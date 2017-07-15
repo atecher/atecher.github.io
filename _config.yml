@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: Atecher的Blog
+subtitle: 胸有丘壑,目有山川
 description:
-author: John Doe
-language:
-timezone:
+author: Atecher
+language: zh-Hans
+timezone: 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
