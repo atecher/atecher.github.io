@@ -5,7 +5,6 @@ categories: "Hexo教程"
 tags: 
      - Hexo
      - Next
- description: 使用hexo+next在GitHub上搭建自己的blog第一步，本地运行hexo
 ---
 
 
