@@ -1,16 +1,14 @@
 ---
-title: 使用hexo+next在GitHub上搭建自己的blog（一）
-date: 2016-02-22 12:33:10
+title: 使用hexo+next在GitHub上搭建自己的blog（二）--部署到github
+date: 2016-02-27 12:33:10
 categories: "Hexo教程"
 tags: 
      - Hexo
      - Next
 ---
-
-
-之前都是在公共的博客平台写东西，突然想自己搭建blog了。我也有自己的阿里云服务器，但一是搭载麻烦，二是数据保存是个问题。最后瞄上了Github Pages,网上也查了些资料，决定使用hexo+next来搭建自己的blog。
-
+上一篇文章我们说了怎么在我们的电脑上安装和使用Hexo，这次我想介绍下怎么将hexo部署到github上，这篇文章中我将介绍两种方法。
 <!-- more -->
+介绍这两种方法之前，我们先将准备工作做一下。
 
 ### 1 安装Git和NodeJS环境
 因为hexo需要依赖Git和NodeJs，所以需要先安装环境。
