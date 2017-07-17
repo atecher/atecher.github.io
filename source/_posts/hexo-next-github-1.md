@@ -1,5 +1,5 @@
 ---
-title: hexo+next+GitHub搭建静态博客(一)
+title: hexo+next+GitHub搭建静态博客(一)-本地服务搭建
 date: 2016-02-22 12:33:10
 categories: "Hexo教程"
 tags: 
