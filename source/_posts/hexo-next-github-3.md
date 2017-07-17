@@ -1,5 +1,5 @@
 ---
-title: 使用hexo+next在GitHub上搭建自己的blog（三）- 添加tags和categories页面
+title: hexo+next+GitHub搭建静态博客(三)-添加tags和categories
 date: 2016-04-23 11:33:10
 categories: "Hexo教程"
 tags: 
@@ -10,7 +10,7 @@ tags:
 
 <!-- more -->
 
-### 1 创建Tag页面
+### 创建Tag页面
 ```
 $ hexo new page "tags"
 
@@ -34,7 +34,7 @@ type: "tags"
 comments: false
 ---
 ```
-### 2 创建Categories页面
+### 创建Categories页面
 
 创建分类页和Tag页是差不多的步骤。
 
@@ -52,7 +52,7 @@ comments: false
 ---
 ```
 
-### 3 添加菜单
+### 添加菜单
 
 在菜单中添加链接。编辑 主题配置文件 ，添加 tags 到 menu 中，如下:
 ```

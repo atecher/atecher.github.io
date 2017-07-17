@@ -1,5 +1,5 @@
 ---
-title: 使用hexo+next在GitHub上搭建自己的blog（一）
+title: hexo+next+GitHub搭建静态博客(一)
 date: 2016-02-22 12:33:10
 categories: "Hexo教程"
 tags: 
@@ -12,7 +12,7 @@ tags:
 
 <!-- more -->
 
-### 1 安装Git和NodeJS环境
+### 安装Git和NodeJS环境
 因为hexo需要依赖Git和NodeJs，所以需要先安装环境。
 ```
 Git下载地址：https://git-scm.com/download/win
@@ -21,7 +21,7 @@ NodeJS下载地址：https://nodejs.org/download/
 ```
 至于安装过程我就不多写了。 
 
-### 2 安装hexo
+### 安装hexo
 
 ```
 #安装hexo服务
@@ -33,16 +33,16 @@ $ npm install
  
 ```
 
-### 3 使用Next主题
+### 使用Next主题
 下面来使用Next主题让站点更酷炫，当然hexo有很多主题，操作方法都类似。
 
-#### 3.1 安装
+#### 安装
 ```
 $ cd <your-hexo-site>
 $ git clone https://github.com/iissnan/hexo-theme-next themes/next
 
 ```
-#### 3.2 配置
+#### 配置
 
 修改<your-hexo-site>/_config.yml中的blog的主题:
 
@@ -73,7 +73,7 @@ scheme: Muse
  
  
  
- ### 4 写文章
+ ### 写文章
  
  ```
  $ hexo new "Hello World"
