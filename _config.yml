@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://atecher.net
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -71,6 +71,25 @@ pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+
+#RSS订阅
+plugin:
+  - hexo-generator-feed
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+sitemap:
+  path: sitemap.xml
+
 ## Themes: https://hexo.io/themes/
 theme: next
 
@@ -79,8 +98,7 @@ theme: next
 deploy:
   type:
    
-search:
-  path: search.json
-  field: post
-  format: html
-  limit: 10000
+
+  
+  
+  
