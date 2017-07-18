@@ -4,8 +4,10 @@ node_js: stable
 # S: Build Lifecycle
 install:
   - npm install
-#  - npm install hexo-generator-search
-#  - npm install hexo-generator-searchdb
+  - npm install hexo-generator-search
+  - npm install hexo-generator-searchdb
+  - npm install hexo-generator-feed
+  - npm install hexo-generator-sitemap
 
 
 #before_script:
