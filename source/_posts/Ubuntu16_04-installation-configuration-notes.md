@@ -12,6 +12,23 @@ tags:
 <!-- more -->
 
 
+#### 更改左上角的Slogan
+
+新建Slogan.po，内容如下：
+
+```
+msgid "Ubuntu Desktop"msgstr "每个人都是自己梦想王国的国王"
+
+```
+
+```
+cd /usr/share/locale/zh_CN/LC_MESSAGES
+
+sudo msgfmt -o unity.mo /home/mark/Slogan.po
+
+```
+
+
 #### 删除libreoffice
 
 ```
@@ -77,7 +94,7 @@ sudo apt-get install arc-theme
 
 #### 安装图标
 
-###### Moka:
+##### Moka
 
 <img src="/img/1472631263972063628.jpg">
 
@@ -90,7 +107,7 @@ sudo apt-get install moka-icon-theme moka-icon-theme-symbolic moka-icon-theme-ex
 
 ```
 
-###### Numix:
+##### Numix
 
 <img src="/img/1472632116730004374.jpg">
 
@@ -102,7 +119,7 @@ sudo apt-get update
 sudo apt-get install numix-icon-theme numix-icon-theme-circle
 
 ```
-###### Uniform：
+##### Uniform
 
 <img src="/img/1472632088729006934.jpg">
 
@@ -111,29 +128,17 @@ http://0rax0.deviantart.com/art/Uniform-Icon-Theme-453054609
 
 ```
 
-###### Plateau
+##### Plateau
 
 <img src="/img/1472632128962088713.jpg">
+
 
 ```
 http://malysss.deviantart.com/art/Plateau-0-2-391110900
 
 ```
 
-#### 更改左上角的Slogan
 
-新建Slogan.po，内容如下：
 
-```
-msgid "Ubuntu Desktop"msgstr "每个人都是自己梦想王国的国王"
-
-```
-
-```
-cd /usr/share/locale/zh_CN/LC_MESSAGES
-
-sudo msgfmt -o unity.mo /home/mark/Slogan.po
-
-```
 
                        
