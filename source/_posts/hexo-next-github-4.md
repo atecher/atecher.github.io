@@ -57,6 +57,10 @@ install:
   - npm install hexo-generator-searchdb
 ```
 
+效果图
+
+<img src="/img/20170913111047.png" />
+
 
 
 
