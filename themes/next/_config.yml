@@ -89,9 +89,11 @@ scheme: Muse
 # Social Links
 # Key is the link label showing to end users.
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
-#social:
+social:
   #LinkLabel: Link
-
+  GitHub: https://github.com/atecher
+  微博: http://weibo.com/atecher
+  简书: http://www.jianshu.com/u/649bbf6c8e00
 # Social Links Icons
 # Icon Mapping:
 #   Map a menu item to a specific FontAwesome icon name.
@@ -103,7 +105,8 @@ social_icons:
   # KeyMapsToSocialItemKey: NameOfTheIconFromFontAwesome
   GitHub: github
   Twitter: twitter
-  Weibo: weibo
+  微博: weibo
+  简书: heartbeat
 
 # Blog rolls
 #links_title: Links
