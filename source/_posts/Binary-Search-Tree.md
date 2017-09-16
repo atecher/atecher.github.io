@@ -35,7 +35,7 @@ tags:
 
 在实现中，我们需要定义一个内部类Node，它包含两个分别指向左右节点的Node，一个用于排序的Key，以及该节点包含的值Value，还有一个记录该节点及所有子节点个数的值Number。
 
-```
+```csharp
 public class BinarySearchTreeSymbolTable<TKey, TValue> : SymbolTables<TKey, TValue> where TKey : IComparable<TKey>, IEquatable<TValue>
 {
     private Node root;
@@ -66,7 +66,8 @@ public class BinarySearchTreeSymbolTable<TKey, TValue> : SymbolTables<TKey, TVal
 该方法实现有迭代和递归两种。
 
 递归的方式实现如下：
-```
+
+```csharp
 public override TValue Get(TKey key)
 {
     TValue result = default(TValue);
@@ -91,8 +92,10 @@ public override TValue Get(TKey key)
     return result;
 }
 ```
+
 迭代的如下：
-```
+
+```csharp
 public TValue Get(TKey key)
 {
     return GetValue(root, key);
@@ -108,8 +111,10 @@ private TValue GetValue(Node root, TKey key)
 }
 ```
 #### 插入
+
 插入和查找类似，首先查找有没有和key相同的，如果有，更新；如果没有找到，那么创建新的节点。并更新每个节点的Number值，代码实现如下：
-```java
+
+```csharp
 public override void Put(TKey key, TValue value)
 {
     root = Put(root, key, value);
@@ -154,7 +159,8 @@ private int Size(Node node)
 ![the max and min item in bst][7]
 
 从图中可以看出，二叉查找树中，最左和最右节点即为最小值和最大值，所以我们只需迭代调用即可。
-```
+
+```csharp
 public override TKey GetMax()
 {
     TKey maxItem = default(TKey);
@@ -179,8 +185,10 @@ public override TKey GetMin()
     return minItem;
 }
 ```
+
 以下是递归的版本：
-```
+
+```csharp
 public TKey GetMaxRecursive()
 {
     return GetMaxRecursive(root);
@@ -203,14 +211,16 @@ private TKey GetMinRecursive(Node root)
     return GetMinRecursive(root.Left);
 }
 ```
+
 #### Floor和Ceiling
+
 查找Floor(key)的值就是所有<=key的最大值，相反查找Ceiling的值就是所有>=key的最小值，下图是Floor函数的查找示意图：
 
 ![floor  function in BST][8]
 
 以查找Floor为例，我们首先将key和root元素比较，如果key比root的key小，则floor值一定在左子树上；如果比root的key大，则有可能在右子树上，当且仅当其右子树有一个节点的key值要小于等于该key；如果和root的key相等，则floor值就是key。根据以上分析，Floor方法的代码如下，Ceiling方法的代码类似，只需要把符号换一下即可：
 
-```
+```csharp
 public TKey Floor(TKey key)
 {
     Node x = Floor(root, key);
@@ -242,7 +252,7 @@ private Node Floor(Node x, TKey key)
 ![delete minimun in BST][9]
 
 代码实现如下：
-```
+```csharp
 public void DelMin()
 {
     root = DelMin(root);
@@ -283,7 +293,7 @@ private Node DelMin(Node root)
 
 对应代码如下：
 
-```
+```csharp
 public void Delete(TKey key)
 {
     root =Delete(root, key);
