@@ -109,7 +109,9 @@ private TValue GetValue(Node root, TKey key)
     else if (cmp < 0) return GetValue(root.Left, key);
     else return root.Value;
 }
+
 ```
+
 #### 插入
 
 插入和查找类似，首先查找有没有和key相同的，如果有，更新；如果没有找到，那么创建新的节点。并更新每个节点的Number值，代码实现如下：
