@@ -7,15 +7,15 @@ tags:
      - Keepalived
 ---
 
-### HAProxy
+## HAProxy
 
 HAProxy是一款提供高可用性、负载均衡以及基于TCP（第四层）和HTTP（第七层）应用的代理软件（PS:nginx最新版也可以基于第四层和第七层的负载均衡）。
 HAProxy和Keepalived 都采用源码方式安装，如果没有gcc编译器，需要先安装gcc编译工具。
 <!-- more -->
-#### 下载解压安装
+### 下载解压安装
 下载haproxy：http://www.haproxy.org/download/1.4/src/
 
-```
+```bash
 tar zxvf haproxy-1.4.24.tar.gz
 cd haproxy-1.4.24
 make install
@@ -24,10 +24,12 @@ mkdir -p /usr/local/haproxy/sbin
 cp examples/haproxy.cfg /usr/local/haproxy/etc
 ln -s /usr/local/sbin/haproxy /usr/local/haproxy/sbin/haproxy
 ```
-#### 修改配置文件
+
+### 修改配置文件
+
 `vim /usr/local/haproxy/etc/haproxy.cfg`
 
-```powershell
+```bash
 global 
     maxconn 51200 #最大连接数
     chroot /usr/local/haproxy #改变当前工作目录
@@ -83,21 +85,28 @@ listen zzs_dzfp_proxy:90
         server web01 192.168.15.12:9000 check inter 2000 fall 3 weight 20  
         server web02 192.168.15.13:9000 check inter 2000 fall 3 weight 20
 ```
-#### 启停haproxy
+
+### 启停haproxy
+
 启动Haproxy
+
 ```
 /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/etc/haproxy.cfg
 ```
+
 停止Haproxy：
+
 ```
 killall haproxy 
 ```
+
 访问统计页面：
+
 ```
 http://10.10.3.163:1080/stats
 ```
 
-### Keepalived
+## Keepalived
 
 keepalived是集群管理中保证集群高可用的一个服务软件，其功能类似于heartbeat，用来防止单点故障。
 
@@ -106,35 +115,41 @@ keepalived是以VRRP协议为实现基础的，VRRP全称Virtual Router Redundan
 虚拟路由冗余协议，可以认为是实现路由器高可用的协议，即将N台提供相同功能的路由器组成一个路由器组，这个组里面有一个master和多个backup，master上面有一个对外提供服务的vip（该路由器所在局域网内其他机器的默认路由为该vip），master会发组播，当backup收不到vrrp包时就认为master宕掉了，这时就需要根据VRRP的优先级来选举一个backup当master。这样的话就可以保证路由器的高可用了。
 
 
-#### 下载解压编译安装
+### 下载解压编译安装
+
 下载地址：http://www.keepalived.org/download.html
  或者 ：
-```
+```bash
 wget http://www.keepalived.org/software/keepalived-1.2.8.tar.gz
+
 ```
 安装：
-```
+```bash
 tar zxvf keepalived-1.2.8.tar.gz
 cd keepalived-1.2.8
 ./configure --prefix=/usr/local/keepalived
 make
 make install
 ```
-#### 安装成功后做成服务模式。
-```
+
+### 安装成功后做成服务模式
+
+```bash
 cp /usr/local/keepalived/sbin/keepalived /usr/sbin/
 cp /usr/local/keepalived/etc/sysconfig/keepalived /etc/sysconfig/
 cp /usr/local/keepalived/etc/rc.d/init.d/keepalived /etc/init.d/
 ```
 
-```
+```bash
 mkdir -p /etc/keepalived/
 cp /usr/local/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf
 chmod +x /etc/init.d/keepalived
 vi /etc/keepalived/keepalived.conf
 ```
-#### 修改文件配置`keepalived.conf`
-```powershell
+
+### 修改文件配置`keepalived.conf`
+
+```bash
 global_defs {
     router_id LVS_DEVEL
 }
@@ -164,11 +179,12 @@ vrrp_instance VI_1 {
 }
 
 ```
-#### 监控脚本配置
+
+### 监控脚本配置
 
 `vi /etc/keepalived/chk_haproxy.sh`
 
-```
+```bash
 tatus=$(ps aux|grep haproxy | grep -v grep | grep -v bash | wc -l)
 if [ "${status}" = "0" ]; then
     /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/etc/haproxy.cfg
@@ -180,11 +196,12 @@ if [ "${status}" = "0" ]; then
     fi
 fi
 ```
+
 这个配置文件意思：检查haproxy是否挂掉，如果挂掉启动haproxy；若启动之后还是没有检测到启动状态，则关闭keepalived，让IP飘移到备机上。
 
-#### 启动停止keepalived命令
+### 启动停止keepalived命令
 
-```
+```bash
 service keepalived start #启动
 service keepalived stop	#关闭服务
 ```

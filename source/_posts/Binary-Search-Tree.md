@@ -57,6 +57,7 @@ public class BinarySearchTreeSymbolTable<TKey, TValue> : SymbolTables<TKey, TVal
 ...
 }
 ```
+
 #### 查找
 
 查找操作和二分查找类似，将key和节点的key比较，如果小于，那么就在Left Node节点查找,如果大于，则在Right Node节点查找，如果相等，直接返回Value。
@@ -109,7 +110,6 @@ private TValue GetValue(Node root, TKey key)
     else if (cmp < 0) return GetValue(root.Left, key);
     else return root.Value;
 }
-
 ```
 
 #### 插入
