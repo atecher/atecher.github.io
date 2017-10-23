@@ -96,7 +96,7 @@ public override TValue Get(TKey key)
 
 迭代的如下：
 
-```csharp
+```java
 public TValue Get(TKey key)
 {
     return GetValue(root, key);
@@ -116,7 +116,7 @@ private TValue GetValue(Node root, TKey key)
 
 插入和查找类似，首先查找有没有和key相同的，如果有，更新；如果没有找到，那么创建新的节点。并更新每个节点的Number值，代码实现如下：
 
-```csharp
+```java
 public override void Put(TKey key, TValue value)
 {
     root = Put(root, key, value);
@@ -141,6 +141,7 @@ private int Size(Node node)
     if (node == null) return 0;
     else return node.Number;
 }
+
 ```
   插入操作图示如下：
   
@@ -162,7 +163,7 @@ private int Size(Node node)
 
 从图中可以看出，二叉查找树中，最左和最右节点即为最小值和最大值，所以我们只需迭代调用即可。
 
-```csharp
+```java
 public override TKey GetMax()
 {
     TKey maxItem = default(TKey);
@@ -190,7 +191,7 @@ public override TKey GetMin()
 
 以下是递归的版本：
 
-```csharp
+```java
 public TKey GetMaxRecursive()
 {
     return GetMaxRecursive(root);
@@ -222,7 +223,7 @@ private TKey GetMinRecursive(Node root)
 
 以查找Floor为例，我们首先将key和root元素比较，如果key比root的key小，则floor值一定在左子树上；如果比root的key大，则有可能在右子树上，当且仅当其右子树有一个节点的key值要小于等于该key；如果和root的key相等，则floor值就是key。根据以上分析，Floor方法的代码如下，Ceiling方法的代码类似，只需要把符号换一下即可：
 
-```csharp
+```java
 public TKey Floor(TKey key)
 {
     Node x = Floor(root, key);
@@ -254,7 +255,7 @@ private Node Floor(Node x, TKey key)
 ![delete minimun in BST][9]
 
 代码实现如下：
-```csharp
+```java
 public void DelMin()
 {
     root = DelMin(root);
@@ -295,7 +296,7 @@ private Node DelMin(Node root)
 
 对应代码如下：
 
-```csharp
+```java
 public void Delete(TKey key)
 {
     root =Delete(root, key);

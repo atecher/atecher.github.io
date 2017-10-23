@@ -7,7 +7,7 @@ tags:
      - Mysql
 ---
 
-```bash
+```
 #!/bin/bash
 if [ `uname -m` == "x86_64" ];then
 machine=x86_64
