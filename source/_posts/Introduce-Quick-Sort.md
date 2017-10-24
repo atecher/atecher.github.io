@@ -425,7 +425,7 @@ Array.Sort这一方法在mscorlib这一程序集中，具体的实现方法有�
 
 从名称中可以看出这是限定深度的快速排序，在第三个参数传进去的是0x20，也就是32。
 
-[![DepthLimitedQuickSort][]][DepthLimitedQuickSort 1]
+[![DepthLimitedQuickSort][DepthLimitedQuickSort_1]][DepthLimitedQuickSort_1]
 
 可以看到，当划分的次数大于固定的32次的时候，采用了基排序，其他的部分是普通的快速排序。
 
@@ -441,68 +441,69 @@ Array.Sort这一方法在mscorlib这一程序集中，具体的实现方法有�
 [20]: http://www.siam.org/pdf/news/637.pdf
 [C. A. R. Hoare]: http://en.wikipedia.org/wiki/Tony_Hoare
 [Quick Sort founder]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-1.png
-[Quick Sort founder 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-2.png
+[Quick Sort founder 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-1.png
 [Sorting_quicksort_anim]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-3.gif
-[Sorting_quicksort_anim_Sorting_quicksort_anim]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-4.gif
+[Sorting_quicksort_anim_Sorting_quicksort_anim]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-3.gif
 [Basic Step of Quick Sort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-5.png
-[Basic Step of Quick Sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-6.png
+[Basic Step of Quick Sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-5.png
 [Partition trace in Quick Sort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-7.png
-[Partition trace in Quick Sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-8.png
+[Partition trace in Quick Sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-7.png
 [before and after partition]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-9.png
-[before and after partition 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-10.png
+[before and after partition 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-9.png
 [the two part sorted]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-11.png
-[the two part sorted 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-12.png
+[the two part sorted 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-11.png
 [quicksort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-13.gif
-[quicksort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-14.gif
+[quicksort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-13.gif
 [the compare complexity in quick sort at the bese case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-15.png
-[the compare complexity in quick sort at the bese case_the compare complexity in quick sort at the bese case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-16.png
+[the compare complexity in quick sort at the bese case_the compare complexity in quick sort at the bese case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-15.png
 [the compare complexity in quick sort at the worst case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-17.png
-[the compare complexity in quick sort at the worst case_the compare complexity in quick sort at the worst case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-18.png
+[the compare complexity in quick sort at the worst case_the compare complexity in quick sort at the worst case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-17.png
 [image]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-19.png
-[image 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-20.png
+[image 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-19.png
 [image 2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-21.png
-[image_image 2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-22.png
+[image_image 2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-21.png
 [image 3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-23.png
-[image_image 3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-24.png
+[image_image 3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-23.png
 [image 4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-25.png
-[image_image 4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-26.png
+[image_image 4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-25.png
 [image 5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-27.png
-[image_image 5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-28.png
+[image_image 5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-27.png
 [image 6]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-29.png
-[image_image 6]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-30.png
+[image_image 6]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-29.png
 [image 7]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-31.png
-[image_image 7]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-32.png
+[image_image 7]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-31.png
 [image 8]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-33.png
-[image_image 8]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-34.png
+[image_image 8]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-33.png
 [image 9]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-35.png
-[image_image 9]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-36.png
+[image_image 9]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-35.png
 [Quick Sort is not Stable]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-37.png
-[Quick Sort is not Stable 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-38.png
+[Quick Sort is not Stable 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-37.png
 [Improvement using Insertsort and 3 mediation partition]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-39.png
-[Improvement using Insertsort and 3 mediation partition 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-40.png
+[Improvement using Insertsort and 3 mediation partition 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-39.png
 [3-way partition quick sort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-41.png
-[3-way partition quick sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-42.png
+[3-way partition quick sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-41.png
 [The Dutch National Flag Problem]: http://www.iis.sinica.edu.tw/~scm/ncs/2010/10/dutch-national-flag-problem/
 [3-way partitioning trace]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-43.png
-[3-way partitioning trace 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-44.png
+[3-way partitioning trace 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-43.png
 [3 way quick sort visual trace]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-45.png
-[3 way quick sort visual trace 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-46.png
+[3 way quick sort visual trace 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-45.png
 [Bentley McIlroy 3 way partition]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-47.png
-[Bentley McIlroy 3 way partition_Bentley McIlroy 3 way partition]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-48.png
+[Bentley McIlroy 3 way partition_Bentley McIlroy 3 way partition]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-47.png
 [3wayquick sort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-49.gif
-[3wayquick sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-50.gif
+[3wayquick sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-49.gif
 [Link 1]: http://www.cnblogs.com/yangecnu/p/Something-about-Concurrent-and-Parallel-Programming.html
 [.NET 4.0]: http://msdn.microsoft.com/en-us/library/b0zbh7b6%28v=vs.100%29.aspx
 [.NET 4.5]: http://msdn.microsoft.com/en-us/library/b0zbh7b6%28v=vs.110%29.aspx
 [Introspective sort]: http://en.wikipedia.org/wiki/Introsort
 [ArraySort implementation in .NET_1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-51.png
-[ArraySort implementation in .NET_1_ArraySort implementation in .NET_1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-52.png
+[ArraySort implementation in .NET_1_ArraySort implementation in .NET_1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-51.png
 [ArraySort implementation in .NET_2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-53.png
-[ArraySort implementation in .NET_2_ArraySort implementation in .NET_2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-54.png
+[ArraySort implementation in .NET_2_ArraySort implementation in .NET_2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-53.png
 [ArraySort implementation in .NET_3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-55.png
-[ArraySort implementation in .NET_3_ArraySort implementation in .NET_3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-56.png
+[ArraySort implementation in .NET_3_ArraySort implementation in .NET_3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-55.png
 [ArraySort implementation in .NET_4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-57.png
-[ArraySort implementation in .NET_4_ArraySort implementation in .NET_4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-58.png
+[ArraySort implementation in .NET_4_ArraySort implementation in .NET_4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-57.png
 [ArraySort implementation in .NET_5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-59.png
-[ArraySort implementation in .NET_5_ArraySort implementation in .NET_5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-60.png
+[ArraySort implementation in .NET_5_ArraySort implementation in .NET_5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-59.png
+[DepthLimitedQuickSort_1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-61.png
 [ref]: http://www.cnblogs.com/yangecnu/p/Introduce-Quick-Sort.html

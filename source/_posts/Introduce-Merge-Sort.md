@@ -218,31 +218,31 @@ private static void Sort(T[] array, int lo, int hi)
 
 
 [Definition of Merge Sort]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-1.png
-[Definition of Merge Sort 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-2.png
+[Definition of Merge Sort 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-1.png
 [Merge_sort_animation2]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-3.gif
-[Merge_sort_animation2_Merge_sort_animation2]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-4.gif
+[Merge_sort_animation2_Merge_sort_animation2]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-3.gif
 [Merge Step in Merge Sort]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-5.png
-[Merge Step in Merge Sort 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-6.png
+[Merge Step in Merge Sort 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-5.png
 [Top-Down merge]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-7.png
-[Top-Down merge_Top-Down merge]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-8.png
+[Top-Down merge_Top-Down merge]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-7.png
 [Trace of merge reuslt for top-down merge sort]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-9.png
-[Trace of merge reuslt for top-down merge sort 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-10.png
+[Trace of merge reuslt for top-down merge sort 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-9.png
 [Merge_sort_algorithm_diagram]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-11.png
-[Merge_sort_algorithm_diagram_Merge_sort_algorithm_diagram]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-12.png
+[Merge_sort_algorithm_diagram_Merge_sort_algorithm_diagram]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-11.png
 [Merge Sort Visualization]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-13.png
-[Merge Sort Visualization 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-14.png
+[Merge Sort Visualization 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-13.png
 [Merge-sort-example]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-15.gif
-[Merge-sort-example 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-16.gif
+[Merge-sort-example 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-15.gif
 [merge sort]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-17.gif
-[merge sort 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-18.gif
+[merge sort 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-17.gif
 [CLRS]: http://www.amazon.com/Introduction-Algorithms-Thomas-H-Cormen/dp/0262033844
 [master theorem]: http://en.wikipedia.org/wiki/Master_theorem
 [merge sort analysis]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-19.png
-[merge sort analysis 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-20.png
+[merge sort analysis 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-19.png
 [Link 1]: http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91
 [Link 2]: http://en.wikipedia.org/wiki/In-place_algorithm
 [Link 3]: http://www.diku.dk/hjemmesider/ansatte/jyrki/Paper/mergesort_NJC.ps
 [Stop if already sorted]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-21.png
-[Stop if already sorted 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-22.png
+[Stop if already sorted 1]: /img/Introduce-Merge-Sort/Introduce-Merge-Sort-21.png
 [Link 4]: http://www.cnblogs.com/yangecnu/p/Something-about-Concurrent-and-Parallel-Programming.html
 [ref]: http://www.cnblogs.com/yangecnu/p/Introduce-Merge-Sort.html
