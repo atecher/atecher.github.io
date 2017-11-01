@@ -48,7 +48,7 @@ tags:
 
 划分过程的代码实现如下：
 
-``````````
+```java
 /// <summary>
 /// 快速排序中的划分过程
 /// </summary>
@@ -89,7 +89,7 @@ private static int Partition(T[] array, int lo, int hi)
     //返回扫描相遇的位置点
     return j;
 }
-``````````
+```
 
 划分前后，元素在序列中的分布如下图：
 
@@ -99,7 +99,7 @@ private static int Partition(T[] array, int lo, int hi)
 
 与合并算法基于合并这一过程一样，快速排序基于分割(Partition)这一过程。只需要递归调用Partition这一操作，每一次以Partition返回的元素位置来划分为左右两个子序列，然后继续这一过程直到子序列长度为1，代码的实现如下：
 
-``````````
+```java
 public class QuickSort<T> where T : IComparable<T>
 {
     public static void Sort(T[] array)
@@ -121,7 +121,7 @@ public class QuickSort<T> where T : IComparable<T>
         Sort(array, index + 1, hi);
     }
 }
-``````````
+```
 
 下图说明了快速排序中，每一次划分之后的结果：
 
@@ -186,7 +186,7 @@ public class QuickSort<T> where T : IComparable<T>
 
 对于较小的子序列（通常序列元素个数为10个左右），我们就可以采用插入排序直接进行排序而不用继续递归，算法改造如下：
 
-``````````
+```java
 private const int CUTTOFF = 10;
 private static void Sort(T[] array, int lo, int hi)
 {
@@ -208,7 +208,7 @@ private static void Sort(T[] array, int lo, int hi)
     //对右边序列进行递归排序
     Sort(array, index + 1, hi);
 }
-``````````
+```
 
 2. 三平均分区法(Median of three partitioning)
 
@@ -222,7 +222,7 @@ private static void Sort(T[] array, int lo, int hi)
 
 采用三平均分区法对快速排序的改进如下：
 
-``````````
+```java
 private static void Sort(T[] array, int lo, int hi)
 {
     //对于小序列，直接采用插入排序替代
@@ -264,7 +264,7 @@ private static bool Less(T t1, T t2)
 {
     return t1.CompareTo(t2) < 0;
 }
-``````````
+```
 
 使用插入排序对小序列进行排序以及使用三平均分区法对一般快速排序进行改进后运行结果示意图如下：
 
@@ -292,7 +292,7 @@ Dijkstra的方法如上图：
 
 下面是使用Dijkstra的三分区快速排序代码：
 
-``````````
+```java
 private static void Sort(T[] array, int lo, int hi)
 {
     //对于小序列，直接采用插入排序替代
@@ -317,7 +317,7 @@ private static void Sort(T[] array, int lo, int hi)
     //对右边序列进行递归排序
     Sort(array, gt + 1, hi);
 }
-``````````
+```
 
 三分区快速排序的每一步如下图所示：
 
@@ -337,7 +337,7 @@ Bentley 和D. McIlroy在普通的三分区快速排序的基础上，对一般�
 
 下面是采用 Bentley&D. McIlroy 三分区快速排序的算法改进：
 
-``````````
+```java
 private static void Sort(T[] array, int lo, int hi)
 {
     //对于小序列，直接采用插入排序替代
@@ -375,7 +375,7 @@ private static void Sort(T[] array, int lo, int hi)
     Sort(array, lo, j);
     Sort(array, i, hi);
 }
-``````````
+```
 
 三分区快速排序的动画如下：
 
