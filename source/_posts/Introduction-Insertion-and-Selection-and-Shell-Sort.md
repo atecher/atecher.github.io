@@ -46,47 +46,49 @@ tags:
 如果中序遍历2-3查找树，就可以得到排好序的序列。在一个完全平衡的2-3查找树中，根节点到每一个为空节点的距离都相同。
 
 ```java
-/// <summary>
-/// 排序算法泛型类，要求类型实现IComparable接口
-/// </summary>
-/// <typeparam name="T"></typeparam>
-public class Sort<T> where T : IComparable<T>
-{
-    /// <summary>
-    /// 选择排序
-    /// </summary>
-    /// <param name="array"></param>
-    public static void SelectionSort(T[] array)
-    {
-        int n = array.Length;
 
-        for (int i = 0; i < n; i++)
-        {
-            int min = i;
-            //从第i+1个元素开始，找最小值
-            for (int j = i + 1; j < n; j++)
-            {
-                if (array[min].CompareTo(array[j]) > 0)
-                    min = j;
-            }
-            //找到之后和第i个元素交换
-            Swap(array, i, min);
+/**
+ * 选择排序
+ * @param array
+ */
+public static void selectionSort(int[] array) {
+    int n = array.length;
+    for (int i = 0; i < n; i++) {
+        int min = i;
+        //从第i+1个元素开始，找最小值
+        for (int j = i + 1; j < n; j++) {
+            if (array[min] > array[j])
+                min = j;
         }
-    }
-
-    /// <summary>
-    /// 元素交换
-    /// </summary>
-    /// <param name="array"></param>
-    /// <param name="i"></param>
-    /// <param name="min"></param>
-    private static void Swap(T[] array, int i, int min)
-    {
-        T temp = array[i];
-        array[i] = array[min];
-        array[min] = temp;
+        //找到之后和第i个元素交换
+        swap(array, i, min);
     }
 }
+
+public static void selectionSort(int[] array,int lo,int hi) {
+    for (int i = lo; i <= hi; i++) {
+        int min = i;
+        //从第i+1个元素开始，找最小值
+        for (int j = i + 1; j <= hi; j++) {
+            if (array[min] > array[j])
+                min = j;
+        }
+        //找到之后和第i个元素交换
+        swap(array, i, min);
+    }
+}
+/**
+ * 元素交换
+ * @param array
+ * @param i
+ * @param min
+ */
+private static void swap(int[] array, int i, int min) {
+    int temp = array[i];
+    array[i] = array[min];
+    array[min] = temp;
+}
+
 ```
 
 下图分析了选择排序中每一次排序的过程，您可以对照图中右边的柱状图来看。
@@ -96,15 +98,13 @@ public class Sort<T> where T : IComparable<T>
 测试如下：
 
 ```java
-static void Main(string[] args)
-{
-    Int32[] array = new Int32[] { 1, 3, 1, 4, 2, 4, 2, 3, 2, 4, 7, 6, 6, 7, 5, 5, 7, 7 };
-    Console.WriteLine("Before SelectionSort:");
-    PrintArray(array);
-    Sort<Int32>.SelectionSort(array);
-    Console.WriteLine("After SelectionSort:");
-    PrintArray(array);
-    Console.ReadKey();
+public static void main(String[] args) {
+    int[] array = new int[]{1, 3, 1, 4, 2, 4, 2, 3, 2, 4, 7, 6, 6, 7, 5, 5, 7, 7};
+    System.out.println("Before SelectionSort:");
+    System.out.println(Arrays.toString(array));
+    selectionSort(array);
+    System.out.println("After SelectionSort:");
+    System.out.println(Arrays.toString(array));
 }
 ```
 
@@ -143,18 +143,18 @@ static void Main(string[] args)
 在Sort泛型方法中，我们添加如下方法，下面的方法和上面的定义一样
 
 ```java
-/// <summary>
-/// 插入排序
-/// </summary>
-/// <param name="array"></param>
-public static void InsertionSort(T[] array){
-    int n = array.Length;
+/**
+ * 插入排序
+ * @param array
+ */
+public static void insertionSort(int[] array){
+    int n = array.length;
     //从第二个元素开始
     for (int i = 1; i < n; i++){
         //从第i个元素开始，一次和前面已经排好序的i-1个元素比较，如果小于，则交换
         for (int j = i; j > 0; j--){
-            if (array[j].CompareTo(array[j - 1]) < 0){
-                Swap(array, j, j - 1);
+            if (array[j]< array[j - 1]){
+                swap(array, j, j - 1);
             }
             else//如果大于，则不用继续往前比较了，因为前面的元素已经排好序，比较大的大就是教大的了。
                 break;
@@ -169,13 +169,14 @@ public static void InsertionSort(T[] array){
 测试如下：
 
 ```java
-Int32[] array1 = new Int32[] { 1, 3, 1, 4, 2, 4, 2, 3, 2, 4, 7, 6, 6, 7, 5, 5, 7, 7 };
-Console.WriteLine("Before InsertionSort:");
-PrintArray(array1);
-Sort<Int32>.InsertionSort(array1);
-Console.WriteLine("After InsertionSort:");
-PrintArray(array1);
-Console.ReadKey();
+public static void main(String[] args) {
+    int[] array = new int[]{1, 3, 1, 4, 2, 4, 2, 3, 2, 4, 7, 6, 6, 7, 5, 5, 7, 7};
+    System.out.println("Before SelectionSort:");
+    System.out.println(Arrays.toString(array));
+    insertionSort(array);
+    System.out.println("After SelectionSort:");
+    System.out.println(Arrays.toString(array));
+}
 
 ```
 
@@ -240,35 +241,31 @@ Console.ReadKey();
 
 ```java
 
-/// <summary>
-/// 希尔排序
-/// </summary>
-/// <param name="array"></param>
-public static void ShellSort(T[] array)
-{
-    int n = array.Length;
+public static void shellSort(int[] array) {
+    int n = array.length;
     int h = 1;
     //初始最大步长
     while (h < n / 3) h = h * 3 + 1;
-    while (h >= 1)
-    {
+    while (h >= 1) {
         //从第二个元素开始
-        for (int i = 1; i < n; i++)
-        {
+        for (int i = 1; i < n; i++) {
             //从第i个元素开始，依次次和前面已经排好序的i-h个元素比较，如果小于，则交换
-            for (int j = i; j >= h; j = j - h)
-            {
-                if (array[j].CompareTo(array[j - h]) < 0)
-                {
-                    Swap(array, j, j - h);
-                }
-                else//如果大于，则不用继续往前比较了，因为前面的元素已经排好序，比较大的大就是教大的了。
+            for (int j = i; j >= h; j = j - h) {
+                if (array[j] < (array[j - h])) {
+                    swap(array, j, j - h);
+                } else//如果大于，则不用继续往前比较了，因为前面的元素已经排好序，比较大的大就是教大的了。
                     break;
             }
         }
         //步长除3递减
         h = h / 3;
     }
+}
+
+private static void swap(int[] array, int i, int min) {
+    int temp = array[i];
+    array[i] = array[min];
+    array[min] = temp;
 }
 
 ```
@@ -314,7 +311,8 @@ public static void ShellSort(T[] array)
 希望本文对您了解以上三个基本的排序算法有所帮助，后面将会介绍合并排序和快速排序。
 
 
->本文系转载文章，原作者为yangecnu，原文链接:[请点此处][3]。
+>本文系转载文章，原作者为yangecnu，原文链接:[请点此处][3]
+>PS：我将算法的语言实现改为Java，望原作者勿怪。
 
   [1]: https://en.wikipedia.org/wiki/Donald_Knuth
   [2]: http://faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Weiss/L12-ShellSort.htm#increments

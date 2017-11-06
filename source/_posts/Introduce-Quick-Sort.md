@@ -100,27 +100,22 @@ private static int Partition(T[] array, int lo, int hi)
 与合并算法基于合并这一过程一样，快速排序基于分割(Partition)这一过程。只需要递归调用Partition这一操作，每一次以Partition返回的元素位置来划分为左右两个子序列，然后继续这一过程直到子序列长度为1，代码的实现如下：
 
 ```java
-public class QuickSort<T> where T : IComparable<T>
-{
-    public static void Sort(T[] array)
-    {
-        Sort(array, 0, array.Length - 1);
+    public static void sort(int[] array) {
+        sort(array, 0, array.length - 1);
     }
 
-    private static void Sort(T[] array, int lo, int hi)
-    {
+    private static void sort(int[] array, int lo, int hi) {
         //如果子序列为1，则直接返回
         if (lo >= hi) return;
         //划分，划分完成之后，分为左右序列，左边所有元素小于array[index]，右边所有元素大于array[index]
-        int index = Partition(array, lo, hi);
+        int index = partition(array, lo, hi);
 
-       //对左右子序列进行排序完成之后，整个序列就有序了
+        //对左右子序列进行排序完成之后，整个序列就有序了
         //对左边序列进行递归排序
-        Sort(array, lo, index - 1);
+        sort(array, lo, index - 1);
         //对右边序列进行递归排序
-        Sort(array, index + 1, hi);
+        sort(array, index + 1, hi);
     }
-}
 ```
 
 下图说明了快速排序中，每一次划分之后的结果：
@@ -187,26 +182,26 @@ public class QuickSort<T> where T : IComparable<T>
 对于较小的子序列（通常序列元素个数为10个左右），我们就可以采用插入排序直接进行排序而不用继续递归，算法改造如下：
 
 ```java
-private const int CUTTOFF = 10;
-private static void Sort(T[] array, int lo, int hi)
-{
+private static int CUTTOFF = 10;
+
+//当划分到较小的子序列时，通常可以使用插入排序替代快速排序
+private static void sort(int[] array, int lo, int hi) {
     //如果子序列为1，则直接返回
     if (lo >= hi) return;
     //对于小序列，直接采用插入排序替代
-    if (hi - lo <= CUTTOFF - 1) 
-    {
-        Sort<int>.InsertionSort(array, lo, hi);
+    if (hi - lo <= CUTTOFF - 1) {
+        InsertionSort.insertionSort(array, lo, hi);
         return;
     }
     //划分，划分完成之后，分为左右序列，左边所有元素小于array[index]，右边所有元素大于array[index]
-    int index = Partition(array, lo, hi);
+    int index = partition(array, lo, hi);
 
     //对左右子序列进行排序完成之后，整个序列就有序了
 
     //对左边序列进行递归排序
-    Sort(array, lo, index - 1);
+    sort(array, lo, index - 1);
     //对右边序列进行递归排序
-    Sort(array, index + 1, hi);
+    sort(array, index + 1, hi);
 }
 ```
 
@@ -223,46 +218,38 @@ private static void Sort(T[] array, int lo, int hi)
 采用三平均分区法对快速排序的改进如下：
 
 ```java
-private static void Sort(T[] array, int lo, int hi)
-{
+//采用三平均分区法对快速排序的改进如下
+private static void sort(int[] array, int lo, int hi) {
     //对于小序列，直接采用插入排序替代
-    if (hi - lo <= CUTTOFF - 1) 
-    {
+    if (hi - lo <= CUTTOFF - 1) {
         //Sort<int>.InsertionSort(array, lo, hi);
         return;
     }
     //采用三平均分区法查找中轴
-    int m = MedianOf3(array, lo, lo + (hi - lo) / 2, hi);
-    Swap(array, lo, m);
+    int m = medianOf3(array, lo, lo + (hi - lo) / 2, hi);
+    swap(array, lo, m);
     //划分，划分完成之后，分为左右序列，左边所有元素小于array[index]，右边所有元素大于array[index]
-    int index = Partition(array, lo, hi);
+    int index = partition(array, lo, hi);
 
     //对左右子序列进行排序完成之后，整个序列就有序了
 
     //对左边序列进行递归排序
-    Sort(array, lo, index - 1);
+    sort(array, lo, index - 1);
     //对右边序列进行递归排序
-    Sort(array, index + 1, hi);
+    sort(array, index + 1, hi);
 }
 
-/// <summary>
-/// 查找三个元素中位于中间的那个元素
-/// </summary>
-/// <param name="array"></param>
-/// <param name="lo"></param>
-/// <param name="center"></param>
-/// <param name="hi"></param>
-/// <returns></returns>
-private static int MedianOf3(T[] array, int lo, int center, int hi)
-{
-    return (Less(array[lo], array[center]) ?
-           (Less(array[center], array[hi]) ? center : Less(array[lo], array[hi]) ? hi : lo) :
-           (Less(array[hi], array[center]) ? center : Less(array[hi], array[lo]) ? hi : lo));
+/**
+ * 查找三个元素中位于中间的那个元素
+ */
+private static int medianOf3(int[] array, int lo, int center, int hi) {
+    return (less(array[lo], array[center]) ?
+            (less(array[center], array[hi]) ? center : less(array[lo], array[hi]) ? hi : lo) :
+            (less(array[hi], array[center]) ? center : less(array[hi], array[lo]) ? hi : lo));
 }
 
-private static bool Less(T t1, T t2)
-{
-    return t1.CompareTo(t2) < 0;
+private static boolean less(int t1, int t2) {
+    return t1 < t2;
 }
 ```
 
@@ -293,30 +280,30 @@ Dijkstra的方法如上图：
 下面是使用Dijkstra的三分区快速排序代码：
 
 ```java
-private static void Sort(T[] array, int lo, int hi)
-{
+
+//使用Dijkstra的三分区快速排序代码
+private static void sort(int[] array, int lo, int hi) {
     //对于小序列，直接采用插入排序替代
-    if (hi - lo <= CUTTOFF - 1)
-    {
-        Sort<int>.InsertionSort(array, lo, hi);
+    if (hi - lo <= CUTTOFF - 1) {
+        InsertionSort.insertionSort(array, lo, hi);
         return;
     }
     //三分区
     int lt = lo, i = lo + 1, gt = hi;
-    T v = array[lo];
-    while (i<=gt)
-    {
-        int cmp = array[i].CompareTo(v);
-        if (cmp < 0) Swap(array, lt++, i++);
-        else if (cmp > 0) Swap(array, i, gt--);
+    int v = array[lo];
+    while (i <= gt) {
+        int cmp = array[i] - v;
+        if (cmp < 0) swap(array, lt++, i++);
+        else if (cmp > 0) swap(array, i, gt--);
         else i++;
     }
 
     //对左边序列进行递归排序
-    Sort(array, lo, lt - 1);
+    sort(array, lo, lt - 1);
     //对右边序列进行递归排序
-    Sort(array, gt + 1, hi);
+    sort(array, gt + 1, hi);
 }
+
 ```
 
 三分区快速排序的每一步如下图所示：
@@ -338,43 +325,43 @@ Bentley 和D. McIlroy在普通的三分区快速排序的基础上，对一般�
 下面是采用 Bentley&D. McIlroy 三分区快速排序的算法改进：
 
 ```java
-private static void Sort(T[] array, int lo, int hi)
-{
+
+//采用 Bentley&D. McIlroy 三分区快速排序的算法改进
+private static void sort(int[] array, int lo, int hi) {
     //对于小序列，直接采用插入排序替代
-    if (hi - lo <= CUTTOFF - 1)
-    {
-        Sort<int>.InsertionSort(array, lo, hi);
+    if (hi - lo <= CUTTOFF - 1) {
+        InsertionSort.insertionSort(array, lo, hi);
         return;
     }
     // Bentley-McIlroy 3-way partitioning
     int i = lo, j = hi + 1;
     int p = lo, q = hi + 1;
-    T v = array[lo];
-    while (true)
-    {
-        while (Less(array[++i], v))
+    int v = array[lo];
+    while (true) {
+        while (less(array[++i], v))
             if (i == hi) break;
-        while (Less(v, array[--j]))
+        while (less(v, array[--j]))
             if (j == lo) break;
 
         // pointers cross
-        if (i == j && Equal(array[i], v))
-            Swap(array, ++p, i);
+        if (i == j && array[i] == v)
+            swap(array, ++p, i);
         if (i >= j) break;
 
-        Swap(array, i, j);
-        if (Equal(array[i], v)) Swap(array, ++p, i);
-        if (Equal(array[j], v)) Swap(array, --q, j);
+        swap(array, i, j);
+        if (array[i] == v) swap(array, ++p, i);
+        if (array[j] == v) swap(array, --q, j);
     }
 
     //将相等的元素交换到中间
     i = j + 1;
-    for (int k = lo; k <= p; k++) Swap(array, k, j--);
-    for (int k = hi; k >= q; k--) Swap(array, k, i++);
+    for (int k = lo; k <= p; k++) swap(array, k, j--);
+    for (int k = hi; k >= q; k--) swap(array, k, i++);
 
-    Sort(array, lo, j);
-    Sort(array, i, hi);
+    sort(array, lo, j);
+    sort(array, i, hi);
 }
+
 ```
 
 三分区快速排序的动画如下：
@@ -436,6 +423,7 @@ Array.Sort这一方法在mscorlib这一程序集中，具体的实现方法有�
 快速排序很重要，希望本文对您了解快速排序有所帮助。
 
 >本文系转载文章，原作者为yangecnu，原文链接:[请点此处][ref]。
+>PS：我将算法的语言实现改为Java，望原作者勿怪。
 
 
 [20]: http://www.siam.org/pdf/news/637.pdf

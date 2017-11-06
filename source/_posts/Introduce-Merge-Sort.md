@@ -30,35 +30,31 @@ tags:
 该过程实现如下，注释比较清楚：
 
 ```java
-private static void Merge(T[] array, int lo, int mid, int hi){
+
+private static int[] aux; // 用于排序的辅助数组
+private static void merge(int[] array, int lo, int mid, int hi) {
     int i = lo, j = mid + 1;
     //把元素拷贝到辅助数组中
-    for (int k = lo; k <= hi; k++)
-    {
+    for (int k = lo; k <= hi; k++) {
         aux[k] = array[k];
     }
     //然后按照规则将数据从辅助数组中拷贝回原始的array中
-    for (int k = lo; k <= hi; k++)
-    {
+    for (int k = lo; k <= hi; k++) {
         //如果左边元素没了， 直接将右边的剩余元素都合并到到原数组中
-        if (i > mid)
-        {
+        if (i > mid) {
             array[k] = aux[j++];
         }//如果右边元素没有了，直接将所有左边剩余元素都合并到原数组中
-        else if (j > hi)
-        {
+        else if (j > hi) {
             array[k] = aux[i++];
         }//如果左边右边小，则将左边的元素拷贝到原数组中
-        else if (aux[i].CompareTo(aux[j]) < 0)
-        {
+        else if (aux[i] < aux[j]) {
             array[k] = aux[i++];
-        }
-        else
-        {
+        } else {
             array[k] = aux[j++];
         }
     }
 }
+
 ```
 
 下图是使用以上方法将ＥＥＧＭＲ和ＡＣＥＲＴ这两个有序序列合并为一个大的序列的过程演示：
@@ -74,23 +70,17 @@ private static void Merge(T[] array, int lo, int mid, int hi){
 首先我们将待排序的元素均分为左右两个序列，然后分别对其进去排序，然后对这个排好序的序列进行合并，代码如下：
 
 ```java
-public class MergeSort<T> where T : IComparable<T>
-{
-    private static T[] aux; // 用于排序的辅助数组
-    public static void Sort(T[] array)
-    {
-        aux = new T[array.Length]; // 仅分配一次
-        Sort(array, 0, array.Length - 1);
-    }
-    private static void Sort(T[] array, int lo, int hi)
-    {
-        if (lo >= hi) return; //如果下标大于上标，则返回
-        int mid = lo + (hi - lo) / 2;//平分数组
-        Sort(array, lo, mid);//循环对左侧元素排序
-        Sort(array, mid + 1, hi);//循环对右侧元素排序
-        Merge(array, lo, mid, hi);//对左右排好的序列进行合并
-    }
-    ...
+public static void sort(int[] array) {
+    aux = new int[array.length]; // 仅分配一次
+    sort(array, 0, array.length - 1);
+}
+
+private static void sort(int[] array, int lo, int hi) {
+    if (lo >= hi) return; //如果下标大于上标，则返回
+    int mid = lo + (hi - lo) / 2;//平分数组
+    sort(array, lo, mid);//循环对左侧元素排序
+    sort(array, mid + 1, hi);//循环对右侧元素排序
+    merge(array, lo, mid, hi);//对左右排好的序列进行合并
 }
 ```
 
@@ -167,15 +157,15 @@ D(N)=0,N=1; (当N=1时，数组只有1个元素，已排好序，时间为0)
 对于较小的子序列（通常序列元素个数为7个左右），我们就可以采用插入排序直接进行排序而不用继续递归了），算法改造如下：
 
 ```java
-private const int CUTOFF = 7;//采用插入排序的阈值
-private static void Sort(T[] array, int lo, int hi)
+private static int CUTOFF = 7;//采用插入排序的阈值
+private static void sort2(int[] array, int lo, int hi)
 {
     if (lo >= hi) return; //如果下标大于上标，则返回
-    if (hi <= lo + CUTOFF - 1) Sort<T>.SelectionSort(array, lo, hi);
+    if (hi <= lo + CUTOFF - 1) SelectionSort.selectionSort(array, lo, hi);
     int mid = lo + (hi - lo) / 2;//平分数组
-    Sort(array, lo, mid);//循环对左侧元素排序
-    Sort(array, mid + 1, hi);//循环对右侧元素排序
-    Merge(array, lo, mid, hi);//对左右排好的序列进行合并
+    sort2(array, lo, mid);//循环对左侧元素排序
+    sort2(array, mid + 1, hi);//循环对右侧元素排序
+    merge(array, lo, mid, hi);//对左右排好的序列进行合并
 }
 ```
 
@@ -188,15 +178,14 @@ private static void Sort(T[] array, int lo, int hi)
 算法改动如下：
 
 ```java
-private static void Sort(T[] array, int lo, int hi)
-{
+private static void sort3(int[] array, int lo, int hi){
     if (lo >= hi) return; //如果下标大于上标，则返回
-    if (hi <= lo + CUTOFF - 1) Sort<T>.SelectionSort(array, lo, hi);
+    if (hi <= lo + CUTOFF - 1)SelectionSort.selectionSort(array, lo, hi);
     int mid = lo + (hi - lo) / 2;//平分数组
-    Sort(array, lo, mid);//循环对左侧元素排序
-    Sort(array, mid + 1, hi);//循环对右侧元素排序
-   if (array[mid].CompareTo(array[mid + 1]) <= 0) return;
-    Merge(array, lo, mid, hi);//对左右排好的序列进行合并
+    sort3(array, lo, mid);//循环对左侧元素排序
+    sort3(array, mid + 1, hi);//循环对右侧元素排序
+    if (array[mid]<=array[mid + 1]) return;
+    merge(array, lo, mid, hi);//对左右排好的序列进行合并
 }
 ```
 
@@ -213,6 +202,7 @@ private static void Sort(T[] array, int lo, int hi)
 本文介绍了分治算法中比较典型的一个合并排序算法，这也是我们遇到的第一个时间复杂度为nlgn的排序算法，并简要对算法的复杂度进行的分析，希望本文对您理解合并排序有所帮助，下文将介绍快速排序算法。
 
 >本文系转载文章，原作者为yangecnu，原文链接:[请点此处][ref]。
+>PS：我将算法的语言实现改为Java，望原作者勿怪。
 
 
 
