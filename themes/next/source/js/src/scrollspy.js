@@ -16,10 +16,6 @@
 
 +function ($) {
   'use strict';
-
-  // SCROLLSPY CLASS DEFINITION
-  // ==========================
-
   function ScrollSpy(element, options) {
     this.$body          = $(document.body)
     this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
