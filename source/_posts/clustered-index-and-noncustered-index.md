@@ -13,6 +13,7 @@ tags:
 ### 聚集索引
 
 一种索引，该索引中键值的逻辑顺序决定了表中相应行的物理顺序。
+
 聚集索引确定表中数据的物理顺序。聚集索引类似于电话簿，后者按姓氏排列数据。由于聚集索引规定数据在表中的物理存储顺序，因此一个表只能包含一个聚集索引。但该索引可以包含多个列（组合索引），就像电话簿按姓氏和名字进行组织一样。
 
 聚集索引对于那些经常要搜索范围值的列特别有效。使用聚集索引找到包含第一个值的行后，便可以确保包含后续索引值的行在物理相邻。例如，如果应用程序执行 的一个查询经常检索某一日期范围内的记录，则使用聚集索引可以迅速找到包含开始日期的行，然后检索表中所有相邻的行，直到到达结束日期。这样有助于提高此 类查询的性能。同样，如果对从表中检索的数据进行排序时经常要用到某一列，则可以将该表在该列上聚集（物理排序），避免每次查询该列时都进行排序，从而节 省成本。
@@ -42,8 +43,11 @@ tags:
 ### 深入浅出理解索引结构
 
 实际上，您可以把索引理解为一种特殊的目录。微软的SQL SERVER提供了两种索引：聚集索引（clustered index，也称聚类索引、簇集索引）和非聚集索引（nonclustered index，也称非聚类索引、非簇集索引）。下面，我们举例来说明一下聚集索引和非聚集索引的区别：
+
 其实，我们的汉语字典的正文本身就是一个聚集索引。比如，我们要查“安”字，就会很自然地翻开字典的前几页，因为“安”的拼音是“an”，而按照拼音排序汉字的字典是以英文字母“a”开头并以“z”结尾的，那么“安”字就自然地排在字典的前部。如果您翻完了所有以“a”开头的部分仍然找不到这个字，那么就说明您的字典中没有这个字；同样的，如果查“张”字，那您也会将您的字典翻到最后部分，因为“张”的拼音是“zhang”。也就是说，字典的正文部分本身就是一个目录，您不需要再去查其他目录来找到您需要找的内容。我们把这种正文内容本身就是一种按照一定规则排列的目录称为“聚集索引”。
+
 如果您认识某个字，您可以快速地从自动中查到这个字。但您也可能会遇到您不认识的字，不知道它的发音，这时候，您就不能按照刚才的方法找到您要查的字，而需要去根据“偏旁部首”查到您要找的字，然后根据这个字后的页码直接翻到某页来找到您要找的字。但您结合“部首目录”和“检字表”而查到的字的排序并不是真正的正文的排序方法，比如您查“张”字，我们可以看到在查部首之后的检字表中“张”的页码是672页，检字表中“张”的上面是“驰”字，但页码却是63页，“张”的下面是“弩”字，页面是390页。很显然，这些字并不是真正的分别位于“张”字的上下方，现在您看到的连续的“驰、张、弩”三字实际上就是他们在非聚集索引中的排序，是字典正文中的字在非聚集索引中的映射。我们可以通过这种方式来找到您所需要的字，但它需要两个过程，先找到目录中的结果，然后再翻到您所需要的页码。我们把这种目录纯粹是目录，正文纯粹是正文的排序方式称为“非聚集索引”。
+
 通过以上例子，我们可以理解到什么是“聚集索引”和“非聚集索引”。进一步引申一下，我们可以很容易的理解：每个表只能有一个聚集索引，因为目录只能按照一种方法进行排序。
 
 ### 何时使用聚集索引或非聚集索引
@@ -89,33 +93,38 @@ tags:
 
 （1）仅在主键上建立聚集索引，并且不划分时间段：
 
+```sql
     Select gid,fariqi,neibuyonghu,title from tgongwen
-
+```
 用时：128470毫秒（即：128秒）
 
 （2）在主键上建立聚集索引，在fariq上建立非聚集索引：
 
+```sql
     select gid,fariqi,neibuyonghu,title from Tgongwen
     where fariqi> dateadd(day,-90,getdate())
-
+```
 用时：53763毫秒（54秒）
 
 （3）将聚合索引建立在日期列（fariqi）上：
-
+```sql
     select gid,fariqi,neibuyonghu,title from Tgongwen
     where fariqi> dateadd(day,-90,getdate())
-
+```
 用时：2423毫秒（2秒）
 
 虽然每条语句提取出来的都是25万条数据，各种情况的差异却是巨大的，特别是将聚集索引建立在日期列时的差异。事实上，如果您的数据库真的有1000 万容量的话，把主键建立在ID列上，就像以上的第1、2种情况，在网页上的表现就是超时，根本就无法显示。这也是我摒弃ID列作为聚集索引的一个最重要的因素。得出以上速度的方法是：在各个select语句前加：
 
+```sql
     declare @d datetime
     set @d=getdate()
+```
 
 并在select语句后加：
 
+```sql
     select \[语句执行花费时间(毫秒)\]=datediff(ms,@d,getdate())
-
+```
 #### 只要建立索引就能显著提高查询速度
 
 事实上，我们可以发现上面的例子中，第2、3条语句完全相同，且建立索引的字段也相同；不同的仅是前者在fariqi字段上建立的是非聚合索引，后者在此字段上建立的是聚合索引，但查询速度却有着天壤之别。所以，并非是在任何字段上简单地建立索引就能提高查询速度。
@@ -127,16 +136,18 @@ tags:
 上面已经谈到：在进行数据查询时都离不开字段的是“日期”还有用户本身的“用户名”。既然这两个字段都是如此的重要，我们可以把他们合并起来，建立一个复合索引（compound index）。
 
 很多人认为只要把任何字段加进聚集索引，就能提高查询速度，也有人感到迷惑：如果把复合的聚集索引字段分开查询，那么查询速度会减慢吗？带着这个问题，我们来看一下以下的查询速度（结果集都是25万条数据）：（日期列fariqi首先排在复合聚集索引的起始列，用户名neibuyonghu排在后列）：
-
+```sql
     select gid,fariqi,neibuyonghu,title from Tgongwen where fariqi>'2004-5-5'
-
+```
 查询速度：2513毫秒
-
+```sql
     select gid,fariqi,neibuyonghu,title from Tgongwen where fariqi>'2004-5-5' and neibuyonghu='办公室'
-
+```
 查询速度：2516毫秒
 
-  select gid,fariqi,neibuyonghu,title from Tgongwen where neibuyonghu=办公室'
+```sql
+  select gid,fariqi,neibuyonghu,title from Tgongwen where neibuyonghu='办公室'
+```
 
 查询速度：60280毫秒
 
@@ -147,57 +158,59 @@ tags:
 #### 用聚合索引比用不是聚合索引的主键速度快
 
 下面是实例语句：（都是提取25万条数据）
-
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen where fariqi='2004-9-16'
-
+```
 使用时间：3326毫秒
 
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen where gid<=250000  
-
+```
 使用时间：4470毫秒
 
 这里，用聚合索引比用不是聚合索引的主键速度快了近1/4。
 
 #### 用聚合索引比用一般的主键作order by时速度快，特别是在小数据量情况下
-
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen order by fariqi  
-
+```
 用时：12936
 
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen order by gid
-
+```
 用时：18843
 
 这里，用聚合索引比用一般的主键作order by时，速度快了3/10。事实上，如果数据量很小的话，用聚集索引作为排序列要比使用非聚集索引速度快得明显的多；而数据量如果很大的话，如10万以上，则二者的速度差别不明显。
 
 #### 使用聚合索引内的时间段，搜索时间会按数据占整个数据表的百分比成比例减少，而无论聚合索引使用了多少个：
-
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen where fariqi>''2004-1-1''
-
+```
 用时：6343毫秒（提取100万条）
-
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen where fariqi>'2004-6-6'
-
+```
 用时：3170毫秒（提取50万条）
-
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen where fariqi='2004-9-16'
-
+```
 用时：3326毫秒（和上句的结果一模一样。如果采集的数量一样，那么用大于号和等于号是一样的）
-
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen where fariqi>'2004-1-1' and fariqi<'2004-6-6'
-
+```
 用时：3280毫秒
 
 #### 日期列不会因为有分秒的输入而减慢查询速度
 
 下面的例子中，共有100万条数据，2004年1月1日以后的数据有50万条，但只有两个不同的日期，日期精确到日；之前有数据50万条，有5000个不同的日期，日期精确到秒。
-
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen where fariqi>'2004-1-1' order by fariqi
-
+```
 用时：6390毫秒
-
+```sql
     select gid,fariqi,neibuyonghu,reader,title from Tgongwen where fariqi<'2004-1-1' order by fariqi
-
+```
 用时：6453毫秒
 
 ### 其他注意事项

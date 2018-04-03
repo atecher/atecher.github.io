@@ -7,25 +7,31 @@ tags:
     - Thread
 ---
 
+我们使用多线程的目的是为了更好的利用CPU资源，从而达到提升系统性能的目的。当然还会有一些其他的一些原因，诸如改善程序结构，异步处理等...
+
 很多人都对其中的一些概念不够明确,如同步、并发等等,让我们先建立一个数据字典,以免产生误会。
 
 <!-- more -->
 
 ## 概念
 
-- 多线程:指的是这个程序(一个进程)运行时产生了不止一个线程
-- 并行与并发:
-    - 并行:多个cpu实例或者多台机器同时执行一段处理逻辑,是真正的同时。
-    - 并发:通过cpu调度算法,让用户看上去同时执行,实际上从cpu操作层面不是真正的同时。并发往往在场景中有公用的资源,那么针对这个公用的资源往往产生瓶颈,我们会用TPS或者QPS来反应这个系统的处理能力。
-    
-- 线程安全:经常用来描绘一段代码。指在并发的情况之下,该代码经过多线程使用,线程的调度顺序不影响任何结果。这个时候使用多线程,我们只需要关注系统的内存,cpu是不是够用即可。反过来,线程不安全就意味着线程的调度顺序会影响最终结果,如不加事务的转账代码:
+ *  多线程：指的是这个程序（一个进程）运行时产生了不止一个线程
+ *  并行与并发：
+     *  并行：多个cpu实例或者多台机器同时执行一段处理逻辑，是真正的同时。
+     *  并发：通过cpu调度算法，让用户看上去同时执行，实际上从cpu操作层面不是真正的同时。并发往往在场景中有公用的资源，那么针对这个公用的资源往往产生瓶颈，我们会用TPS或者QPS来反应这个系统的处理能力。
+
+![Image-3][]
+并发与并行
+
+ *  线程安全：经常用来描绘一段代码。指在并发的情况之下，该代码经过多线程使用，线程的调度顺序不影响任何结果。这个时候使用多线程，我们只需要关注系统的内存，cpu是不是够用即可。反过来，线程不安全就意味着线程的调度顺序会影响最终结果，如不加事务的转账代码：
+
 ```java
 void transferMoney(User from, User to, float amount){
-  to.setMoney(to.getBalance() + amount);
-  from.setMoney(from.getBalance() - amount);
+    to.setMoney(to.getBalance() + amount);
+    from.setMoney(from.getBalance() - amount);
 }
 ```
-- 同步:Java中的同步指的是通过人为的控制和调度,保证共享资源的多线程访问成为线程安全,来保证结果的准确。如上面的代码简单加入@synchronized关键字。在保证结果准确的同时,提高性能,才是优秀的程序。线程安全的优先级高于性能。
+ *  同步：Java中的同步指的是通过人为的控制和调度，保证共享资源的多线程访问成为线程安全，来保证结果的准确。如上面的代码简单加入`@synchronized`关键字。在保证结果准确的同时，提高性能，才是优秀的程序。线程安全的优先级高于性能。
 
 ## 上下文切换
 
@@ -39,9 +45,10 @@ void transferMoney(User from, User to, float amount){
 
 虽然多线程可以使得任务执行的效率得到提升,但是由于在线程切换时同样会带来一定的开销代价,并且多个线程会导致系统资源占用的增加,所以在进行多线程编程时要注意这些因素。
 
-## 线程的实现
+## 线程的实现方式
 
 ### 继承Thread类
+
 在java.lang包中定义, 继承Thread类必须重写run()方法
 创建好了自己的线程类之后,就可以创建线程对象了,然后通过start()方法去启动线程。注意,不是调用run()方法启动线程,run方法中只是定义需要执行的任务,如果调用run方法,即相当于在主线程中执行run方法,跟普通的方法调用没有任何区别,此时并不会创建一个新的线程来执行定义的任务。
 ```java
@@ -65,6 +72,7 @@ public class Test {
 ```
 
 在上面代码中,通过调用start()方法,就会创建一个新的线程了。为了分清start()方法调用和run()方法调用的区别,请看下面一个例子:
+
 ```java
 class MyThread extends Thread{
     private String name;
@@ -94,6 +102,7 @@ name:thread2 子线程ID:1
 name:thread1 子线程ID:8
 */
 ```
+
 从输出结果可以得出以下结论:
 
 1. thread1和thread2的线程ID不同,thread2和主线程ID相同,说明通过run方法调用并不会创建新的线程,而是在主线程中直接运行run方法,跟普通的方法调用没有任何区别；
@@ -103,6 +112,7 @@ name:thread1 子线程ID:8
 
 在Java中创建线程除了继承Thread类之外,还可以通过实现Runnable接口来实现类似的功能。实现Runnable接口必须重写其run方法。
 下面是一个例子:
+
 ```java
 public class Test {
     public static void main(String[] args)  {
@@ -121,6 +131,7 @@ class MyRunnable implements Runnable{
     }
 }
 ```
+
 Runnable的中文意思是“任务”,顾名思义,通过实现Runnable接口,我们定义了一个子任务,然后将子任务交由Thread去执行。注意,这种方式必须将Runnable作为Thread类的参数,然后通过Thread的start方法来创建一个新线程来执行该子任务。如果调用Runnable的run方法的话,是不会创建新线程的,这根普通的方法调用没有任何区别。
 
 事实上,查看Thread类的实现源代码会发现Thread类是实现了Runnable接口的。
@@ -188,16 +199,29 @@ class MyCallable implements Callable<Object> {
 ```
 代码说明:
 上述代码中Executors类,提供了一系列工厂方法用于创先线程池,返回的线程池都实现了ExecutorService接口。
+
+```java
 public static ExecutorService newFixedThreadPool(int nThreads)
+```
+
 创建固定数目线程的线程池。
 
+```java
 public static ExecutorService newCachedThreadPool()
+```
+
 创建一个可缓存的线程池,调用execute 将重用以前构造的线程(如果线程可用)。如果现有线程没有可用的,则创建一个新线程并添加到池中。终止并从缓存中移除那些已有 60 秒钟未被使用的线程。
 
+```java
 public static ExecutorService newSingleThreadExecutor()
+```
+
 创建一个单线程化的Executor。
 
+```java
 public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize)
+```
+
 创建一个支持定时及周期性的任务执行的线程池,多数情况下可用来替代Timer类。
 
 ExecutoreService提供了submit()方法,传递一个Callable,或Runnable,返回Future。如果Executor后台线程池还没有完成Callable的计算,这调用返回Future对象的get()方法,会阻塞直到计算完成。
@@ -226,7 +250,7 @@ ExecutoreService提供了submit()方法,传递一个Callable,或Runnable,返回F
 {% asset_img thread_status_from_new_2_dead.jpg thread_status_from_new_2_dead %}
 
 下图是从别处摘来的线程状态转换, 可结合以供参考
-{% asset_img Thread_State_trans.png 线程状态转换 %}
+![Image-5][]
 
 各种状态一目了然,值得一提的是”blocked”这个状态:
 线程在Running的过程中可能会遇到阻塞(Blocked)情况
@@ -751,3 +775,15 @@ threadFactory:线程工厂类,有默认实现,如果有自定义的需要则需�
 ref: 
 [http://www.importnew.com/21089.html](http://www.importnew.com/21089.html)
 [http://www.importnew.com/21136.html](http://www.importnew.com/21136.html)
+
+
+
+[Image-3]: http://qn.atecher.com/mts/20180403/3832334064026624
+[Image-4]: http://qn.atecher.com/mts/20180403/3832334093239296
+[Image-5]: http://qn.atecher.com/mts/20180403/3832334095647744
+[Image-6]: http://qn.atecher.com/mts/20180403/3832334097646592
+[Image-7]: http://qn.atecher.com/mts/20180403/3832334099989504
+[Image-8]: http://qn.atecher.com/mts/20180403/3832334101742592
+[Image-9]: http://qn.atecher.com/mts/20180403/3832334102774784
+[Image-10]: http://qn.atecher.com/mts/20180403/3832334103856128
+[Image-11]: http://qn.atecher.com/mts/20180403/3832334108263424
