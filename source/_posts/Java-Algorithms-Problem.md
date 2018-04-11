@@ -565,7 +565,10 @@ public class Demo17 {
     }
 }
 ```
-##两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，c说他不和x,z比，请编程序找出三队赛手的名单。
+
+## 乒乓球比赛
+
+两个乒乓球队进行比赛，各出三人。甲队为a,b,c三人，乙队为x,y,z三人。已抽签决定比赛名单。有人向队员打听比赛的名单。a说他不和x比，c说他不和x,z比，请编程序找出三队赛手的名单。
 
 ```java
 public class Demo18 {
@@ -625,7 +628,8 @@ public class Demo18 {
 
 1.程序分析：先把图形分成两部分来看待，前四行一个规律，后三行一个规律，利用双重for循环，第一层控制行，第二层控制列。
 
-三角形：
+**三角形：**
+
 ```java
 *
 ***
@@ -651,7 +655,9 @@ public class Demo19 {
     }
 }
 ```
-菱形：
+
+**菱形：**
+
 ```java
    *
   ***
@@ -681,8 +687,11 @@ public class Demo19 {
     }
 }
 ```
-##有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13...求出这个数列的前20项之和。
+
+## 有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13...求出这个数列的前20项之和。
+
 1.程序分析：请抓住分子与分母的变化规律。
+
 ```java
 public class Demo20 {
     public static void main(String[] args) {
@@ -701,8 +710,10 @@ public class Demo20 {
     }
 }
 ```
-## 求1+2!+3!+...+20!的和。
+## 求1+2!+3!+...+20!的和
+
 1.程序分析：此程序只是把累加变成了累乘。
+
 ```java
 public class Demo21 {
     public static void main(String[] args) {
@@ -716,7 +727,9 @@ public class Demo21 {
     }
 }
 ```
+
 ## 利用递归方法求5!
+
 1.程序分析：递归公式：f(n)=f(n-1)*4!
 ```java
 import java.util.Scanner;
@@ -738,9 +751,15 @@ public class Demo22 {
     }
 }
 ```
-##有5个人坐在一起，问第五个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第三个人，又说比第2人大两岁。问第2个人，说比第一个人大两岁。最后问第一个人，他说是10岁。请问第五个人多大？
+
+## 计算年龄
+
+有5个人坐在一起，问第五个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第三个人，又说比第2人大两岁。问第2个人，说比第一个人大两岁。最后问第一个人，他说是10岁。请问第五个人多大？
+
 1.程序分析：利用递归的方法，递归分为回推和递推两个阶段。要想知道第五个人岁数，需知道第四人的岁数，依次类推，推到第一人（10岁），再往回推。
+
 直接求解：
+
 ```java
 public class Demo23 {
     public static void main(String[] args) {
@@ -752,7 +771,9 @@ public class Demo23 {
     }
 }
 ```
+
 递归求解：
+
 ```java
 public class Demo23 {
     public static int getAge(int n) {
@@ -767,7 +788,9 @@ public class Demo23 {
 }
 ```
 ## 给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字。
+
 本题原方法：
+
 ```java
 import java.util.Scanner;
 public class Demo24 {
@@ -810,7 +833,9 @@ public class Demo24 {
     }
 }
 ```
+
 个人版方法：
+
 ```java
 import java.util.Scanner;
 public class Demo24 {
@@ -826,8 +851,11 @@ public class Demo24 {
     }
 }
 ```
+
 ## 一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。
+
 原方法：
+
 ```java
 import java.util.Scanner;
 public class Palindrom {
@@ -866,7 +894,9 @@ public class Palindrom {
     }
 }
 ```
+
 个人版：
+
 ```java
 import java.util.Scanner;
 public class Palindrom {
@@ -896,9 +926,11 @@ public class Palindrom {
     }
 }
 ```
+
 ## 请输入星期几的第一个字母来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母。
 
 1.程序分析：用情况语句比较好，如果第一个字母一样，则判断用情况语句或if语句判断第二个字母。
+
 ```java
 import java.util.Scanner;
 public class Demo26 {
@@ -972,7 +1004,9 @@ public class Demo26 {
     }
 }
 ```
+
 ## 求100之内的素数
+
 ```java
 public class Demo27 {
     public static void main(String args[]) {
@@ -988,7 +1022,9 @@ public class Demo27 {
     }
 }
 ```
+
 或
+
 ```java
 public class Demo27{
     public static void main(String args[]){
@@ -1004,7 +1040,9 @@ public class Demo27{
     }
 }
 ```
+
 ## 对10个数进行排序。
+
 1.程序分析：可以利用选择法，即从后9个比较过程中，选择一个最小的与第一个元素交换，下次类推，即用第二个元素与后8个进行比较，并进行交换。
 本例代码为生成随机10个数排序，并输入1个数，插入重排序输出：
 ```java
@@ -1032,7 +1070,9 @@ public class Demo28 {
     }
 }
 ```
+
 个人代码：
+
 ```java
 import java.util.Arrays;
 import java.util.Scanner;
@@ -1057,8 +1097,11 @@ public class Demo28 {
     }
 }
 ```
+
 ## 求一个3*3矩阵主对角线元素之和
+
 1.程序分析：利用双重for循环控制输入二维数组，再将a[i][i]累加后输出。
+
 ```java
 public class Demo29 {
     public static void main(String[] args) {
@@ -1073,7 +1116,9 @@ public class Demo29 {
     }
 }
 ```
+
 主负对角线：
+
 ```java
  for(i=0;i<n;i++)
          for(j=0;j<n;j++)
@@ -1082,7 +1127,9 @@ public class Demo29 {
             if(i+j==n-1) sum2+=a[i][j];
          }
 ```
+
 ##有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。
+
 1.程序分析：首先判断此数是否大于最后一个数，然后再考虑插入中间的数的情况，插入后此元素之后的数，依次后移一个位置。
 ```java
 import java.util.Random;
@@ -1119,9 +1166,13 @@ public class Demo30 {
     }
 }
 ```
+
 ## 将一个数组逆序输出
+
 程序分析：用第一个与最后一个交换。
+
 用逆序循环控制变量输出：
+
 ```java
 public class Demo31 {
     public static void main(String[] args) {
@@ -1131,8 +1182,10 @@ public class Demo31 {
         }
     }
 }
-````
+```
+
 ## 取一个整数a从右端开始的第4～7位数字。
+
 ```java
 import java.util.*;
 public class Demo32 {
@@ -1150,7 +1203,9 @@ public class Demo32 {
     }
 }
 ```
+
 或
+
 ```java
 import java.util.Scanner;
 public class Demo32{
@@ -1166,6 +1221,7 @@ public class Demo32{
 
 
 ## 打印出杨辉三角形（要求打印出10行如下图）
+
 1.程序分析：
 1
 1   1
@@ -1173,6 +1229,7 @@ public class Demo32{
 1   3   3   1
 1   4   6   4   1
 1   5   10  10  5   1
+
 ```java
 public class Demo33 {
     public static void main(String args[]) {
@@ -1198,8 +1255,11 @@ public class Demo33 {
     }
 }
 ```
+
 ## 输入3个数a,b,c，按大小顺序输出。
+
 （也可互相比较交换排序）
+
 ```java
 import java.util.Arrays;
 public class Demo34 {
@@ -1211,12 +1271,15 @@ public class Demo34 {
     }
 }
 ```
+
 或
+
 ```java
 if(x > y) { int t = x; x = y; y = t; } if(x > z) { int t = x; x = z; z = t; } if(y > z) { int t = y; y = z; z = t; }
 ```
 
 ## 输入数组，最大的与第一个元素交换，最小的与最后一个元素交换，输出数组。
+
 ```java
 import java.util.*;
 public class Demo35 {
@@ -1258,7 +1321,9 @@ public class Demo35 {
     }
 }
 ```
+
 ## 有n个整数，使其前面各数顺序向后移m个位置，最后m个数变成最前面的m个数
+
 ```java
 import java.util.LinkedList;
 import java.util.List;
@@ -1290,7 +1355,9 @@ public class Demo36 {
     }
 }
 ```
+
 或
+
 ```java
 import java.util.*;
 public class Demo36{
@@ -1327,8 +1394,11 @@ public class Demo36{
     }
 }
 ```
+
 ##有n个人围成一圈，顺序排号。从第一个人开始报数（从1到3报数），凡报到3的人退出圈子，问最后留下的是原来第几号的那位。
+
 （约瑟夫环问题，百度百科有时间复杂度最简单的数学方法）
+
 原例代码：
 ```java
 import java.util.Scanner;
@@ -1366,7 +1436,9 @@ public class Demo37 {
     }
 }
 ```
+
 个人代码1：
+
 ```java
 import java.util.Scanner;
 public class Demo37 {
@@ -1403,7 +1475,9 @@ public class Demo37 {
     }
 }
 ```
+
 个人代码2：
+
 ```java
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -1441,7 +1515,9 @@ public class Demo37 {
     }
 }
 ```
+
 ## 写一个函数，求一个字符串的长度，在main函数中输入字符串，并输出其长度。
+
 ```java
 import java.util.Scanner;
 public class Demo38 {
@@ -1456,7 +1532,9 @@ public class Demo38 {
     }
 }
 ```
+
 或
+
 ```java
 import java.util.Scanner;
 public class Demo38 {
@@ -1468,7 +1546,9 @@ public class Demo38 {
     }
 }
 ```
+
 ## 编写一个函数，输入n为偶数时，调用函数求1/2+1/4+...+1/n,当输入n为奇数时，调用函数1/1+1/3+...+1/n
+
 ```java
 import java.util.Scanner;
 public class Demo39 {
@@ -1498,8 +1578,11 @@ public class Demo39 {
     }
 }
 ```
-## 字符串排序。
+
+## 字符串排序
+
 （利用容器类中的sort方法）
+
 ```java
 import java.util.*;
 public class Demo40 {
@@ -1515,7 +1598,9 @@ public class Demo40 {
     }
 }
 ```
+
 或
+
 ```java
 import java.util.*;
 
@@ -1566,7 +1651,11 @@ public class Demo40 {
 }
 
 ```
-## 海滩上有一堆桃子，五只猴子来分。第一只猴子把这堆桃子平均分为五份，多了一个，这只猴子把多的一个扔入海中，拿走了一份。第二只猴子把剩下的桃子又平均分成五份，又多了一个，它同样把多的一个扔入海中，拿走了一份，第三、第四、第五只猴子都是这样做的，问海滩上原来最少有多少个桃子？
+
+## 猴子分桃
+
+海滩上有一堆桃子，五只猴子来分。第一只猴子把这堆桃子平均分为五份，多了一个，这只猴子把多的一个扔入海中，拿走了一份。第二只猴子把剩下的桃子又平均分成五份，又多了一个，它同样把多的一个扔入海中，拿走了一份，第三、第四、第五只猴子都是这样做的，问海滩上原来最少有多少个桃子？
+
 本题源码：
 ```java
 public class Demo41 {
@@ -1598,7 +1687,9 @@ public class Demo41 {
     }
 }
 ```
+
 个人修改：
+
 ```java
 public class Demo41 {
     public static void main(String[] args) {
@@ -1620,6 +1711,7 @@ public class Demo41 {
 ```
 
 ## 809*??=800*??+9*??+1。其中??代表的两位数,8*??的结果为两位数，9*??的结果为3位数。求??代表的两位数，及809*??后的结果。
+
 （本题为无解，去掉1有解）
 ```java
 public class Demo42 {
@@ -1635,8 +1727,11 @@ public class Demo42 {
     }
 }
 ```
+
 ## 求0—7所能组成的奇数个数
+
 暴力算法：
+
 ```java
 public class Demo43 {
     public static boolean isJiShu(int n) {
@@ -1675,7 +1770,9 @@ public class Demo43 {
     }
 }
 ```
+
 数学算法：
+
 ```java
 public class Demo43 {
     public static void main(String[] args) {
@@ -1690,7 +1787,9 @@ public class Demo43 {
     }
 }
 ```
+
 个人算法：
+
 ```java
 //组成1位数是4个。
 //组成2位数是7*4个。
@@ -1712,8 +1811,10 @@ public class Demo43 {
 }
 ```
 
-## 一个偶数总能表示为两个素数之和。
-    哥德巴赫猜想是想证明对任何大于6的自然数n之内的所有偶数可以表示为两个素数之和
+## 一个偶数总能表示为两个素数之和
+
+哥德巴赫猜想是想证明对任何大于6的自然数n之内的所有偶数可以表示为两个素数之和
+
 ```java
 public class Demo44 {
     public static boolean isSuShu(int x) {
@@ -1739,7 +1840,9 @@ public class Demo44 {
     }
 }
 ```
+
 或
+
 ```java
 public class Demo44{
     public static void main(String[] args){
@@ -1761,7 +1864,9 @@ public class Demo44{
     }
 }
 ```
+
 ## 判断几个9能被一个素数整除
+
 ```java
 public class Demo45{
     public static boolean isSuShu(int x){
@@ -1816,7 +1921,9 @@ public class Demo45{
     }
 }
 ```
+
 ## 判断一个整数能被几个9整除。（原题：一个素数能被几个9整除）
+
 ```java
 import java.util.*;
 public class Demo45 {
@@ -1834,7 +1941,9 @@ public class Demo45 {
     }
 }
 ```
+
 ## 两个字符串连接程序
+
 ```java
 import java.util.Scanner;
 public class Demo46 {
@@ -1848,7 +1957,9 @@ public class Demo46 {
     }
 }
 ```
+
 或
+
 ```java
 import java.util.*;
 public class Demo46 {
@@ -1864,7 +1975,8 @@ public class Demo46 {
 }
 ```
 
-## 读取7个数（1—50）的整数值，每读取一个值，程序打印出该值个数的
+## 读取7个数（1—50）的整数值，每读取一个值，程序打印出该值个数的\*号
+
 ```java
 import java.util.*;
 public class Demo47 {
@@ -1885,7 +1997,9 @@ public class Demo47 {
     }
 }
 ```
+
 或
+
 ```java
 import java.util.Scanner;
 public class Demo47 {
@@ -1904,7 +2018,9 @@ public class Demo47 {
     }
 }
 ```
+
 ## 某个公司采用公用电话传递数据，数据是四位的整数，在传递过程中是加密的，加密规则如下：每位数字都加上5，然后用和除以10的余数代替该数字，再将第一位和第四位交换，第二位和第三位交换。
+
 ```java
 import java.util.Scanner;
 public class Demo48{
@@ -1932,7 +2048,9 @@ public class Demo48{
     }
 }
 ```
+
 或
+
 ```java
 import java.util.*;
 public class Demo48 {
@@ -1961,6 +2079,7 @@ public class Demo48 {
 ```
 
 ## 计算字符串中子串出现的次数
+
 ```java
 import java.util.Scanner;
 public class Demo49 {
@@ -1989,7 +2108,9 @@ public class Demo49 {
     }
 }
 ```
+
 ## 有五个学生，每个学生有3门课的成绩，从键盘输入以上数据（包括学生号，姓名，三门课成绩），计算出平均成绩，把原有的数据和计算出的平均分数存放在磁盘文
+
 ```java
 import java.io.File;
 import java.io.FileWriter;
@@ -2009,10 +2130,10 @@ class Student {
     }
     @Override
     public String toString() {
-        return "学号：" + this.number + "\\t姓名：" + this.name + "\r\n各科成绩：\r\n" + a[0] + "\\t" + a[1] + "\\t" + a[2] + "\r\n平均成绩：\r\n"
-                + this.getAve();
+        return "学号：" + this.number + "\t姓名：" + this.name + "\r\n各科成绩：\r\n" + a[0] + "\\t" + a[1] + "\\t" + a[2] + "\r\n平均成绩：\r\n"+ this.getAve();
     }
 }
+
 public class Demo50 {
     public static Student input() {
         Scanner s = new Scanner(System.in);
