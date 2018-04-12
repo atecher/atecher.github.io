@@ -294,7 +294,7 @@ mathjax:
 han: false
 
 # Swiftype Search API Key
-swiftype_key: togi6KW1EXZtAezYoC6g
+#swiftype_key: togi6KW1EXZtAezYoC6g
 
 # Baidu Analytics ID
 #baidu_analytics:
@@ -458,13 +458,14 @@ calendar:
 
 # Algolia Search
 algolia_search:
-  enable: false
+  enable: true
   hits:
     per_page: 10
   labels:
     input_placeholder: Search for Posts
     hits_empty: "We didn't find any results for the search: ${query}"
     hits_stats: "${hits} results found in ${time} ms"
+
 
 
 # Local search

@@ -1,6 +1,9 @@
 language: node_js
 node_js: stable
 
+env:
+  - HEXO_ALGOLIA_INDEXING_KEY=8123eba2f0fd8a9eacbaf3113776710f
+
 # S: Build Lifecycle
 install:
   - npm install
@@ -14,6 +17,7 @@ install:
  # - npm install -g gulp
 
 script:
+  - hexo algolia
   - hexo g
 
 after_script:
