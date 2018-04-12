@@ -99,6 +99,11 @@ deploy:
   type:
    
 
+
+algolia:
+  applicationID: 'PITP4EHINM'
+  indexName: 'atecher_hexo'
+  chunkSize: 5000 
   
   
   

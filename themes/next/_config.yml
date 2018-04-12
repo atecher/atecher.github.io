@@ -466,7 +466,12 @@ algolia_search:
     hits_empty: "We didn't find any results for the search: ${query}"
     hits_stats: "${hits} results found in ${time} ms"
 
-
+algolia:
+  applicationID: 'PITP4EHINM'
+  apiKey: '8123eba2f0fd8a9eacbaf3113776710f'
+  indexName: 'atecher_hexo'
+  chunkSize: 5000 
+  
 
 # Local search
 local_search:
