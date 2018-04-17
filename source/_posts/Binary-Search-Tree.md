@@ -366,22 +366,22 @@ BST中位于顶部的元素就是快速排序中的第一个划分的元素，�
 
 
 
-  [1]: /img/Binary-Search-Tree/242107596238677.png
-  [2]: /img/Binary-Search-Tree/242108017644291.png
-  [3]: /img/Binary-Search-Tree/242108031863290.png
-  [4]: /img/Binary-Search-Tree/242108044987088.png
-  [5]: /img/Binary-Search-Tree/242108051395960.gif
-  [6]: /img/Binary-Search-Tree/242108539987565.gif
-  [7]: /img/Binary-Search-Tree/242109028579058.png
-  [8]: /img/Binary-Search-Tree/242109054823357.png
-  [9]: /img/Binary-Search-Tree/242109072177027.png
-  [10]: /img/Binary-Search-Tree/242109079512170.png
-  [11]: /img/Binary-Search-Tree/242109117799766.png
-  [12]: /img/Binary-Search-Tree/242109130291051.png
-  [13]: /img/Binary-Search-Tree/242109359362821.gif
-  [14]: /img/Binary-Search-Tree/242110202325986.png
-  [15]: /img/Binary-Search-Tree/242110231541728.png
-  [16]: /img/Binary-Search-Tree/242110257646498.png
+  [1]: http://qn.atecher.com/mts/20180417/3852386529018880
+  [2]: http://qn.atecher.com/mts/20180417/3852386531558400
+  [3]: http://qn.atecher.com/mts/20180417/3852386535556096
+  [4]: http://qn.atecher.com/mts/20180417/3852386541241344
+  [5]: http://qn.atecher.com/mts/20180417/3852386541077504
+  [6]: http://qn.atecher.com/mts/20180417/3852393206400000
+  [7]: http://qn.atecher.com/mts/20180417/3852386544337920
+  [8]: http://qn.atecher.com/mts/20180417/3852386547647488
+  [9]: http://qn.atecher.com/mts/20180417/3852386547663872
+  [10]: http://qn.atecher.com/mts/20180417/3852386549728256
+  [11]: http://qn.atecher.com/mts/20180417/3852386552349696
+  [12]: http://qn.atecher.com/mts/20180417/3852386510390272
+  [13]: http://qn.atecher.com/mts/20180417/3852393206531072
+  [14]: http://qn.atecher.com/mts/20180417/3852386510504960
+  [15]: http://qn.atecher.com/mts/20180417/3852386513814528
+  [16]: http://qn.atecher.com/mts/20180417/3852386522203136
   [17]: http://www.cnblogs.com/yangecnu/p/Introduce-Binary-Search-Tree.html
   
   

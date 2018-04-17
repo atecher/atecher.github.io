@@ -107,16 +107,16 @@ tags:
 
 
 
-  [1]: /img/2-3-tree/252248421868855.png
-  [2]: /img/2-3-tree/252248494047648.png
-  [3]: /img/2-3-tree/252248534044960.png
-  [4]: /img/2-3-tree/252248561705215.png
-  [5]: /img/2-3-tree/252248597641585.png
-  [6]: /img/2-3-tree/252249052327179.png
-  [7]: /img/2-3-tree/252249062951222.png
-  [8]: /img/2-3-tree/252249072955050.png
-  [9]: /img/2-3-tree/252249082017906.png
-  [10]: /img/2-3-tree/252249087649035.png
+  [1]: http://qn.atecher.com/mts/20180417/3852376548230144
+  [2]: http://qn.atecher.com/mts/20180417/3852376536810496
+  [3]: http://qn.atecher.com/mts/20180417/3852376537089024
+  [4]: http://qn.atecher.com/mts/20180417/3852376537416704
+  [5]: http://qn.atecher.com/mts/20180417/3852376542184448
+  [6]: http://qn.atecher.com/mts/20180417/3852376542299136
+  [7]: http://qn.atecher.com/mts/20180417/3852376543986688
+  [8]: http://qn.atecher.com/mts/20180417/3852376545215488
+  [9]: http://qn.atecher.com/mts/20180417/3852376546264064
+  [10]: http://qn.atecher.com/mts/20180417/3852376548197376
   [11]: http://www.cnblogs.com/yangecnu/p/Introduce-2-3-Search-Tree.html
 
 
