@@ -7,8 +7,8 @@ tags:
     - Thread
 ---
 
-本指南根据 Jakob Jenkov 最新博客翻译,请随时关注博客更新:[http://tutorials.jenkov.com/java-util-concurrent/index.html](http://tutorials.jenkov.com/java-util-concurrent/index.html)。
-本指南已做成中英文对照阅读版的 pdf 文档,有兴趣的朋友可以去 [Java并发工具包java.util.concurrent用户指南中英文对照阅读版.pdf](http://download.csdn.net/detail/defonds/8469189) 进行下载。
+本指南根据 Jakob Jenkov 最新博客翻译,请随时关注博客更新:[http://tutorials.jenkov.com/java-util-concurrent/index.html][Link-1]。
+本指南已做成中英文对照阅读版的 pdf 文档,有兴趣的朋友可以去 [Java并发工具包java.util.concurrent用户指南中英文对照阅读版.pdf][Link-2] 进行下载。
 
 <!-- more -->
 
@@ -16,7 +16,7 @@ tags:
 
 Java 5 添加了一个新的包到 Java 平台,java.util.concurrent 包。这个包包含有一系列能够让 Java 的并发编程变得更加简单轻松的类。在这个包被添加以前,你需要自己去动手实现自己的相关工具类。
 
-本文我将带你一一认识 java.util.concurrent 包里的这些类,然后你可以尝试着如何在项目中使用它们。本文中我将使用 Java 6 版本,我不确定这和 Java 5 版本里的是否有一些差异。我不会去解释关于 Java 并发的核心问题 - 其背后的原理,也就是说,如果你对那些东西感兴趣,参考《[Java 并发指南](http://tutorials.jenkov.com/java-concurrency/index.html)》。
+本文我将带你一一认识 java.util.concurrent 包里的这些类,然后你可以尝试着如何在项目中使用它们。本文中我将使用 Java 6 版本,我不确定这和 Java 5 版本里的是否有一些差异。我不会去解释关于 Java 并发的核心问题 - 其背后的原理,也就是说,如果你对那些东西感兴趣,参考《[Java 并发指南][Link-3]》。
 
 半成品
 本文很大程度上还是个 "半成品",所以当你发现一些被漏掉的类或接口时,请耐心等待。在我空闲的时候会把它们加进来的。
@@ -28,7 +28,8 @@ java.util.concurrent 包里的 BlockingQueue 接口表示一个线程安放入�
 ### BlockingQueue 用法
 
 BlockingQueue 通常用于一个线程生产对象,而另外一个线程消费这些对象的场景。下图是对这个原理的阐述:
-{% asset_img 5401760-27d2be9af3d08a19.png %}
+
+[![5401760-27d2be9af3d08a19.png][Image-4]][Image-4]
 
 **一个线程往里边放,另外一个线程从里边取的一个 BlockingQueue。**
 
@@ -58,11 +59,11 @@ BlockingQueue 具有 4 组不同的方法用于插入、移除以及对队列中
 
 BlockingQueue 是个接口,你需要使用它的实现之一来使用 BlockingQueue。java.util.concurrent 具有以下 BlockingQueue 接口的实现(Java 6):
 
-- [ArrayBlockingQueue](http://blog.csdn.net/defonds/article/details/44021605#t7)
-- [DelayQueue](http://blog.csdn.net/defonds/article/details/44021605#t8)
-- [LinkedBlockingQueue](http://blog.csdn.net/defonds/article/details/44021605#t9)
-- [PriorityBlockingQueue](http://blog.csdn.net/defonds/article/details/44021605#t10)
-- [SynchronousQueue](http://blog.csdn.net/defonds/article/details/44021605#t11)
+ *  [ArrayBlockingQueue][Link-5]
+ *  [DelayQueue][Link-6]
+ *  [LinkedBlockingQueue][Link-7]
+ *  [PriorityBlockingQueue][Link-8]
+ *  [SynchronousQueue][Link-9]
 
 ### Java 中使用 BlockingQueue 的例子
 
@@ -72,64 +73,66 @@ BlockingQueue 是个接口,你需要使用它的实现之一来使用 BlockingQu
 
 Producer 向一个共享的 BlockingQueue 中注入字符串,而 Consumer 则会从中把它们拿出来。
 ```java
-public class BlockingQueueExample {  
+public class BlockingQueueExample {
 
-    public static void main(String[] args) throws Exception {  
+    public static void main(String[] args) throws Exception {
 
-        BlockingQueue queue = new ArrayBlockingQueue(1024);  
+        BlockingQueue queue = new ArrayBlockingQueue(1024);
 
-        Producer producer = new Producer(queue);  
-        Consumer consumer = new Consumer(queue);  
+        Producer producer = new Producer(queue);
+        Consumer consumer = new Consumer(queue);
 
-        new Thread(producer).start();  
-        new Thread(consumer).start();  
+        new Thread(producer).start();
+        new Thread(consumer).start();
 
-        Thread.sleep(4000);  
-    }  
+        Thread.sleep(4000);
+    }
 }
 ```
 以下是 Producer 类。注意它在每次 put() 调用时是如何休眠一秒钟的。这将导致 Consumer 在等待队列中对象的时候发生阻塞。
 ```java
-public class Producer implements Runnable{  
+public class Producer implements Runnable{
 
-    protected BlockingQueue queue = null;  
+    protected BlockingQueue queue = null;
 
-    public Producer(BlockingQueue queue) {  
-        this.queue = queue;  
-    }  
+    public Producer(BlockingQueue queue) {
+        this.queue = queue;
+    }
 
-    public void run() {  
-        try {  
-            queue.put("1");  
-            Thread.sleep(1000);  
-            queue.put("2");  
-            Thread.sleep(1000);  
-            queue.put("3");  
-        } catch (InterruptedException e) {  
-            e.printStackTrace();  
-        }  
-    }  
+    public void run() {
+        try {
+            queue.put("1");
+            Thread.sleep(1000);
+            queue.put("2");
+            Thread.sleep(1000);
+            queue.put("3");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
 ```
+
 以下是 Consumer 类。它只是把对象从队列中抽取出来,然后将它们打印到 System.out。
+
 ```java
-public class Consumer implements Runnable{  
+public class Consumer implements Runnable{
 
-    protected BlockingQueue queue = null;  
+    protected BlockingQueue queue = null;
 
-    public Consumer(BlockingQueue queue) {  
-        this.queue = queue;  
-    }  
+    public Consumer(BlockingQueue queue) {
+        this.queue = queue;
+    }
 
-    public void run() {  
-        try {  
-            System.out.println(queue.take());  
-            System.out.println(queue.take());  
-            System.out.println(queue.take());  
-        } catch (InterruptedException e) {  
-            e.printStackTrace();  
-        }  
-    }  
+    public void run() {
+        try {
+            System.out.println(queue.take());
+            System.out.println(queue.take());
+            System.out.println(queue.take());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
 ```
 
@@ -140,46 +143,53 @@ ArrayBlockingQueue 是一个有界的阻塞队列,其内部实现是将对象放
 'ArrayBlockingQueue 内部以 FIFO(先进先出)的顺序对元素进行存储。队列中的头元素在所有元素之中是放入时间最久的那个,而尾元素则是最短的那个。
 以下是在使用 ArrayBlockingQueue 的时候对其初始化的一个示例:
 ```java
-BlockingQueue queue = new ArrayBlockingQueue(1024);  
-queue.put("1");  
+BlockingQueue queue = new ArrayBlockingQueue(1024);
+queue.put("1");
 Object object = queue.take();
 ```
 以下是使用了 Java 泛型的一个 BlockingQueue 示例。注意其中是如何对 String 元素放入和提取的:
 ```java
-BlockingQueue<String> queue = new ArrayBlockingQueue<String>(1024);  
-queue.put("1");  
+BlockingQueue<String> queue = new ArrayBlockingQueue<String>(1024);
+queue.put("1");
 String string = queue.take();
 ```
 
 ## 4. 延迟队列 DelayQueue
 
 DelayQueue 实现了 BlockingQueue 接口。DelayQueue 对元素进行持有直到一个特定的延迟到期。注入其中的元素必须实现 java.util.concurrent.Delayed 接口,该接口定义:
+
 ```java
-public interface Delayed extends Comparable<Delayed< {  
- public long getDelay(TimeUnit timeUnit);  
+
+public interface Delayed extends Comparable<Delayed< {
+ public long getDelay(TimeUnit timeUnit);
 }
+
 ```
+
+
 DelayQueue 将会在每个元素的 getDelay() 方法返回的值的时间段之后才释放掉该元素。如果返回的是 0 或者负值,延迟将被认为过期,该元素将会在 DelayQueue 的下一次 take 被调用的时候被释放掉。传递给 getDelay 方法的 getDelay 实例是一个枚举类型,它表明了将要延迟的时间段。
 
 TimeUnit 枚举将会取以下值:
+
 ```
-DAYS  
-HOURS  
-MINUTES  
-SECONDS  
-MILLISECONDS  
-MICROSECONDS  
-NANOSECONDS  
+DAYS
+HOURS
+MINUTES
+SECONDS
+MILLISECONDS
+MICROSECONDS
+NANOSECONDS
 ```
+
 正如你所看到的,Delayed 接口也继承了 java.lang.Comparable 接口,这也就意味着 Delayed 对象之间可以进行对比。这个可能在对 DelayQueue 队列中的元素进行排序时有用,因此它们可以根据过期时间进行有序释放。以下是使用 DelayQueue 的例子:
 ```java
-public class DelayQueueExample {  
-    public static void main(String[] args) {  
-        DelayQueue queue = new DelayQueue();  
-        Delayed element1 = new DelayedElement();  
-        queue.put(element1);  
-        Delayed element2 = queue.take();  
-    }  
+public class DelayQueueExample {
+    public static void main(String[] args) {
+        DelayQueue queue = new DelayQueue();
+        Delayed element1 = new DelayedElement();
+        queue.put(element1);
+        Delayed element2 = queue.take();
+    }
 }
 ```
 DelayedElement 是我所创建的一个 Delayed 接口的实现类,它不在 Java.util.concurrent 包里。你需要自行创建你自己的 Delayed 接口的实现以使用 DelayQueue 类。
@@ -194,10 +204,10 @@ LinkedBlockingQueue 内部以 FIFO(先进先出)的顺序对元素进行存储�
 
 以下是 LinkedBlockingQueue 的初始化和使用示例代码:
 ```java
-BlockingQueue<String> unbounded = new LinkedBlockingQueue<String>();  
-BlockingQueue<String> bounded   = new LinkedBlockingQueue<String>(1024);  
+BlockingQueue<String> unbounded = new LinkedBlockingQueue<String>();
+BlockingQueue<String> bounded   = new LinkedBlockingQueue<String>(1024);
 
-bounded.put("Value");  
+bounded.put("Value");
 
 String value = bounded.take();
 ```
@@ -212,10 +222,10 @@ PriorityBlockingQueue 是一个无界的并发队列。它使用了和类 java.u
 
 以下是使用 PriorityBlockingQueue 的示例:
 ```java
-BlockingQueue queue   = new PriorityBlockingQueue();  
+BlockingQueue queue   = new PriorityBlockingQueue();
 
-    //String implements java.lang.Comparable  
-    queue.put("Value");  
+    //String implements java.lang.Comparable
+    queue.put("Value");
 
     String value = queue.take();
 ```
@@ -235,7 +245,8 @@ java.util.concurrent 包里的 BlockingDeque 接口表示一个线程安放入�
 ### BlockingDeque 的使用
 
 在线程既是一个队列的生产者又是这个队列的消费者的时候可以使用到 BlockingDeque。如果生产者线程需要在队列的两端都可以插入数据,消费者线程需要在队列的两端都可以移除数据,这个时候也可以使用 BlockingDeque。
-{% asset_img 5401760-157e5d6759d43eff.png %}
+
+[![5401760-157e5d6759d43eff.png][Image-10]][Image-10]
 
 **一个 BlockingDeque - 线程在双端队列的两端都可以插入和提取元素。**
 
@@ -247,15 +258,15 @@ BlockingDeque 具有 4 组不同的方法用于插入、移除以及对双端队
 
 |操作|抛异常|特定值|阻塞|超时|
 |:---|:---|:---|:---|:---|
-|插入|addFirst(o)|	offerFirst(o)|	putFirst(o)|	offerFirst(o, timeout, timeunit)|
-|移除|removeFirst(o)|	pollFirst(o)|	takeFirst(o)|	pollFirst(timeout, timeunit)|
-|检查|getFirst(o)|	peekFirst(o)|		||
+|插入|addFirst(o)|    offerFirst(o)|  putFirst(o)|    offerFirst(o, timeout, timeunit)|
+|移除|removeFirst(o)| pollFirst(o)|   takeFirst(o)|   pollFirst(timeout, timeunit)|
+|检查|getFirst(o)|    peekFirst(o)|       ||
 
 |操作|抛异常|特定值|阻塞|超时|
 |:---|:---|:---|:---|:---|
-|插入|addLast(o)|	offerLast(o)|	putLast(o)|	offerLast(o, timeout, timeunit)|
-|移除|removeLast(o)|	pollLast(o)|	takeLast(o)|	pollLast(timeout, timeunit)|
-|检查|getLast(o)|	peekLast(o)||||
+|插入|addLast(o)| offerLast(o)|   putLast(o)| offerLast(o, timeout, timeunit)|
+|移除|removeLast(o)|  pollLast(o)|    takeLast(o)|    pollLast(timeout, timeunit)|
+|检查|getLast(o)| peekLast(o)||||
 
 四组不同的行为方式解释:
 抛异常:如果试图的操作无法立即执行,抛一个异常。
@@ -277,12 +288,12 @@ LinkedBlockingDeque
 
 以下是如何使用 BlockingDeque 方法的一个简短代码示例:
 ```java
-BlockingDeque<String> deque = new LinkedBlockingDeque<String>();  
+BlockingDeque<String> deque = new LinkedBlockingDeque<String>();
 
-deque.addFirst("1");  
-deque.addLast("2");  
+deque.addFirst("1");
+deque.addLast("2");
 
-String two = deque.takeLast();  
+String two = deque.takeLast();
 String one = deque.takeFirst();
 ```
 
@@ -292,12 +303,12 @@ LinkedBlockingDeque 类实现了 BlockingDeque 接口。
 
 deque(双端队列) 是 "Double Ended Queue" 的缩写。因此,双端队列是一个你可以从任意一端插入或者抽取元素的队列。(译者注:唐僧啊,受不了。)LinkedBlockingDeque 是一个双端队列,在它为空的时候,一个试图从中抽取数据的线程将会阻塞,无论该线程是试图从哪一端抽取数据。以下是 LinkedBlockingDeque 实例化以及使用的示例:
 ```java
-BlockingDeque<String> deque = new LinkedBlockingDeque<String>();  
+BlockingDeque<String> deque = new LinkedBlockingDeque<String>();
 
-deque.addFirst("1");  
-deque.addLast("2");  
+deque.addFirst("1");
+deque.addLast("2");
 
-String two = deque.takeLast();  
+String two = deque.takeLast();
 String one = deque.takeFirst();
 ```
 
@@ -321,8 +332,8 @@ ConcurrentHashMap 和 java.util.HashTable 类很相似,但 ConcurrentHashMap 能
 
 以下是如何使用 ConcurrentMap 接口的一个例子。
 ```java
-ConcurrentMap concurrentMap = new ConcurrentHashMap();  
-concurrentMap.put("key", "value");  
+ConcurrentMap concurrentMap = new ConcurrentHashMap();
+concurrentMap.put("key", "value");
 Object value = concurrentMap.get("key");
 ```
 
@@ -336,11 +347,11 @@ NavigableMap 中的方法不再赘述,本小节我们来看一下 ConcurrentNavi
 
 headMap(T toKey) 方法返回一个包含了小于给定 toKey 的 key 的子 map。如果你对原始 map 里的元素做了改动,这些改动将影响到子 map 中的元素(译者注:map 集合持有的其实只是对象的引用)。以下示例演示了对 headMap() 方法的使用:
 ```java
-ConcurrentNavigableMap map = new ConcurrentSkipListMap();  
+ConcurrentNavigableMap map = new ConcurrentSkipListMap();
 
-map.put("1", "one");  
-map.put("2", "two");  
-map.put("3", "three");  
+map.put("1", "one");
+map.put("2", "two");
+map.put("3", "three");
 
 ConcurrentNavigableMap headMap = map.headMap("2");
 ```
@@ -354,11 +365,11 @@ tailMap(T fromKey) 方法返回一个包含了不小于给定 fromKey 的 key �
 
 以下示例演示了对 tailMap() 方法的使用:
 ```java
-ConcurrentNavigableMap map = new ConcurrentSkipListMap();  
+ConcurrentNavigableMap map = new ConcurrentSkipListMap();
 
-map.put("1", "one");  
-map.put("2", "two");  
-map.put("3", "three");  
+map.put("1", "one");
+map.put("2", "two");
+map.put("3", "three");
 
 ConcurrentNavigableMap tailMap = map.tailMap("2");
 ```
@@ -370,11 +381,11 @@ subMap() 方法返回原始 map 中,键介于 from(包含) 和 to (不包含) �
 
 示例如下:
 ```java
-ConcurrentNavigableMap map = new ConcurrentSkipListMap();  
+ConcurrentNavigableMap map = new ConcurrentSkipListMap();
 
-map.put("1", "one");  
-map.put("2", "two");  
-map.put("3", "three");  
+map.put("1", "one");
+map.put("2", "two");
+map.put("3", "three");
 
 ConcurrentNavigableMap subMap = map.subMap("2", "3");
 ```
@@ -398,58 +409,58 @@ CountDownLatch 以一个给定的数量初始化。countDown() 每被调用一�
 
 Decrementer 三次调用 countDown() 之后,等待中的 Waiter 才会从 await() 调用中释放出来。
 ```java
-CountDownLatch latch = new CountDownLatch(3);  
+CountDownLatch latch = new CountDownLatch(3);
 
-Waiter waiter = new Waiter(latch);  
-Decrementer decrementer = new Decrementer(latch);  
+Waiter waiter = new Waiter(latch);
+Decrementer decrementer = new Decrementer(latch);
 
-new Thread(waiter).start();  
-new Thread(decrementer).start();  
+new Thread(waiter).start();
+new Thread(decrementer).start();
 
-Thread.sleep(4000);  
+Thread.sleep(4000);
 
-public class Waiter implements Runnable{  
+public class Waiter implements Runnable{
 
-    CountDownLatch latch = null;  
+    CountDownLatch latch = null;
 
-    public Waiter(CountDownLatch latch) {  
-        this.latch = latch;  
-    }  
+    public Waiter(CountDownLatch latch) {
+        this.latch = latch;
+    }
 
-    public void run() {  
-        try {  
-            latch.await();  
-        } catch (InterruptedException e) {  
-            e.printStackTrace();  
-        }  
+    public void run() {
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        System.out.println("Waiter Released");  
-    }  
-}  
+        System.out.println("Waiter Released");
+    }
+}
 
-public class Decrementer implements Runnable {  
+public class Decrementer implements Runnable {
 
-    CountDownLatch latch = null;  
+    CountDownLatch latch = null;
 
-    public Decrementer(CountDownLatch latch) {  
-        this.latch = latch;  
-    }  
+    public Decrementer(CountDownLatch latch) {
+        this.latch = latch;
+    }
 
-    public void run() {  
+    public void run() {
 
-        try {  
-            Thread.sleep(1000);  
-            this.latch.countDown();  
+        try {
+            Thread.sleep(1000);
+            this.latch.countDown();
 
-            Thread.sleep(1000);  
-            this.latch.countDown();  
+            Thread.sleep(1000);
+            this.latch.countDown();
 
-            Thread.sleep(1000);  
-            this.latch.countDown();  
-        } catch (InterruptedException e) {  
-            e.printStackTrace();  
-        }  
-    }  
+            Thread.sleep(1000);
+            this.latch.countDown();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
 ```
 
@@ -458,7 +469,8 @@ public class Decrementer implements Runnable {
 java.util.concurrent.CyclicBarrier 类是一种同步机制,它能够对处理一些算法的线程实现同步。换句话讲,它就是一个所有线程必须等待的一个栅栏,直到所有线程都到达这里,然后所有线程才可以继续做其他事情。
 
 图示如下:
-{% asset_img 5401760-e86f6cf9f744a024.png %}
+
+[![5401760-e86f6cf9f744a024.png][Image-11]][Image-11]
 
 **两个线程在栅栏旁等待对方。**
 
@@ -495,61 +507,61 @@ barrier.await(10, TimeUnit.SECONDS);
 
 CyclicBarrier 支持一个栅栏行动,栅栏行动是一个 Runnable 实例,一旦最后等待栅栏的线程抵达,该实例将被执行。你可以在 CyclicBarrier 的构造方法中将 Runnable 栅栏行动传给它:
 ```java
-Runnable      barrierAction = ... ;  
+Runnable      barrierAction = ... ;
 CyclicBarrier barrier       = new CyclicBarrier(2, barrierAction);
 ```
 CyclicBarrier 示例
 ```java
-Runnable barrier1Action = new Runnable() {  
-    public void run() {  
-        System.out.println("BarrierAction 1 executed ");  
-    }  
-};  
-Runnable barrier2Action = new Runnable() {  
-    public void run() {  
-        System.out.println("BarrierAction 2 executed ");  
-    }  
-};  
+Runnable barrier1Action = new Runnable() {
+    public void run() {
+        System.out.println("BarrierAction 1 executed ");
+    }
+};
+Runnable barrier2Action = new Runnable() {
+    public void run() {
+        System.out.println("BarrierAction 2 executed ");
+    }
+};
 
-CyclicBarrier barrier1 = new CyclicBarrier(2, barrier1Action);  
-CyclicBarrier barrier2 = new CyclicBarrier(2, barrier2Action);  
+CyclicBarrier barrier1 = new CyclicBarrier(2, barrier1Action);
+CyclicBarrier barrier2 = new CyclicBarrier(2, barrier2Action);
 
-CyclicBarrierRunnable barrierRunnable1 = new CyclicBarrierRunnable(barrier1, barrier2);  
-CyclicBarrierRunnable barrierRunnable2 = new CyclicBarrierRunnable(barrier1, barrier2);  
+CyclicBarrierRunnable barrierRunnable1 = new CyclicBarrierRunnable(barrier1, barrier2);
+CyclicBarrierRunnable barrierRunnable2 = new CyclicBarrierRunnable(barrier1, barrier2);
 
-new Thread(barrierRunnable1).start();  
+new Thread(barrierRunnable1).start();
 new Thread(barrierRunnable2).start();
 ```
 CyclicBarrierRunnable 类:
 ```java
-public class CyclicBarrierRunnable implements Runnable{  
+public class CyclicBarrierRunnable implements Runnable{
 
-    CyclicBarrier barrier1 = null;  
-    CyclicBarrier barrier2 = null;  
+    CyclicBarrier barrier1 = null;
+    CyclicBarrier barrier2 = null;
 
-    public CyclicBarrierRunnable(  CyclicBarrier barrier1,  CyclicBarrier barrier2) {  
-        this.barrier1 = barrier1;  
-        this.barrier2 = barrier2;  
-    }  
+    public CyclicBarrierRunnable(  CyclicBarrier barrier1,  CyclicBarrier barrier2) {
+        this.barrier1 = barrier1;
+        this.barrier2 = barrier2;
+    }
 
-    public void run() {  
-        try {  
-            Thread.sleep(1000);  
-            System.out.println(Thread.currentThread().getName() +  " waiting at barrier 1");  
-            this.barrier1.await();  
+    public void run() {
+        try {
+            Thread.sleep(1000);
+            System.out.println(Thread.currentThread().getName() +  " waiting at barrier 1");
+            this.barrier1.await();
 
-            Thread.sleep(1000);  
-            System.out.println(Thread.currentThread().getName() +  " waiting at barrier 2");  
-            this.barrier2.await();  
+            Thread.sleep(1000);
+            System.out.println(Thread.currentThread().getName() +  " waiting at barrier 2");
+            this.barrier2.await();
 
-            System.out.println(Thread.currentThread().getName() +  " done!");  
+            System.out.println(Thread.currentThread().getName() +  " done!");
 
-        } catch (InterruptedException e) {  
-            e.printStackTrace();  
-        } catch (BrokenBarrierException e) {  
-            e.printStackTrace();  
-        }  
-    }  
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+    }
 }
 ```
 result:
@@ -567,41 +579,43 @@ Thread-1 done!
 ## 14. 交换机 Exchanger
 
 java.util.concurrent.Exchanger 类表示一种两个线程可以进行互相交换对象的会和点。这种机制图示如下:
-{% asset_img 5401760-e6a0b41e04e51a52.png %}
+
+[![5401760-e6a0b41e04e51a52.png][Image-12]][Image-12]
+
 **两个线程通过一个 Exchanger 交换对象。**
 交换对象的动作由 Exchanger 的两个 exchange() 方法的其中一个完成。
 
 以下是一个示例:
 ```java
-Exchanger exchanger = new Exchanger();  
+Exchanger exchanger = new Exchanger();
 
-ExchangerRunnable exchangerRunnable1 = new ExchangerRunnable(exchanger, "A");  
-ExchangerRunnable exchangerRunnable2 = new ExchangerRunnable(exchanger, "B");  
+ExchangerRunnable exchangerRunnable1 = new ExchangerRunnable(exchanger, "A");
+ExchangerRunnable exchangerRunnable2 = new ExchangerRunnable(exchanger, "B");
 
-new Thread(exchangerRunnable1).start();  
+new Thread(exchangerRunnable1).start();
 new Thread(exchangerRunnable2).start();
 ```
 ExchangerRunnable 代码:
 ```java
-public class ExchangerRunnable implements Runnable{  
+public class ExchangerRunnable implements Runnable{
 
-    Exchanger exchanger = null;  
-    Object    object    = null;  
+    Exchanger exchanger = null;
+    Object    object    = null;
 
-    public ExchangerRunnable(Exchanger exchanger, Object object) {  
-        this.exchanger = exchanger;  
-        this.object = object;  
-    }  
+    public ExchangerRunnable(Exchanger exchanger, Object object) {
+        this.exchanger = exchanger;
+        this.object = object;
+    }
 
-    public void run() {  
-        try {  
-            Object previous = this.object;  
-            this.object = this.exchanger.exchange(this.object);  
-            System.out.println(Thread.currentThread().getName() + " exchanged " + previous + " for " + this.object);  
-        } catch (InterruptedException e) {  
-            e.printStackTrace();  
-        }  
-    }  
+    public void run() {
+        try {
+            Object previous = this.object;
+            this.object = this.exchanger.exchange(this.object);
+            System.out.println(Thread.currentThread().getName() + " exchanged " + previous + " for " + this.object);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
 ```
 以上程序输出:
@@ -629,12 +643,12 @@ java.util.concurrent.Semaphore 类是一个计数信号量。这就意味着它�
 如果你将信号量用于保护一个重要部分,试图进入这一部分的代码通常会首先尝试获得一个许可,然后才能进入重要部分(代码块),执行完之后,再把许可释放掉。
 比如这样:
 ```java
-Semaphore semaphore = new Semaphore(1);  
+Semaphore semaphore = new Semaphore(1);
 
-//critical section  
-semaphore.acquire();  
+//critical section
+semaphore.acquire();
 
-...  
+...
 
 semaphore.release();
 ```
@@ -674,13 +688,13 @@ java.util.concurrent.ExecutorService 接口表示一个异步执行机制,使我
 
 以下是一个简单的 ExecutorService 例子:
 ```java
-ExecutorService executorService = Executors.newFixedThreadPool(10);  
+ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-executorService.execute(new Runnable() {  
-    public void run() {  
-        System.out.println("Asynchronous task");  
-    }  
-});  
+executorService.execute(new Runnable() {
+    public void run() {
+        System.out.println("Asynchronous task");
+    }
+});
 
 executorService.shutdown();
 ```
@@ -689,7 +703,9 @@ executorService.shutdown();
 ### 任务委派
 
 下图说明了一个线程是如何将一个任务委托给一个 ExecutorService 去异步执行的:
-{% asset_img 5401760-38c1aa97e5108e84.png %}
+
+[![5401760-38c1aa97e5108e84.png][Image-13]][Image-13]
+
 一个线程将一个任务委派给一个 ExecutorService 去异步执行。
 
 一旦该线程将任务委派给 ExecutorService,该线程将继续它自己的执行,独立于该任务的执行。
@@ -700,8 +716,8 @@ executorService.shutdown();
 
 java.util.concurrent 包提供了 ExecutorService 接口的以下实现类:
 
-- [ThreadPoolExecutor](http://blog.csdn.net/defonds/article/details/44021605#t53)
-- [ScheduledThreadPoolExecutor](http://blog.csdn.net/defonds/article/details/44021605#t55)
+ *  [ThreadPoolExecutor][Link-14]
+ *  [ScheduledThreadPoolExecutor][Link-15]
 
 ### 创建一个 ExecutorService
 
@@ -709,8 +725,8 @@ ExecutorService 的创建依赖于你使用的具体实现。但是你也可以�
 
 以下是几个创建 ExecutorService 实例的例子:
 ```java
-ExecutorService executorService1 = Executors.newSingleThreadExecutor();  
-ExecutorService executorService2 = Executors.newFixedThreadPool(10);  
+ExecutorService executorService1 = Executors.newSingleThreadExecutor();
+ExecutorService executorService2 = Executors.newFixedThreadPool(10);
 ExecutorService executorService3 = Executors.newScheduledThreadPool(10);
 ```
 
@@ -729,13 +745,13 @@ ExecutorService executorService3 = Executors.newScheduledThreadPool(10);
 
 execute(Runnable) 方法要求一个 java.lang.Runnable 对象,然后对它进行异步执行。以下是使用 ExecutorService 执行一个 Runnable 的示例:
 ```java
-ExecutorService executorService = Executors.newSingleThreadExecutor();  
+ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-executorService.execute(new Runnable() {  
-    public void run() {  
-        System.out.println("Asynchronous task");  
-    }  
-});  
+executorService.execute(new Runnable() {
+    public void run() {
+        System.out.println("Asynchronous task");
+    }
+});
 
 executorService.shutdown();
 ```
@@ -745,13 +761,13 @@ executorService.shutdown();
 
 submit(Runnable) 方法也要求一个 Runnable 实现类,但它返回一个 Future 对象。这个 Future 对象可以用来检查 Runnable 是否已经执行完毕。以下是 ExecutorService submit() 示例:
 ```java
-Future future = executorService.submit(new Runnable() {  
-    public void run() {  
-        System.out.println("Asynchronous task");  
-    }  
-});  
+Future future = executorService.submit(new Runnable() {
+    public void run() {
+        System.out.println("Asynchronous task");
+    }
+});
 
-future.get();  //returns null if the task has finished correctly.
+future.get();//returns null if the task has finished correctly.
 ```
 
 #### submit(Callable)
@@ -760,12 +776,12 @@ submit(Callable) 方法类似于 submit(Runnable) 方法,除了它所要求的�
 
 以下是一个 ExecutorService Callable 示例:
 ```java
-Future future = executorService.submit(new Callable(){  
-    public Object call() throws Exception {  
-        System.out.println("Asynchronous Callable");  
-        return "Callable Result";  
-    }  
-});  
+Future future = executorService.submit(new Callable(){
+    public Object call() throws Exception {
+        System.out.println("Asynchronous Callable");
+        return "Callable Result";
+    }
+});
 
 System.out.println("future.get() = " + future.get());
 ```
@@ -781,29 +797,29 @@ invokeAny() 方法要求一系列的 Callable 或者其子接口的实例对象�
 
 如果其中一个任务执行结束(或者抛了一个异常),其他 Callable 将被取消。以下是示例代码:
 ```java
-ExecutorService executorService = Executors.newSingleThreadExecutor();  
+ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-Set<Callable<String>> callables = new HashSet<Callable<String>>();  
+Set<Callable<String>> callables = new HashSet<Callable<String>>();
 
-callables.add(new Callable<String>() {  
-    public String call() throws Exception {  
-        return "Task 1";  
-    }  
-});  
-callables.add(new Callable<String>() {  
-    public String call() throws Exception {  
-        return "Task 2";  
-    }  
-});  
-callables.add(new Callable<String>() {  
-    public String call() throws Exception {  
-        return "Task 3";  
-    }  
-});  
+callables.add(new Callable<String>() {
+    public String call() throws Exception {
+        return "Task 1";
+    }
+});
+callables.add(new Callable<String>() {
+    public String call() throws Exception {
+        return "Task 2";
+    }
+});
+callables.add(new Callable<String>() {
+    public String call() throws Exception {
+        return "Task 3";
+    }
+});
 
-String result = executorService.invokeAny(callables);  
+String result = executorService.invokeAny(callables);
 
-System.out.println("result = " + result);  
+System.out.println("result = " + result);
 
 executorService.shutdown();
 ```
@@ -815,31 +831,31 @@ invokeAll() 方法将调用你在集合中传给 ExecutorService 的所有 Calla
 
 无法通过一个 Future 对象来告知我们是两种结束中的哪一种。以下是一个代码示例:
 ```java
-ExecutorService executorService = Executors.newSingleThreadExecutor();  
+ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-Set<Callable<String>> callables = new HashSet<Callable<String>>();  
+Set<Callable<String>> callables = new HashSet<Callable<String>>();
 
-callables.add(new Callable<String>() {  
-    public String call() throws Exception {  
-        return "Task 1";  
-    }  
-});  
-callables.add(new Callable<String>() {  
-    public String call() throws Exception {  
-        return "Task 2";  
-    }  
-});  
-callables.add(new Callable<String>() {  
-    public String call() throws Exception {  
-        return "Task 3";  
-    }  
-});  
+callables.add(new Callable<String>() {
+    public String call() throws Exception {
+        return "Task 1";
+    }
+});
+callables.add(new Callable<String>() {
+    public String call() throws Exception {
+        return "Task 2";
+    }
+});
+callables.add(new Callable<String>() {
+    public String call() throws Exception {
+        return "Task 3";
+    }
+});
 
-List<Future<String>> futures = executorService.invokeAll(callables);  
+List<Future<String>> futures = executorService.invokeAll(callables);
 
-for(Future<String> future : futures){  
-    System.out.println("future.get = " + future.get());  
-}  
+for(Future<String> future : futures){
+    System.out.println("future.get = " + future.get());
+}
 
 executorService.shutdown();
 ```
@@ -860,29 +876,31 @@ ThreadPoolExecutor 包含的线程池能够包含不同数量的线程。池中�
 
 - corePoolSize
 - maximumPoolSize
+
 当一个任务委托给线程池时,如果池中线程数量低于 corePoolSize,一个新的线程将被创建,即使池中可能尚有空闲线程。如果内部任务队列已满,而且有至少 corePoolSize 正在运行,但是运行线程的数量低于 maximumPoolSize,一个新的线程将被创建去执行该任务。
 
 ThreadPoolExecutor 图解:
-{% asset_img 5401760-64bc059cafc4f417.png %}
+
+[![5401760-64bc059cafc4f417.png][Image-16]][Image-16]
 
 ### 创建一个 ThreadPoolExecutor
 
 ThreadPoolExecutor 有若干个可用构造子。比如:
 ```java
-int  corePoolSize  =    5;  
-int  maxPoolSize   =   10;  
-long keepAliveTime = 5000;  
+int  corePoolSize  = 5;
+int  maxPoolSize   = 10;
+long keepAliveTime = 5000;
 
-ExecutorService threadPoolExecutor =  
-        new ThreadPoolExecutor(  
-                corePoolSize,  
-                maxPoolSize,  
-                keepAliveTime,  
-                TimeUnit.MILLISECONDS,  
-                new LinkedBlockingQueue<Runnable>()  
+ExecutorService threadPoolExecutor =
+        new ThreadPoolExecutor(
+                corePoolSize,
+                maxPoolSize,
+                keepAliveTime,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>()
                 );
 ```
-但是,除非你确实需要显式为 ThreadPoolExecutor 定义所有参数,使用 java.util.concurrent.Executors 类中的工厂方法之一会更加方便,正如 [ExecutorService](http://blog.csdn.net/defonds/article/details/44021605#t41) 小节所述。
+但是,除非你确实需要显式为 ThreadPoolExecutor 定义所有参数,使用 java.util.concurrent.Executors 类中的工厂方法之一会更加方便,正如 [ExecutorService][Link-17] 小节所述。
 
 ## 18. 定时执行者服务 ScheduledExecutorService
 
@@ -890,17 +908,17 @@ java.util.concurrent.ScheduledExecutorService 是一个 ExecutorService, 它能�
 
 ### ScheduledExecutorService 例子
 ```java
-ScheduledExecutorService scheduledExecutorService =  
-        Executors.newScheduledThreadPool(5);  
+ScheduledExecutorService scheduledExecutorService =
+        Executors.newScheduledThreadPool(5);
 
-ScheduledFuture scheduledFuture =  
-    scheduledExecutorService.schedule(new Callable() {  
-        public Object call() throws Exception {  
-            System.out.println("Executed!");  
-            return "Called!";  
-        }  
-    },  
-    5,  
+ScheduledFuture scheduledFuture =
+    scheduledExecutorService.schedule(new Callable() {
+        public Object call() throws Exception {
+            System.out.println("Executed!");
+            return "Called!";
+        }
+    },
+    5,
     TimeUnit.SECONDS);
 ```
 首先一个内置 5 个线程的 ScheduledExecutorService 被创建。之后一个 Callable 接口的匿名类示例被创建然后传递给 schedule() 方法。后边的俩参数定义了 Callable 将在 5 秒钟之后被执行。
@@ -929,19 +947,19 @@ ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThread
 
 这个方法计划指定的 Callable 在给定的延迟之后执行。这个方法返回一个 ScheduledFuture,通过它你可以在它被执行之前对它进行取消,或者在它执行之后获取结果。以下是一个示例:
 ```java
-ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);  
+ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
 
-ScheduledFuture scheduledFuture =  
-    scheduledExecutorService.schedule(new Callable() {  
-        public Object call() throws Exception {  
-            System.out.println("Executed!");  
-            return "Called!";  
-        }  
-    },  
-    5,  
-    TimeUnit.SECONDS);  
+ScheduledFuture scheduledFuture =
+    scheduledExecutorService.schedule(new Callable() {
+        public Object call() throws Exception {
+            System.out.println("Executed!");
+            return "Called!";
+        }
+    },
+    5,
+    TimeUnit.SECONDS);
 
-System.out.println("result = " + scheduledFuture.get());  
+System.out.println("result = " + scheduledFuture.get());
 
 scheduledExecutorService.shutdown();
 ```
@@ -983,7 +1001,9 @@ ForkJoinPool 在 Java 7 中被引入。它和 ExecutorService 很相似,除了�
 #### 分叉
 
 一个使用了分叉和合并原理的任务可以将自己分叉(分割)为更小的子任务,这些子任务可以被并发执行。如下图所示:
-{% asset_img 5401760-e4d6b0523bfc5936.png %}
+
+[![5401760-e4d6b0523bfc5936.png][Image-18]][Image-18]
+
 通过把自己分割成多个子任务,每个子任务可以由不同的 CPU 并行执行,或者被同一个 CPU 上的不同线程执行。只有当给的任务过大,把它分割成几个子任务才有意义。把任务分割成子任务有一定开销,因此对于小型任务,这个分割的消耗可能比每个子任务并发执行的消耗还要大。
 
 什么时候把一个任务分割成子任务是有意义的,这个界限也称作一个阀值。这要看每个任务对有意义阀值的决定。很大程度上取决于它要做的工作的种类。
@@ -991,7 +1011,9 @@ ForkJoinPool 在 Java 7 中被引入。它和 ExecutorService 很相似,除了�
 #### 合并
 
 当一个任务将自己分割成若干子任务之后,该任务将进入等待所有子任务的结束之中。一旦子任务执行结束,该任务可以把所有结果合并到同一个结果。图示如下:
-{% asset_img 5401760-d3f822dbc4045bb9.png %}
+
+[![5401760-d3f822dbc4045bb9.png][Image-19]][Image-19]
+
 当然,并非所有类型的任务都会返回一个结果。如果这个任务并不返回一个结果,它只需等待所有子任务执行完毕。也就不需要结果的合并啦。
 
 ### ForkJoinPool
@@ -1014,49 +1036,48 @@ ForkJoinPool forkJoinPool = new ForkJoinPool(4);
 
 RecursiveAction 是一种没有任何返回值的任务。它只是做一些工作,比如写数据到磁盘,然后就退出了。一个 RecursiveAction 可以把自己的工作分割成更小的几块,这样它们可以由独立的线程或者 CPU 执行。你可以通过继承来实现一个 RecursiveAction。示例如下:
 ```java
-import java.util.ArrayList;  
-import java.util.List;  
-import java.util.concurrent.RecursiveAction;  
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.RecursiveAction;
 
-public class MyRecursiveAction extends RecursiveAction {  
+public class MyRecursiveAction extends RecursiveAction {
 
-    private long workLoad = 0;  
+    private long workLoad = 0;
 
-    public MyRecursiveAction(long workLoad) {  
-        this.workLoad = workLoad;  
-    }  
+    public MyRecursiveAction(long workLoad) {
+        this.workLoad = workLoad;
+    }
 
-    @Override  
-    protected void compute() {  
-        //if work is above threshold, break tasks up into smaller tasks  
-        if(this.workLoad > 16) {  
-            System.out.println("Splitting workLoad : " + this.workLoad);  
-            List<MyRecursiveAction> subtasks = new ArrayList<MyRecursiveAction>();  
-            subtasks.addAll(createSubtasks());  
-            for(RecursiveAction subtask : subtasks){  
-                subtask.fork();  
-            }  
-        } else {  
-            System.out.println("Doing workLoad myself: " + this.workLoad);  
-        }  
-    }  
+    @Override
+    protected void compute() {
+        //if work is above threshold, break tasks up into smaller tasks
+        if(this.workLoad > 16) {
+            System.out.println("Splitting workLoad : " + this.workLoad);
+            List<MyRecursiveAction> subtasks = new ArrayList<MyRecursiveAction>();
+            subtasks.addAll(createSubtasks());
+            for(RecursiveAction subtask : subtasks){
+                subtask.fork();
+            }
+        } else {
+            System.out.println("Doing workLoad myself: " + this.workLoad);
+        }
+    }
 
-    private List<MyRecursiveAction> createSubtasks() {  
-        List<MyRecursiveAction> subtasks = new ArrayList<MyRecursiveAction>();  
+    private List<MyRecursiveAction> createSubtasks() {
+        List<MyRecursiveAction> subtasks = new ArrayList<MyRecursiveAction>();
+        MyRecursiveAction subtask1 = new MyRecursiveAction(this.workLoad / 2);
+        MyRecursiveAction subtask2 = new MyRecursiveAction(this.workLoad / 2);
 
-        MyRecursiveAction subtask1 = new MyRecursiveAction(this.workLoad / 2);  
-        MyRecursiveAction subtask2 = new MyRecursiveAction(this.workLoad / 2);  
+        subtasks.add(subtask1);
+        subtasks.add(subtask2);
 
-        subtasks.add(subtask1);  
-        subtasks.add(subtask2);  
-
-        return subtasks;  
-    }  
+        return subtasks;
+    }
 }
 ```
 例子很简单。MyRecursiveAction 将一个虚构的 workLoad 作为参数传给自己的构造子。如果 workLoad 高于一个特定阀值,该工作将被分割为几个子工作,子工作继续分割。如果 workLoad 低于特定阀值,该工作将由 MyRecursiveAction 自己执行。你可以这样规划一个 MyRecursiveAction 的执行:
 ```java
-MyRecursiveAction myRecursiveAction = new MyRecursiveAction(24);  
+MyRecursiveAction myRecursiveAction = new MyRecursiveAction(24);
 forkJoinPool.invoke(myRecursiveAction);
 ```
 
@@ -1064,52 +1085,51 @@ forkJoinPool.invoke(myRecursiveAction);
 
 RecursiveTask 是一种会返回结果的任务。它可以将自己的工作分割为若干更小任务,并将这些子任务的执行结果合并到一个集体结果。可以有几个水平的分割和合并。以下是一个 RecursiveTask 示例:
 ```java
-import java.util.ArrayList;  
-import java.util.List;  
-import java.util.concurrent.RecursiveTask;  
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.RecursiveTask;
 
 
-public class MyRecursiveTask extends RecursiveTask<Long> {  
+public class MyRecursiveTask extends RecursiveTask<Long> {
 
-    private long workLoad = 0;  
+    private long workLoad = 0;
 
-    public MyRecursiveTask(long workLoad) {  
-        this.workLoad = workLoad;  
-    }  
+    public MyRecursiveTask(long workLoad) {
+        this.workLoad = workLoad;
+    }
 
-    protected Long compute() {  
+    protected Long compute() {
+        //if work is above threshold, break tasks up into smaller tasks
+        if(this.workLoad > 16) {
+            System.out.println("Splitting workLoad : " + this.workLoad);
+            List<MyRecursiveTask> subtasks = new ArrayList<MyRecursiveTask>();
+            subtasks.addAll(createSubtasks());
+            for(MyRecursiveTask subtask : subtasks){
+                subtask.fork();
+            }
 
-        //if work is above threshold, break tasks up into smaller tasks  
-        if(this.workLoad > 16) {  
-            System.out.println("Splitting workLoad : " + this.workLoad);  
-            List<MyRecursiveTask> subtasks = new ArrayList<MyRecursiveTask>();  
-            subtasks.addAll(createSubtasks());  
-            for(MyRecursiveTask subtask : subtasks){  
-                subtask.fork();  
-            }  
+            long result = 0;
+            for(MyRecursiveTask subtask : subtasks) {
+                result += subtask.join();
+            }
+            return result;
+        } else {
+            System.out.println("Doing workLoad myself: " + this.workLoad);
+            return workLoad * 3;
+        }
+    }
 
-            long result = 0;  
-            for(MyRecursiveTask subtask : subtasks) {  
-                result += subtask.join();  
-            }  
-            return result;  
-        } else {  
-            System.out.println("Doing workLoad myself: " + this.workLoad);  
-            return workLoad * 3;  
-        }  
-    }  
+    private List<MyRecursiveTask> createSubtasks() {
+        List<MyRecursiveTask> subtasks = new ArrayList<MyRecursiveTask>();
 
-    private List<MyRecursiveTask> createSubtasks() {  
-        List<MyRecursiveTask> subtasks = new ArrayList<MyRecursiveTask>();  
+        MyRecursiveTask subtask1 = new MyRecursiveTask(this.workLoad / 2);
+        MyRecursiveTask subtask2 = new MyRecursiveTask(this.workLoad / 2);
 
-        MyRecursiveTask subtask1 = new MyRecursiveTask(this.workLoad / 2);  
-        MyRecursiveTask subtask2 = new MyRecursiveTask(this.workLoad / 2);  
+        subtasks.add(subtask1);
+        subtasks.add(subtask2);
 
-        subtasks.add(subtask1);  
-        subtasks.add(subtask2);  
-
-        return subtasks;  
-    }  
+        return subtasks;
+    }
 }
 ```
 除了有一个结果返回之外,这个示例和 RecursiveAction 的例子很像。MyRecursiveTask 类继承自 RecursiveTask<Long>,这也就意味着它将返回一个 Long 类型的结果。
@@ -1120,29 +1140,29 @@ MyRecursiveTask 示例也会将工作分割为子任务,并通过 fork() 方法�
 
 你可以这样规划一个 RecursiveTask:
 ```java
-MyRecursiveTask myRecursiveTask = new MyRecursiveTask(128);  
-long mergedResult = forkJoinPool.invoke(myRecursiveTask);  
+MyRecursiveTask myRecursiveTask = new MyRecursiveTask(128);
+long mergedResult = forkJoinPool.invoke(myRecursiveTask);
 System.out.println("mergedResult = " + mergedResult);
 ```
 注意是如何通过 ForkJoinPool.invoke() 方法的调用来获取最终执行结果的。
 
 ### ForkJoinPool 评论
 
-貌似并非每个人都对 Java 7 里的 ForkJoinPool 满意:《[一个 Java 分叉-合并 带来的灾祸](http://coopsoft.com/ar/CalamityArticle.html)》。
+貌似并非每个人都对 Java 7 里的 ForkJoinPool 满意:《[一个 Java 分叉-合并 带来的灾祸][Link-20]》。
 
 在你计划在自己的项目里使用 ForkJoinPool 之前最好读一下该篇文章。
 
 ## 20. 锁 Lock
 
-java.util.concurrent.locks.Lock 是一个类似于 synchronized 块的线程同步机制。但是 Lock 比 synchronized 块更加灵活、精细。顺便说一下,在《[Java 并发指南](http://tutorials.jenkov.com/java-concurrency/index.html)》中我对如何实现你自己的锁进行了描述。
+java.util.concurrent.locks.Lock 是一个类似于 synchronized 块的线程同步机制。但是 Lock 比 synchronized 块更加灵活、精细。顺便说一下,在《[Java 并发指南][Link-3]》中我对如何实现你自己的锁进行了描述。
 
 ### Java Lock 例子
 
 既然 Lock 是一个接口,在你的程序里需要使用它的实现类之一来使用它。以下是一个简单示例:
 ```java
-Lock lock = new ReentrantLock();  
-lock.lock();  
-//critical section  
+Lock lock = new ReentrantLock();
+lock.lock();
+//critical section
 lock.unlock();
 ```
 首先创建了一个 Lock 对象。之后调用了它的 lock() 方法。这时候这个 lock 实例就被锁住啦。任何其他再过来调用 lock() 方法的线程将会被阻塞住,直到锁定 lock 实例的线程调用了 unlock() 方法。最后 unlock() 被调用了,lock 对象解锁了,其他线程可以对它进行锁定了。
@@ -1185,7 +1205,7 @@ java.util.concurrent.locks.ReadWriteLock 读写锁是一种先进的线程锁机
 
 读写锁的理念在于多个线程能够对一个共享资源进行读取,而不会导致并发问题。并发问题的发生场景在于对一个共享资源的读和写操作的同时进行,或者多个写操作并发进行。
 
-本节只讨论 Java 内置 ReadWriteLock。如果你想了解 ReadWriteLock 背后的实现原理,请参考我的《Java 并发指南》主题中的《[读写锁](http://tutorials.jenkov.com/java-concurrency/read-write-locks.html)》小节。
+本节只讨论 Java 内置 ReadWriteLock。如果你想了解 ReadWriteLock 背后的实现原理,请参考我的《Java 并发指南》主题中的《[读写锁][Link-21]》小节。
 
 ### ReadWriteLock 锁规则
 
@@ -1199,33 +1219,35 @@ java.util.concurrent.locks.ReadWriteLock 读写锁是一种先进的线程锁机
 ReadWriteLock 是个接口,如果你想用它的话就得去使用它的实现类之一。java.util.concurrent.locks 包提供了 ReadWriteLock 接口的以下实现类:
 
 - ReentrantReadWriteLock
-    
+
 以下是 ReadWriteLock 的创建以及如何使用它进行读、写锁定的简单示例代码:
+
 ```java
-ReadWriteLock readWriteLock = new ReentrantReadWriteLock();  
+ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
-readWriteLock.readLock().lock();  
+readWriteLock.readLock().lock();
 
-    // multiple readers can enter this section  
-    // if not locked for writing, and not writers waiting  
-    // to lock for writing.  
+// multiple readers can enter this section
+// if not locked for writing, and not writers waiting
+// to lock for writing.
 
-readWriteLock.readLock().unlock();  
+readWriteLock.readLock().unlock();
 
-readWriteLock.writeLock().lock();  
+readWriteLock.writeLock().lock();
 
-    // only one writer can enter this section,  
-    // and only if no threads are currently reading.  
+// only one writer can enter this section,
+    // and only if no threads are currently reading.
 
 readWriteLock.writeLock().unlock();
 ```
+
 注意如何使用 ReadWriteLock 对两种锁实例的持有。一个对读访问进行保护,一个队写访问进行保护。
 
 ## 22. 原子性布尔 AtomicBoolean
 
 AtomicBoolean 类为我们提供了一个可以用原子方式进行读和写的布尔值,它还拥有一些先进的原子性操作,比如 compareAndSet()。AtomicBoolean 类位于 java.util.concurrent.atomic 包,完整类名是为 java.util.concurrent.atomic.AtomicBoolean。本小节描述的 AtomicBoolean 是 Java 8 版本里的,而不是它第一次被引入的 Java 5 版本。
 
-AtomicBoolean 背后的设计理念在我的《Java 并发指南》主题的《[比较和交换](http://tutorials.jenkov.com/java-concurrency/compare-and-swap.html)》小节有解释。
+AtomicBoolean 背后的设计理念在我的《Java 并发指南》主题的《[比较和交换][Link-22]》小节有解释。
 
 ### 创建一个 AtomicBoolean
 
@@ -1242,7 +1264,7 @@ AtomicBoolean atomicBoolean = new AtomicBoolean(true);
 
 你可以通过使用 get() 方法来获取一个 AtomicBoolean 的值。示例如下:
 ```java
-AtomicBoolean atomicBoolean = new AtomicBoolean(true);  
+AtomicBoolean atomicBoolean = new AtomicBoolean(true);
 boolean value = atomicBoolean.get();
 ```
 以上代码执行后 value 变量的值将为 true。
@@ -1252,7 +1274,7 @@ boolean value = atomicBoolean.get();
 你可以通过使用 set() 方法来设置一个 AtomicBoolean 的值。
 示例如下:
 ```java
-AtomicBoolean atomicBoolean = new AtomicBoolean(true);  
+AtomicBoolean atomicBoolean = new AtomicBoolean(true);
 atomicBoolean.set(false);
 ```
 以上代码执行后 AtomicBoolean 的值为 false。
@@ -1261,7 +1283,7 @@ atomicBoolean.set(false);
 
 你可以通过 getAndSet() 方法来交换一个 AtomicBoolean 实例的值。getAndSet() 方法将返回 AtomicBoolean 当前的值,并将为 AtomicBoolean 设置一个新值。示例如下:
 ```java
-AtomicBoolean atomicBoolean = new AtomicBoolean(true);  
+AtomicBoolean atomicBoolean = new AtomicBoolean(true);
 boolean oldValue = atomicBoolean.getAndSet(false);
 ```
 以上代码执行后 oldValue 变量的值为 true,atomicBoolean 实例将持有 false 值。代码成功将 AtomicBoolean 当前值 ture 交换为 false。
@@ -1270,10 +1292,10 @@ boolean oldValue = atomicBoolean.getAndSet(false);
 
 compareAndSet() 方法允许你对 AtomicBoolean 的当前值与一个期望值进行比较,如果当前值等于期望值的话,将会对 AtomicBoolean 设定一个新值。compareAndSet() 方法是原子性的,因此在同一时间之内有单个线程执行它。因此 compareAndSet() 方法可被用于一些类似于锁的同步的简单实现。以下是一个 compareAndSet() 示例:
 ```java
-AtomicBoolean atomicBoolean = new AtomicBoolean(true);  
+AtomicBoolean atomicBoolean = new AtomicBoolean(true);
 
-boolean expectedValue = true;  
-boolean newValue      = false;  
+boolean expectedValue = true;
+boolean newValue      = false;
 
 boolean wasNewValueSet = atomicBoolean.compareAndSet(expectedValue, newValue);
 ```
@@ -1283,7 +1305,7 @@ boolean wasNewValueSet = atomicBoolean.compareAndSet(expectedValue, newValue);
 
 AtomicInteger 类为我们提供了一个可以进行原子性读和写操作的 int 变量,它还包含一系列先进的原子性操作,比如 compareAndSet()。AtomicInteger 类位于 java.util.concurrent.atomic 包,因此其完整类名为 java.util.concurrent.atomic.AtomicInteger。本小节描述的 AtomicInteger 是 Java 8 版本里的,而不是它第一次被引入的 Java 5 版本。
 
-AtomicInteger 背后的设计理念在我的《Java 并发指南》主题的《[比较和交换](http://tutorials.jenkov.com/java-concurrency/compare-and-swap.html)》小节有解释。
+AtomicInteger 背后的设计理念在我的《Java 并发指南》主题的《[比较和交换][Link-22]》小节有解释。
 
 ### 创建一个 AtomicInteger
 
@@ -1301,7 +1323,7 @@ AtomicInteger atomicInteger = new AtomicInteger(123);
 
 你可以使用 get() 方法获取 AtomicInteger 实例的值。示例如下:
 ```java
-AtomicInteger atomicInteger = new AtomicInteger(123);  
+AtomicInteger atomicInteger = new AtomicInteger(123);
 int theValue = atomicInteger.get();
 ```
 
@@ -1309,7 +1331,7 @@ int theValue = atomicInteger.get();
 
 你可以通过 set() 方法对 AtomicInteger 的值进行重新设置。以下是 AtomicInteger.set() 示例:
 ```java
-AtomicInteger atomicInteger = new AtomicInteger(123);  
+AtomicInteger atomicInteger = new AtomicInteger(123);
 atomicInteger.set(234);
 ```
 以上示例创建了一个初始值为 123 的 AtomicInteger,而在第二行将其值更新为 234。
@@ -1318,9 +1340,9 @@ atomicInteger.set(234);
 
 AtomicInteger 类也通过了一个原子性的 compareAndSet() 方法。这一方法将 AtomicInteger 实例的当前值与期望值进行比较,如果二者相等,为 AtomicInteger 实例设置一个新值。AtomicInteger.compareAndSet() 代码示例:
 ```java
-AtomicInteger atomicInteger = new AtomicInteger(123);  
-int expectedValue = 123;  
-int newValue      = 234;  
+AtomicInteger atomicInteger = new AtomicInteger(123);
+int expectedValue = 123;
+int newValue      = 234;
 atomicInteger.compareAndSet(expectedValue, newValue);
 ```
 本示例首先新建一个初始值为 123 的 AtomicInteger 实例。然后将 AtomicInteger 与期望值 123 进行比较,如果相等,将 AtomicInteger 的值更新为 234。
@@ -1336,8 +1358,8 @@ AtomicInteger 类包含有一些方法,通过它们你可以增加 AtomicInteger
 
 第一个 addAndGet() 方法给 AtomicInteger 增加了一个值,然后返回增加后的值。getAndAdd() 方法为 AtomicInteger 增加了一个值,但返回的是增加以前的 AtomicInteger 的值。具体使用哪一个取决于你的应用场景。以下是这两种方法的示例:
 ```java
-AtomicInteger atomicInteger = new AtomicInteger();  
-System.out.println(atomicInteger.getAndAdd(10));  
+AtomicInteger atomicInteger = new AtomicInteger();
+System.out.println(atomicInteger.getAndAdd(10));
 System.out.println(atomicInteger.addAndGet(10));
 ```
 本示例将打印出 0 和 20。例子中,第二行拿到的是加 10 之前的 AtomicInteger 的值。加 10 之前的值是 0。第三行将 AtomicInteger 的值再加 10,并返回加操作之后的值。该值现在是为 20。你当然也可以使用这俩方法为 AtomicInteger 添加负值。结果实际是一个减法操作。getAndIncrement() 和 incrementAndGet() 方法类似于 getAndAdd() 和 addAndGet(),但每次只将 AtomicInteger 的值加 1。
@@ -1373,7 +1395,7 @@ AtomicLong atomicLong = new AtomicLong(123);
 
 你可以通过 get() 方法获取 AtomicLong 的值。AtomicLong.get() 示例:
 ```java
-AtomicLong atomicLong = new AtomicLong(123);  
+AtomicLong atomicLong = new AtomicLong(123);
 long theValue = atomicLong.get();
 ```
 
@@ -1381,7 +1403,7 @@ long theValue = atomicLong.get();
 
 你可以通过 set() 方法设置 AtomicLong 实例的值。一个 AtomicLong.set() 的示例:
 ```java
-AtomicLong atomicLong = new AtomicLong(123);  
+AtomicLong atomicLong = new AtomicLong(123);
 atomicLong.set(234);
 ```
 本示例新建了一个初始值为 123 的 AtomicLong,第二行将其值设置为 234。
@@ -1390,9 +1412,9 @@ atomicLong.set(234);
 
 AtomicLong 类也有一个原子性的 compareAndSet() 方法。这一方法将 AtomicLong 实例的当前值与一个期望值进行比较,如果两种相等,为 AtomicLong 实例设置一个新值。AtomicLong.compareAndSet() 使用示例:
 ```java
-AtomicLong atomicLong = new AtomicLong(123);  
-long expectedValue = 123;  
-long newValue      = 234;  
+AtomicLong atomicLong = new AtomicLong(123);
+long expectedValue = 123;
+long newValue      = 234;
 atomicLong.compareAndSet(expectedValue, newValue);
 ```
 本示例新建了一个初始值为 123 的 AtomicLong。然后将 AtomicLong 的当前值与期望值 123 进行比较,如果相等的话,AtomicLong 的新值将变为 234。
@@ -1408,8 +1430,8 @@ AtomicLong 具备一些能够增加 AtomicLong 的值并返回自身值的方法
 
 第一个方法 addAndGet() 将 AtomicLong 的值加一个数字,并返回增加后的值。第二个方法 getAndAdd() 也将 AtomicLong 的值加一个数字,但返回的是增加前的 AtomicLong 的值。具体使用哪一个取决于你自己的场景。示例如下:
 ```java
-AtomicLong atomicLong = new AtomicLong();  
-System.out.println(atomicLong.getAndAdd(10));  
+AtomicLong atomicLong = new AtomicLong();
+System.out.println(atomicLong.getAndAdd(10));
 System.out.println(atomicLong.addAndGet(10));
 ```
 本示例将打印出 0 和 20。例子中,第二行拿到的是加 10 之前的 AtomicLong 的值。加 10 之前的值是 0。第三行将 AtomicLong 的值再加 10,并返回加操作之后的值。该值现在是为 20。你当然也可以使用这俩方法为 AtomicLong 添加负值。结果实际是一个减法操作。getAndIncrement() 和 incrementAndGet() 方法类似于 getAndAdd() 和 addAndGet(),但每次只将 AtomicLong 的值加 1。
@@ -1429,12 +1451,13 @@ AtomicReference 提供了一个可以被原子性读和写的对象引用变量�
 ### 创建一个 AtomicReference
 
 创建 AtomicReference 如下:
+
 ```java
 AtomicReference atomicReference = new AtomicReference();
 ```
 如果你需要使用一个指定引用创建 AtomicReference,可以:
 ```java
-String initialReference = "the initially referenced string";  
+String initialReference = "the initially referenced string";
 AtomicReference atomicReference = new AtomicReference(initialReference);
 ```
 
@@ -1446,7 +1469,7 @@ AtomicReference<String> atomicStringReference = new AtomicReference<String>();
 ```
 你也可以为泛型 AtomicReference 设置一个初始值。示例:
 ```java
-String initialReference = "the initially referenced string";  
+String initialReference = "the initially referenced string";
 AtomicReference<String> atomicStringReference = new AtomicReference<String>(initialReference);
 ```
 
@@ -1454,12 +1477,12 @@ AtomicReference<String> atomicStringReference = new AtomicReference<String>(init
 
 你可以通过 AtomicReference 的 get() 方法来获取保存在 AtomicReference 里的引用。如果你的 AtomicReference 是非泛型的,get() 方法将返回一个 Object 类型的引用。如果是泛型化的,get() 将返回你创建 AtomicReference 时声明的那个类型。先来看一个非泛型的 AtomicReference get() 示例:
 ```java
-AtomicReference atomicReference = new AtomicReference("first value referenced");  
+AtomicReference atomicReference = new AtomicReference("first value referenced");
 String reference = (String) atomicReference.get();
 ```
 注意如何对 get() 方法返回的引用强制转换为 String。泛型化的 AtomicReference 示例:
 ```java
-AtomicReference<String> atomicReference = new AtomicReference<String>("first value referenced");  
+AtomicReference<String> atomicReference = new AtomicReference<String>("first value referenced");
 String reference = atomicReference.get();
 ```
 编译器知道了引用的类型,所以我们无需再对 get() 返回的引用进行强制转换了。
@@ -1469,7 +1492,7 @@ String reference = atomicReference.get();
 
 你可以使用 get() 方法对 AtomicReference 里边保存的引用进行设置。如果你定义的是一个非泛型 AtomicReference,set() 将会以一个 Object 引用作为参数。如果是泛型化的 AtomicReference,set() 方法将只接受你定义给的类型。AtomicReference set() 示例:
 ```java
-AtomicReference atomicReference = new AtomicReference();  
+AtomicReference atomicReference = new AtomicReference();
 atomicReference.set("New object referenced");
 ```
 
@@ -1479,16 +1502,41 @@ AtomicReference 类具备了一个很有用的方法:compareAndSet()。compareAn
 
 如果 compareAndSet() 为 AtomicReference 设置了一个新的引用,compareAndSet() 将返回 true。否则 compareAndSet() 返回 false。AtomicReference compareAndSet() 示例:
 ```java
-String initialReference = "initial value referenced";  
-AtomicReference<String> atomicStringReference = new AtomicReference<String>(initialReference);  
+String initialReference = "initial value referenced";
+AtomicReference<String> atomicStringReference = new AtomicReference<String>(initialReference);
 
-String newReference = "new value referenced";  
-boolean exchanged = atomicStringReference.compareAndSet(initialReference, newReference);  
-System.out.println("exchanged: " + exchanged);  
-
-exchanged = atomicStringReference.compareAndSet(initialReference, newReference);  
+String newReference = "new value referenced";
+boolean exchanged = atomicStringReference.compareAndSet(initialReference, newReference);
 System.out.println("exchanged: " + exchanged);
+
+exchanged = atomicStringReference.compareAndSet(initialReference, newReference);
+System.out.println("exchanged: " + exchanged);
+```
+
 本示例创建了一个带有一个初始引用的泛型化的 AtomicReference。之后两次调用 comparesAndSet()来对存储值和期望值进行对比,如果二者一致,为 AtomicReference 设置一个新的引用。第一次比较,存储的引用(initialReference)和期望的引用(initialReference)一致,所以一个新的引用(newReference)被设置给 AtomicReference,compareAndSet() 方法返回 true。第二次比较时,存储的引用(newReference)和期望的引用(initialReference)不一致,因此新的引用没有被设置给 AtomicReference,compareAndSet() 方法返回 false。
 
-ref: [http://tutorials.jenkov.com/java-util-concurrent/index.html](http://tutorials.jenkov.com/java-util-concurrent/index.html)。
+ref: [http://tutorials.jenkov.com/java-util-concurrent/index.html][Link-1]。
 
+
+[Link-1]: http://tutorials.jenkov.com/java-util-concurrent/index.html
+[Link-2]: http://download.csdn.net/detail/defonds/8469189
+[Link-3]: http://tutorials.jenkov.com/java-concurrency/index.html
+[Image-4]: http://qn.atecher.com/mts/20180418/3853454026228736
+[Link-5]: http://blog.csdn.net/defonds/article/details/44021605#t7
+[Link-6]: http://blog.csdn.net/defonds/article/details/44021605#t8
+[Link-7]: http://blog.csdn.net/defonds/article/details/44021605#t9
+[Link-8]: http://blog.csdn.net/defonds/article/details/44021605#t10
+[Link-9]: http://blog.csdn.net/defonds/article/details/44021605#t11
+[Image-10]: http://qn.atecher.com/mts/20180418/3853454030636032
+[Image-11]: http://qn.atecher.com/mts/20180418/3853454019855361
+[Image-12]: http://qn.atecher.com/mts/20180418/3853454019789824
+[Image-13]: http://qn.atecher.com/mts/20180418/3853454027228160
+[Link-14]: http://blog.csdn.net/defonds/article/details/44021605#t53
+[Link-15]: http://blog.csdn.net/defonds/article/details/44021605#t55
+[Image-16]: http://qn.atecher.com/mts/20180418/3853454028964864
+[Link-17]: http://blog.csdn.net/defonds/article/details/44021605#t41
+[Image-18]: http://qn.atecher.com/mts/20180418/3853454019855360
+[Image-19]: http://qn.atecher.com/mts/20180418/3853454032962560
+[Link-20]: http://coopsoft.com/ar/CalamityArticle.html
+[Link-21]: http://tutorials.jenkov.com/java-concurrency/read-write-locks.html
+[Link-22]: http://tutorials.jenkov.com/java-concurrency/compare-and-swap.html
