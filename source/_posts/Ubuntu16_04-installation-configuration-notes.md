@@ -66,8 +66,7 @@ http://gd.7edown.com:808/green/symbol%A3%ADfonts_all.rar
 
 #### 安装Unity tweak tool
 
-<img src="/img/1472631243749014082.jpg">
-
+[![Image-1][]][Image-1]
 
 ```
 sudo apt install unity-tweak-tool
@@ -96,7 +95,7 @@ sudo apt-get install arc-theme
 
 ##### Moka
 
-<img src="/img/1472631263972063628.jpg">
+[![Image-2][]][Image-2]
 
 ```
 sudo add-apt-repository ppa:snwh/moka-icon-theme-daily
@@ -109,8 +108,7 @@ sudo apt-get install moka-icon-theme moka-icon-theme-symbolic moka-icon-theme-ex
 
 ##### Numix
 
-<img src="/img/1472632116730004374.jpg">
-
+[![Image-3][]][Image-3]
 ```
 sudo add-apt-repository ppa:numix/ppa
 
@@ -121,7 +119,7 @@ sudo apt-get install numix-icon-theme numix-icon-theme-circle
 ```
 ##### Uniform
 
-<img src="/img/1472632088729006934.jpg">
+[![Image-4][]][Image-4]
 
 ```
 http://0rax0.deviantart.com/art/Uniform-Icon-Theme-453054609
@@ -130,15 +128,17 @@ http://0rax0.deviantart.com/art/Uniform-Icon-Theme-453054609
 
 ##### Plateau
 
-<img src="/img/1472632128962088713.jpg">
-
+[![Image-5][]][Image-5]
 
 ```
 http://malysss.deviantart.com/art/Plateau-0-2-391110900
 
 ```
 
-
-
+[Image-1]: http://qn.atecher.com/mts/20180418/3853306638009344
+[Image-2]: http://qn.atecher.com/mts/20180418/3853306639139840
+[Image-3]: http://qn.atecher.com/mts/20180418/3853306641581056
+[Image-4]: http://qn.atecher.com/mts/20180418/3853306640466944
+[Image-5]: http://qn.atecher.com/mts/20180418/3853306644251648
 
                        

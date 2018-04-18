@@ -19,11 +19,11 @@ tags:
 
 新建Repository
 
-<img src="/img/T146hvB4WQ1RCvBVdK.jpg"  />
+[![Image-1][]][Image-1]
 
 创建yourname.github.io，打勾表示名称可用
 
-<img src="/img/T146hvB4WQ1RCvBVdK4.jpg" />
+[![Image-2][]][Image-2]
 
 ### 第一种方法
 
@@ -43,7 +43,7 @@ $ hexo server
 
 ```
 
-输入http://localhost:4000 即可查看网站。
+输入[http://localhost:4000][Link-3] 即可查看网站。
 
 可修改：
 
@@ -52,7 +52,7 @@ $ hexo server -p 3000
 
 ```
 
-此时，输入http://localhost:3000 查看网站。
+此时，输入[http://localhost:3000][Link-4] 查看网站。
 
 
 #### 部署网站
@@ -80,7 +80,7 @@ $ hexo deploy
 部署网站之前需要生成静态文件，也可以用$ hexo generate -d直接生成并部署。
 
 
-到此为止完成网站的雏形。输入yourname.github.io可访问博客主页。例如：[http://atecher.github.io/](http://atecher.github.io/) 。
+到此为止完成网站的雏形。输入yourname.github.io可访问博客主页。例如：[http://atecher.github.io/][Link-5] 。
 
 部署的时候有可能会出错，别急，加这一步操作就ok了。
 ```
@@ -107,11 +107,11 @@ Travis CI 是目前新兴的开源持续集成构建项目，它与jenkins，Go�
  
 master：博客的静态文件，也就是hexo生成后的HTML文件，因为要使用Github Pages服务，所以他规定的网页文件必须是在master分支。
  
-<img src="/img/20170717153834.png" />
+[![Image-6][]][Image-6]
  
 blog-source：是博客的源代码，我们需要将hexo的代码上传到这个分支。
 
-<img src="/img/20170717153923.png" />
+[![Image-7][]][Image-7]
 
 我们只需要将你的blog clone到本地，在blog-source分支写blog，写完之后it push到github，然后Travis自动构建，构建完成后自动推送到Github上的master分支下。
 
@@ -119,20 +119,20 @@ blog-source：是博客的源代码，我们需要将hexo的代码上传到这�
 
 首先如果你要使用Travis CI，你必须要GIthub账号（好像Travis CI只支持构建github的项目）和一个项目。
 
-使用Github账号登录[Travis CI](https://travis-ci.org/)官网，如下图:
+使用Github账号登录[Travis CI][Link-8]官网，如下图:
 
-<img src="/img/20170717154918.png" />
+[![Image-9][]][Image-9]
 
 
 登录完后会进入如下界面 
  
-<img src="/img/20170717155128.png" />
+[![Image-10][]][Image-10]
 
 当然如果你以前没用使用过，所以你登录完是没有上图红框内的内容的，这里是因为我在写这篇博客前已经使用了，所以会有这些内容。
 
 接下来我们点击My Repositories旁边的+，意思是添加一个要自动构建的仓库，点击后就会来到如下界面：
 
-<img src="/img/20170717155615.png" />
+[![Image-11][]][Image-11]
 
 可以看到这个界面会显示当前github账号的所以项目，如果没有显示，点击右上角的“Sync account”按钮，就可以同步过来了。
 
@@ -140,11 +140,11 @@ blog-source：是博客的源代码，我们需要将hexo的代码上传到这�
 
 开启后我们还需要进行一些配置，操作如下：
 
-<img src="/img/20170717160144.png" />
+[![Image-12][]][Image-12]
 
 点击红框的那个菜单按钮，就会出现这样的下拉菜单，我们选择设置，来到这个界面，我们按照如下勾选：
 
-<img src="/img/20170717160236.png" />
+[![Image-13][]][Image-13]
 
 Build only if .travis.yml is present：是只有在.travis.yml文件中配置的分支改变了才构建；
 Build branch updates：当推送完这个分支后开始构建；
@@ -159,7 +159,7 @@ Build branch updates：当推送完这个分支后开始构建；
 
 首先我们来到github的设置界面，点击到Personal access tokens页面，点击右上角的Generate new token按钮会重新生成一个，点击后他会叫你输入密码，然后来到如下界面，给他去一个名字，下面是勾选一些权限。
 
-<img src="/img/20170717153924.png" />
+[![Image-14][]][Image-14]
 
 生成完后，你需要拷贝下来，只有这时候他才显示，下载进来为了安全他就不会显示了，如果忘了只能重新生成一个了，拷贝完以后我们需要到Travis CI网站配置下
 
@@ -167,12 +167,12 @@ Build branch updates：当推送完这个分支后开始构建；
 
 配置界面还是在项目的setting里面，如下图：
 
-<img src="/img/20170717160929.png" />
+[![Image-15][]][Image-15]
 
 至于为什么我们要在这里配置，我想大家肯定应该明白了，写在程序里不安全，配置到这里相当于一个环境变量，我们在构建的时候就可以引用他。 
 到这里我已经配置了要构建的仓库和要访问的Token，但是问题来了，他知道怎么构建，怎么生成静态文件吗，怎么push的github pages，又push到那个仓库吗，所以这里我们还需要在源代码的仓库里创建一个.travis.yml配置文件，放到源代码的根目录，如下图：
 
-<img src="/img/20170717161315.png" />
+[![Image-16][]][Image-16]
 
 文件内容：
 
@@ -216,7 +216,24 @@ env:
 
 如果不出意外，我们可以就可以在Travis CI网站看到他已经在构建了，如下图：
 
-<img src="/img/20170717162125.png" />
+[![Image-17][]][Image-17]
 
 构建完成后，我们去blog上就能看到这篇文章了。
 
+[Image-1]: http://qn.atecher.com/mts/20180418/3853306650002432
+[Image-2]: http://qn.atecher.com/mts/20180418/3853306656179200
+[Link-3]: http://localhost:4000
+[Link-4]: http://localhost:3000
+[Link-5]: http://atecher.github.io/
+[Image-6]: http://qn.atecher.com/mts/20180418/3853306661143552
+[Image-7]: http://qn.atecher.com/mts/20180418/3853306661618688
+[Link-8]: https://travis-ci.org/
+[Image-9]: http://qn.atecher.com/mts/20180418/3853306665387008
+[Image-10]: http://qn.atecher.com/mts/20180418/3853306665468928
+[Image-11]: http://qn.atecher.com/mts/20180418/3853306667451392
+[Image-12]: http://qn.atecher.com/mts/20180418/3853306667877377
+[Image-13]: http://qn.atecher.com/mts/20180418/3853306667877376
+[Image-14]: http://qn.atecher.com/mts/20180418/3853306664092672
+[Image-15]: http://qn.atecher.com/mts/20180418/3853306634912768
+[Image-16]: http://qn.atecher.com/mts/20180418/3853306634945536
+[Image-17]: http://qn.atecher.com/mts/20180418/3853306635273216

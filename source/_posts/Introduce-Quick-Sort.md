@@ -428,70 +428,70 @@ Array.Sort这一方法在mscorlib这一程序集中，具体的实现方法有�
 
 [20]: http://www.siam.org/pdf/news/637.pdf
 [C. A. R. Hoare]: http://en.wikipedia.org/wiki/Tony_Hoare
-[Quick Sort founder]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-1.png
-[Quick Sort founder 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-1.png
-[Sorting_quicksort_anim]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-3.gif
-[Sorting_quicksort_anim_Sorting_quicksort_anim]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-3.gif
-[Basic Step of Quick Sort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-5.png
-[Basic Step of Quick Sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-5.png
-[Partition trace in Quick Sort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-7.png
-[Partition trace in Quick Sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-7.png
-[before and after partition]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-9.png
-[before and after partition 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-9.png
-[the two part sorted]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-11.png
-[the two part sorted 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-11.png
-[quicksort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-13.gif
-[quicksort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-13.gif
-[the compare complexity in quick sort at the bese case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-15.png
-[the compare complexity in quick sort at the bese case_the compare complexity in quick sort at the bese case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-15.png
-[the compare complexity in quick sort at the worst case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-17.png
-[the compare complexity in quick sort at the worst case_the compare complexity in quick sort at the worst case]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-17.png
-[image]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-19.png
-[image 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-19.png
-[image 2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-21.png
-[image_image 2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-21.png
-[image 3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-23.png
-[image_image 3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-23.png
-[image 4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-25.png
-[image_image 4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-25.png
-[image 5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-27.png
-[image_image 5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-27.png
-[image 6]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-29.png
-[image_image 6]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-29.png
-[image 7]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-31.png
-[image_image 7]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-31.png
-[image 8]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-33.png
-[image_image 8]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-33.png
-[image 9]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-35.png
-[image_image 9]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-35.png
-[Quick Sort is not Stable]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-37.png
-[Quick Sort is not Stable 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-37.png
-[Improvement using Insertsort and 3 mediation partition]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-39.png
-[Improvement using Insertsort and 3 mediation partition 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-39.png
-[3-way partition quick sort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-41.png
-[3-way partition quick sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-41.png
+[Quick Sort founder]: http://qn.atecher.com/mts/20180418/3853286368494592
+[Quick Sort founder 1]: http://qn.atecher.com/mts/20180418/3853286368494592
+[Sorting_quicksort_anim]: http://qn.atecher.com/mts/20180418/3853286371001344
+[Sorting_quicksort_anim_Sorting_quicksort_anim]: http://qn.atecher.com/mts/20180418/3853286371001344
+[Basic Step of Quick Sort]: http://qn.atecher.com/mts/20180418/3853286371394560
+[Basic Step of Quick Sort 1]: http://qn.atecher.com/mts/20180418/3853286371394560
+[Partition trace in Quick Sort]: http://qn.atecher.com/mts/20180418/3853286374802432
+[Partition trace in Quick Sort 1]: http://qn.atecher.com/mts/20180418/3853286374802432
+[before and after partition]: http://qn.atecher.com/mts/20180418/3853286379619328
+[before and after partition 1]: http://qn.atecher.com/mts/20180418/3853286379619328
+[the two part sorted]: http://qn.atecher.com/mts/20180418/3853286384108544
+[the two part sorted 1]: http://qn.atecher.com/mts/20180418/3853286384108544
+[quicksort]: http://qn.atecher.com/mts/20180418/3853286384681984
+[quicksort 1]: http://qn.atecher.com/mts/20180418/3853286384681984
+[the compare complexity in quick sort at the bese case]: http://qn.atecher.com/mts/20180418/3853286386304000
+[the compare complexity in quick sort at the bese case_the compare complexity in quick sort at the bese case]: http://qn.atecher.com/mts/20180418/3853286386304000
+[the compare complexity in quick sort at the worst case]: http://qn.atecher.com/mts/20180418/3853286387532800
+[the compare complexity in quick sort at the worst case_the compare complexity in quick sort at the worst case]: http://qn.atecher.com/mts/20180418/3853286387532800
+[image]: http://qn.atecher.com/mts/20180418/3853286332040192
+[image 1]: http://qn.atecher.com/mts/20180418/3853286332040192
+[image 2]: http://qn.atecher.com/mts/20180418/3853286332974080
+[image_image 2]: http://qn.atecher.com/mts/20180418/3853286332974080
+[image 3]: http://qn.atecher.com/mts/20180418/3853286332990464
+[image_image 3]: http://qn.atecher.com/mts/20180418/3853286332990464
+[image 4]: http://qn.atecher.com/mts/20180418/3853286340428800
+[image_image 4]: http://qn.atecher.com/mts/20180418/3853286340428800
+[image 5]: http://qn.atecher.com/mts/20180418/3853286340461568
+[image_image 5]: http://qn.atecher.com/mts/20180418/3853286340461568
+[image 6]: http://qn.atecher.com/mts/20180418/3853286340609024
+[image_image 6]: http://qn.atecher.com/mts/20180418/3853286340609024
+[image 7]: http://qn.atecher.com/mts/20180418/3853286342181888
+[image_image 7]: http://qn.atecher.com/mts/20180418/3853286342181888
+[image 8]: http://qn.atecher.com/mts/20180418/3853286342673408
+[image_image 8]: http://qn.atecher.com/mts/20180418/3853286342673408
+[image 9]: http://qn.atecher.com/mts/20180418/3853286344508416
+[image_image 9]: http://qn.atecher.com/mts/20180418/3853286344508416
+[Quick Sort is not Stable]: http://qn.atecher.com/mts/20180418/3853286344705024
+[Quick Sort is not Stable 1]: http://qn.atecher.com/mts/20180418/3853286344705024
+[Improvement using Insertsort and 3 mediation partition]: http://qn.atecher.com/mts/20180418/3853286345360384
+[Improvement using Insertsort and 3 mediation partition 1]: http://qn.atecher.com/mts/20180418/3853286345360384
+[3-way partition quick sort]: http://qn.atecher.com/mts/20180418/3853286346785792
+[3-way partition quick sort 1]: http://qn.atecher.com/mts/20180418/3853286346785792
 [The Dutch National Flag Problem]: http://www.iis.sinica.edu.tw/~scm/ncs/2010/10/dutch-national-flag-problem/
-[3-way partitioning trace]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-43.png
-[3-way partitioning trace 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-43.png
-[3 way quick sort visual trace]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-45.png
-[3 way quick sort visual trace 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-45.png
-[Bentley McIlroy 3 way partition]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-47.png
-[Bentley McIlroy 3 way partition_Bentley McIlroy 3 way partition]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-47.png
-[3wayquick sort]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-49.gif
-[3wayquick sort 1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-49.gif
+[3-way partitioning trace]: http://qn.atecher.com/mts/20180418/3853286346966016
+[3-way partitioning trace 1]: http://qn.atecher.com/mts/20180418/3853286346966016
+[3 way quick sort visual trace]: http://qn.atecher.com/mts/20180418/3853286348096512
+[3 way quick sort visual trace 1]: http://qn.atecher.com/mts/20180418/3853286348096512
+[Bentley McIlroy 3 way partition]: http://qn.atecher.com/mts/20180418/3853286349685760
+[Bentley McIlroy 3 way partition_Bentley McIlroy 3 way partition]: http://qn.atecher.com/mts/20180418/3853286349685760
+[3wayquick sort]: http://qn.atecher.com/mts/20180418/3853286350013440
+[3wayquick sort 1]: http://qn.atecher.com/mts/20180418/3853286350013440
 [Link 1]: http://www.cnblogs.com/yangecnu/p/Something-about-Concurrent-and-Parallel-Programming.html
 [.NET 4.0]: http://msdn.microsoft.com/en-us/library/b0zbh7b6%28v=vs.100%29.aspx
 [.NET 4.5]: http://msdn.microsoft.com/en-us/library/b0zbh7b6%28v=vs.110%29.aspx
 [Introspective sort]: http://en.wikipedia.org/wiki/Introsort
-[ArraySort implementation in .NET_1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-51.png
-[ArraySort implementation in .NET_1_ArraySort implementation in .NET_1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-51.png
-[ArraySort implementation in .NET_2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-53.png
-[ArraySort implementation in .NET_2_ArraySort implementation in .NET_2]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-53.png
-[ArraySort implementation in .NET_3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-55.png
-[ArraySort implementation in .NET_3_ArraySort implementation in .NET_3]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-55.png
-[ArraySort implementation in .NET_4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-57.png
-[ArraySort implementation in .NET_4_ArraySort implementation in .NET_4]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-57.png
-[ArraySort implementation in .NET_5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-59.png
-[ArraySort implementation in .NET_5_ArraySort implementation in .NET_5]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-59.png
-[DepthLimitedQuickSort_1]: /img/Introduce-Quick-Sort/Introduce-Quick-Sort-61.png
+[ArraySort implementation in .NET_1]: http://qn.atecher.com/mts/20180418/3853286356550656
+[ArraySort implementation in .NET_1_ArraySort implementation in .NET_1]: http://qn.atecher.com/mts/20180418/3853286356550656
+[ArraySort implementation in .NET_2]: http://qn.atecher.com/mts/20180418/3853286358451200
+[ArraySort implementation in .NET_2_ArraySort implementation in .NET_2]: http://qn.atecher.com/mts/20180418/3853286358451200
+[ArraySort implementation in .NET_3]: http://qn.atecher.com/mts/20180418/3853286362121216
+[ArraySort implementation in .NET_3_ArraySort implementation in .NET_3]: http://qn.atecher.com/mts/20180418/3853286362121216
+[ArraySort implementation in .NET_4]: http://qn.atecher.com/mts/20180418/3853286364546048
+[ArraySort implementation in .NET_4_ArraySort implementation in .NET_4]: http://qn.atecher.com/mts/20180418/3853286364546048
+[ArraySort implementation in .NET_5]: http://qn.atecher.com/mts/20180418/3853286368314368
+[ArraySort implementation in .NET_5_ArraySort implementation in .NET_5]: http://qn.atecher.com/mts/20180418/3853286368314368
+[DepthLimitedQuickSort_1]: http://qn.atecher.com/mts/20180418/3853286368658432
 [ref]: http://www.cnblogs.com/yangecnu/p/Introduce-Quick-Sort.html

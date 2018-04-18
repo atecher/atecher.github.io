@@ -139,7 +139,7 @@ tags:
 
 62.有疑问时使用一个通用的MySQL配置文件.
 
-<img src="/img/101-tips-to-mysql-tuning-and-optimization-1.jpg"/>
+[![Image-1][]][Image-1]
 
 ### 查询优化
 
@@ -223,8 +223,9 @@ tags:
 
 101.执行MySQL 监控: Monitis Unveils The World’s First Free On-demand MySQL Monitoring.
 
-<img src="/img/101-tips-to-mysql-tuning-and-optimization-2.jpg"/>
+[![Image-2][]][Image-2]
 
 本文为转载文章，最初发表在[oschina](http://www.oschina.net/translate/101-tips-to-mysql-tuning-and-optimization)。
 
-
+[Image-1]: http://qn.atecher.com/mts/20180418/3853306656752640
+[Image-2]: http://qn.atecher.com/mts/20180418/3853306657358848
