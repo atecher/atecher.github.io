@@ -118,7 +118,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: /images/avatar.jpg
+avatar: http://qn.atecher.com/mts/20180418/3853594527466496
 
 # Table Of Contents in the Sidebar
 toc:
