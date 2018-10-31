@@ -25,7 +25,8 @@ tags:
 - 命中:应用程序从cache中取数据,取到后返回。
 - 更新:先把数据存到数据库中,成功后,再让缓存失效。
 
-{% asset_img Cache-Aside-Design-Pattern-Flow-Diagram-e1470471723210.png %}
+[![image][image 1]][image 1]
+
 注意,我们的更新是先更新数据库,成功后,让缓存失效。那么,这种方式是否可以没有文章前面提到过的那个问题呢？我们可以脑补一下。
 
 一个是查询操作,一个是更新操作的并发,首先,没有了删除cache数据的操作了,而是先更新了数据库中的数据,此时,缓存依然有效,所以,并发的查询操作拿的是没有更新的数据,但是,更新操作马上让缓存的失效了,后续的查询操作再把数据从数据库中拉出来。而不会像文章开头的那个逻辑产生的问题,后续的查询操作一直都在取老的数据。
@@ -49,7 +50,8 @@ Read Through 套路就是在查询操作中更新缓存,也就是说,当缓存�
 Write Through 套路和Read Through相仿,不过是在更新数据时发生。当有数据更新的时候,如果没有命中缓存,直接更新数据库,然后返回。如果命中了缓存,则更新缓存,然后再由Cache自己更新数据库(这是一个同步操作)
 
 下图自来Wikipedia的[Cache](https://en.wikipedia.org/wiki/Cache_(computing))词条。其中的Memory你可以理解为就是我们例子里的数据库。
-{% asset_img 460px-Write-through_with_no-write-allocation.svg_.png %}
+
+[![image][image 2]][image 2]
 
 ## Write Behind Caching Pattern
 Write Behind 又叫 Write Back。一些了解Linux操作系统内核的同学对write back应该非常熟悉,这不就是Linux文件系统的Page Cache的算法吗？是的,你看基础这玩意全都是相通的。所以,基础很重要,我已经不是一次说过基础很重要这事了。
@@ -61,7 +63,8 @@ Write Back套路,一句说就是,在更新数据的时候,只更新缓存,不更
 另外,Write Back实现逻辑比较复杂,因为他需要track有哪数据是被更新了的,需要刷到持久层上。操作系统的write back会在仅当这个cache需要失效的时候,才会被真正持久起来,比如,内存不够了,或是进程退出了等情况,这又叫lazy write。
 
 在wikipedia上有一张write back的流程图,基本逻辑如下:
-{% asset_img Write-back_with_write-allocation.png %}
+
+[![image][image 3]][image 3]
 
 ## 再多唠叨一些
 1. 上面讲的这些Design Pattern,其实并不是软件架构里的mysql数据库和memcache/redis的更新策略,这些东西都是计算机体系结构里的设计,比如CPU的缓存,硬盘文件系统中的缓存,硬盘上的缓存,数据库中的缓存。基本上来说,这些缓存更新的设计模式都是非常老古董的,而且历经长时间考验的策略,所以这也就是,工程学上所谓的Best Practice,遵从就好了。
@@ -74,3 +77,7 @@ Write Back套路,一句说就是,在更新数据的时候,只更新缓存,不更
 
 ref:
 [https://coolshell.cn/articles/17416.html](https://coolshell.cn/articles/17416.html)
+
+[image 1]: http://qn.atecher.com/Cache-Aside-Design-Pattern-Flow-Diagram-e1470471723210.png
+[image 2]: http://qn.atecher.com/460px-Write-through_with_no-write-allocation.svg_.png
+[image 3]: http://qn.atecher.com/Write-back_with_write-allocation.png

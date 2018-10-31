@@ -14,7 +14,9 @@ tags:
 <!-- more -->
 
 如图1所示，缓存的使用可以出现在1～4的各个环节中，每个环节的缓存方案与使用各有特点。
-{% asset_img 网络应用一般流程.png%}
+
+[![image][image 1]][image 1]
+
 图1 互联网应用一般流程
 
 ## 缓存特征
@@ -158,7 +160,7 @@ O2O业务中常用的城市基础基本信息判断，通过静态变量一次�
 
 美团点评内部的基础配置组件MtConfig，采用的就是类似原理，使用静态变量缓存，结合ZooKeeper的统一管理，做到自动动态更新缓存，如图2所示。
 
-{% asset_img mtconfig实现图.png %}
+[![image][image 2]][image 2]
 
 图2 Mtconfig实现图
 ```
@@ -170,7 +172,8 @@ O2O业务中常用的城市基础基本信息判断，通过静态变量一次�
 ### Ehcache
 Ehcache是现在最流行的纯Java开源缓存框架，配置简单、结构清晰、功能强大，是一个非常轻量级的缓存实现，我们常用的Hibernate里面就集成了相关缓存功能。
 
-{% asset_img ehcach框架图.png %}
+[![image][image 3]][image 3]
+
 图3 Ehcache框架图
 
 从图3中我们可以了解到，Ehcache的核心定义主要包括：
@@ -191,7 +194,9 @@ Ehcache是现在最流行的纯Java开源缓存框架，配置简单、结构清
 - Pinning：强制缓存条目保持在某一层。
 
 图4反映了数据在各个层之间的流转，同时也体现了各层数据的一个生命周期。
-{% asset_img ehcach缓存数据流转图.png %}
+
+[![image][image 4]][image 4]
+
 图4 缓存数据流转图（L1:本地内存层；L2:Terracotta服务节点层)
 Ehcache的配置使用如下：
 ```
@@ -273,7 +278,10 @@ Guava Cache是Google开源的Java重用工具集库Guava里的一款缓存工具
 Guava Cache的架构设计灵感来源于ConcurrentHashMap，我们前面也提到过，简单场景下可以自行编码通过hashmap来做少量数据的缓存，但是，如果结果可能随时间改变或者是希望存储的数据空间可控的话，自己实现这种数据结构还是有必要的。
 
 Guava Cache继承了ConcurrentHashMap的思路，使用多个segments方式的细粒度锁，在保证线程安全的同时，支持高并发场景需求。Cache类似于Map，它是存储键值对的集合，不同的是它还需要处理evict、expire、dynamic load等算法逻辑，需要一些额外信息来实现这些操作。对此，根据面向对象思想，需要做方法与数据的关联封装。如图5所示cache的内存数据模型，可以看到，使用ReferenceEntry接口来封装一个键值对，而用ValueReference来封装Value值，之所以用Reference命令，是因为Cache要支持WeakReference Key和SoftReference、WeakReference value。
-{% asset_img guavacache数据结构图.png %}
+
+
+[![image][image 5]][image 5]
+
 图5 Guava Cache数据结构图
 
 **ReferenceEntry**是对一个键值对节点的抽象，它包含了key和值的ValueReference抽象类，Cache由多个Segment组成，而每个Segment包含一个ReferenceEntry数组，每个ReferenceEntry数组项都是一条ReferenceEntry链，且一个ReferenceEntry包含key、hash、valueReference、next字段。除了在ReferenceEntry数组项中组成的链，在一个Segment中，所有ReferenceEntry还组成access链（accessQueue）和write链（writeQueue）（后面会介绍链的作用）。ReferenceEntry可以是强引用类型的key，也可以WeakReference类型的key，为了减少内存使用量，还可以根据是否配置了expireAfterWrite、expireAfterAccess、maximumSize来决定是否需要write链和access链确定要创建的具体Reference：StrongEntry、StrongWriteEntry、StrongAccessEntry、StrongWriteAccessEntry等。
@@ -351,16 +359,21 @@ build生成器的两种方式都实现了一种逻辑：从缓存中取key的值
 
 ### memcached缓存
 memcached是应用较广的开源分布式缓存产品之一，它本身其实不提供分布式解决方案。在服务端，memcached集群环境实际就是一个个memcached服务器的堆积，环境搭建较为简单；cache的分布式主要是在客户端实现，通过客户端的路由处理来达到分布式解决方案的目的。客户端做路由的原理非常简单，应用服务器在每次存取某key的value时，通过某种算法把key映射到某台memcached服务器nodeA上，因此这个key所有操作都在nodeA上，结构图如图6、图7所示。
-{% asset_img memcached客户端路由图.png %}
+
+[![image][image 6]][image 6]
+
 图6 memcached客户端路由图
-{% asset_img memcached一致性hash示例图.png %}
+
+[![image][image 7]][image 7]
+
 图7 memcached一致性hash示例图
 
 memcached客户端采用一致性hash算法作为路由策略，如图7，相对于一般hash（如简单取模）的算法，一致性hash算法除了计算key的hash值外，还会计算每个server对应的hash值，然后将这些hash值映射到一个有限的值域上（比如0~2^32）。通过寻找hash值大于hash(key)的最小server作为存储该key数据的目标server。如果找不到，则直接把具有最小hash值的server作为目标server。同时，一定程度上，解决了扩容问题，增加或删除单个节点，对于整个集群来说，不会有大的影响。最近版本，增加了虚拟节点的设计，进一步提升了可用性。
 
 memcached是一个高效的分布式内存cache，了解memcached的内存管理机制，才能更好的掌握memcached，让我们可以针对我们数据特点进行调优，让其更好的为我所用。我们知道memcached仅支持基础的key-value键值对类型数据存储。在memcached内存结构中有两个非常重要的概念：slab和chunk。如图8所示。
 
-{% asset_img memcached内存结构图.png %}
+[![image][image 8]][image 8]
+
 图8 memcached内存结构图
 
 slab是一个内存块，它是memcached一次申请内存的最小单位。在启动memcached的时候一般会使用参数-m指定其可用内存，但是并不是在启动的那一刻所有的内存就全部分配出去了，只有在需要的时候才会去申请，而且每次申请一定是一个slab。Slab的大小固定为1M（1048576 Byte），一个slab由若干个大小相等的chunk组成。每个chunk中都保存了一个item结构体、一对key和value。
@@ -387,7 +400,8 @@ memcached内存管理采取预分配、分组管理的方式，分组管理就�
 
 Redis是一个远程内存数据库（非关系型数据库），性能强劲，具有复制特性以及解决问题而生的独一无二的数据模型。它可以存储键值对与5种不同类型的值之间的映射，可以将存储在内存的键值对数据持久化到硬盘，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。
 
-{% asset_img redis数据模型图.png %}
+[![image][image 9]][image 9]
+
 图9 Redis数据模型图
 
 如图9，Redis内部使用一个redisObject对象来标识所有的key和value数据，redisObject最主要的信息如图所示：type代表一个value对象具体是何种数据类型，encoding是不同数据类型在Redis内部的存储方式，比如——type=string代表value存储的是一个普通字符串，那么对应的encoding可以是raw或是int，如果是int则代表世界Redis内部是按数值类型存储和表示这个字符串。
@@ -405,9 +419,13 @@ aof的方式的**主要缺点**是追加log文件可能导致体积过大，当�
 Redis的持久化使用了Buffer I/O，所谓Buffer I/O是指Redis对持久化文件的写入和读取操作都会使用物理内存的Page Cache，而大多数数据库系统会使用Direct I/O来绕过这层Page Cache并自行维护一个数据的Cache。而当Redis的持久化文件过大（尤其是快照文件），并对其进行读写时，磁盘文件中的数据都会被加载到物理内存中作为操作系统对该文件的一层Cache，而这层Cache的数据与Redis内存中管理的数据实际是重复存储的。虽然内核在物理内存紧张时会做Page Cache的剔除工作，但内核很可能认为某块Page Cache更重要，而让你的进程开始Swap，这时你的系统就会开始出现不稳定或者崩溃了，因此在持久化配置后，针对内存使用需要实时监控观察。
 
 与memcached客户端支持分布式方案不同，Redis更倾向于在服务端构建分布式存储，如图10、11。
-{% asset_img redis分布式集群图1.png %}
+
+[![image][image 10]][image 10]
+
 图10 Redis分布式集群图1
-{% asset_img redis分布式集群图2.png %}
+
+[![image][image 11]][image 11]
+
 图11 Redis分布式集群图2
 
 Redis Cluster是一个实现了分布式且允许单点故障的Redis高级版本，它没有中心节点，具有线性可伸缩的功能。如图11，其中节点与节点之间通过二进制协议进行通信，节点与客户端之间通过ascii协议进行通信。在数据的放置策略上，Redis Cluster将整个key的数值域分成4096个hash槽，每个节点上可以存储一个或多个hash槽，也就是说当前Redis Cluster支持的最大节点数就是4096。Redis Cluster使用的分布式算法也很简单：crc16( key ) % HASH_SLOTS_NUMBER。整体设计可总结为：
@@ -453,7 +471,8 @@ Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体�
 
 和Spring的事务管理类似，Spring Cache的关键原理就是Spring AOP，通过Spring AOP实现了在方法调用前、调用后获取方法的入参和返回值，进而实现了缓存的逻辑。而Spring Cache利用了Spring AOP的动态代理技术，即当客户端尝试调用pojo的foo()方法的时候，给它的不是pojo自身的引用，而是一个动态生成的代理类。
 
-{% asset_img spring动态代理调用图.png %}
+[![image][image 12]][image 12]
+
 图12 Spring动态代理调用图
 
 如图12所示，实际客户端获取的是一个代理的引用，在调用foo()方法的时候，会首先调用proxy的foo()方法，这个时候proxy可以整体控制实际的pojo.foo()方法的入参和返回值，比如缓存结果，比如直接略过执行实际的foo()方法等，都是可以轻松做到的。Spring Cache主要使用三个注释标签，即@Cacheable、@CachePut和@CacheEvict，主要针对方法上注解使用，部分场景也可以直接类上注解使用，当在类上使用时，该类所有方法都将受影响。我们总结一下其作用和配置方法，如表1所示。
@@ -474,3 +493,17 @@ Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体�
 
 ref:
 [https://tech.meituan.com/cache_about.html](https://tech.meituan.com/cache_about.html)
+
+[image 1]: http://qn.atecher.com/网络应用一般流程.png
+[image 2]: http://qn.atecher.com/mtconfig实现图.png
+[image 3]: http://qn.atecher.com/ehcach框架图.png
+[image 4]: http://qn.atecher.com/ehcach缓存数据流转图.png
+[image 5]: http://qn.atecher.com/guavacache数据结构图.png
+[image 6]: http://qn.atecher.com/memcached客户端路由图.png
+[image 7]: http://qn.atecher.com/memcached一致性hash示例图.png
+[image 8]: http://qn.atecher.com/memcached内存结构图.png
+[image 9]: http://qn.atecher.com/redis数据模型图.png
+[image 10]: http://qn.atecher.com/redis分布式集群图1.png
+[image 11]: http://qn.atecher.com/redis分布式集群图2.png
+[image 12]: http://qn.atecher.com/spring动态代理调用图.png
+

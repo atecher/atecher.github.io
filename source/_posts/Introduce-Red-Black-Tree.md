@@ -15,7 +15,8 @@ tags:
 
 红黑树的主要是想对2-3查找树进行编码，尤其是对2-3查找树中的3-nodes节点添加额外的信息。红黑树中将节点之间的链接分为两种不同类型，红色链接，他用来链接两个2-nodes节点来表示一个3-nodes节点。黑色链接用来链接普通的2-3节点。特别的，使用红色链接的两个2-nodes来表示一个3-nodes节点，并且向左倾斜，即一个2-node是另一个2-node的左子节点。这种做法的好处是查找的时候不用做任何修改，和普通的二叉查找树相同。
 
-{% asset_img red-black-tree.png %}
+[![image][image 1]][image 1]
+
 
 根据以上描述，红黑树定义如下：
 
@@ -27,7 +28,7 @@ tags:
 
 下图可以看到红黑树其实是2-3树的另外一种表现形式：如果我们将红色的连线水平绘制，那么他链接的两个2-node节点就是2-3树中的一个3-node节点了。
 
-{% asset_img red-black-tree-2.png %}
+[![image][image 2]][image 2]
 
 ## 表示
 
@@ -62,7 +63,7 @@ class Node{
 ```
 
 
-{% asset_img red-black-tree-3.png %}
+[![image][image 3]][image 3]
 
 ## 实现
 
@@ -96,7 +97,7 @@ private TValue GetValue(Node node, TKey key){
 
 **左旋**操作如下图：
 
-{% asset_img red-black-tree-4.png %}
+[![image][image 4]][image 4]
 
 ```java
 //左旋转
@@ -115,12 +116,12 @@ private Node RotateLeft(Node h)
 ```
 
 **左旋**的动画效果如下：
-{% asset_img red-black-tree-5.gif %}
+[![image][image 5]][image 5]
 
 
 **右旋**是左旋的逆操作，过程如下：
 
-{% asset_img red-black-tree-6.png %}
+[![image][image 6]][image 6]
 
 代码如下：
 ```java
@@ -139,19 +140,19 @@ private Node RotateRight(Node h)
 
 右旋的动画效果如下：
 
-{% asset_img red-black-tree-7.gif %}
+[![image][image 7]][image 7]
 
 #### 颜色反转
 
 当出现一个临时的4-node的时候，即一个节点的两个子节点均为红色，如下图：
 
-{% asset_img red-black-tree-8.png %}
+[![image][image 8]][image 8]
 
 这其实是个A，E，S 4-node连接，我们需要将E提升至父节点，操作方法很简单，就是把E对子节点的连线设置为黑色，自己的颜色设置为红色。
 
 有了以上基本操作方法之后，我们现在对应之前对**2-3树的平衡操作来对红黑树进行平衡操作**，这两者是可以一一对应的，如下图：
 
-{% asset_img red-black-tree-9.png %}
+[![image][image 9]][image 9]
 
 现在来讨论各种情况：
 
@@ -159,7 +160,7 @@ private Node RotateRight(Node h)
 
 先热身一下，首先我们看对于只有一个节点的红黑树，插入一个新的节点的操作：
 
-{% asset_img red-black-tree-10.png %}
+[![image][image 10]][image 10]
 
 这种情况很简单，只需要：
 
@@ -170,7 +171,7 @@ private Node RotateRight(Node h)
 
 先热身一下，假设我们往一个只有两个节点的树中插入元素，如下图，根据待插入元素与已有元素的大小，又可以分为如下三种情况：
 
-{% asset_img red-black-tree-11.png %}
+[![image][image 11]][image 11]
 
 - 如果带插入的节点比现有的两个节点都大，这种情况最简单。我们只需要将新插入的节点连接到右边子树上即可，然后将中间的元素提升至根节点。这样根节点的左右子树都是红色的节点了，我们只需要调研FlipColor方法即可。其他情况经过反转操作后都会和这一样。
 - 如果插入的节点比最小的元素要小，那么将新节点添加到最左侧，这样就有两个连接红色的节点了，这是对中间节点进行右旋操作，使中间结点成为根节点。这是就转换到了第一种情况，这时候只需要再进行一次FlipColor操作即可。
@@ -178,7 +179,7 @@ private Node RotateRight(Node h)
 
 有了以上基础，我们现在来总结一下往一个3-node节点底部插入新的节点的操作步骤，下面是一个典型的操作过程图：
   
-{% asset_img red-black-tree-12.png %}
+[![image][image 12]][image 12]
 
 可以看出，操作步骤如下：
 
@@ -188,13 +189,13 @@ private Node RotateRight(Node h)
 4. 如果需要，左旋操作使红色节点左倾。
 5. 在有些情况下，需要递归调用Case1 Case2，来进行递归操作。如下：
 
-{% asset_img red-black-tree-13.png %}
+[![image][image 13]][image 13]
 
 ##代码实现
 
 经过上面的平衡化讨论，现在就来实现插入操作，一般地插入操作就是先执行标准的二叉查找树插入，然后再进行平衡化。对照2-3树，我们可以通过前面讨论的，左旋，右旋，FlipColor这三种操作来完成平衡化。
 
-{% asset_img red-black-tree-14.png %}
+[![image][image 14]][image 14]
 
 具体操作方式如下：
 
@@ -241,15 +242,15 @@ private int Size(Node node)
 
 以升序插入构建红黑树：
 
-{% asset_img red-black-tree-15.gif %}
+[![image][image 15]][image 15]
 
 以降序插入构建红黑树：
 
-{% asset_img red-black-tree-16.gif %}
+[![image][image 16]][image 16]
 
 随机插入构建红黑树
 
-{% asset_img red-black-tree-17.gif %}
+[![image][image 17]][image 17]
 
 
 从上面三张动画效果中，可以很直观的看出，红黑树在各种情况下都能维护良好的平衡性，从而能够保证最差情况下的查找，插入效率。
@@ -261,14 +262,14 @@ private int Size(Node node)
 
 下图是一个典型的红黑树，从中可以看到最长的路径(红黑相间的路径)是最短路径的2倍：
 
-{% asset_img red-black-tree-18.png %}
+[![image][image 18]][image 18]
 
 2. 红黑树的平均高度大约为lgN
 下图是红黑树在各种情况下的时间复杂度，可以看出红黑树是2-3查找树的一种实现，他能保证最坏情况下仍然具有对数的时间复杂度。
 
 下图是红黑树各种操作的时间复杂度。
 
-{% asset_img red-black-tree-19.png %}
+[![image][image 19]][image 19]
 
 ## 应用
 
@@ -343,5 +344,26 @@ public void Add(T item)
 
 >本文系转载文章，原作者为yangecnu，原文链接:[请点此处][1]。
 
-  [1]: http://www.cnblogs.com/yangecnu/p/Introduce-Red-Black-Tree.html
+[1]: http://www.cnblogs.com/yangecnu/p/Introduce-Red-Black-Tree.html
+[image 1]: http://qn.atecher.com/red-black-tree.png
+[image 2]: http://qn.atecher.com/red-black-tree-2.png
+[image 3]: http://qn.atecher.com/red-black-tree-3.png
+[image 4]: http://qn.atecher.com/red-black-tree-4.png
+[image 5]: http://qn.atecher.com/red-black-tree-5.gif
+[image 6]: http://qn.atecher.com/red-black-tree-6.png
+[image 7]: http://qn.atecher.com/red-black-tree-7.gif
+[image 8]: http://qn.atecher.com/red-black-tree-8.png
+[image 9]: http://qn.atecher.com/red-black-tree-9.png
+[image 10]: http://qn.atecher.com/red-black-tree-10.png
+[image 11]: http://qn.atecher.com/red-black-tree-11.png
+[image 12]: http://qn.atecher.com/red-black-tree-12.png
+[image 13]: http://qn.atecher.com/red-black-tree-13.png
+[image 14]: http://qn.atecher.com/red-black-tree-14.png
+[image 15]: http://qn.atecher.com/red-black-tree-15.gif
+[image 16]: http://qn.atecher.com/red-black-tree-16.gif
+[image 17]: http://qn.atecher.com/red-black-tree-17.gif
+[image 18]: http://qn.atecher.com/red-black-tree-18.png
+[image 19]: http://qn.atecher.com/red-black-tree-19.png
+
+
 
