@@ -14,7 +14,9 @@ tags:
 ## MySQL架构总览
 
 下图根据参考书籍中一图为原本,再在其上添加上了自己的理解。
-{% asset_img 701942-20151210224128402-1287669438.png %}
+
+[![][image 1]][image 1]
+
 从上图中我们可以看到,整个架构分为两层,上层是MySQLD的被称为的‘SQL Layer’,下层是各种各样对上提供接口的存储引擎,被称为‘Storage Engine Layer’。其它各个模块和组件,从名字上就可以简单了解到它们的作用,这里就不再累述了。
 
 ## 查询执行流程
@@ -45,7 +47,7 @@ tags:
 2. 返回的也可以是相应的状态标识,如成功或失败等
 3. ‘连接进/线程模块’进行后续的清理工作,并继续等待请求或断开与客户端的连接
 
-{% asset_img 701942-20151210224221011-1559007674.png %}
+[![][image 2]][image 2]
 
 ## SQL解析顺序
 
@@ -216,7 +218,8 @@ mysql> SELECT
 rows in set (0.00 sec)
 ```
 SQL JOINS'的解释图
-{% asset_img 701942-20151210224510246-264811072.png %}
+
+[![][image 3]][image 3]
 
 2.WHERE
 对VT1过程中生成的临时表进行过滤,满足WHERE子句的列被插入到VT2表中。
@@ -387,11 +390,15 @@ row in set (0.00 sec)
 
 ## 总结
 
-{% asset_img 701942-20151210224616246-320415795.png %}
+[![][image 4]][image 4]
 
 ref:
 《MySQL性能调优与架构实践》
 《MySQL技术内幕:SQL编程》
 [http://www.cnblogs.com/annsshadow/p/5037667.html](http://www.cnblogs.com/annsshadow/p/5037667.html)
 
+[image 1]: http://qn.atecher.com/701942-20151210224128402-1287669438.png
+[image 2]: http://qn.atecher.com/701942-20151210224221011-1559007674.png
+[image 3]: http://qn.atecher.com/701942-20151210224510246-264811072.png
+[image 4]: http://qn.atecher.com/701942-20151210224616246-320415795.png
 

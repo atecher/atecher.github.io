@@ -24,13 +24,16 @@ static class Node<K,V> implements Map.Entry<K,V> {
 ```
 
 可以看到 HashMap 内部存储使用了一个 Node 数组(默认大小是16),而 Node 类包含一个类型为 Node 的 next 的变量,也就是相当于一个链表,所有根据 hash 值计算的 bucket 一样的 key 会存储到同一个链表里(即产生了冲突),大概就是下面图的样子
-{% asset_img HashMap内部存储结果.png %}
+
+[![][image 1]][image 1]
 
 需要注意的是,在 Java 8 中如果 hash 值相同的 key 数量大于指定值(默认是8)时使用平衡树来代替链表,这会将get()方法的性能从O(n)提高到O(logn)。具体的可以看我的另一篇博客[Java 8中HashMap和LinkedHashMap如何解决冲突](https://yemengying.com/2016/02/03/%E8%AF%91-Java%E4%B8%ADHashMap%E5%92%8CLinkedHashMap%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81/)。
 
 ### HashMap的自动扩容机制
 HashMap 内部的 Node 数组默认的大小是16,假设有100万个元素,那么最好的情况下每个 hash 桶里都有62500个元素,这时get(),put(),remove()等方法效率都会降低。为了解决这个问题,HashMap 提供了自动扩容机制,当元素个数达到数组大小 loadFactor 后会扩大数组的大小,在默认情况下,数组大小为16,loadFactor 为0.75,也就是说当 HashMap 中的元素超过16*0.75=12时,会把数组大小扩展为2*16=32,并且重新计算每个元素在新数组中的位置。如下图所示
-{% asset_img resizing_of_java_hashmap.jpg %}
+
+[![][image 2]][image 2]
+
 从图中可以看到没扩容前,获取 EntryE 需要遍历5个元素,扩容之后只需要2次
 
 为什么线程不安全
@@ -208,3 +211,7 @@ For class java.util.concurrent.ConcurrentHashMap the average time is 792 ms
 
 ref:
 [http://yemengying.com/2016/05/07/threadsafe-hashmap/](http://yemengying.com/2016/05/07/threadsafe-hashmap/)
+
+
+[image 1]:http://qn.atecher.com/HashMap内部存储结果.png
+[image 2]:http://qn.atecher.com/resizing_of_java_hashmap.jpg

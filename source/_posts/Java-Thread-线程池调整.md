@@ -160,7 +160,8 @@ public static void boundedThreadPoolServerSocket() throws IOException {
 
 ## 利特尔法则
 
-{% asset_img Littles_Law.png Littles_Law %}
+[![][image 1]][image 1]
+
 排队论,特别的,Little’s Law,可以用来帮助我们理解线程池的一些特性。简单地说,利特尔法则解释了这三种变量的关系:L—系统里的请求数量、λ—请求到达的速率和W—每个请求的处理时间。例如,如果每秒10个请求到达,处理一个请求需要1秒,那么系统在每个时刻都有10个请求在处理。如果处理每个请求的时间翻倍,那么系统每时刻需要处理的请求数也翻倍为20,因此需要20个线程。
 
 任务的执行时间对于系统中正在处理的请求数量有着很大的影响,一些后端资源的迟延,例如数据库,通常会使得请求的处理时间被延长,从而导致线程池中的线程被迅速用尽。因此,理论上测出的线程数上限对于这种情况就不是很合适,这个上限值还应该考虑到线程的执行时间,并结合理论上的上限值。
@@ -205,3 +206,4 @@ ref:
 [https://blog.bramp.net/post/2015/12/17/the-importance-of-tuning-your-thread-pools/](https://blog.bramp.net/post/2015/12/17/the-importance-of-tuning-your-thread-pools/)
 [http://www.importnew.com/18619.html](http://www.importnew.com/18619.html)
 
+[image 1]: http://qn.atecher.com/Littles_Law.png

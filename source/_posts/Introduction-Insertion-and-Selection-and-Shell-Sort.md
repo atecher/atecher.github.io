@@ -10,11 +10,13 @@ tags:
 本篇开始学习排序算法。排序与我们日常生活中息息相关，比如，我们要从电话簿中找到某个联系人首先会按照姓氏排序、买火车票会按照出发时间或者时长排序、买东西会按照销量或者好评度排序、查找文件会按照修改时间排序等等。在计算机程序设计中，排序和查找也是最基本的算法，很多其他的算法都是以排序算法为基础，在一般的数据处理或分析中，通常第一步就是进行排序，比如说二分查找，首先要对数据进行排序。在[Donald Knuth][1]。 的计算机程序设计的艺术这四卷书中，有一卷是专门介绍排序和查找的。
 
 <!-- more -->
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-1.png %}
+
+[![][image 1]][image 1]
+
 
 排序的算法有很多，在维基百科上有这么一个分类，另外大家有兴趣也可以直接上维基百科上看相关算法，本文也参考了上面的内容。
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-2.png %}
+[![][image 2]][image 2]
 
 首先来看比较简单的选择排序(Selection sort)，插入排序(Insertion sort)，然后在分析插入排序的特征和缺点的基础上，介绍在插入排序基础上改进的希尔排序(Shell sort)。
 
@@ -29,7 +31,7 @@ tags:
 以此类推，直到所有元素均排序完毕。
 之所以称之为选择排序，是因为每一次遍历未排序的序列我们总是从中选择出最小的元素。下面是选择排序的动画演示：
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-3.gif %}
+[![][image 3]][image 3]
 
 ### 实现
 
@@ -83,7 +85,7 @@ private static void swap(int[] array, int i, int min) {
 
 下图分析了选择排序中每一次排序的过程，您可以对照图中右边的柱状图来看。
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-4.png %}
+[![][image 4]][image 4]
 
 测试如下：
 
@@ -100,13 +102,13 @@ public static void main(String[] args) {
 
 输出结果：
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-5.png %}
+[![][image 5]][image 5]
 
 ### 分析
 
 选择排序的在各种初始条件下的排序效果如下：
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-6.gif %}
+[![][image 6]][image 6]
 
 1. 选择排序需要花费 (N – 1) + (N – 2) + ... + 1 + 0 = N(N- 1) / 2 ~ N<sup>2</sup>/2次比较 和 N-1次交换操作。
 2. 对初始数据不敏感，不管初始的数据有没有排好序，都需要经历N<sup>2</sup>/2次比较，这对于一些原本排好序，或者近似排好序的序列来说并不具有优势。在最好的情况下，即所有的排好序，需要0次交换，最差的情况，倒序，需要N-1次交换。
@@ -126,7 +128,7 @@ public static void main(String[] args) {
 
 下面是插入排序的动画演示：
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-7.gif %}
+[![][image 7]][image 7]
 
 ### 实现
 
@@ -154,7 +156,7 @@ public static void insertionSort(int[] array){
 
 ```
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-8.gif %}
+[![][image 8]][image 8]
 
 测试如下：
 
@@ -172,21 +174,21 @@ public static void main(String[] args) {
 
 输出结果:
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-9.png %}
+[![][image 9]][image 9]
 
 ### 分析
 
 插入排序的在各种初始条件下的排序效果如下：
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-10.gif %}
+[![][image 10]][image 10]
 
 1. 插入排序平均需要N<sup>2</sup>/4次比较和N<sup>2</sup>/4 次交换。在最坏的情况下需要N<sup>2</sup>/2次比较和交换；在最好的情况下只需要N-1次比较和0次交换。
 
-  {% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-11.png %}
+[![][image 11]][image 11]
 
   先考虑最坏情况，那就是所有的元素逆序排列，那么第i个元素需要与前面的i-1个元素进行i-1次比较和交换，所有的加起来大概等于N(N- 1) / 2 ~ N<sup>2</sup> / 2，在数组随机排列的情况下，只需要和前面一半的元素进行比较和交换，所以平均需要N<sup>2</sup>/4次比较和N<sup>2</sup>/4 次交换。
 
-  {% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-12.png %}
+[![][image 12]][image 12]
 
   在最好的情况下，所有元素都排好序，只需要从第二个元素开始都和前面的元素比较一次即可，不需要交换，所以为N-1次比较和0次交换。
 
@@ -194,7 +196,7 @@ public static void main(String[] args) {
 
 3. **总体来说，插入排序对于部分有序序列以及元素个数比较小的序列是一种比较有效的方式**。
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-13.png %}
+[![][image 13]][image 13]
 
 如上图中，序列AEELMOTRXPS，中逆序的对数为T-R，T-P，T-S，R-P，X-S 6对。典型的部分有序队列的特征有：
 
@@ -206,7 +208,7 @@ public static void main(String[] args) {
 
 ### 选择排序和插入排序的比较
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-14.png %}
+[![][image 14]][image 14]
 
 上图展示了插入排序和选择排序的动画效果。图中灰色的柱子是不用动的，黑色的是需要参与到比较中的，红色的是参与交换的。图中可以看出：
 
@@ -223,7 +225,7 @@ public static void main(String[] args) {
 
 如下图，我们对下面数组进行排序的时候，首先以4为步长，这是元素分为了LMPT，EHSS，ELOX，AELR几个序列，我们对这几个独立的序列进行插入排序，排序完成之后，我们减小步长继续排序，最后直到步长为1，步长为1即为一般的插入排序，他保证了元素一定会被排序。
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-15.png %}
+[![][image 15]][image 15]
 
 希尔排序的增量递减算法可以随意指定，可以以N/2递减，只要保证最后的步长为1即可。
 
@@ -264,7 +266,7 @@ private static void swap(int[] array, int i, int min) {
 
 下面是希尔排序在各种情况下的排序动画：
 
-{% asset_img Introduction-Insertion-and-Selection-and-Shell-Sort-16.gif %}
+[![][image 16]][image 16]
 
 ### 分析
 
@@ -304,9 +306,24 @@ private static void swap(int[] array, int i, int min) {
 >本文系转载文章，原作者为yangecnu，原文链接:[请点此处][3]
 >PS：我将算法的语言实现改为Java，望原作者勿怪。
 
-  [1]: https://en.wikipedia.org/wiki/Donald_Knuth
-  [2]: http://faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Weiss/L12-ShellSort.htm#increments
-  [3]: http://www.cnblogs.com/yangecnu/p/Introduction-Insertion-and-Selection-and-Shell-Sort.html
-
+[1]: https://en.wikipedia.org/wiki/Donald_Knuth
+[2]: http://faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Weiss/L12-ShellSort.htm#increments
+[3]: http://www.cnblogs.com/yangecnu/p/Introduction-Insertion-and-Selection-and-Shell-Sort.html
+[image 1]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-1.png
+[image 2]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-2.png
+[image 3]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-3.gif
+[image 4]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-4.png
+[image 5]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-5.png
+[image 6]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-6.gif
+[image 7]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-7.gif
+[image 8]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-8.gif
+[image 9]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-9.png
+[image 10]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-10.gif
+[image 11]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-11.png
+[image 12]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-12.png
+[image 13]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-13.png
+[image 14]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-14.png
+[image 15]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-15.png
+[image 16]: http://qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-16.gif
 
 

@@ -87,7 +87,8 @@ try {
 ## 线程池的分析
 
 流程分析:线程池的主要工作流程如下图:
-{% asset_img threadpool.jpg %}
+
+[![][image 1]][image 1]
 
 从上图我们可以看出,当提交一个新任务到线程池时,线程池的处理流程如下:
 
@@ -174,3 +175,5 @@ JDK1.6源码
 
 ref:
 [http://www.infoq.com/cn/articles/java-threadPool](http://www.infoq.com/cn/articles/java-threadPool)
+
+[image 1]:http://qn.atecher.com/threadpool.jpg

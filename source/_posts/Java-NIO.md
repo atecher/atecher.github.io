@@ -36,7 +36,8 @@ Java NIO 由以下几个核心部分组成:
 ### Channel 和 Buffer
 
 基本上,所有的 IO 在NIO 中都从一个Channel 开始。Channel 有点象流。 数据可以从Channel读到Buffer中,也可以从Buffer 写到Channel中。这里有个图示:
-{% asset_img overview-channels-buffers1.png %}
+
+[![][image 1]][image 1]
 
 Channel和Buffer有好几种类型。下面是JAVA NIO中的一些主要Channel的实现:
 
@@ -67,7 +68,9 @@ Java NIO 还有个 MappedByteBuffer,用于表示内存映射文件, 我也不打
 Selector允许单线程处理多个 Channel。如果你的应用打开了多个连接(通道),但每个连接的流量都很低,使用Selector就会很方便。例如,在一个聊天服务器中。
 
 这是在一个单线程中使用一个Selector处理3个Channel的图示:
-{% asset_img overview-selectors.png %}
+
+[![][image 2]][image 2]
+
 要使用Selector,得向Selector注册Channel,然后调用它的select()方法。这个方法会一直阻塞到某个注册的通道有事件就绪。一旦这个方法返回,线程就可以处理这些事件,事件的例子有如新连接进来,数据接收等。
 
 
@@ -80,7 +83,8 @@ Java NIO的通道类似流,但又有些不同:
 - 通道中的数据总是要先读到一个Buffer,或者总是要从一个Buffer中写入。
 
 正如上面所说,从通道读取数据到缓冲区,从缓冲区写入数据到通道。如下图所示:
-{% asset_img overview-channels-buffers.png %}
+
+[![][image 3]][image 3]
 
 ### Channel的实现
 
@@ -179,7 +183,8 @@ aFile.close();
 position和limit的含义取决于Buffer处在读模式还是写模式。不管Buffer处在什么模式,capacity的含义总是一样的。
 
 这里有一个关于capacity,position和limit在读写模式中的说明,详细的解释在插图后面。
-{% asset_img buffers-modes.png %}
+
+[![][image 4]][image 4]
 
 #### capacity
 
@@ -327,7 +332,8 @@ scatter / gather经常用于需要将传输的数据分开处理的场合,例如
 
 ### Scattering Reads
 Scattering Reads是指数据从一个channel读取到多个buffer中。如下图描述:
-{% asset_img scatter.png %}
+
+[![][image 5]][image 5]
 
 ```java
 ByteBuffer header = ByteBuffer.allocate(128);
@@ -344,7 +350,9 @@ Scattering Reads在移动下一个buffer前,必须填满当前的buffer,这也�
 ### Gathering Writes
 
 Gathering Writes是指数据从多个buffer写入到同一个channel。如下图描述:
-{% asset_img gather.png %}
+
+[![][image 6]][image 6]
+
 代码示例如下:
 ```java
 ByteBuffer header = ByteBuffer.allocate(128);
@@ -411,7 +419,8 @@ Selector(选择器)是Java NIO中能够检测一到多个NIO通道,并能够知�
 但是,需要记住,现代的操作系统和CPU在多任务方面表现的越来越好,所以多线程的开销随着时间的推移,变得越来越小了。实际上,如果一个CPU有多个内核,不使用多任务可能是在浪费CPU能力。不管怎么说,关于那种设计的讨论应该放在另一篇不同的文章中。在这里,只要知道使用Selector能够处理多个通道就足够了。
 
 下面是单线程使用一个Selector处理3个channel的示例图:
-{% asset_img overview-selectors.png %}
+
+[![][image 7]][image 7]
 
 ### Selector的创建
 
@@ -843,7 +852,9 @@ while(true){
 
 ### 非阻塞式IO管道(Pipelines)
 一个非阻塞式IO管道是由各个处理非阻塞式IO组件组成的链。其中包括读/写IO。下图就是一个简单的非阻塞式IO管道组成:
-{% asset_img non-blocking-server-1.png %}
+
+[![][image 8]][image 8]
+
 一个组件使用 Selector 监控 Channel 什么时候有可读数据。然后这个组件读取输入并且根据输入生成相应的输出。最后输出将会再次写入到一个Channel中。
 
 一个非阻塞式IO管道不需要将读数据和写数据都包含,有一些管道可能只会读数据,另一些可能只会写数据。
@@ -858,7 +869,9 @@ while(true){
 非阻塞和阻塞IO管道两者之间最大的区别在于他们如何从底层Channel(Socket或者file)读取数据。
 
 IO管道通常从流中读取数据(来自socket或者file)并且将这些数据拆分为一系列连贯的消息。这和使用tokenizer(这里估计是解析器之类的意思)将数据流解析为token(这里应该是数据包的意思)类似。相反你只是将数据流分解为更大的消息体。我将拆分数据流成消息这一组件称为“消息读取器”(Message Reader)下面是Message Reader拆分流为消息的示意图:
-{% asset_img non-blocking-server-2.png %}
+
+[![][image 9]][image 9]
+
 一个阻塞IO管道可以使用类似InputStream的接口每次一个字节地从底层Channel读取数据,并且这个接口阻塞直到有数据可以读取。这就是阻塞式Message Reader的实现过程。
 
 使用阻塞式IO接口简化了Message Reader的实现。阻塞式Message Reader从不用处理在流没有数据可读的情况,或者它只读取流中的部分数据并且对于消息的恢复也要延迟处理的情况。
@@ -872,7 +885,9 @@ IO管道通常从流中读取数据(来自socket或者file)并且将这些数据
 如果IO管道是必须要处理大量并发链接服务器的一部分的话,那么服务器就需要为每一个链接维护一个线程。对于任何时间都只有几百条并发链接的服务器这确实不是什么问题。但是如果服务器拥有百万级别的并发链接量,这种设计方式就没有良好收放。每个线程都会占用栈32bit-64bit的内存。所以一百万个线程占用的内存将会达到1TB！不过在此之前服务器将会把所有的内存用以处理传经来的消息(例如:分配给消息处理期间使用对象的内存)
 
 为了将线程数量降下来,许多服务器使用了服务器维持线程池(例如:常用线程为100)的设计,从而一次一个地从入站链接(inbound connections)地读取。入站链接保存在一个队列中,线程按照进入队列的顺序处理入站链接。这一设计如下图所示:(译者注:Tomcat就是这样的)
-{% asset_img non-blocking-server-3.png %}
+
+[![][image 10]][image 10]
+
 然而,这一设计需要入站链接合理地发送数据。如果入站链接长时间不活跃,那么大量的不活跃链接实际上就造成了线程池中所有线程阻塞。这意味着服务器响应变慢甚至是没有反应。
 
 一些服务器尝试通过弹性控制线程池的核心线程数量这一设计减轻这一问题。例如,如果线程池线程不足时,线程池可能开启更多的线程处理请求。这一方案意味着需要大量的长时链接才能使服务器不响应。但是记住,对于并发线程数任然是有一个上限的。因此,这一方案仍然无法很好地解决一百万个长时链接。
@@ -881,11 +896,14 @@ IO管道通常从流中读取数据(来自socket或者file)并且将这些数据
 一个非阻塞式IO管道可以使用一个单独的线程向多个流读取数据。这需要流可以被切换到非阻塞模式。在非阻塞模式下,当你读取流信息时可能会返回0个字节或更多字节的信息。如果流中没有数据可读就返回0字节,如果流中有数据可读就返回1+字节。
 
 为了避免检查没有可读数据的流我们可以使用 Java NIO Selector. 一个或多个SelectableChannel 实例可以同时被一个Selector注册。**当你调用Selector的select()或者 selectNow() 方法它只会返回有数据读取的SelectableChannel的实例**. 下图是该设计的示意图:
-{% asset_img non-blocking-server-4.png %}
+
+[![][image 11]][image 11]
 
 ### 读取部分消息
 当我们从一个SelectableChannel读取一个数据包时,我们不知道这个数据包相比于源文件是否有丢失或者重复数据(原文是:When we read a block of data from a SelectableChannel we do not know if that data block contains less or more than a message)。一个数据包可能的情况有:缺失数据(比原有消息的数据少)、与原有一致、比原来的消息的数据更多(例如:是原来的1.5或者2.5倍)。数据包可能出现的情况如下图所示:
-{% asset_img non-blocking-server-5.png %}
+
+[![][image 12]][image 12]
+
 在处理类似上面这样部分信息时,有两个问题:
 
 - 判断你是否能在数据包中获取完整的消息。
@@ -894,7 +912,9 @@ IO管道通常从流中读取数据(来自socket或者file)并且将这些数据
 判断消息的完整性需要消息读取器(Message Reader)在数据包中寻找是否存在至少一个完整消息体的数据。如果一个数据包包含一个或多个完整消息体,这些消息就能够被发送到管道进行处理。寻找完整消息体这一处理可能会重复多次,因此这一操作应该尽可能的快。
 
 判断消息完整性和存储部分消息都是消息读取器(Message Reader)的责任。为了避免混合来自不同Channel的消息,我们将对每一个Channel使用一个Message Reader。设计如下图所示:
-{% asset_img non-blocking-server-6.png %}
+
+[![][image 13]][image 13]
+
 在从Selector得到可从中读取数据的Channel实例之后, 与该Channel相关联的Message Reader读取数据并尝试将他们分解为消息。这样读出的任何完整消息可以被传到读取通道(read pipeline)任何需要处理这些消息的组件中。
 
 一个Message Reader一定满足特定的协议。Message Reader需要知道它尝试读取的消息的消息格式。如果我们的服务器可以通过协议来复用,那它需要有能够插入Message Reader实现的功能 – 可能通过接收一个Message Reader工厂作为配置参数。
@@ -974,7 +994,8 @@ TLV编码使内存管理更容易这一事实,其实是HTTP 1.1是如此可怕�
 如果达到的消息量超过Message Writer可直接写入Channel的消息量,消息就需要在Message Writer排队。然后Message Writer尽快地将消息写入到Channel中。
 
 下图是部分消息如何写入的设计图:
-{% asset_img non-blocking-server-8.png %}
+
+[![][image 14]][image 14]
 
 为了使Message Writer能够尽快发送数据,Message Writer需要能够不时被调用,这样就能发送更多的消息。
 
@@ -1003,7 +1024,7 @@ TLV编码使内存管理更容易这一事实,其实是HTTP 1.1是如此可怕�
 
 以下是说明完整服务器循环的图:
 
-{% asset_img non-blocking-server-9.png %}
+[![][image 15]][image 15]
 
 如果仍然发现这有点复杂,请记住查看GitHub资料库:https://github.com/jjenkov/java-nio-server
 
@@ -1011,7 +1032,9 @@ TLV编码使内存管理更容易这一事实,其实是HTTP 1.1是如此可怕�
 
 ### 服务器线程模型
 GitHub资源库里面的非阻塞式服务器实现使用了两个线程的线程模式。第一个线程用来接收来自ServerSocketChannel的传入连接。第二个线程处理接受的连接,意思是读取消息,处理消息并将响应写回连接。这两个线程模型的图解如下:
-{% asset_img non-blocking-server-10.png %}
+
+[![][image 16]][image 16]
+
 上一节中说到的服务器循环处理是由处理线程(Processor Thread)执行。
 
 
@@ -1073,7 +1096,8 @@ int bytesWritten = channel.write(but);
 Java NIO 管道是2个线程之间的单向数据连接。Pipe有一个source通道和一个sink通道。数据会被写到sink通道,从source通道读取。
 
 这里是Pipe原理的图示:
-{% asset_img pipe.bmp %}
+
+[![][image 17]][image 17]
 
 ### 创建管道
 
@@ -1171,7 +1195,9 @@ String emailLine  = reader.readLine();
 String phoneLine  = reader.readLine();
 ```
 请注意处理状态由程序执行多久决定。换句话说,一旦reader.readLine()方法返回,你就知道肯定文本行就已读完, readline()阻塞直到整行读完,这就是原因。你也知道此行包含名称；同样,第二个readline()调用返回的时候,你知道这行包含年龄等。 正如你可以看到,该处理程序仅在有新数据读入时运行,并知道每步的数据是什么。一旦正在运行的线程已处理过读入的某些数据,该线程不会再回退数据(大多如此)。下图也说明了这条原则:
-{% asset_img nio-vs-io-1.png %}
+
+[![][image 18]][image 18]
+
 (Java IO: 从一个阻塞的流中读数据) 而一个NIO的实现会有所不同,下面是一个简单的例子:
 ```java
 ByteBuffer buffer = ByteBuffer.allocate(48);
@@ -1194,7 +1220,9 @@ bufferFull()方法必须跟踪有多少数据读入缓冲区,并返回真或假,
 bufferFull()方法扫描缓冲区,但必须保持在bufferFull()方法被调用之前状态相同。如果没有,下一个读入缓冲区的数据可能无法读到正确的位置。这是不可能的,但却是需要注意的又一问题。
 
 如果缓冲区已满,它可以被处理。如果它不满,并且在你的实际案例中有意义,你或许能处理其中的部分数据。但是许多情况下并非如此。下图展示了“缓冲区数据循环就绪”:
-{% asset_img nio-vs-io-2.png %}
+
+[![][image 19]][image 19]
+
 Java NIO:从一个通道里读数据,直到所有的数据都读到缓冲区里.
 
 ### 总结
@@ -1202,14 +1230,40 @@ Java NIO:从一个通道里读数据,直到所有的数据都读到缓冲区里.
 NIO可让您只使用一个(或几个)单线程管理多个通道(网络连接或文件),但付出的代价是解析数据可能会比从一个阻塞流中读取数据更复杂。
 
 如果需要管理同时打开的成千上万个连接,这些连接每次只是发送少量的数据,例如聊天服务器,实现NIO的服务器可能是一个优势。同样,如果你需要维持许多打开的连接到其他计算机上,如P2P网络中,使用一个单独的线程来管理你所有出站连接,可能是一个优势。一个线程多个连接的设计方案如下图所示:
-{% asset_img nio-vs-io-3.png %}
+
+[![][image 20]][image 20]
+
 Java NIO: 单线程管理多个连接
 
 如果你有少量的连接使用非常高的带宽,一次发送大量的数据,也许典型的IO服务器实现可能非常契合。下图说明了一个典型的IO服务器设计:
-{% asset_img nio-vs-io-4.png %}
+
+[![][image 21]][image 21]
+
 Java IO: 一个典型的IO服务器设计- 一个连接通过一个线程处理.
 
 未完待续...
 
 ref:
 [http://ifeve.com/java-nio-all/](http://ifeve.com/java-nio-all/)
+
+[image 1]: http://qn.atecher.com/overview-channels-buffers1.png
+[image 2]: http://qn.atecher.com/overview-selectors.png
+[image 3]: http://qn.atecher.com/overview-channels-buffers.png
+[image 4]: http://qn.atecher.com/buffers-modes.png
+[image 5]: http://qn.atecher.com/scatter.png
+[image 6]: http://qn.atecher.com/gather.png
+[image 7]: http://qn.atecher.com/overview-selectors.png
+[image 8]: http://qn.atecher.com/non-blocking-server-1.png
+[image 9]: http://qn.atecher.com/non-blocking-server-2.png
+[image 10]: http://qn.atecher.com/non-blocking-server-3.png
+[image 11]: http://qn.atecher.com/non-blocking-server-4.png
+[image 12]: http://qn.atecher.com/non-blocking-server-5.png
+[image 13]: http://qn.atecher.com/non-blocking-server-6.png
+[image 14]: http://qn.atecher.com/non-blocking-server-8.png
+[image 15]: http://qn.atecher.com/non-blocking-server-9.png
+[image 16]: http://qn.atecher.com/non-blocking-server-10.png
+[image 17]: http://qn.atecher.com/pipe.bmp
+[image 18]: http://qn.atecher.com/nio-vs-io-1.png
+[image 19]: http://qn.atecher.com/nio-vs-io-2.png
+[image 20]: http://qn.atecher.com/nio-vs-io-3.png
+[image 21]: http://qn.atecher.com/nio-vs-io-4.png
