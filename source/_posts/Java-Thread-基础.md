@@ -27,9 +27,12 @@ tags:
  *  线程安全：经常用来描绘一段代码。指在并发的情况之下，该代码经过多线程使用，线程的调度顺序不影响任何结果。这个时候使用多线程，我们只需要关注系统的内存，cpu是不是够用即可。反过来，线程不安全就意味着线程的调度顺序会影响最终结果，如不加事务的转账代码：
 
 ```java
-void transferMoney(User from, User to, float amount){
-    to.setMoney(to.getBalance() + amount);
-    from.setMoney(from.getBalance() - amount);
+
+class Test{
+    void transferMoney(User from, User to, float amount){
+        to.setMoney(to.getBalance() + amount);
+        from.setMoney(from.getBalance() - amount);
+    }
 }
 ```
  *  同步：Java中的同步指的是通过人为的控制和调度，保证共享资源的多线程访问成为线程安全，来保证结果的准确。如上面的代码简单加入`@synchronized`关键字。在保证结果准确的同时，提高性能，才是优秀的程序。线程安全的优先级高于性能。
@@ -202,13 +205,13 @@ class MyCallable implements Callable<Object> {
 上述代码中Executors类,提供了一系列工厂方法用于创先线程池,返回的线程池都实现了ExecutorService接口。
 
 ```java
-public static ExecutorService newFixedThreadPool(int nThreads)
+public static ExecutorService newFixedThreadPool(int nThreads);
 ```
 
 创建固定数目线程的线程池。
 
 ```java
-public static ExecutorService newCachedThreadPool()
+public static ExecutorService newCachedThreadPool();
 ```
 
 创建一个可缓存的线程池,调用execute 将重用以前构造的线程(如果线程可用)。如果现有线程没有可用的,则创建一个新线程并添加到池中。终止并从缓存中移除那些已有 60 秒钟未被使用的线程。
