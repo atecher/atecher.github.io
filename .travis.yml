@@ -32,10 +32,8 @@ after_script:
 branches:
   only:
     - blog-source
-env:
-  - HEXO_ALGOLIA_INDEXING_KEY=8123eba2f0fd8a9eacbaf3113776710f
-env:
-  global:
+env.global:
     - GH_REF: github.com/atecher/atecher.github.io.git
+    - HEXO_ALGOLIA_INDEXING_KEY: 8123eba2f0fd8a9eacbaf3113776710f
 
 #   - CODING_REF: git.coding.net/Atecher/atecher.git
