@@ -1246,24 +1246,24 @@ Java IO: 一个典型的IO服务器设计- 一个连接通过一个线程处理.
 ref:
 [http://ifeve.com/java-nio-all/](http://ifeve.com/java-nio-all/)
 
-[image 1]: http://qn.atecher.com/overview-channels-buffers1.png
-[image 2]: http://qn.atecher.com/overview-selectors.png
-[image 3]: http://qn.atecher.com/overview-channels-buffers.png
-[image 4]: http://qn.atecher.com/buffers-modes.png
-[image 5]: http://qn.atecher.com/scatter.png
-[image 6]: http://qn.atecher.com/gather.png
-[image 7]: http://qn.atecher.com/overview-selectors.png
-[image 8]: http://qn.atecher.com/non-blocking-server-1.png
-[image 9]: http://qn.atecher.com/non-blocking-server-2.png
-[image 10]: http://qn.atecher.com/non-blocking-server-3.png
-[image 11]: http://qn.atecher.com/non-blocking-server-4.png
-[image 12]: http://qn.atecher.com/non-blocking-server-5.png
-[image 13]: http://qn.atecher.com/non-blocking-server-6.png
-[image 14]: http://qn.atecher.com/non-blocking-server-8.png
-[image 15]: http://qn.atecher.com/non-blocking-server-9.png
-[image 16]: http://qn.atecher.com/non-blocking-server-10.png
-[image 17]: http://qn.atecher.com/pipe.bmp
-[image 18]: http://qn.atecher.com/nio-vs-io-1.png
-[image 19]: http://qn.atecher.com/nio-vs-io-2.png
-[image 20]: http://qn.atecher.com/nio-vs-io-3.png
-[image 21]: http://qn.atecher.com/nio-vs-io-4.png
+[image 1]: http://qn.mintools.net/overview-channels-buffers1.png
+[image 2]: http://qn.mintools.net/overview-selectors.png
+[image 3]: http://qn.mintools.net/overview-channels-buffers.png
+[image 4]: http://qn.mintools.net/buffers-modes.png
+[image 5]: http://qn.mintools.net/scatter.png
+[image 6]: http://qn.mintools.net/gather.png
+[image 7]: http://qn.mintools.net/overview-selectors.png
+[image 8]: http://qn.mintools.net/non-blocking-server-1.png
+[image 9]: http://qn.mintools.net/non-blocking-server-2.png
+[image 10]: http://qn.mintools.net/non-blocking-server-3.png
+[image 11]: http://qn.mintools.net/non-blocking-server-4.png
+[image 12]: http://qn.mintools.net/non-blocking-server-5.png
+[image 13]: http://qn.mintools.net/non-blocking-server-6.png
+[image 14]: http://qn.mintools.net/non-blocking-server-8.png
+[image 15]: http://qn.mintools.net/non-blocking-server-9.png
+[image 16]: http://qn.mintools.net/non-blocking-server-10.png
+[image 17]: http://qn.mintools.net/pipe.bmp
+[image 18]: http://qn.mintools.net/nio-vs-io-1.png
+[image 19]: http://qn.mintools.net/nio-vs-io-2.png
+[image 20]: http://qn.mintools.net/nio-vs-io-3.png
+[image 21]: http://qn.mintools.net/nio-vs-io-4.png

@@ -494,16 +494,16 @@ Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体�
 ref:
 [https://tech.meituan.com/cache_about.html](https://tech.meituan.com/cache_about.html)
 
-[image 1]: http://qn.atecher.com/网络应用一般流程.png
-[image 2]: http://qn.atecher.com/mtconfig实现图.png
-[image 3]: http://qn.atecher.com/ehcach框架图.png
-[image 4]: http://qn.atecher.com/ehcach缓存数据流转图.png
-[image 5]: http://qn.atecher.com/guavacache数据结构图.png
-[image 6]: http://qn.atecher.com/memcached客户端路由图.png
-[image 7]: http://qn.atecher.com/memcached一致性hash示例图.png
-[image 8]: http://qn.atecher.com/memcached内存结构图.png
-[image 9]: http://qn.atecher.com/redis数据模型图.png
-[image 10]: http://qn.atecher.com/redis分布式集群图1.png
-[image 11]: http://qn.atecher.com/redis分布式集群图2.png
-[image 12]: http://qn.atecher.com/spring动态代理调用图.png
+[image 1]: http://qn.mintools.net/网络应用一般流程.png
+[image 2]: http://qn.mintools.net/mtconfig实现图.png
+[image 3]: http://qn.mintools.net/ehcach框架图.png
+[image 4]: http://qn.mintools.net/ehcach缓存数据流转图.png
+[image 5]: http://qn.mintools.net/guavacache数据结构图.png
+[image 6]: http://qn.mintools.net/memcached客户端路由图.png
+[image 7]: http://qn.mintools.net/memcached一致性hash示例图.png
+[image 8]: http://qn.mintools.net/memcached内存结构图.png
+[image 9]: http://qn.mintools.net/redis数据模型图.png
+[image 10]: http://qn.mintools.net/redis分布式集群图1.png
+[image 11]: http://qn.mintools.net/redis分布式集群图2.png
+[image 12]: http://qn.mintools.net/spring动态代理调用图.png
 

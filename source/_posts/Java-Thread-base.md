@@ -800,14 +800,14 @@ ref:
 
 
 
-[image 1]: http://qn.atecher.com/mts/20180403/3832334064026624
-[image 2]: http://qn.atecher.com/Thread_State.png
-[image 3]: http://qn.atecher.com/thread_status_from_new_2_dead.jpg
-[image 4]: http://qn.atecher.com/mts/20180403/3832334095647744
-[image 5]: http://qn.atecher.com/thread_status_from_new_2_dead_with_methods.jpg
-[image 6]: http://qn.atecher.com/a_java_monitor.png
-[image 7]: http://qn.atecher.com/main_memory.png
-[image 8]: http://qn.atecher.com/thread_exception_catch.png 
-[image 9]: http://qn.atecher.com/synchronize_Lock_performance.png
-[image 10]: http://qn.atecher.com/BlockingQueue.png 
-[image 11]: http://qn.atecher.com/ThreadPoolExecutor.png 
+[image 1]: http://qn.mintools.net/mts/20180403/3832334064026624
+[image 2]: http://qn.mintools.net/Thread_State.png
+[image 3]: http://qn.mintools.net/thread_status_from_new_2_dead.jpg
+[image 4]: http://qn.mintools.net/mts/20180403/3832334095647744
+[image 5]: http://qn.mintools.net/thread_status_from_new_2_dead_with_methods.jpg
+[image 6]: http://qn.mintools.net/a_java_monitor.png
+[image 7]: http://qn.mintools.net/main_memory.png
+[image 8]: http://qn.mintools.net/thread_exception_catch.png 
+[image 9]: http://qn.mintools.net/synchronize_Lock_performance.png
+[image 10]: http://qn.mintools.net/BlockingQueue.png 
+[image 11]: http://qn.mintools.net/ThreadPoolExecutor.png 
