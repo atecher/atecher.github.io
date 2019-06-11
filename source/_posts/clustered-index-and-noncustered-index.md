@@ -222,5 +222,5 @@ tags:
 当然，在实践中，作为一个尽职的数据库管理员，您还要多测试一些方案，找出哪种方案效率最高、最为有效。
 
 
-[Image-1]: http://qn.atecher.com/mts/20180404/3833492718322688
-[Image-2]: http://qn.atecher.com/mts/20180402/3831019975492608
+[Image-1]: http://qn.mintools.net/mts/20180404/3833492718322688
+[Image-2]: http://qn.mintools.net/mts/20180402/3831019975492608

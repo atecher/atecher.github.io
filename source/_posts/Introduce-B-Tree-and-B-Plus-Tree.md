@@ -124,15 +124,15 @@ B树和B+广泛应用于文件存储系统以及数据库系统中，在讲解�
 
 >本文系转载文章，原作者为yangecnu，原文链接:[请点此处][2]。
 
-[image 1]: http://qn.atecher.com/Introduce-B-Tree-and-B-Plus-Tree-1.png
-[image 2]: http://qn.atecher.com/Introduce-B-Tree-and-B-Plus-Tree-2.gif
-[image 3]: http://qn.atecher.com/Introduce-B-Tree-and-B-Plus-Tree-3.png
-[image 4]: http://qn.atecher.com/Introduce-B-Tree-and-B-Plus-Tree-4.gif
-[image 5]: http://qn.atecher.com/Introduce-B-Tree-and-B-Plus-Tree-5.png
-[image 6]: http://qn.atecher.com/Introduce-B-Tree-and-B-Plus-Tree-6.png
-[image 7]: http://qn.atecher.com/Introduce-B-Tree-and-B-Plus-Tree-7.png
-[image 8]: http://qn.atecher.com/Introduce-B-Tree-and-B-Plus-Tree-8.png
-[image 9]: http://qn.atecher.com/Introduce-B-Tree-and-B-Plus-Tree-9.png
+[image 1]: http://qn.mintools.net/Introduce-B-Tree-and-B-Plus-Tree-1.png
+[image 2]: http://qn.mintools.net/Introduce-B-Tree-and-B-Plus-Tree-2.gif
+[image 3]: http://qn.mintools.net/Introduce-B-Tree-and-B-Plus-Tree-3.png
+[image 4]: http://qn.mintools.net/Introduce-B-Tree-and-B-Plus-Tree-4.gif
+[image 5]: http://qn.mintools.net/Introduce-B-Tree-and-B-Plus-Tree-5.png
+[image 6]: http://qn.mintools.net/Introduce-B-Tree-and-B-Plus-Tree-6.png
+[image 7]: http://qn.mintools.net/Introduce-B-Tree-and-B-Plus-Tree-7.png
+[image 8]: http://qn.mintools.net/Introduce-B-Tree-and-B-Plus-Tree-8.png
+[image 9]: http://qn.mintools.net/Introduce-B-Tree-and-B-Plus-Tree-9.png
 
 [1]: http://blog.codinglabs.org/articles/theory-of-mysql-index.html
 [2]: http://www.cnblogs.com/yangecnu/p/Introduce-B-Tree-and-B-Plus-Tree.html

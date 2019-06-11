@@ -345,25 +345,25 @@ public void Add(T item)
 >本文系转载文章，原作者为yangecnu，原文链接:[请点此处][1]。
 
 [1]: http://www.cnblogs.com/yangecnu/p/Introduce-Red-Black-Tree.html
-[image 1]: http://qn.atecher.com/red-black-tree.png
-[image 2]: http://qn.atecher.com/red-black-tree-2.png
-[image 3]: http://qn.atecher.com/red-black-tree-3.png
-[image 4]: http://qn.atecher.com/red-black-tree-4.png
-[image 5]: http://qn.atecher.com/red-black-tree-5.gif
-[image 6]: http://qn.atecher.com/red-black-tree-6.png
-[image 7]: http://qn.atecher.com/red-black-tree-7.gif
-[image 8]: http://qn.atecher.com/red-black-tree-8.png
-[image 9]: http://qn.atecher.com/red-black-tree-9.png
-[image 10]: http://qn.atecher.com/red-black-tree-10.png
-[image 11]: http://qn.atecher.com/red-black-tree-11.png
-[image 12]: http://qn.atecher.com/red-black-tree-12.png
-[image 13]: http://qn.atecher.com/red-black-tree-13.png
-[image 14]: http://qn.atecher.com/red-black-tree-14.png
-[image 15]: http://qn.atecher.com/red-black-tree-15.gif
-[image 16]: http://qn.atecher.com/red-black-tree-16.gif
-[image 17]: http://qn.atecher.com/red-black-tree-17.gif
-[image 18]: http://qn.atecher.com/red-black-tree-18.png
-[image 19]: http://qn.atecher.com/red-black-tree-19.png
+[image 1]: http://qn.mintools.net/red-black-tree.png
+[image 2]: http://qn.mintools.net/red-black-tree-2.png
+[image 3]: http://qn.mintools.net/red-black-tree-3.png
+[image 4]: http://qn.mintools.net/red-black-tree-4.png
+[image 5]: http://qn.mintools.net/red-black-tree-5.gif
+[image 6]: http://qn.mintools.net/red-black-tree-6.png
+[image 7]: http://qn.mintools.net/red-black-tree-7.gif
+[image 8]: http://qn.mintools.net/red-black-tree-8.png
+[image 9]: http://qn.mintools.net/red-black-tree-9.png
+[image 10]: http://qn.mintools.net/red-black-tree-10.png
+[image 11]: http://qn.mintools.net/red-black-tree-11.png
+[image 12]: http://qn.mintools.net/red-black-tree-12.png
+[image 13]: http://qn.mintools.net/red-black-tree-13.png
+[image 14]: http://qn.mintools.net/red-black-tree-14.png
+[image 15]: http://qn.mintools.net/red-black-tree-15.gif
+[image 16]: http://qn.mintools.net/red-black-tree-16.gif
+[image 17]: http://qn.mintools.net/red-black-tree-17.gif
+[image 18]: http://qn.mintools.net/red-black-tree-18.png
+[image 19]: http://qn.mintools.net/red-black-tree-19.png
 
 
 

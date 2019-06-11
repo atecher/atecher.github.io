@@ -969,4 +969,4 @@ public class EnumMapTest{
 
 
 
-[1]: http://qn.atecher.com/mts/20180418/3853301862220800
+[1]: http://qn.mintools.net/mts/20180418/3853301862220800

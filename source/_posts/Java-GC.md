@@ -192,9 +192,9 @@ for (int i = 1; i<100; i++){
 3. 监听器的使用，在释放对象的同时没有相应删除监听器的时候也可能导致内存泄露。
 
 
-[Image-1]: http://qn.atecher.com/mts/20180403/3832083954451456
-[Image-2]: http://qn.atecher.com/mts/20180403/3832084002276352
-[Image-3]: http://qn.atecher.com/mts/20180403/3832084008698880
-[Image-4]: http://qn.atecher.com/mts/20180403/3832084014646272
-[Image-5]: http://qn.atecher.com/mts/20180403/3832084020200448
-[Image-6]: http://qn.atecher.com/mts/20180403/3832084025279488
+[Image-1]: http://qn.mintools.net/mts/20180403/3832083954451456
+[Image-2]: http://qn.mintools.net/mts/20180403/3832084002276352
+[Image-3]: http://qn.mintools.net/mts/20180403/3832084008698880
+[Image-4]: http://qn.mintools.net/mts/20180403/3832084014646272
+[Image-5]: http://qn.mintools.net/mts/20180403/3832084020200448
+[Image-6]: http://qn.mintools.net/mts/20180403/3832084025279488

@@ -368,20 +368,20 @@ BST中位于顶部的元素就是快速排序中的第一个划分的元素，�
 
   [1]: http://qn.mintools.net/mts/20180417/3852386529018880
   [2]: http://qn.mintools.net/mts/20180417/3852386531558400
-  [3]: http://qn.atecher.com/mts/20180417/3852386535556096
-  [4]: http://qn.atecher.com/mts/20180417/3852386541241344
-  [5]: http://qn.atecher.com/mts/20180417/3852386541077504
-  [6]: http://qn.atecher.com/mts/20180417/3852393206400000
-  [7]: http://qn.atecher.com/mts/20180417/3852386544337920
-  [8]: http://qn.atecher.com/mts/20180417/3852386547647488
-  [9]: http://qn.atecher.com/mts/20180417/3852386547663872
-  [10]: http://qn.atecher.com/mts/20180417/3852386549728256
-  [11]: http://qn.atecher.com/mts/20180417/3852386552349696
-  [12]: http://qn.atecher.com/mts/20180417/3852386510390272
-  [13]: http://qn.atecher.com/mts/20180417/3852393206531072
-  [14]: http://qn.atecher.com/mts/20180417/3852386510504960
-  [15]: http://qn.atecher.com/mts/20180417/3852386513814528
-  [16]: http://qn.atecher.com/mts/20180417/3852386522203136
+  [3]: http://qn.mintools.net/mts/20180417/3852386535556096
+  [4]: http://qn.mintools.net/mts/20180417/3852386541241344
+  [5]: http://qn.mintools.net/mts/20180417/3852386541077504
+  [6]: http://qn.mintools.net/mts/20180417/3852393206400000
+  [7]: http://qn.mintools.net/mts/20180417/3852386544337920
+  [8]: http://qn.mintools.net/mts/20180417/3852386547647488
+  [9]: http://qn.mintools.net/mts/20180417/3852386547663872
+  [10]: http://qn.mintools.net/mts/20180417/3852386549728256
+  [11]: http://qn.mintools.net/mts/20180417/3852386552349696
+  [12]: http://qn.mintools.net/mts/20180417/3852386510390272
+  [13]: http://qn.mintools.net/mts/20180417/3852393206531072
+  [14]: http://qn.mintools.net/mts/20180417/3852386510504960
+  [15]: http://qn.mintools.net/mts/20180417/3852386513814528
+  [16]: http://qn.mintools.net/mts/20180417/3852386522203136
   [17]: http://www.cnblogs.com/yangecnu/p/Introduce-Binary-Search-Tree.html
   
   
