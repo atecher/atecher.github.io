@@ -35,5 +35,5 @@ branches:
 env:
   global:
     - GH_REF: github.com/atecher/atecher.github.io.git
-    - CODING_REF: git.dev.tencent.com/Atecher/atecher.git
+    - CODING_REF: e.coding.net/Atecher/atecher.git
 
