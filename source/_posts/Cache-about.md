@@ -66,7 +66,7 @@ tags:
 
 a. 成员变量或局部变量实现
 简单代码示例如下：
-```
+```java
     public void UseLocalCache(){
      //一个本地的缓存变量
      Map<String, Object> localCacheStoreMap = new HashMap<String, Object>();
@@ -96,7 +96,7 @@ private Object getInfoFromDB(){
 b. 静态变量实现
 
 最常用的单例实现静态资源缓存，代码示例如下：
-```
+```java
 public class CityUtils {
       private static final HttpClient httpClient = ServerHolder.createClientWithPool(); 
       private static Map<Integer, String> cityIdNameMap = new HashMap<Integer, String>();
@@ -199,7 +199,7 @@ Ehcache是现在最流行的纯Java开源缓存框架，配置简单、结构清
 
 图4 缓存数据流转图（L1:本地内存层；L2:Terracotta服务节点层)
 Ehcache的配置使用如下：
-```
+```xml
 <ehcache>
 <!-- 指定一个文件目录，当Ehcache把数据写到硬盘上时，将把数据写到这个文件目录下 -->
 <diskStore path="java.io.tmpdir"/>
@@ -305,7 +305,7 @@ Guava Cache提供Builder模式的CacheBuilder生成器来创建缓存的方式�
 
 build生成器的两种方式都实现了一种逻辑：从缓存中取key的值，如果该值已经缓存过了则返回缓存中的值，如果没有缓存过可以通过某个方法来获取这个值，不同的地方在于cacheloader的定义比较宽泛，是针对整个cache定义的，可以认为是统一的根据key值load value的方法，而callable的方式较为灵活，允许你在get的时候指定load方法。使用示例如下：
 ```
-/**
+/**java
     * CacheLoader
    */
    public void loadingCache()
