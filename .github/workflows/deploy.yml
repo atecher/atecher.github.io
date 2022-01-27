@@ -52,6 +52,6 @@ jobs:
           git config user.name "atecher"
           git config user.email "hongwei.han@qq.com"
           git add .
-          git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')!"
           git push --force --quiet "https://${{ secrets.HEXO_DEPLOY_KEY }}@$GITHUB_REPO" master:master
           git push --force --quiet "https://atecher:${{ secrets.HEXO_DEPLOY_KEY }}@$GITEE_REPO" master:master
