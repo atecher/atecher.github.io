@@ -1,0 +1,57 @@
+name: Hexo Deploy
+
+on:
+  push:
+    branches:
+      - blog-source
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          ref: blog-source
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Setup Hexo
+        env:
+          ACTION_DEPLOY_KEY: ${{ secrets.HEXO_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.email "hongwei.han@qq.com"
+          git config --global user.name "atecher"
+          npm install hexo-cli -g
+          npm install
+
+      - name: Generate files
+        run: |
+          hexo clean
+          hexo generate
+
+      - name: Deploy hexo blog
+          env:
+            # Github 仓库
+            GITHUB_REPO: github.com/atecher/atecher.github.io
+            # Gitee 仓库
+            GITEE_REPO: gitee.com/atecher/atecher.git
+          # 将编译后的博客文件推送到指定仓库
+          run: |
+            cd ./public && git init && git add .
+            git config user.name "atecher"
+            git config user.email "hongwei.han@qq.com"
+            git add .
+            git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
+            git push --force --quiet "https://${{ secrets.HEXO_DEPLOY_KEY }}@$GITHUB_REPO" master:master
+            git push --force --quiet "https://atecher:${{ secrets.HEXO_DEPLOY_KEY }}@$GITEE_REPO" master:master
