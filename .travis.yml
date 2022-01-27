@@ -25,7 +25,7 @@ after_script:
   - git add .
   - git commit -m "Update docs"
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
-  - git push --force --quiet "https://18600668500:${CO_TOKEN}@${CODING_REF}" master:master
+  - git push --force --quiet "https://${GE_USERNAME}:${GE_PASSWORD}@${GE_REF}" master:master
   
 # E: Build LifeCycle
 
@@ -34,6 +34,6 @@ branches:
     - blog-source
 env:
   global:
-    - GH_REF: github.com/atecher/atecher.github.io.git
-    - CODING_REF: e.coding.net/Atecher/atecher.git
+    - GH_REF: git@github.com:atecher/atecher.github.io.git
+    - GE_REF: git@gitee.com:atecher/atecher.git
 

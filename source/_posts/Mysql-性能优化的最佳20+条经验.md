@@ -279,6 +279,6 @@ ORM 还可以把你的SQL语句打包成一个事务,这会比单独执行他们
 ref: [https://coolshell.cn/articles/1846.html](https://coolshell.cn/articles/1846.html)
 
 
-[image 1]: http://qn.mintools.net/unoptimized_explain.jpg
-[image 2]: http://qn.mintools.net/optimized_explain.jpg
-[image 3]: http://qn.mintools.net/search_index.jpg
+[image 1]: http://qn.atecher.com/unoptimized_explain.jpg
+[image 2]: http://qn.atecher.com/optimized_explain.jpg
+[image 3]: http://qn.atecher.com/search_index.jpg
