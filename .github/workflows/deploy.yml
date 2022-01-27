@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: blog-source
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v1
