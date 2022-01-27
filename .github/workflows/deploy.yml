@@ -32,17 +32,13 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.email "hongwei.han@qq.com"
           git config --global user.name "atecher"
-          npm install hexo-cli gulp -g
+          npm install hexo-cli -g
           npm install
 
       - name: Generate files
         run: |
           hexo clean
           hexo generate
-
-      - name: Execute gulp task
-        run: gulp
-
 
 
       - name: Deploy
