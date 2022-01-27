@@ -32,7 +32,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.email "hongwei.han@qq.com"
           git config --global user.name "atecher"
-          npm install hexo-cli -g
+          npm install hexo-cli gulp -g
           npm install
 
       - name: Generate files
@@ -40,18 +40,30 @@ jobs:
           hexo clean
           hexo generate
 
-      - name: Deploy hexo blog
-        env:
-          # Github 仓库
-          GITHUB_REPO: github.com/atecher/atecher.github.io.git
-          # Gitee 仓库
-          GITEE_REPO: gitee.com/atecher/atecher.git
-        # 将编译后的博客文件推送到指定仓库
-        run: |
-          cd ./public && git init && git add .
-          git config user.name "atecher"
-          git config user.email "hongwei.han@qq.com"
-          git add .
-          git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')!"
-          git push --force --quiet "https://${{ secrets.HEXO_DEPLOY_KEY }}@$GITHUB_REPO" master:master
-          git push --force --quiet "https://atecher:${{ secrets.HEXO_DEPLOY_KEY }}@$GITEE_REPO" master:master
+      - name: Execute gulp task
+        run: gulp
+
+
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.HEXO_DEPLOY_KEY }}
+          BRANCH: master
+          FOLDER: public
+
+#      - name: Deploy hexo blog
+#        env:
+#          # Github 仓库
+#          GITHUB_REPO: github.com/atecher/atecher.github.io.git
+#          # Gitee 仓库
+#          GITEE_REPO: gitee.com/atecher/atecher.git
+#        # 将编译后的博客文件推送到指定仓库
+#        run: |
+#          cd ./public && git init && git add .
+#          git config user.name "atecher"
+#          git config user.email "hongwei.han@qq.com"
+#          git add .
+#          git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')!"
+#          git push --force --quiet "https://${{ secrets.HEXO_DEPLOY_KEY }}@$GITHUB_REPO" master:master
+#          git push --force --quiet "https://atecher:${{ secrets.HEXO_DEPLOY_KEY }}@$GITEE_REPO" master:master
