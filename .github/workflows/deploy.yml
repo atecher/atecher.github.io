@@ -49,6 +49,16 @@ jobs:
           branch: master
           folder: public
 
+      - name: Qiniu
+        uses: Hanlin-Dong/hexo-to-qiniu-action@v1-full
+        with:
+          bucket: atecher-blog
+          access-key: ${{secrets.QINIU_ACCESS_KEY}}
+          secret-key: ${{secrets.QINIU_SECRET_KEY}}
+          base-folder: public
+          domain: "http://www.atecher.com"
+          sub-domain: ""
+
 
 #      - name: sync
 #        uses: wearerequired/git-mirror-action@master
