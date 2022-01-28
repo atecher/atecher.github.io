@@ -41,6 +41,7 @@ jobs:
         run: |
           hexo clean
           hexo generate
+          echo "pwd: "`pwd`
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.2
@@ -48,16 +49,16 @@ jobs:
           ssh-key: ${{secrets.HEXO_DEPLOY_KEY}}
           branch: master
           folder: public
-
-      - name: Qiniu
-        uses: Hanlin-Dong/hexo-to-qiniu-action@v1-full
-        with:
-          bucket: atecher-blog
-          access-key: ${{secrets.QINIU_ACCESS_KEY}}
-          secret-key: ${{secrets.QINIU_SECRET_KEY}}
-          base-folder: ./public
-          domain: "http://www.atecher.com"
-          sub-domain: ""
+#
+#      - name: Qiniu
+#        uses: Hanlin-Dong/hexo-to-qiniu-action@v1-full
+#        with:
+#          bucket: atecher-blog
+#          access-key: ${{secrets.QINIU_ACCESS_KEY}}
+#          secret-key: ${{secrets.QINIU_SECRET_KEY}}
+#          base-folder: ./public
+#          domain: "http://www.atecher.com"
+#          sub-domain: ""
 
 
 #      - name: sync
