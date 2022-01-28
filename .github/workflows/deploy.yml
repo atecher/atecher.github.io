@@ -6,7 +6,7 @@ on:
       - blog-source
 
 jobs:
-  build:
+  build-to-deploy:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
 
@@ -65,3 +65,16 @@ jobs:
 #          git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')!"
 #          git push --force --quiet "https://${{ secrets.HEXO_DEPLOY_KEY }}@$GITHUB_REPO" master:master
 #          git push --force --quiet "https://atecher:${{ secrets.HEXO_DEPLOY_KEY }}@$GITEE_REPO" master:master
+
+
+
+  mirror-to-gitee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v1
+      - name: 'Mirror to gitee'
+        uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url: git@gitee.com:atecher/atecher.git
+          ssh_private_key: ${{secrets.HEXO_DEPLOY_KEY}}
