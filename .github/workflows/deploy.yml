@@ -55,7 +55,7 @@ jobs:
           bucket: atecher-blog
           access-key: ${{secrets.QINIU_ACCESS_KEY}}
           secret-key: ${{secrets.QINIU_SECRET_KEY}}
-          base-folder: public
+          base-folder: ./public
           domain: "http://www.atecher.com"
           sub-domain: ""
 
