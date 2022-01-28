@@ -45,10 +45,7 @@ jobs:
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.2
-        env:
-          ACTION_DEPLOY_KEY: ${{secrets.HEXO_DEPLOY_KEY}}
         with:
-          ACCESS_TOKEN: $ACTION_DEPLOY_KEY
           ssh-key: ${{secrets.HEXO_DEPLOY_KEY}}
           branch: master
           folder: public
