@@ -1,9 +1,6 @@
 name: Sync To Gitee
 
-on:
-  push:
-    branches:
-      - master
+on: page_build
 
 jobs:
   sync:
