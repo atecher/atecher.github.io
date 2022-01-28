@@ -42,14 +42,12 @@ jobs:
           hexo clean
           hexo generate
 
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
           ssh-key: ${{secrets.HEXO_DEPLOY_KEY}}
           branch: master
           folder: public
-
 
       - name: 'Mirror to gitee'
         uses: pixta-dev/repository-mirroring-action@v1
