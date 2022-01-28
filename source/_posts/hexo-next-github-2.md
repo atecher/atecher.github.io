@@ -220,20 +220,20 @@ env:
 
 构建完成后，我们去blog上就能看到这篇文章了。
 
-[Image-1]: http://qn.atecher.com/mts/20180418/3853306650002432
-[Image-2]: http://qn.atecher.com/mts/20180418/3853306656179200
+[Image-1]: //qn.atecher.com/mts/20180418/3853306650002432
+[Image-2]: //qn.atecher.com/mts/20180418/3853306656179200
 [Link-3]: http://localhost:4000
 [Link-4]: http://localhost:3000
 [Link-5]: http://atecher.github.io/
-[Image-6]: http://qn.atecher.com/mts/20180418/3853306661143552
-[Image-7]: http://qn.atecher.com/mts/20180418/3853306661618688
+[Image-6]: //qn.atecher.com/mts/20180418/3853306661143552
+[Image-7]: //qn.atecher.com/mts/20180418/3853306661618688
 [Link-8]: https://travis-ci.org/
-[Image-9]: http://qn.atecher.com/mts/20180418/3853306665387008
-[Image-10]: http://qn.atecher.com/mts/20180418/3853306665468928
-[Image-11]: http://qn.atecher.com/mts/20180418/3853306667451392
-[Image-12]: http://qn.atecher.com/mts/20180418/3853306667877377
-[Image-13]: http://qn.atecher.com/mts/20180418/3853306667877376
-[Image-14]: http://qn.atecher.com/mts/20180418/3853306664092672
-[Image-15]: http://qn.atecher.com/mts/20180418/3853306634912768
-[Image-16]: http://qn.atecher.com/mts/20180418/3853306634945536
-[Image-17]: http://qn.atecher.com/mts/20180418/3853306635273216
+[Image-9]: //qn.atecher.com/mts/20180418/3853306665387008
+[Image-10]: //qn.atecher.com/mts/20180418/3853306665468928
+[Image-11]: //qn.atecher.com/mts/20180418/3853306667451392
+[Image-12]: //qn.atecher.com/mts/20180418/3853306667877377
+[Image-13]: //qn.atecher.com/mts/20180418/3853306667877376
+[Image-14]: //qn.atecher.com/mts/20180418/3853306664092672
+[Image-15]: //qn.atecher.com/mts/20180418/3853306634912768
+[Image-16]: //qn.atecher.com/mts/20180418/3853306634945536
+[Image-17]: //qn.atecher.com/mts/20180418/3853306635273216

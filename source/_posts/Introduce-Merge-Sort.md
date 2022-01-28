@@ -207,32 +207,32 @@ private static void sort3(int[] array, int lo, int hi){
 
 
 
-[Definition of Merge Sort]: http://qn.atecher.com/mts/20180417/3852398591837184
-[Definition of Merge Sort 1]: http://qn.atecher.com/mts/20180417/3852398591837184
-[Merge_sort_animation2]: http://qn.atecher.com/mts/20180417/3852398592246784
-[Merge_sort_animation2_Merge_sort_animation2]: http://qn.atecher.com/mts/20180417/3852398592246784
-[Merge Step in Merge Sort]: http://qn.atecher.com/mts/20180417/3852398592230400
-[Merge Step in Merge Sort 1]: http://qn.atecher.com/mts/20180417/3852398592230400
-[Top-Down merge]: http://qn.atecher.com/mts/20180417/3852398595326976
-[Top-Down merge_Top-Down merge]: http://qn.atecher.com/mts/20180417/3852398595326976
-[Trace of merge reuslt for top-down merge sort]: http://qn.atecher.com/mts/20180417/3852398596801536
-[Trace of merge reuslt for top-down merge sort 1]: http://qn.atecher.com/mts/20180417/3852398596801536
-[Merge_sort_algorithm_diagram]: http://qn.atecher.com/mts/20180417/3852398597260288
-[Merge_sort_algorithm_diagram_Merge_sort_algorithm_diagram]: http://qn.atecher.com/mts/20180417/3852398597260288
-[Merge Sort Visualization]: http://qn.atecher.com/mts/20180417/3852398602765312
-[Merge Sort Visualization 1]: http://qn.atecher.com/mts/20180417/3852398602765312
-[Merge-sort-example]: http://qn.atecher.com/mts/20180417/3852398603420672
-[Merge-sort-example 1]: http://qn.atecher.com/mts/20180417/3852398603420672
-[merge sort]: http://qn.atecher.com/mts/20180417/3852398604289024
-[merge sort 1]: http://qn.atecher.com/mts/20180417/3852398604289024
+[Definition of Merge Sort]: //qn.atecher.com/mts/20180417/3852398591837184
+[Definition of Merge Sort 1]: //qn.atecher.com/mts/20180417/3852398591837184
+[Merge_sort_animation2]: //qn.atecher.com/mts/20180417/3852398592246784
+[Merge_sort_animation2_Merge_sort_animation2]: //qn.atecher.com/mts/20180417/3852398592246784
+[Merge Step in Merge Sort]: //qn.atecher.com/mts/20180417/3852398592230400
+[Merge Step in Merge Sort 1]: //qn.atecher.com/mts/20180417/3852398592230400
+[Top-Down merge]: //qn.atecher.com/mts/20180417/3852398595326976
+[Top-Down merge_Top-Down merge]: //qn.atecher.com/mts/20180417/3852398595326976
+[Trace of merge reuslt for top-down merge sort]: //qn.atecher.com/mts/20180417/3852398596801536
+[Trace of merge reuslt for top-down merge sort 1]: //qn.atecher.com/mts/20180417/3852398596801536
+[Merge_sort_algorithm_diagram]: //qn.atecher.com/mts/20180417/3852398597260288
+[Merge_sort_algorithm_diagram_Merge_sort_algorithm_diagram]: //qn.atecher.com/mts/20180417/3852398597260288
+[Merge Sort Visualization]: //qn.atecher.com/mts/20180417/3852398602765312
+[Merge Sort Visualization 1]: //qn.atecher.com/mts/20180417/3852398602765312
+[Merge-sort-example]: //qn.atecher.com/mts/20180417/3852398603420672
+[Merge-sort-example 1]: //qn.atecher.com/mts/20180417/3852398603420672
+[merge sort]: //qn.atecher.com/mts/20180417/3852398604289024
+[merge sort 1]: //qn.atecher.com/mts/20180417/3852398604289024
 [CLRS]: http://www.amazon.com/Introduction-Algorithms-Thomas-H-Cormen/dp/0262033844
 [master theorem]: http://en.wikipedia.org/wiki/Master_theorem
-[merge sort analysis]: http://qn.atecher.com/mts/20180417/3852398610023424
-[merge sort analysis 1]: http://qn.atecher.com/mts/20180417/3852398610023424
+[merge sort analysis]: //qn.atecher.com/mts/20180417/3852398610023424
+[merge sort analysis 1]: //qn.atecher.com/mts/20180417/3852398610023424
 [Link 1]: http://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91
 [Link 2]: http://en.wikipedia.org/wiki/In-place_algorithm
 [Link 3]: http://www.diku.dk/hjemmesider/ansatte/jyrki/Paper/mergesort_NJC.ps
-[Stop if already sorted]: http://qn.atecher.com/mts/20180417/3852398611137536
-[Stop if already sorted 1]: http://qn.atecher.com/mts/20180417/3852398611137536
+[Stop if already sorted]: //qn.atecher.com/mts/20180417/3852398611137536
+[Stop if already sorted 1]: //qn.atecher.com/mts/20180417/3852398611137536
 [Link 4]: http://www.cnblogs.com/yangecnu/p/Something-about-Concurrent-and-Parallel-Programming.html
 [ref]: http://www.cnblogs.com/yangecnu/p/Introduce-Merge-Sort.html

@@ -176,4 +176,4 @@ JDK1.6源码
 ref:
 [http://www.infoq.com/cn/articles/java-threadPool](http://www.infoq.com/cn/articles/java-threadPool)
 
-[image 1]:http://qn.atecher.com/threadpool.jpg
+[image 1]://qn.atecher.com/threadpool.jpg

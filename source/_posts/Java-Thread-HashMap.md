@@ -213,5 +213,5 @@ ref:
 [http://yemengying.com/2016/05/07/threadsafe-hashmap/](http://yemengying.com/2016/05/07/threadsafe-hashmap/)
 
 
-[image 1]:http://qn.atecher.com/HashMap内部存储结果.png
-[image 2]:http://qn.atecher.com/resizing_of_java_hashmap.jpg
+[image 1]://qn.atecher.com/HashMap内部存储结果.png
+[image 2]://qn.atecher.com/resizing_of_java_hashmap.jpg
