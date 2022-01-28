@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="//qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -82,7 +82,7 @@
 <meta property="og:description" content="Java集合类基本概念在编程中，常常需要集中存放多个数据。从传统意义上讲，数组是我们的一个很好的选择，前提是我们事先已经明确知道我们将要保存的对象的数量。一旦在数组初始化时指定了这个数组长度，这个数组长度就是不可变的，如果我们需要保存一个可以动态增长的数据(在编译时无法确定具体的数量)，java的集合类就是一个很好的设计方案了。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qn.atecher.com/mts/20180418/3853301862220800">
-<meta property="og:updated_time" content="2022-01-28T10:13:28.517Z">
+<meta property="og:updated_time" content="2022-01-28T10:28:39.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Map、Set、List、Queue、Stack的特点与用法">
 <meta name="twitter:description" content="Java集合类基本概念在编程中，常常需要集中存放多个数据。从传统意义上讲，数组是我们的一个很好的选择，前提是我们事先已经明确知道我们将要保存的对象的数量。一旦在数组初始化时指定了这个数组长度，这个数组长度就是不可变的，如果我们需要保存一个可以动态增长的数据(在编译时无法确定具体的数量)，java的集合类就是一个很好的设计方案了。">
@@ -316,7 +316,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="//qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -484,7 +484,7 @@
 <h5 id="WeakHashMap"><a href="#WeakHashMap" class="headerlink" title="WeakHashMap"></a>WeakHashMap</h5><p>WeakHashMap与HashMap的用法基本相似。区别在于，HashMap的key保留了对实际对象的”强引用”，这意味着只要该HashMap对象不被销毁，该HashMap所引用的对象就不会被垃圾回收。但WeakHashMap的key只保留了对实际对象的弱引用，这意味着如果WeakHashMap对象的key所引用的对象没有被其他强引用变量所引用，则这些key所引用的对象可能被垃圾回收，当垃圾回收了该key所对应的实际对象之后，WeakHashMap也可能自动删除这些key所对应的key-value对</p>
 <h5 id="IdentityHashMap"><a href="#IdentityHashMap" class="headerlink" title="IdentityHashMap"></a>IdentityHashMap</h5><p>IdentityHashMap的实现机制与HashMap基本相似，在IdentityHashMap中，当且仅当两个key严格相等(key1 == key2)时，IdentityHashMap才认为两个key相等</p>
 <h5 id="EnumMap"><a href="#EnumMap" class="headerlink" title="EnumMap"></a>EnumMap</h5><p>EnumMap是一个与枚举类一起使用的Map实现，EnumMap中的所有key都必须是单个枚举类的枚举值。创建EnumMap时必须显式或隐式指定它对应的枚举类。EnumMap根据key的自然顺序(即枚举值在枚举类中的定义顺序)</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853301862220800" alt="map-set-list-queue-stack-1"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853301862220800" alt="map-set-list-queue-stack-1"></p>
 <h2 id="Java集合类的应用场景代码"><a href="#Java集合类的应用场景代码" class="headerlink" title="Java集合类的应用场景代码"></a>Java集合类的应用场景代码</h2><p>学习了集合类的基本架构框架之后，我们接着来学习它们各自的应用场景、以及细节处的注意事项:</p>
 <h3 id="Set-1"><a href="#Set-1" class="headerlink" title="Set"></a>Set</h3><h4 id="HashSet-1"><a href="#HashSet-1" class="headerlink" title="HashSet"></a>HashSet</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*; </span><br><span class="line"></span><br><span class="line"><span class="comment">//类A的equals方法总是返回true,但没有重写其hashCode()方法。不能保证当前对象是HashSet中的唯一对象</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//类B的hashCode()方法总是返回1,但没有重写其equals()方法。不能保证当前对象是HashSet中的唯一对象</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//类C的hashCode()方法总是返回2,且有重写其equals()方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashSetTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        HashSet books = <span class="keyword">new</span> HashSet();</span><br><span class="line">        <span class="comment">//分别向books集合中添加两个A对象，两个B对象，两个C对象</span></span><br><span class="line">        books.add(<span class="keyword">new</span> A());</span><br><span class="line">        books.add(<span class="keyword">new</span> A());</span><br><span class="line"></span><br><span class="line">        books.add(<span class="keyword">new</span> B());</span><br><span class="line">        books.add(<span class="keyword">new</span> B());</span><br><span class="line"></span><br><span class="line">        books.add(<span class="keyword">new</span> C());</span><br><span class="line">        books.add(<span class="keyword">new</span> C());</span><br><span class="line">        System.out.println(books);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>result:</p>
@@ -708,7 +708,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="//qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>

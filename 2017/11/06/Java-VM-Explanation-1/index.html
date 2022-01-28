@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="//qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://qn.atecher.com/mts/20180418/3853291049092096">
 <meta property="og:image" content="http://qn.atecher.com/mts/20180418/3853291050943488">
 <meta property="og:image" content="http://qn.atecher.com/mts/20180418/3853291050828800">
-<meta property="og:updated_time" content="2022-01-28T10:13:28.517Z">
+<meta property="og:updated_time" content="2022-01-28T10:28:39.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机详解：JVM常见问题总结">
 <meta name="twitter:description" content="先把本文的目录画一个思维导图：">
@@ -330,7 +330,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="//qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -434,7 +434,7 @@
 
       
         <p>先把本文的目录画一个思维导图：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291052336128" alt="Java-VM-Explanation-1-1"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291052336128" alt="Java-VM-Explanation-1-1"></p>
 <a id="more"></a>
 <h2 id="Java引用的四种状态"><a href="#Java引用的四种状态" class="headerlink" title="Java引用的四种状态"></a>Java引用的四种状态</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h3><p>用的最广。我们平时写代码时，new一个Object存放在堆内存，然后用一个引用指向它，这就是强引用。</p>
 <p><strong>如果一个对象具有强引用，那垃圾回收器绝不会回收它</strong>。当内存空间不足，Java虚拟机宁愿抛出OutOfMemoryError错误，使程序异常终止，也不会靠随意回收具有强引用的对象来解决内存不足的问题。</p>
@@ -446,7 +446,7 @@
 <p>虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p>
 <p>注：关于各种引用的详解，可以参考这篇博客：<a href="http://zhangjunhd.blog.51cto.com/113473/53092" target="_blank" rel="noopener">http://zhangjunhd.blog.51cto.com/113473/53092</a></p>
 <h2 id="Java中的内存划分"><a href="#Java中的内存划分" class="headerlink" title="Java中的内存划分"></a>Java中的内存划分</h2><p>Java程序在运行时，需要在内存中的分配空间。<strong>为了提高运算效率，就对数据进行了不同空间的划分</strong>，因为每一片区域都有特定的处理数据方式和内存管理方式。</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291055121408" alt="Java-VM-Explanation-1-2"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291055121408" alt="Java-VM-Explanation-1-2"></p>
 <p>上面这张图就是jvm运行时的状态。具体划分为如下5个内存空间：（非常重要）</p>
 <ul>
 <li>程序计数器：保证线程切换后能恢复到原来的执行位置</li>
@@ -500,7 +500,7 @@
 <p><strong>注：</strong>这里提到，设立若干种根对象，当任何一个根对象到某一个对象均不可达时，则认为这个对象是可以被回收的。我们在后面介绍标记-清理算法/标记整理算法时，也会一直强调从根节点开始，对所有可达对象做一次标记，那什么叫做可达呢？</p>
 <p><strong>可达性分析：</strong></p>
 <p>从根（GC Roots）的对象作为起始点，开始向下搜索，搜索所走过的路径称为“<strong>引用链</strong>”，当一个对象到GC Roots没有任何引用链相连（用图论的概念来讲，就是从GC Roots到这个对象不可达）时，则证明此对象是不可用的。</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291055662080" alt="Java-VM-Explanation-1-3"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291055662080" alt="Java-VM-Explanation-1-3"></p>
 <p>如上图所示，ObjectD和ObjectE是互相关联的，但是由于GC roots到这两个对象不可达，所以最终D和E还是会被当做GC的对象，上图若是采用引用计数法，则A-E五个对象都不会被回收。</p>
 <p><strong>根（GC Roots）：</strong></p>
 <p>说到GC roots（GC根），在JAVA语言中，可以当做GC roots的对象有以下几种：</p>
@@ -522,7 +522,7 @@
 <p>从以上描述不难看出，复制算法要想使用，最起码对象的存活率要非常低才行。</p>
 <p>现在的商业虚拟机都采用这种收集算法来回收新生代，新生代中的对象98%都是“朝生夕死”的，所以并不需要按照1:1的比例来划分内存空间，而是将<strong>内存分为一块比较大的Eden空间和两块较小的Survivor空间</strong>，每次使用Eden和其中一块Survivor。当回收时，将Eden和Survivor中还存活着的对象一次性地复制到另外一块Survivor空间上，最后清理掉Eden和刚才用过的Survivor空间。HotSpot虚拟机默认Eden和Survivor的大小比例是8:1，也就是说，每次新生代中可用内存空间为整个新生代容量的90%（80%+10%），只有10%的空间会被浪费。</p>
 <p>当然，98%的对象可回收只是一般场景下的数据，我们没有办法保证每次回收都只有不多于10%的对象存活，<strong>当Survivor空间不够用时，需要依赖于老年代进行分配担保，所以大对象直接进入老年代</strong>。整个过程如下图所示：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291040113664" alt="Java-VM-Explanation-1-4"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291040113664" alt="Java-VM-Explanation-1-4"></p>
 <h3 id="标记-整理算法（老年代的GC）"><a href="#标记-整理算法（老年代的GC）" class="headerlink" title="标记-整理算法（老年代的GC）"></a>标记-整理算法（老年代的GC）</h3><p>复制算法在对象<strong>存活率高</strong>的时候要进行较多的复制操作，效率将会降低，所以在老年代中一般不能直接选用这种算法。</p>
 <p><strong>概念：</strong></p>
 <p>标记阶段：先通过根节点，标记所有从根节点开始的可达对象。因此，未被标记的对象就是未被引用的垃圾对象</p>
@@ -539,7 +539,7 @@
 <p>注：<strong>老年代的对象中，有一小部分是因为在新生代回收时，老年代做担保，进来的对象；绝大部分对象是因为很多次GC都没有被回收掉而进入老年代</strong>。</p>
 <h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p>如果说收集算法时内存回收的方法论，那么垃圾收集器就是内存回收的具体实现。<br>虽然我们在对各种收集器进行比较，但并非为了挑出一个最好的收集器。因为直到现在位置还没有最好的收集器出现，更加没有万能的收集器，所以我们<strong>选择的只是对具体应用最合适的收集器</strong>。</p>
 <h3 id="Serial收集器（串行收集器）"><a href="#Serial收集器（串行收集器）" class="headerlink" title="Serial收集器（串行收集器）"></a>Serial收集器（串行收集器）</h3><p>这个收集器是一个单线程的收集器，但它的单线程的意义并不仅仅说明它只会使用一个CPU或一条收集线程去完成垃圾收集工作，更重要的是在它进行垃圾收集时，必须暂停其他所有的工作线程（<strong>Stop-The-World：将用户正常工作的线程全部暂停掉</strong>），直到它收集结束。收集器的运行过程如下图所示：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291042571264" alt="Java-VM-Explanation-1-5"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291042571264" alt="Java-VM-Explanation-1-5"></p>
 <p>上图中：</p>
 <ul>
 <li>新生代采用复制算法，Stop-The-World</li>
@@ -548,7 +548,7 @@
 <p>当它进行GC工作的时候，虽然会造成Stop-The-World，但它存在有存在的原因：正是因为它的简单而高效（与其他收集器的单线程比），对于限定单个CPU的环境来说，没有线程交互的开销，专心做GC，自然可以获得最高的单线程手机效率。所以<strong>Serial收集器对于运行在client模式下是一个很好的选择</strong>（它依然是虚拟机运行在<strong>client模式下</strong>的默认<strong>新生代</strong>收集器）。</p>
 <h3 id="ParNew收集器（使用多条线程进行GC）"><a href="#ParNew收集器（使用多条线程进行GC）" class="headerlink" title="ParNew收集器（使用多条线程进行GC）"></a>ParNew收集器（使用多条线程进行GC）</h3><p>ParNew收集器是Serial收集器的多线程版本。</p>
 <p><strong>它是运行在server模式下的首选新生代收集器</strong>，除了Serial收集器外，目前只有它能与CMS收集器配合工作。CMS收集器是一个被认为具有划时代意义的并发收集器，因此如果有一个垃圾收集器能和它一起搭配使用让其更加完美，那这个收集器必然也是一个不可或缺的部分了。收集器的运行过程如下图所示：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291042374656" alt="Java-VM-Explanation-1-6"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291042374656" alt="Java-VM-Explanation-1-6"></p>
 <p>上图中：</p>
 <ul>
 <li>新生代采用复制算法，Stop-The-World</li>
@@ -591,7 +591,7 @@
 <li>基于标记结果，直接清理对象</li>
 </ul>
 <p>整个过程如下图所示：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291045504000" alt="Java-VM-Explanation-1-7"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291045504000" alt="Java-VM-Explanation-1-7"></p>
 <p>上图中，初始标记和重新标记时，需要stop the world。整个过程中耗时最长的是并发标记和并发清除，这两个过程都可以和用户线程一起工作。</p>
 <hr>
 <p><strong>优点：</strong><br>　　并发收集，低停顿<br><strong>缺点：</strong><br>（1）导致用户的执行速度降低。<br>（2）无法处理浮动垃圾。因为它采用的是标记-清除算法。有可能有些垃圾在标记之后，需要等到下一次GC才会被回收。如果CMS运行期间无法满足程序需要，那么就会临时启用Serial Old收集器来重新进行老年代的手机。<br>（3）由于采用的是标记-清除算法，那么就会产生大量的碎片。往往会出现老年代还有很大的空间剩余，但是无法找到足够大的连续空间来分配当前对象，不得不提前触发一次full GC</p>
@@ -602,7 +602,7 @@
 <h2 id="Java堆内存划分"><a href="#Java堆内存划分" class="headerlink" title="Java堆内存划分"></a>Java堆内存划分</h2><p>根据对象的存活率（年龄），Java对内存划分为3种：新生代、老年代、永久代：</p>
 <h3 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h3><p>比如我们在方法中去new一个对象，那这方法调用完毕后，对象就会被回收，这就是一个典型的新生代对象。<br>现在的商业虚拟机都采用这种收集算法来回收新生代，新生代中的对象98%都是“朝生夕死”的，所以并不需要按照1:1的比例来划分内存空间，而是将<strong>内存分为一块比较大的Eden空间和两块较小的Survivor空间</strong>，每次使用Eden和其中一块Survivor。当回收时，将Eden和Survivor中还存活着的对象一次性地复制到另外一块Survivor空间上，最后清理掉Eden和刚才用过的Survivor空间。HotSpot虚拟机默认Eden和Survivor的大小比例是8:1，也就是说，每次新生代中可用内存空间为整个新生代容量的90%（80%+10%），只有10%的空间会被浪费。<br>当然，98%的对象可回收只是一般场景下的数据，我们没有办法保证每次回收都只有不多于10%的对象存活，<strong>当Survivor空间不够用时，需要依赖于老年代进行分配担保，所以大对象直接进入老年代</strong>。同时，<strong>长期存活的对象将进入老年代</strong>（虚拟机给每个对象定义一个年龄计数器）。</p>
 <p>来看下面这张图：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291046257664" alt="Java-VM-Explanation-1-8"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291046257664" alt="Java-VM-Explanation-1-8"></p>
 <h4 id="Minor-GC和Full-GC"><a href="#Minor-GC和Full-GC" class="headerlink" title="Minor GC和Full GC"></a>Minor GC和Full GC</h4><p>GC分为两种：Minor GC和Full GC</p>
 <p><strong>Minor GC</strong></p>
 <p>Minor GC是发生在新生代中的垃圾收集动作，采用的是复制算法。</p>
@@ -616,7 +616,7 @@
 <h3 id="永久代"><a href="#永久代" class="headerlink" title="永久代"></a>永久代</h3><p>即方法区。</p>
 <h2 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h2><p>虚拟机把描述类的数据从Class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。</p>
 <h3 id="类加载的过程"><a href="#类加载的过程" class="headerlink" title="类加载的过程"></a>类加载的过程</h3><p>包括加载、链接（含验证、准备、解析）、初始化。如下图所示：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291046355968" alt="Java-VM-Explanation-1-9"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291046355968" alt="Java-VM-Explanation-1-9"></p>
 <h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>类加载指的是将类的class文件读入内存，并为之创建一个java.lang.<strong>Class对象</strong>，作为方法区<strong>这个类的数据访问的入口</strong>。</p>
 <p>也就是说，当程序中使用任何类时，系统都会为之建立一个java.lang.Class对象。具体包括以下三个部分：</p>
 <p>（1）通过<strong>类的全名</strong>产生对应类的二进制数据流。（根据early load原理，如果没找到对应的类文件，只有在类实际使用时才会抛出错误）<br>（2）分析并将这些二进制数据流转换为方法区方法区特定的数据结构<br>（3）创建对应类的java.lang.Class对象，作为方法区的入口（有了对应的Class对象，并不意味着这个类已经完成了加载链接）</p>
@@ -653,11 +653,11 @@
 <p>(3)JavaTest.java:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaTest</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         System.out.println(Son.a);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>上面的测试类中，虽然用上了Son这个类，但是并没有调用子类里的成员，所以并不会对子类进行初始化。于是运行效果是：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291047191552" alt="Java-VM-Explanation-1-10"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291047191552" alt="Java-VM-Explanation-1-10"></p>
 <p>如果把JavaTest.java改成下面这个样子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaTest</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         System.out.println(Son.a);</span><br><span class="line">         System.out.println(Son.b);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>运行效果：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291048797184" alt="Java-VM-Explanation-1-11"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291048797184" alt="Java-VM-Explanation-1-11"></p>
 <p><strong>代码举例2</strong></p>
 <p>我们对上面的第（2）种情况做一个代码举例。即：如果是用static final修饰的常量，则不会进行显式初始化。代码举例如下：</p>
 <p>(1)Father.java:</p>
@@ -667,23 +667,23 @@
 <p>这里面的变量c是一个静态常量。</p>
 <p>(3)JavaTest.java:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaTest</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         System.out.println(Son.c);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291048715264" alt="Java-VM-Explanation-1-12"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291048715264" alt="Java-VM-Explanation-1-12"></p>
 <p>上面的运行效果显示，<strong>由于c是final static修饰的静态常量，所以根本就没有调用静态代码块里面的内容，也就是说，没有对这个类进行显式初始化</strong>。<br>现在，保持Father.java的代码不变。将Son.java代码做如下修改：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Java学习交流QQ群：589809992 我们一起学Java！</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"*******son init"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> c = <span class="keyword">new</span> Random().nextInt(<span class="number">3</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>JavaTest.java:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaTest</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         System.out.println(Son.c);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>运行效果如下：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291049092096" alt="Java-VM-Explanation-1-13"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291049092096" alt="Java-VM-Explanation-1-13"></p>
 <p><strong>代码举例3：（很容易出错）</strong><br>我们来下面这段代码的运行结果是什么：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Java学习交流QQ群：589809992 我们一起学Java！</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestInstance</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> TestInstance instance = <span class="keyword">new</span> TestInstance();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        a++;</span><br><span class="line">        b++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(TestInstance.a);</span><br><span class="line">        System.out.println(TestInstance.b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行结果：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291050943488" alt="Java-VM-Explanation-1-14"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291050943488" alt="Java-VM-Explanation-1-14"></p>
 <p>之所以有这样的运行结果，这里涉及到类加载的顺序：</p>
 <p>（1）在加载阶段，加载类的信息<br>（2）在链接的准备阶段给instance、a、b做默认初始化并分配空间，此时a和b的值都为0<br>（3）在初始化阶段，执行构造方法，此时a和b的值都为1<br>（4）在初始化阶段，给静态变量做显式初始化，此时b的值为0</p>
 <p>我们改一下代码的执行顺序，改成下面这个样子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestInstance</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> TestInstance instance = <span class="keyword">new</span> TestInstance();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        a++;</span><br><span class="line">        b++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(TestInstance.a);</span><br><span class="line">        System.out.println(TestInstance.b);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行效果是：</p>
-<p><img src="http://qn.atecher.com/mts/20180418/3853291050828800" alt="Java-VM-Explanation-1-15"></p>
+<p><img src="//qn.atecher.com/mts/20180418/3853291050828800" alt="Java-VM-Explanation-1-15"></p>
 <p>之所以有这样的运行结果，这里涉及到类加载的顺序：</p>
 <p>（1）在加载阶段，加载类的信息<br>（2）在链接的准备阶段给instance、a、b做默认初始化并分配空间，此时a和b的值都为0<br>（3）在初始化阶段，给静态变量做显式初始化，此时b的值仍为0<br>（4）在初始化阶段，执行构造方法，此时a和b的值都为1</p>
 <p>注意，这里涉及到另外一个类似的知识点不要搞混了。知识点如下。</p>
@@ -816,7 +816,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="//qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>

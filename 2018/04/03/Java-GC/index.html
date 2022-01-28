@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="//qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -87,7 +87,7 @@
 <meta property="og:image" content="http://qn.atecher.com/mts/20180403/3832084014646272">
 <meta property="og:image" content="http://qn.atecher.com/mts/20180403/3832084020200448">
 <meta property="og:image" content="http://qn.atecher.com/mts/20180403/3832084025279488">
-<meta property="og:updated_time" content="2022-01-28T10:13:28.513Z">
+<meta property="og:updated_time" content="2022-01-28T10:28:39.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Java垃圾回收机制">
 <meta name="twitter:description" content="垃圾回收机制的意义Java语言中一个显著的特点就是引入了垃圾回收机制，使c++程序员最头疼的内存管理的问题迎刃而解，它使得Java程序员在编写程序的时候不再需要考虑内存管理。由于有个垃圾回收机制，Java中的对象不再有“作用域”的概念，只有对象的引用才有“作用域”。垃圾回收可以有效的防止内存泄露，有效的使用空闲的内存。  ps:内存泄露是指该内存空间使用完毕之后未回收，在不涉及复杂数据结构的一般情">
@@ -321,7 +321,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="//qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -435,7 +435,7 @@
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p><strong>无法检测出循环引用</strong>。如父对象有一个对子对象的引用，子对象反过来引用父对象。这样，他们的引用计数永远不可能为0.</p>
 <h3 id="引用计数算法无法解决循环引用问题，例如："><a href="#引用计数算法无法解决循环引用问题，例如：" class="headerlink" title="引用计数算法无法解决循环引用问题，例如："></a>引用计数算法无法解决循环引用问题，例如：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Java学习交流QQ群：589809992 我们一起学Java！</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyObject object1 = <span class="keyword">new</span> MyObject();</span><br><span class="line">        MyObject object2 = <span class="keyword">new</span> MyObject();</span><br><span class="line"></span><br><span class="line">        object1.object = object2;</span><br><span class="line">        object2.object = object1;</span><br><span class="line"></span><br><span class="line">        object1 = <span class="keyword">null</span>;</span><br><span class="line">        object2 = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>最后面两句将object1和object2赋值为null，也就是说object1和object2指向的对象已经不可能再被访问，但是由于它们互相引用对方，导致它们的引用计数器都不为0，那么垃圾收集器就永远不会回收它们。</p>
-<h2 id="tracing算法-Tracing-Collector-或-标记-清除算法-mark-and-sweep"><a href="#tracing算法-Tracing-Collector-或-标记-清除算法-mark-and-sweep" class="headerlink" title="tracing算法(Tracing Collector) 或 标记-清除算法(mark and sweep)"></a>tracing算法(Tracing Collector) 或 标记-清除算法(mark and sweep)</h2><h3 id="根搜索算法"><a href="#根搜索算法" class="headerlink" title="根搜索算法"></a>根搜索算法</h3><p><img src="http://qn.atecher.com/mts/20180403/3832083954451456" alt="Image-1"></p>
+<h2 id="tracing算法-Tracing-Collector-或-标记-清除算法-mark-and-sweep"><a href="#tracing算法-Tracing-Collector-或-标记-清除算法-mark-and-sweep" class="headerlink" title="tracing算法(Tracing Collector) 或 标记-清除算法(mark and sweep)"></a>tracing算法(Tracing Collector) 或 标记-清除算法(mark and sweep)</h2><h3 id="根搜索算法"><a href="#根搜索算法" class="headerlink" title="根搜索算法"></a>根搜索算法</h3><p><img src="//qn.atecher.com/mts/20180403/3832083954451456" alt="Image-1"></p>
 <p>根搜索算法是从离散数学中的图论引入的，程序把所有的引用关系看作一张图，从一个节点GC ROOT开始，寻找对应的引用节点，找到这个节点以后，继续寻找这个节点的引用节点，当所有的引用节点寻找完毕之后，剩余的节点则被认为是没有被引用到的节点，即无用的节点。</p>
 <p>java中可作为GC Root的对象有:</p>
 <ol>
@@ -444,13 +444,13 @@
 <li>方法区中常量引用的对象</li>
 <li>本地方法栈中引用的对象（Native对象）</li>
 </ol>
-<h3 id="tracing算法的示意图"><a href="#tracing算法的示意图" class="headerlink" title="tracing算法的示意图"></a>tracing算法的示意图</h3><p>　　<img src="http://qn.atecher.com/mts/20180403/3832084002276352" alt="Image-2"></p>
+<h3 id="tracing算法的示意图"><a href="#tracing算法的示意图" class="headerlink" title="tracing算法的示意图"></a>tracing算法的示意图</h3><p>　　<img src="//qn.atecher.com/mts/20180403/3832084002276352" alt="Image-2"></p>
 <h3 id="标记-清除算法分析"><a href="#标记-清除算法分析" class="headerlink" title="标记-清除算法分析"></a>标记-清除算法分析</h3><p>标记-清除算法采用从根集合进行扫描，对存活的对象对象标记，标记完毕后，再扫描整个空间中未被标记的对象，进行回收，如上图所示。标记-清除算法不需要进行对象的移动，并且仅对不存活的对象进行处理，在存活对象比较多的情况下极为高效，但由于标记-清除算法直接回收不存活的对象，因此会造成内存碎片。</p>
-<h2 id="compacting算法-或-标记-整理算法"><a href="#compacting算法-或-标记-整理算法" class="headerlink" title="compacting算法 或 标记-整理算法"></a>compacting算法 或 标记-整理算法</h2><p><img src="http://qn.atecher.com/mts/20180403/3832084008698880" alt="Image-3"></p>
+<h2 id="compacting算法-或-标记-整理算法"><a href="#compacting算法-或-标记-整理算法" class="headerlink" title="compacting算法 或 标记-整理算法"></a>compacting算法 或 标记-整理算法</h2><p><img src="//qn.atecher.com/mts/20180403/3832084008698880" alt="Image-3"></p>
 <p>标记-整理算法采用标记-清除算法一样的方式进行对象的标记，但在清除时不同，在回收不存活的对象占用的空间后，会将所有的存活对象往左端空闲空间移动，并更新对应的指针。标记-整理算法是在标记-清除算法的基础上，又进行了对象的移动，因此成本更高，但是却解决了内存碎片的问题。在基于Compacting算法的收集器的实现中，一般增加句柄和句柄表。</p>
-<h2 id="copying算法-Compacting-Collector"><a href="#copying算法-Compacting-Collector" class="headerlink" title="copying算法(Compacting Collector)"></a>copying算法(Compacting Collector)</h2><p>　　<img src="http://qn.atecher.com/mts/20180403/3832084014646272" alt="Image-4"></p>
+<h2 id="copying算法-Compacting-Collector"><a href="#copying算法-Compacting-Collector" class="headerlink" title="copying算法(Compacting Collector)"></a>copying算法(Compacting Collector)</h2><p>　　<img src="//qn.atecher.com/mts/20180403/3832084014646272" alt="Image-4"></p>
 <p>该算法的提出是为了克服句柄的开销和解决堆碎片的垃圾回收。它开始时把堆分成 一个对象 面和多个空闲面， 程序从对象面为对象分配空间，当对象满了，基于copying算法的垃圾 收集就从根集中扫描活动对象，并将每个 活动对象复制到空闲面(使得活动对象所占的内存之间没有空闲洞)，这样空闲面变成了对象面，原来的对象面变成了空闲面，程序会在新的对象面中分配内存。一种典型的基于coping算法的垃圾回收是stop-and-copy算法，它将堆分成对象面和空闲区域面，在对象面与空闲区域面的切换过程中，程序暂停执行。</p>
-<h2 id="generation算法-Generational-Collector"><a href="#generation算法-Generational-Collector" class="headerlink" title="generation算法(Generational Collector)"></a>generation算法(Generational Collector)</h2><p><img src="http://qn.atecher.com/mts/20180403/3832084020200448" alt="Image-5"></p>
+<h2 id="generation算法-Generational-Collector"><a href="#generation算法-Generational-Collector" class="headerlink" title="generation算法(Generational Collector)"></a>generation算法(Generational Collector)</h2><p><img src="//qn.atecher.com/mts/20180403/3832084020200448" alt="Image-5"></p>
 <p>分代的垃圾回收策略，是基于这样一个事实：<strong>不同的对象的生命周期是不一样的</strong>。因此，不同生命周期的对象可以采取不同的回收算法，以便提高回收效率。</p>
 <p><strong>年轻代（Young Generation）</strong></p>
 <ol>
@@ -473,7 +473,7 @@
 <p><strong>持久代（Permanent Generation）</strong></p>
 <p>用于存放静态文件，如Java类、方法等。持久代对垃圾回收没有显著影响，但是有些应用可能动态生成或者调用一些class，例如Hibernate 等，在这种时候需要设置一个比较大的持久代空间来存放这些运行过程中新增的类。</p>
 <h1 id="GC（垃圾收集器）"><a href="#GC（垃圾收集器）" class="headerlink" title="GC（垃圾收集器）"></a>GC（垃圾收集器）</h1><p>新生代收集器使用的收集器：Serial、PraNew、Parallel Scavenge<br>老年代收集器使用的收集器：Serial Old、Parallel Old、CMS</p>
-<p><img src="http://qn.atecher.com/mts/20180403/3832084025279488" alt="Image-6"></p>
+<p><img src="//qn.atecher.com/mts/20180403/3832084025279488" alt="Image-6"></p>
 <h2 id="Serial收集器（复制算法"><a href="#Serial收集器（复制算法" class="headerlink" title="Serial收集器（复制算法)"></a>Serial收集器（复制算法)</h2><p>新生代单线程收集器，标记和清理都是单线程，优点是简单高效。</p>
 <h2 id="Serial-Old收集器-标记-整理算法"><a href="#Serial-Old收集器-标记-整理算法" class="headerlink" title="Serial Old收集器(标记-整理算法)"></a>Serial Old收集器(标记-整理算法)</h2><p>老年代单线程收集器，Serial收集器的老年代版本。</p>
 <h2 id="ParNew收集器-停止-复制算法"><a href="#ParNew收集器-停止-复制算法" class="headerlink" title="ParNew收集器(停止-复制算法)"></a>ParNew收集器(停止-复制算法)</h2><p>新生代收集器，可以认为是Serial收集器的多线程版本,在多核CPU环境下有着比Serial更好的表现。</p>
@@ -620,7 +620,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="//qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>

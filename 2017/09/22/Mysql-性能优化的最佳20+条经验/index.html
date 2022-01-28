@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="//qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -84,7 +84,7 @@
 <meta property="og:image" content="http://qn.atecher.com/unoptimized_explain.jpg">
 <meta property="og:image" content="http://qn.atecher.com/optimized_explain.jpg">
 <meta property="og:image" content="http://qn.atecher.com/search_index.jpg">
-<meta property="og:updated_time" content="2022-01-28T10:13:28.517Z">
+<meta property="og:updated_time" content="2022-01-28T10:28:39.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql-性能优化的最佳20+条经验">
 <meta name="twitter:description" content="今天,数据库的操作越来越成为整个应用的性能瓶颈了,这点对于Web应用尤其明显。关于数据库的性能,这并不只是DBA才需要担心的事,而这更是我们程序员需要去关注的事情。当我们去设计数据库表结构,对操作数据库时(尤其是查表时的SQL语句),我们都需要注意数据操作的性能。这里,我们不会讲过多的SQL语句的优化,而只是针对MySQL这一Web应用最多的数据库。希望下面的这些优化技巧对你有用。">
@@ -318,7 +318,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="//qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -429,15 +429,15 @@
 <h2 id="2-EXPLAIN-你的-SELECT-查询"><a href="#2-EXPLAIN-你的-SELECT-查询" class="headerlink" title="2. EXPLAIN 你的 SELECT 查询"></a>2. EXPLAIN 你的 SELECT 查询</h2><p>使用 EXPLAIN 关键字可以让你知道MySQL是如何处理你的SQL语句的。这可以帮你分析你的查询语句或是表结构的性能瓶颈。</p>
 <p>EXPLAIN 的查询结果还会告诉你你的索引主键被如何利用的,你的数据表是如何被搜索和排序的……等等,等等。</p>
 <p>挑一个你的SELECT语句(推荐挑选那个最复杂的,有多表联接的),把关键字EXPLAIN加到前面。你可以使用phpmyadmin来做这个事。然后,你会看到一张表格。下面的这个示例中,我们忘记加上了group_id索引,并且有表联接:</p>
-<p><a href="http://qn.atecher.com/unoptimized_explain.jpg" target="_blank" rel="noopener"><img src="http://qn.atecher.com/unoptimized_explain.jpg" alt=""></a></p>
+<p><a href="//qn.atecher.com/unoptimized_explain.jpg"><img src="//qn.atecher.com/unoptimized_explain.jpg" alt=""></a></p>
 <p>当我们为 group_id 字段加上索引后:</p>
-<p><a href="http://qn.atecher.com/optimized_explain.jpg" target="_blank" rel="noopener"><img src="http://qn.atecher.com/optimized_explain.jpg" alt=""></a></p>
+<p><a href="//qn.atecher.com/optimized_explain.jpg"><img src="//qn.atecher.com/optimized_explain.jpg" alt=""></a></p>
 <p>我们可以看到,前一个结果显示搜索了 7883 行,而后一个只是搜索了两个表的 9 和 16 行。查看rows列可以让我们找到潜在的性能问题。</p>
 <h2 id="3-当只要一行数据时使用-LIMIT-1"><a href="#3-当只要一行数据时使用-LIMIT-1" class="headerlink" title="3. 当只要一行数据时使用 LIMIT 1"></a>3. 当只要一行数据时使用 LIMIT 1</h2><p>当你查询表的有些时候,你已经知道结果只会有一条结果,但因为你可能需要去fetch游标,或是你也许会去检查返回的记录数。</p>
 <p>在这种情况下,加上 LIMIT 1 可以增加性能。这样一样,MySQL数据库引擎会在找到一条数据后停止搜索,而不是继续往后查少下一条符合记录的数据。</p>
 <p>下面的示例,只是为了找一下是否有“中国”的用户,很明显,后面的会比前面的更有效率。(请注意,第一条中是Select *,第二条是Select 1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 没有效率的:</span><br><span class="line">$r = mysql_query(&quot;SELECT * FROM user WHERE country = &apos;China&apos;&quot;);</span><br><span class="line">if (mysql_num_rows($r) &gt; 0) &#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 有效率的:</span><br><span class="line">$r = mysql_query(&quot;SELECT 1 FROM user WHERE country = &apos;China&apos; LIMIT 1&quot;);</span><br><span class="line">if (mysql_num_rows($r) &gt; 0) &#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="4-为搜索字段建索引"><a href="#4-为搜索字段建索引" class="headerlink" title="4. 为搜索字段建索引"></a>4. 为搜索字段建索引</h2><p>索引并不一定就是给主键或是唯一的字段。如果在你的表中,有某个字段你总要会经常用来做搜索,那么,请为其建立索引吧。</p>
-<p><a href="http://qn.atecher.com/search_index.jpg" target="_blank" rel="noopener"><img src="http://qn.atecher.com/search_index.jpg" alt=""></a></p>
+<p><a href="//qn.atecher.com/search_index.jpg"><img src="//qn.atecher.com/search_index.jpg" alt=""></a></p>
 <p>从上图你可以看到那个搜索字串 “last_name LIKE ‘a%’”,一个是建了索引,一个是没有索引,性能差了4倍左右。</p>
 <p>另外,你应该也需要知道什么样的搜索是不能使用正常的索引的。例如,当你需要在一篇大的文章中搜索一个词时,如: “WHERE post_content LIKE ‘%apple%’”,索引可能是没有意义的。你可能需要使用<a href="http://dev.mysql.com/doc/refman/5.1/en/fulltext-search.html" target="_blank" rel="noopener">MySQL全文索引</a> 或是自己做一个索引(比如说:搜索关键词或是Tag什么的)</p>
 <h2 id="5-在Join表的时候使用相当类型的例-并将其索引"><a href="#5-在Join表的时候使用相当类型的例-并将其索引" class="headerlink" title="5. 在Join表的时候使用相当类型的例,并将其索引"></a>5. 在Join表的时候使用相当类型的例,并将其索引</h2><p>如果你的应用程序有很多 JOIN 查询,你应该确认两个表中Join的字段是被建过索引的。这样,MySQL内部会启动为你优化Join的SQL语句的机制。</p>
@@ -618,7 +618,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="//qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>

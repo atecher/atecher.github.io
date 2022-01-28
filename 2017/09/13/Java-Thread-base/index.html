@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="//qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://qn.atecher.com/synchronize_Lock_performance.png">
 <meta property="og:image" content="http://qn.atecher.com/BlockingQueue.png">
 <meta property="og:image" content="http://qn.atecher.com/ThreadPoolExecutor.png">
-<meta property="og:updated_time" content="2022-01-28T10:13:28.513Z">
+<meta property="og:updated_time" content="2022-01-28T10:28:39.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-Thread-基础">
 <meta name="twitter:description" content="我们使用多线程的目的是为了更好的利用CPU资源，从而达到提升系统性能的目的。当然还会有一些其他的一些原因，诸如改善程序结构，异步处理等… 很多人都对其中的一些概念不够明确,如同步、并发等等,让我们先建立一个数据字典,以免产生误会。">
@@ -326,7 +326,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="//qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -440,7 +440,7 @@
 </ul>
 </li>
 </ul>
-<p><a href="http://qn.atecher.com/mts/20180403/3832334064026624" target="_blank" rel="noopener"><img src="http://qn.atecher.com/mts/20180403/3832334064026624" alt=""></a></p>
+<p><a href="//qn.atecher.com/mts/20180403/3832334064026624"><img src="//qn.atecher.com/mts/20180403/3832334064026624" alt=""></a></p>
 <p>并发与并行</p>
 <ul>
 <li>线程安全：经常用来描绘一段代码。指在并发的情况之下，该代码经过多线程使用，线程的调度顺序不影响任何结果。这个时候使用多线程，我们只需要关注系统的内存，cpu是不是够用即可。反过来，线程不安全就意味着线程的调度顺序会影响最终结果，如不加事务的转账代码：</li>
@@ -480,7 +480,7 @@
 <p>创建一个支持定时及周期性的任务执行的线程池,多数情况下可用来替代Timer类。</p>
 <p>ExecutoreService提供了submit()方法,传递一个Callable,或Runnable,返回Future。如果Executor后台线程池还没有完成Callable的计算,这调用返回Future对象的get()方法,会阻塞直到计算完成。</p>
 <h2 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h2><p>在正式学习Thread类中的具体方法之前,我们先来了解一下线程有哪些状态,这个将会有助于后面对Thread类中的方法的理解。</p>
-<p><a href="http://qn.atecher.com/Thread_State.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/Thread_State.png" alt=""></a></p>
+<p><a href="//qn.atecher.com/Thread_State.png"><img src="//qn.atecher.com/Thread_State.png" alt=""></a></p>
 <ul>
 <li>创建(new)状态: 准备好了一个多线程的对象</li>
 <li>就绪(runnable)状态: 调用了start()方法, 等待CPU进行调度</li>
@@ -493,9 +493,9 @@
 <p>线程在运行状态过程中,可能有多个原因导致当前线程不继续运行下去,比如用户主动让线程睡眠(睡眠一定的时间之后再重新执行)、用户主动让线程等待,或者被同步块给阻塞,此时就对应着多个状态:time waiting(睡眠或等待一定的事件)、waiting(等待被唤醒)、blocked(阻塞)。</p>
 <p>当由于突然中断或者子任务执行完毕,线程就会被消亡。</p>
 <p>下面这副图描述了线程从创建到消亡之间的状态:</p>
-<p><a href="http://qn.atecher.com/thread_status_from_new_2_dead.jpg" target="_blank" rel="noopener"><img src="http://qn.atecher.com/thread_status_from_new_2_dead.jpg" alt=""></a></p>
+<p><a href="//qn.atecher.com/thread_status_from_new_2_dead.jpg"><img src="//qn.atecher.com/thread_status_from_new_2_dead.jpg" alt=""></a></p>
 <p>下图是从别处摘来的线程状态转换, 可结合以供参考</p>
-<p><a href="http://qn.atecher.com/mts/20180403/3832334095647744" target="_blank" rel="noopener"><img src="http://qn.atecher.com/mts/20180403/3832334095647744" alt=""></a></p>
+<p><a href="//qn.atecher.com/mts/20180403/3832334095647744"><img src="//qn.atecher.com/mts/20180403/3832334095647744" alt=""></a></p>
 <p>各种状态一目了然,值得一提的是”blocked”这个状态:<br>线程在Running的过程中可能会遇到阻塞(Blocked)情况</p>
 <ol>
 <li>调用join()和sleep()方法,sleep()时间结束或被打断,join()中断,IO完成都会回到Runnable状态,等待JVM的调度。</li>
@@ -589,7 +589,7 @@
 <h3 id="setDaemon和isDaemon"><a href="#setDaemon和isDaemon" class="headerlink" title="setDaemon和isDaemon"></a>setDaemon和isDaemon</h3><p>用来设置线程是否成为守护线程和判断线程是否是守护线程。</p>
 <p>守护线程和用户线程的区别在于:守护线程依赖于创建它的线程,而用户线程则不依赖。举个简单的例子:如果在main线程中创建了一个守护线程,当main方法运行完毕之后,守护线程也会随着消亡。而用户线程则不会,用户线程会一直运行直到其运行完毕。在JVM中,像垃圾收集器线程就是守护线程。</p>
 <p>在上面已经说到了Thread类中的大部分方法,那么Thread类中的方法调用到底会引起线程状态发生怎样的变化呢？下面一幅图就是在上面的图上进行改进而来的:</p>
-<p><a href="http://qn.atecher.com/thread_status_from_new_2_dead_with_methods.jpg" target="_blank" rel="noopener"><img src="http://qn.atecher.com/thread_status_from_new_2_dead_with_methods.jpg" alt=""></a><br>thread_status_from_new_2_dead_with_methods</p>
+<p><a href="//qn.atecher.com/thread_status_from_new_2_dead_with_methods.jpg"><img src="//qn.atecher.com/thread_status_from_new_2_dead_with_methods.jpg" alt=""></a><br>thread_status_from_new_2_dead_with_methods</p>
 <p>ps:<br>Thread类最佳实践:<br>写的时候最好要设置线程名称 Thread.name,并设置线程组 ThreadGroup,目的是方便管理。在出现问题的时候,打印线程栈 (jstack -pid) 一眼就可以看出是哪个线程出的问题,这个线程是干什么的。</p>
 <h2 id="停止线程"><a href="#停止线程" class="headerlink" title="停止线程"></a>停止线程</h2><p>停止线程是在多线程开发时很重要的技术点,掌握此技术可以对线程的停止进行有效的处理。<br>停止一个线程可以使用Thread.stop()方法,但最好不用它。该方法是不安全的,已被弃用。<br>在Java中有以下3种方法可以终止正在运行的线程:</p>
 <ul>
@@ -614,7 +614,7 @@
 <li>不是所有的应用都可以分配给Daemon线程来进行服务,比如读写操作或者计算逻辑。因为在Daemon Thread还没来的及进行操作时,虚拟机可能已经退出了。</li>
 </ul>
 <h2 id="每个对象都有的方法-机制"><a href="#每个对象都有的方法-机制" class="headerlink" title="每个对象都有的方法(机制)"></a>每个对象都有的方法(机制)</h2><p>synchronized, wait, notify 是任何对象都具有的同步工具。让我们先来了解他们<br>monitor</p>
-<p><a href="http://qn.atecher.com/a_java_monitor.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/a_java_monitor.png" alt=""></a></p>
+<p><a href="//qn.atecher.com/a_java_monitor.png"><img src="//qn.atecher.com/a_java_monitor.png" alt=""></a></p>
 <p>他们是应用于同步问题的人工线程调度工具。讲其本质,首先就要明确monitor的概念,Java中的每个对象都有一个监视器,来监测并发代码的重入。在非多线程编码时该监视器不发挥作用,反之如果在synchronized 范围内,监视器发挥作用。</p>
 <p>wait/notify必须存在于synchronized块中。并且,这三个关键字针对的是同一个监视器(某对象的监视器)。这意味着wait之后,其他线程可以进入同步块执行。</p>
 <p>当某代码并不持有监视器的使用权时(如图中5的状态,即脱离同步块)去wait或notify,会抛出java.lang.IllegalMonitorStateException。也包括在synchronized块中去调用另一个对象的wait/notify,因为不同对象的监视器不同,同样会抛出此异常。</p>
@@ -635,9 +635,9 @@
 </ul>
 <p>volatile</p>
 <p>多线程的内存模型:main memory(主存)、working memory(线程栈),在处理数据时,线程会把值从主存load到本地栈,完成操作后再save回去(volatile关键词的作用:每次针对该变量的操作都激发一次load and save)。</p>
-<p><a href="http://qn.atecher.com/main_memory.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/main_memory.png" alt=""></a></p>
+<p><a href="//qn.atecher.com/main_memory.png"><img src="//qn.atecher.com/main_memory.png" alt=""></a></p>
 <p>针对多线程使用的变量如果不是volatile或者final修饰的,很有可能产生不可预知的结果(另一个线程修改了这个值,但是之后在某线程看到的是修改之前的值)。其实道理上讲同一实例的同一属性本身只有一个副本。但是多线程是会缓存值的,本质上,volatile就是不去缓存,直接取值。在线程安全的情况下加volatile会牺牲性能。</p>
-<h2 id="如何获取线程中的异常"><a href="#如何获取线程中的异常" class="headerlink" title="如何获取线程中的异常"></a>如何获取线程中的异常</h2><p><a href="http://qn.atecher.com/thread_exception_catch.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/thread_exception_catch.png" alt=""></a><br>thread_exception_catch</p>
+<h2 id="如何获取线程中的异常"><a href="#如何获取线程中的异常" class="headerlink" title="如何获取线程中的异常"></a>如何获取线程中的异常</h2><p><a href="//qn.atecher.com/thread_exception_catch.png"><img src="//qn.atecher.com/thread_exception_catch.png" alt=""></a><br>thread_exception_catch</p>
 <p>不能用try,catch来获取线程中的异常</p>
 <h2 id="高级多线程控制类"><a href="#高级多线程控制类" class="headerlink" title="高级多线程控制类"></a>高级多线程控制类</h2><p>以上都属于内功心法,接下来是实际项目中常用到的工具了,Java1.5提供了一个非常高效实用的多线程包:java.util.concurrent, 提供了大量高级工具,可以帮助开发者编写高效、易维护、结构清晰的Java多线程程序。</p>
 <h3 id="ThreadLocal类"><a href="#ThreadLocal类" class="headerlink" title="ThreadLocal类"></a>ThreadLocal类</h3><p>用处:保存线程的独立变量。对一个线程类(继承自Thread)<br>当使用ThreadLocal维护变量时,ThreadLocal为每个使用该变量的线程提供独立的变量副本,所以每一个线程都可以独立地改变自己的副本,而不会影响其它线程所对应的副本。常用于用户登录控制,如记录session信息。</p>
@@ -661,7 +661,7 @@
 <li>和Condition类的结合。</li>
 <li>性能更高,对比如下图:<br>synchronized和Lock性能对比</li>
 </ul>
-<p><a href="http://qn.atecher.com/synchronize_Lock_performance.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/synchronize_Lock_performance.png" alt=""></a><br> synchronize_Lock_performance</p>
+<p><a href="//qn.atecher.com/synchronize_Lock_performance.png"><img src="//qn.atecher.com/synchronize_Lock_performance.png" alt=""></a><br> synchronize_Lock_performance</p>
 <p>ReentrantLock<br>可重入的意义在于持有锁的线程可以继续持有,并且要释放对等的次数后才真正释放该锁。<br>使用方法是:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.先new一个实例</span></span><br><span class="line"><span class="keyword">static</span> ReentrantLock r=<span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.加锁</span></span><br><span class="line">r.lock()<span class="comment">//或r.lockInterruptibly();</span></span><br><span class="line"><span class="comment">/*此处也是个不同,后者可被打断。当a线程lock后,b线程阻塞,此时如果是lockInterruptibly,那么在调用b.interrupt()之后,b线程退出阻塞,并放弃对资源的争抢,进入catch块。(如果使用后者,必须throw interruptable exception 或catch)*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3.释放锁</span></span><br><span class="line">r.unlock()</span><br><span class="line"></span><br><span class="line"><span class="comment">/*必须做！何为必须做呢,要放在finally里面。以防止异常跳出了正常流程,导致灾难。这里补充一个小知识点,finally是可以信任的:经过测试,哪怕是发生了OutofMemoryError,finally块中的语句执行也能够得到保证。*/</span></span><br></pre></td></tr></table></figure>
 <p>ReentrantReadWriteLock</p>
@@ -674,7 +674,7 @@
 </ul>
 <p>BlockingQueue<br>阻塞队列。该类是java.util.concurrent包下的重要类,通过对Queue的学习可以得知,这个queue是单向队列,可以在队列头添加元素和在队尾删除或取出元素。类似于一个管　　道,特别适用于先进先出策略的一些应用场景。普通的queue接口主要实现有PriorityQueue(优先队列),有兴趣可以研究</p>
 <p>BlockingQueue在队列的基础上添加了多线程协作的功能:</p>
-<p><a href="http://qn.atecher.com/BlockingQueue.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/BlockingQueue.png" alt=""></a><br>BlockingQueue</p>
+<p><a href="//qn.atecher.com/BlockingQueue.png"><img src="//qn.atecher.com/BlockingQueue.png" alt=""></a><br>BlockingQueue</p>
 <p>除了传统的queue功能(表格左边的两列)之外,还提供了阻塞接口put和take,带超时功能的阻塞接口offer和poll。put会在队列满的时候阻塞,直到有空间时被唤醒；take在队　列空的时候阻塞,直到有东西拿的时候才被唤醒。用于生产者-消费者模型尤其好用,堪称神器。</p>
 <p>常见的阻塞队列有:</p>
 <ul>
@@ -686,7 +686,7 @@
 <p>ConcurrentHashMap<br>高效的线程安全哈希map。请对比hashTable , concurrentHashMap, HashMap</p>
 <h3 id="管理类"><a href="#管理类" class="headerlink" title="管理类"></a>管理类</h3><p>管理类的概念比较泛,用于管理线程,本身不是多线程的,但提供了一些机制来利用上述的工具做一些封装。<br>了解到的值得一提的管理类:ThreadPoolExecutor和 JMX框架下的系统级管理类 ThreadMXBean<br>ThreadPoolExecutor<br>如果不了解这个类,应该了解前面提到的ExecutorService,开一个自己的线程池非常方便:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService e = Executors.newCachedThreadPool();</span><br><span class="line">ExecutorService e = Executors.newSingleThreadExecutor();</span><br><span class="line">ExecutorService e = Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line"><span class="comment">// 第一种是可变大小线程池,按照任务数来分配线程,</span></span><br><span class="line"><span class="comment">// 第二种是单线程池,相当于FixedThreadPool(1)</span></span><br><span class="line"><span class="comment">// 第三种是固定大小线程池。</span></span><br><span class="line"><span class="comment">// 然后运行</span></span><br><span class="line">e.execute(<span class="keyword">new</span> MyRunnableImpl());</span><br></pre></td></tr></table></figure></p>
 <p>该类内部是通过ThreadPoolExecutor实现的,掌握该类有助于理解线程池的管理,本质上,他们都是ThreadPoolExecutor类的各种实现版本。请参见javadoc:</p>
-<p><a href="http://qn.atecher.com/ThreadPoolExecutor.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/ThreadPoolExecutor.png" alt=""></a><br>ThreadPoolExecutor</p>
+<p><a href="//qn.atecher.com/ThreadPoolExecutor.png"><img src="//qn.atecher.com/ThreadPoolExecutor.png" alt=""></a><br>ThreadPoolExecutor</p>
 <p>ThreadPoolExecutor参数解释<br>翻译一下:<br>corePoolSize:池内线程初始值与最小值,就算是空闲状态,也会保持该数量线程。<br>maximumPoolSize:线程最大值,线程的增长始终不会超过该值。<br>keepAliveTime:当池内线程数高于corePoolSize时,经过多少时间多余的空闲线程才会被回收。回收前处于wait状态<br>unit:时间单位,可以使用TimeUnit的实例,如TimeUnit.MILLISECONDS<br>workQueue:待入任务(Runnable)的等待场所,该参数主要影响调度策略,如公平与否,是否产生饿死(starving)<br>threadFactory:线程工厂类,有默认实现,如果有自定义的需要则需要自己实现ThreadFactory接口并作为参数传入。</p>
 <p>ref:<br><a href="http://www.importnew.com/21089.html" target="_blank" rel="noopener">http://www.importnew.com/21089.html</a><br><a href="http://www.importnew.com/21136.html" target="_blank" rel="noopener">http://www.importnew.com/21136.html</a></p>
 
@@ -807,7 +807,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="//qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
