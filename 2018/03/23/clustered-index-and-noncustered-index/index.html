@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.mintools.net/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -81,13 +81,13 @@
 <meta property="og:site_name" content="Atecher&#39;s blog">
 <meta property="og:description" content="官方说法聚集索引一种索引，该索引中键值的逻辑顺序决定了表中相应行的物理顺序。 聚集索引确定表中数据的物理顺序。聚集索引类似于电话簿，后者按姓氏排列数据。由于聚集索引规定数据在表中的物理存储顺序，因此一个表只能包含一个聚集索引。但该索引可以包含多个列（组合索引），就像电话簿按姓氏和名字进行组织一样。 聚集索引对于那些经常要搜索范围值的列特别有效。使用聚集索引找到包含第一个值的行后，便可以确保包含后续">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180402/3831019975492608">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180404/3833492718322688">
-<meta property="og:updated_time" content="2020-06-24T12:54:49.967Z">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180402/3831019975492608">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180404/3833492718322688">
+<meta property="og:updated_time" content="2022-01-28T02:59:18.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="聚集索引和非聚集索引">
 <meta name="twitter:description" content="官方说法聚集索引一种索引，该索引中键值的逻辑顺序决定了表中相应行的物理顺序。 聚集索引确定表中数据的物理顺序。聚集索引类似于电话簿，后者按姓氏排列数据。由于聚集索引规定数据在表中的物理存储顺序，因此一个表只能包含一个聚集索引。但该索引可以包含多个列（组合索引），就像电话簿按姓氏和名字进行组织一样。 聚集索引对于那些经常要搜索范围值的列特别有效。使用聚集索引找到包含第一个值的行后，便可以确保包含后续">
-<meta name="twitter:image" content="http://qn.mintools.net/mts/20180402/3831019975492608">
+<meta name="twitter:image" content="http://qn.atecher.com/mts/20180402/3831019975492608">
 
 
 
@@ -317,7 +317,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.mintools.net/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -425,11 +425,11 @@
 <p>聚集索引对于那些经常要搜索范围值的列特别有效。使用聚集索引找到包含第一个值的行后，便可以确保包含后续索引值的行在物理相邻。例如，如果应用程序执行 的一个查询经常检索某一日期范围内的记录，则使用聚集索引可以迅速找到包含开始日期的行，然后检索表中所有相邻的行，直到到达结束日期。这样有助于提高此 类查询的性能。同样，如果对从表中检索的数据进行排序时经常要用到某一列，则可以将该表在该列上聚集（物理排序），避免每次查询该列时都进行排序，从而节 省成本。</p>
 <p>当索引值唯一时，使用聚集索引查找特定的行也很有效率。例如，使用唯一雇员 ID 列 emp_id 查找特定雇员的最快速的方法，是在 emp_id 列上创建聚集索引或 PRIMARY KEY 约束。</p>
 <a id="more"></a>
-<p><img src="http://qn.mintools.net/mts/20180402/3831019975492608" alt="Image-2"></p>
+<p><img src="http://qn.atecher.com/mts/20180402/3831019975492608" alt="Image-2"></p>
 <p>（聚集索引）</p>
 <h3 id="非聚集索引"><a href="#非聚集索引" class="headerlink" title="非聚集索引"></a>非聚集索引</h3><p>一种索引，该索引中索引的逻辑顺序与磁盘上行的物理存储顺序不同。</p>
 <p>索引是通过二叉树的数据结构来描述的，我们可以这么理解聚簇索引：索引的叶节点就是数据节点。而非聚簇索引的叶节点仍然是索引节点，只不过有一个指针指向对应的数据块。如下图：</p>
-<p><img src="http://qn.mintools.net/mts/20180404/3833492718322688" alt="Image-1"></p>
+<p><img src="http://qn.atecher.com/mts/20180404/3833492718322688" alt="Image-1"></p>
 <p>（非聚集索引）</p>
 <h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><h3 id="深入浅出理解索引结构"><a href="#深入浅出理解索引结构" class="headerlink" title="深入浅出理解索引结构"></a>深入浅出理解索引结构</h3><p>实际上，您可以把索引理解为一种特殊的目录。微软的SQL SERVER提供了两种索引：聚集索引（clustered index，也称聚类索引、簇集索引）和非聚集索引（nonclustered index，也称非聚类索引、非簇集索引）。下面，我们举例来说明一下聚集索引和非聚集索引的区别：</p>
 <p>其实，我们的汉语字典的正文本身就是一个聚集索引。比如，我们要查“安”字，就会很自然地翻开字典的前几页，因为“安”的拼音是“an”，而按照拼音排序汉字的字典是以英文字母“a”开头并以“z”结尾的，那么“安”字就自然地排在字典的前部。如果您翻完了所有以“a”开头的部分仍然找不到这个字，那么就说明您的字典中没有这个字；同样的，如果查“张”字，那您也会将您的字典翻到最后部分，因为“张”的拼音是“zhang”。也就是说，字典的正文部分本身就是一个目录，您不需要再去查其他目录来找到您需要找的内容。我们把这种正文内容本身就是一种按照一定规则排列的目录称为“聚集索引”。</p>
@@ -661,7 +661,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.mintools.net/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -788,7 +788,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

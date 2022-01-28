@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.mintools.net/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -81,30 +81,30 @@
 <meta property="og:site_name" content="Atecher&#39;s blog">
 <meta property="og:description" content="前面一篇文章介绍了2-3查找树，可以看到，2-3查找树能保证在插入元素之后能保持树的平衡状态，最坏情况下即所有的子节点都是2-node，树的高度为lgN，从而保证了最坏情况下的时间复杂度。但是2-3树实现起来比较复杂，本文介绍一种简单实现2-3树的数据结构，即红黑树（Red-Black Tree）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-2.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-3.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-4.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-5.gif">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-6.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-7.gif">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-8.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-9.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-10.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-11.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-12.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-13.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-14.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-15.gif">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-16.gif">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-17.gif">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-18.png">
-<meta property="og:image" content="http://qn.mintools.net/red-black-tree-19.png">
-<meta property="og:updated_time" content="2020-06-24T12:54:49.963Z">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-2.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-3.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-4.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-5.gif">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-6.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-7.gif">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-8.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-9.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-10.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-11.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-12.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-13.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-14.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-15.gif">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-16.gif">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-17.gif">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-18.png">
+<meta property="og:image" content="http://qn.atecher.com/red-black-tree-19.png">
+<meta property="og:updated_time" content="2022-01-28T02:59:18.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈算法和数据结构之平衡查找树之红黑树">
 <meta name="twitter:description" content="前面一篇文章介绍了2-3查找树，可以看到，2-3查找树能保证在插入元素之后能保持树的平衡状态，最坏情况下即所有的子节点都是2-node，树的高度为lgN，从而保证了最坏情况下的时间复杂度。但是2-3树实现起来比较复杂，本文介绍一种简单实现2-3树的数据结构，即红黑树（Red-Black Tree）。">
-<meta name="twitter:image" content="http://qn.mintools.net/red-black-tree.png">
+<meta name="twitter:image" content="http://qn.atecher.com/red-black-tree.png">
 
 
 
@@ -334,7 +334,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.mintools.net/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -440,7 +440,7 @@
         <p>前面一篇文章介绍了2-3查找树，可以看到，2-3查找树能保证在插入元素之后能保持树的平衡状态，最坏情况下即所有的子节点都是2-node，树的高度为lgN，从而保证了最坏情况下的时间复杂度。但是2-3树实现起来比较复杂，本文介绍一种简单实现2-3树的数据结构，即红黑树（Red-Black Tree）。</p>
 <a id="more"></a>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>红黑树的主要是想对2-3查找树进行编码，尤其是对2-3查找树中的3-nodes节点添加额外的信息。红黑树中将节点之间的链接分为两种不同类型，红色链接，他用来链接两个2-nodes节点来表示一个3-nodes节点。黑色链接用来链接普通的2-3节点。特别的，使用红色链接的两个2-nodes来表示一个3-nodes节点，并且向左倾斜，即一个2-node是另一个2-node的左子节点。这种做法的好处是查找的时候不用做任何修改，和普通的二叉查找树相同。</p>
-<p><a href="http://qn.mintools.net/red-black-tree.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree.png" alt="image"></a></p>
 <p>根据以上描述，红黑树定义如下：</p>
 <p>红黑树是一种具有红色和黑色链接的平衡查找树，同时满足：</p>
 <ul>
@@ -449,33 +449,33 @@
 <li>整个书完全黑色平衡，即从根节点到所以叶子结点的路径上，黑色链接的个数都相同。</li>
 </ul>
 <p>下图可以看到红黑树其实是2-3树的另外一种表现形式：如果我们将红色的连线水平绘制，那么他链接的两个2-node节点就是2-3树中的一个3-node节点了。</p>
-<p><a href="http://qn.mintools.net/red-black-tree-2.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-2.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-2.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-2.png" alt="image"></a></p>
 <h2 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h2><p>我们可以在二叉查找树的每一个节点上增加一个新的表示颜色的标记。该标记指示该节点指向其父节点的颜色。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">bool</span> RED = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">bool</span> BLACK = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> Node root;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Node</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Node Left &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> Node Right &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> TKey Key &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> TValue Value &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Number &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">bool</span> Color &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Node</span>(<span class="params">TKey key, TValue <span class="keyword">value</span>,<span class="keyword">int</span> number, <span class="keyword">bool</span> color</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.Key = key;</span><br><span class="line">        <span class="keyword">this</span>.Value = <span class="keyword">value</span>;</span><br><span class="line">        <span class="keyword">this</span>.Number = number;</span><br><span class="line">        <span class="keyword">this</span>.Color = color;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">bool</span> <span class="title">IsRed</span>(<span class="params">Node node</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (node == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">return</span> node.Color == RED;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="http://qn.mintools.net/red-black-tree-3.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-3.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-3.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-3.png" alt="image"></a></p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>红黑树是一种特殊的二叉查找树，他的查找方法也和二叉查找树一样，不需要做太多更改。</p>
 <p>但是由于红黑树比一般的二叉查找树具有更好的平衡，所以查找起来更快。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找获取指定的值</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> override TValue <span class="title">Get</span><span class="params">(TKey key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> GetValue(root, key);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> TValue <span class="title">GetValue</span><span class="params">(Node node, TKey key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">default</span>(TValue);</span><br><span class="line">    <span class="keyword">int</span> cmp = key.CompareTo(node.Key);</span><br><span class="line">    <span class="keyword">if</span> (cmp == <span class="number">0</span>) <span class="keyword">return</span> node.Value;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>) <span class="keyword">return</span> GetValue(node.Right, key);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> GetValue(node.Left, key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="平衡化"><a href="#平衡化" class="headerlink" title="平衡化"></a>平衡化</h3><p>在介绍插入之前，我们先介绍如何让红黑树保持平衡，因为一般的，我们插入完成之后，需要对树进行平衡化操作以使其满足平衡化。</p>
 <h4 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h4><p>旋转又分为左旋和右旋。通常左旋操作用于将一个向右倾斜的红色链接旋转为向左链接。对比操作前后，可以看出，该操作实际上是将红线链接的两个节点中的一个较大的节点移动到根节点上。</p>
 <p><strong>左旋</strong>操作如下图：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-4.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-4.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-4.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-4.png" alt="image"></a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//左旋转</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">RotateLeft</span><span class="params">(Node h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node x = h.Right;</span><br><span class="line">    <span class="comment">//将x的左节点复制给h右节点</span></span><br><span class="line">    h.Right = x.Left;</span><br><span class="line">    <span class="comment">//将h复制给x右节点</span></span><br><span class="line">    x.Left = h;</span><br><span class="line">    x.Color = h.Color;</span><br><span class="line">    h.Color = RED;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>左旋</strong>的动画效果如下：<br><a href="http://qn.mintools.net/red-black-tree-5.gif" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-5.gif" alt="image"></a></p>
+<p><strong>左旋</strong>的动画效果如下：<br><a href="http://qn.atecher.com/red-black-tree-5.gif" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-5.gif" alt="image"></a></p>
 <p><strong>右旋</strong>是左旋的逆操作，过程如下：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-6.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-6.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-6.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-6.png" alt="image"></a></p>
 <p>代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//右旋转</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">RotateRight</span><span class="params">(Node h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node x = h.Left;</span><br><span class="line">    h.Left = x.Right;</span><br><span class="line">    x.Right = h;</span><br><span class="line"></span><br><span class="line">    x.Color = h.Color;</span><br><span class="line">    h.Color = RED;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>右旋的动画效果如下：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-7.gif" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-7.gif" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-7.gif" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-7.gif" alt="image"></a></p>
 <h4 id="颜色反转"><a href="#颜色反转" class="headerlink" title="颜色反转"></a>颜色反转</h4><p>当出现一个临时的4-node的时候，即一个节点的两个子节点均为红色，如下图：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-8.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-8.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-8.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-8.png" alt="image"></a></p>
 <p>这其实是个A，E，S 4-node连接，我们需要将E提升至父节点，操作方法很简单，就是把E对子节点的连线设置为黑色，自己的颜色设置为红色。</p>
 <p>有了以上基本操作方法之后，我们现在对应之前对<strong>2-3树的平衡操作来对红黑树进行平衡操作</strong>，这两者是可以一一对应的，如下图：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-9.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-9.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-9.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-9.png" alt="image"></a></p>
 <p>现在来讨论各种情况：</p>
 <p><strong>Case 1 往一个2-node节点底部插入新的节点</strong></p>
 <p>先热身一下，首先我们看对于只有一个节点的红黑树，插入一个新的节点的操作：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-10.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-10.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-10.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-10.png" alt="image"></a></p>
 <p>这种情况很简单，只需要：</p>
 <ul>
 <li>标准的二叉查找树遍历即可。新插入的节点标记为红色</li>
@@ -483,14 +483,14 @@
 </ul>
 <p><strong>Case 2往一个3-node节点底部插入新的节点</strong></p>
 <p>先热身一下，假设我们往一个只有两个节点的树中插入元素，如下图，根据待插入元素与已有元素的大小，又可以分为如下三种情况：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-11.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-11.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-11.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-11.png" alt="image"></a></p>
 <ul>
 <li>如果带插入的节点比现有的两个节点都大，这种情况最简单。我们只需要将新插入的节点连接到右边子树上即可，然后将中间的元素提升至根节点。这样根节点的左右子树都是红色的节点了，我们只需要调研FlipColor方法即可。其他情况经过反转操作后都会和这一样。</li>
 <li>如果插入的节点比最小的元素要小，那么将新节点添加到最左侧，这样就有两个连接红色的节点了，这是对中间节点进行右旋操作，使中间结点成为根节点。这是就转换到了第一种情况，这时候只需要再进行一次FlipColor操作即可。</li>
 <li>如果插入的节点的值位于两个节点之间，那么将新节点插入到左侧节点的右子节点。因为该节点的右子节点是红色的，所以需要进行左旋操作。操作完之后就变成第二种情况了，再进行一次右旋，然后再调用FlipColor操作即可完成平衡操作。</li>
 </ul>
 <p>有了以上基础，我们现在来总结一下往一个3-node节点底部插入新的节点的操作步骤，下面是一个典型的操作过程图：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-12.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-12.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-12.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-12.png" alt="image"></a></p>
 <p>可以看出，操作步骤如下：</p>
 <ol>
 <li>执行标准的二叉查找树插入操作，新插入的节点元素用红色标识。</li>
@@ -499,10 +499,10 @@
 <li>如果需要，左旋操作使红色节点左倾。</li>
 <li>在有些情况下，需要递归调用Case1 Case2，来进行递归操作。如下：</li>
 </ol>
-<p><a href="http://qn.mintools.net/red-black-tree-13.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-13.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-13.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-13.png" alt="image"></a></p>
 <p>##代码实现</p>
 <p>经过上面的平衡化讨论，现在就来实现插入操作，一般地插入操作就是先执行标准的二叉查找树插入，然后再进行平衡化。对照2-3树，我们可以通过前面讨论的，左旋，右旋，FlipColor这三种操作来完成平衡化。</p>
-<p><a href="http://qn.mintools.net/red-black-tree-14.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-14.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-14.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-14.png" alt="image"></a></p>
 <p>具体操作方式如下：</p>
 <ul>
 <li>如果节点的右子节点为红色，且左子节点位黑色，则进行左旋操作</li>
@@ -513,21 +513,21 @@
 <h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>对红黑树的分析其实就是对2-3查找树的分析，红黑树能够保证符号表的所有操作即使在最坏的情况下都能保证对数的时间复杂度，也就是树的高度。</p>
 <p>在分析之前，为了更加直观，下面是以升序，降序和随机构建一颗红黑树的动画：</p>
 <p>以升序插入构建红黑树：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-15.gif" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-15.gif" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-15.gif" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-15.gif" alt="image"></a></p>
 <p>以降序插入构建红黑树：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-16.gif" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-16.gif" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-16.gif" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-16.gif" alt="image"></a></p>
 <p>随机插入构建红黑树</p>
-<p><a href="http://qn.mintools.net/red-black-tree-17.gif" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-17.gif" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-17.gif" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-17.gif" alt="image"></a></p>
 <p>从上面三张动画效果中，可以很直观的看出，红黑树在各种情况下都能维护良好的平衡性，从而能够保证最差情况下的查找，插入效率。</p>
 <p>下面来详细分析下红黑树的效率：</p>
 <p>1.在最坏的情况下，红黑树的高度不超过2lgN<br>最坏的情况就是，红黑树中除了最左侧路径全部是由3-node节点组成，即红黑相间的路径长度是全黑路径长度的2倍。</p>
 <p>下图是一个典型的红黑树，从中可以看到最长的路径(红黑相间的路径)是最短路径的2倍：</p>
-<p><a href="http://qn.mintools.net/red-black-tree-18.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-18.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-18.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-18.png" alt="image"></a></p>
 <ol>
 <li>红黑树的平均高度大约为lgN<br>下图是红黑树在各种情况下的时间复杂度，可以看出红黑树是2-3查找树的一种实现，他能保证最坏情况下仍然具有对数的时间复杂度。</li>
 </ol>
 <p>下图是红黑树各种操作的时间复杂度。</p>
-<p><a href="http://qn.mintools.net/red-black-tree-19.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/red-black-tree-19.png" alt="image"></a></p>
+<p><a href="http://qn.atecher.com/red-black-tree-19.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/red-black-tree-19.png" alt="image"></a></p>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>红黑树这种数据结构应用十分广泛，在多种编程语言中被用作符号表的实现，如：</p>
 <p>Java中的java.util.TreeMap,java.util.TreeSet<br>C++ STL中的：map,multimap,multiset<br>.NET中的：SortedDictionary,SortedSet 等<br>下面以.NET中为例，通过Reflector工具，我们可以看到SortedDictionary的Add方法如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Add</span><span class="params">(T item)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.root == <span class="keyword">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.root = <span class="keyword">new</span> Node&lt;T&gt;(item, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">this</span>.count = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Node&lt;T&gt; root = <span class="keyword">this</span>.root;</span><br><span class="line">        Node&lt;T&gt; node = <span class="keyword">null</span>;</span><br><span class="line">        Node&lt;T&gt; grandParent = <span class="keyword">null</span>;</span><br><span class="line">        Node&lt;T&gt; greatGrandParent = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (root != <span class="keyword">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            num = <span class="keyword">this</span>.comparer.Compare(item, root.Item);</span><br><span class="line">            <span class="keyword">if</span> (num == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">this</span>.root.IsRed = <span class="keyword">false</span>;</span><br><span class="line">                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_AddingDuplicate);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (TreeSet&lt;T&gt;.Is4Node(root))</span><br><span class="line">            &#123;</span><br><span class="line">                TreeSet&lt;T&gt;.Split4Node(root);</span><br><span class="line">                <span class="keyword">if</span> (TreeSet&lt;T&gt;.IsRed(node))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">this</span>.InsertionBalance(root, ref node, grandParent, greatGrandParent);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            greatGrandParent = grandParent;</span><br><span class="line">            grandParent = node;</span><br><span class="line">            node = root;</span><br><span class="line">            root = (num &lt; <span class="number">0</span>) ? root.Left : root.Right;</span><br><span class="line">        &#125;</span><br><span class="line">        Node&lt;T&gt; current = <span class="keyword">new</span> Node&lt;T&gt;(item);</span><br><span class="line">        <span class="keyword">if</span> (num &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            node.Right = current;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            node.Left = current;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.IsRed)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">this</span>.InsertionBalance(current, ref node, grandParent, greatGrandParent);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.root.IsRed = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.count++;</span><br><span class="line">        <span class="keyword">this</span>.version++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>可以看到，内部实现也是一个红黑树，其操作方法和本文将的大同小异，感兴趣的话，您可以使用Reflector工具跟进去查看源代码。</p>
@@ -654,7 +654,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.mintools.net/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -781,7 +781,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

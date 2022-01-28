@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.mintools.net/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -81,12 +81,12 @@
 <meta property="og:site_name" content="Atecher&#39;s blog">
 <meta property="og:description" content="合理利用线程池能够带来三个好处:  降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。 提高响应速度。当任务到达时,任务可以不需要的等到线程创建就能立即执行。 提高线程的可管理性。线程是稀缺资源,如果无限制的创建,不仅会消耗系统资源,还会降低系统的稳定性,使用线程池可以进行统一的分配,调优和监控。但是要做到合理的利用线程池,必须对其原理了如指掌。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://qn.mintools.net/threadpool.jpg">
-<meta property="og:updated_time" content="2020-06-24T12:54:49.967Z">
+<meta property="og:image" content="http://qn.atecher.com/threadpool.jpg">
+<meta property="og:updated_time" content="2022-01-28T02:59:18.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-Thread-线程池的分析和使用">
 <meta name="twitter:description" content="合理利用线程池能够带来三个好处:  降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。 提高响应速度。当任务到达时,任务可以不需要的等到线程创建就能立即执行。 提高线程的可管理性。线程是稀缺资源,如果无限制的创建,不仅会消耗系统资源,还会降低系统的稳定性,使用线程池可以进行统一的分配,调优和监控。但是要做到合理的利用线程池,必须对其原理了如指掌。">
-<meta name="twitter:image" content="http://qn.mintools.net/threadpool.jpg">
+<meta name="twitter:image" content="http://qn.atecher.com/threadpool.jpg">
 
 
 
@@ -316,7 +316,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.mintools.net/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -459,7 +459,7 @@
 <h3 id="线程池的关闭"><a href="#线程池的关闭" class="headerlink" title="线程池的关闭"></a>线程池的关闭</h3><p>我们可以通过调用线程池的shutdown或shutdownNow方法来关闭线程池,它们的原理是遍历线程池中的工作线程,然后逐个调用线程的interrupt方法来中断线程,所以无法响应中断的任务可能永远无法终止。但是它们存在一定的区别,shutdownNow首先将线程池的状态设置成STOP,然后尝试停止所有的正在执行或暂停任务的线程,并返回等待执行任务的列表,而shutdown只是将线程池的状态设置成SHUTDOWN状态,然后中断所有没有正在执行任务的线程。</p>
 <p>只要调用了这两个关闭方法的其中一个,isShutdown方法就会返回true。当所有的任务都已关闭后,才表示线程池关闭成功,这时调用isTerminaed方法会返回true。至于我们应该调用哪一种方法来关闭线程池,应该由提交到线程池的任务特性决定,通常调用shutdown来关闭线程池,如果任务不一定要执行完,则可以调用shutdownNow。</p>
 <h2 id="线程池的分析"><a href="#线程池的分析" class="headerlink" title="线程池的分析"></a>线程池的分析</h2><p>流程分析:线程池的主要工作流程如下图:</p>
-<p><a href="http://qn.mintools.net/threadpool.jpg" target="_blank" rel="noopener"><img src="http://qn.mintools.net/threadpool.jpg" alt=""></a></p>
+<p><a href="http://qn.atecher.com/threadpool.jpg" target="_blank" rel="noopener"><img src="http://qn.atecher.com/threadpool.jpg" alt=""></a></p>
 <p>从上图我们可以看出,当提交一个新任务到线程池时,线程池的处理流程如下:</p>
 <ol>
 <li>首先线程池判断基本线程池是否已满？没满,创建一个工作线程来执行任务。满了,则进入下个流程。</li>
@@ -535,8 +535,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/29/Java-LinkedList的局限/" rel="next" title="Java-LinkedList-LinkedList的局限">
-                <i class="fa fa-chevron-left"></i> Java-LinkedList-LinkedList的局限
+              <a href="/2017/09/27/Map-Set-List-Queue-Stack/" rel="next" title="Map、Set、List、Queue、Stack的特点与用法">
+                <i class="fa fa-chevron-left"></i> Map、Set、List、Queue、Stack的特点与用法
               </a>
             
           </div>
@@ -545,8 +545,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/09/Java-NIO/" rel="prev" title="Java-NIO">
-                Java-NIO <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/29/Java-LinkedList的局限/" rel="prev" title="Java-LinkedList-LinkedList的局限">
+                Java-LinkedList-LinkedList的局限 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -609,7 +609,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.mintools.net/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -736,7 +736,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

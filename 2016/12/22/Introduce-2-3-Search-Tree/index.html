@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.mintools.net/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -81,21 +81,21 @@
 <meta property="og:site_name" content="Atecher&#39;s blog">
 <meta property="og:description" content="前面介绍了二叉查找树(Binary Search Tree)，他对于大多数情况下的查找和插入在效率上来说是没有问题的，但是他在最差的情况下效率比较低。本文及后面文章介绍的平衡查找树的数据结构能够保证在最差的情况下也能达到lgN的效率，要实现这一目标我们需要保证树在插入完成之后始终保持平衡状态，这就是平衡查找树(Balanced Search Tree)。在一棵具有N 个节点的树中，我们希望该树的高">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376548230144">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376536810496">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376537089024">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376537416704">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376542184448">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376542299136">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376543986688">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376545215488">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376546264064">
-<meta property="og:image" content="http://qn.mintools.net/mts/20180417/3852376548197376">
-<meta property="og:updated_time" content="2020-06-24T12:54:49.963Z">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376548230144">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376536810496">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376537089024">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376537416704">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376542184448">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376542299136">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376543986688">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376545215488">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376546264064">
+<meta property="og:image" content="http://qn.atecher.com/mts/20180417/3852376548197376">
+<meta property="og:updated_time" content="2022-01-28T02:59:18.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈算法和数据结构之平衡查找树之2-3树">
 <meta name="twitter:description" content="前面介绍了二叉查找树(Binary Search Tree)，他对于大多数情况下的查找和插入在效率上来说是没有问题的，但是他在最差的情况下效率比较低。本文及后面文章介绍的平衡查找树的数据结构能够保证在最差的情况下也能达到lgN的效率，要实现这一目标我们需要保证树在插入完成之后始终保持平衡状态，这就是平衡查找树(Balanced Search Tree)。在一棵具有N 个节点的树中，我们希望该树的高">
-<meta name="twitter:image" content="http://qn.mintools.net/mts/20180417/3852376548230144">
+<meta name="twitter:image" content="http://qn.atecher.com/mts/20180417/3852376548230144">
 
 
 
@@ -325,7 +325,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.mintools.net/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -440,25 +440,25 @@
 </li>
 </ol>
 <p>如果中序遍历2-3查找树，就可以得到排好序的序列。在一个完全平衡的2-3查找树中，根节点到每一个为空节点的距离都相同。</p>
-<p><img src="http://qn.mintools.net/mts/20180417/3852376548230144" alt="2-3 tree"></p>
+<p><img src="http://qn.atecher.com/mts/20180417/3852376548230144" alt="2-3 tree"></p>
 <h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>在进行2-3树的平衡之前，我们先假设已经处于平衡状态，我们先看基本的查找操作。</p>
 <p>2-3树的查找和二叉查找树类似，要确定一个树是否属于2-3树，我们首先和其跟节点进行比较，如果相等，则查找成功；否则根据比较的条件，在其左中右子树中递归查找，如果找到的节点为空，则未找到，否则返回。查找过程如下图：</p>
-<p><img src="http://qn.mintools.net/mts/20180417/3852376536810496" alt="search in 2-3 tree"></p>
+<p><img src="http://qn.atecher.com/mts/20180417/3852376536810496" alt="search in 2-3 tree"></p>
 <h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><h3 id="往一个2-node节点插入"><a href="#往一个2-node节点插入" class="headerlink" title="往一个2-node节点插入"></a>往一个2-node节点插入</h3><p>往2-3树中插入元素和往二叉查找树中插入元素一样，首先要进行查找，然后将节点挂到未找到的节点上。2-3树之所以能够保证在最差的情况下的效率的原因在于其插入之后仍然能够保持平衡状态。如果查找后未找到的节点是一个2-node节点，那么很容易，我们只需要将新的元素放到这个2-node节点里面使其变成一个3-node节点即可。但是如果查找的节点结束于一个3-node节点，那么可能有点麻烦。</p>
-<p><img src="http://qn.mintools.net/mts/20180417/3852376537089024" alt="insert new node into 2-node"></p>
+<p><img src="http://qn.atecher.com/mts/20180417/3852376537089024" alt="insert new node into 2-node"></p>
 <h3 id="往一个3-node节点插入"><a href="#往一个3-node节点插入" class="headerlink" title="往一个3-node节点插入"></a>往一个3-node节点插入</h3><p>往一个3-node节点插入一个新的节点可能会遇到很多种不同的情况，下面首先从一个最简单的只包含一个3-node节点的树开始讨论。</p>
-<h4 id="只包含一个3-node节点"><a href="#只包含一个3-node节点" class="headerlink" title="只包含一个3-node节点"></a>只包含一个3-node节点</h4><p><img src="http://qn.mintools.net/mts/20180417/3852376537416704" alt="insert into a single 3-node"></p>
+<h4 id="只包含一个3-node节点"><a href="#只包含一个3-node节点" class="headerlink" title="只包含一个3-node节点"></a>只包含一个3-node节点</h4><p><img src="http://qn.atecher.com/mts/20180417/3852376537416704" alt="insert into a single 3-node"></p>
 <p>如上图，假设2-3树只包含一个3-node节点，这个节点有两个key，没有空间来插入第三个key了，最自然的方式是我们假设这个节点能存放三个元素，暂时使其变成一个4-node节点，同时他包含四个子节点。然后，我们将这个4-node节点的中间元素提升，左边的节点作为其左节点，右边的元素作为其右节点。插入完成，变为平衡2-3查找树，树的高度从0变为1。</p>
 <h4 id="节点是3-node，父节点是2-node"><a href="#节点是3-node，父节点是2-node" class="headerlink" title="节点是3-node，父节点是2-node"></a>节点是3-node，父节点是2-node</h4><p>和第一种情况一样，我们也可以将新的元素插入到3-node节点中，使其成为一个临时的4-node节点，然后，将该节点中的中间元素提升到父节点即2-node节点中，使其父节点成为一个3-node节点，然后将左右节点分别挂在这个3-node节点的恰当位置。操作如下图：</p>
-<p><img src="http://qn.mintools.net/mts/20180417/3852376542184448" alt="Insert into a 3-node whose parent is a 2-node"></p>
+<p><img src="http://qn.atecher.com/mts/20180417/3852376542184448" alt="Insert into a 3-node whose parent is a 2-node"></p>
 <h4 id="根节点分裂"><a href="#根节点分裂" class="headerlink" title="根节点分裂"></a>根节点分裂</h4><p>当根节点到字节点都是3-node节点的时候，这是如果我们要在字节点插入新的元素的时候，会一直查分到跟节点，在最后一步的时候，跟节点变成了一个4-node节点，这个时候，就需要将跟节点查分为两个2-node节点，树的高度加1，这个操作过程如下：</p>
-<p><img src="http://qn.mintools.net/mts/20180417/3852376542299136" alt="Insert into a 3-node whose parent is a 3-node"></p>
+<p><img src="http://qn.atecher.com/mts/20180417/3852376542299136" alt="Insert into a 3-node whose parent is a 3-node"></p>
 <h4 id="本地转换"><a href="#本地转换" class="headerlink" title="本地转换"></a>本地转换</h4><p>将一个4-node拆分为2-3node涉及到6种可能的操作。这4-node可能在跟节点，也可能是2-node的左子节点或者右子节点。或者是一个3-node的左，中，右子节点。所有的这些改变都是本地的，不需要检查或者修改其他部分的节点。所以只需要常数次操作即可完成2-3树的平衡。</p>
-<p><img src="http://qn.mintools.net/mts/20180417/3852376543986688" alt="splite a 4-node is a local transformation"></p>
+<p><img src="http://qn.atecher.com/mts/20180417/3852376543986688" alt="splite a 4-node is a local transformation"></p>
 <h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><p>这些本地操作保持了2-3树的平衡。对于4-node节点变形为2-3节点，变形前后树的高度没有发生变化。只有当跟节点是4-node节点，变形后树的高度才加一。如下图所示：</p>
-<p><img src="http://qn.mintools.net/mts/20180417/3852376545215488" alt="global property of 2-3 tree"></p>
+<p><img src="http://qn.atecher.com/mts/20180417/3852376545215488" alt="global property of 2-3 tree"></p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>完全平衡的2-3查找树如下图，每个根节点到叶子节点的距离是相同的：</p>
-<p><img src="http://qn.mintools.net/mts/20180417/3852376546264064" alt="perfect balanced 2-3 tree"></p>
+<p><img src="http://qn.atecher.com/mts/20180417/3852376546264064" alt="perfect balanced 2-3 tree"></p>
 <p>2-3树的查找效率与树的高度是息息相关的。</p>
 <ul>
 <li>在最坏的情况下，也就是所有的节点都是2-node节点，查找效率为lgN</li>
@@ -466,7 +466,7 @@
 <li>距离来说，对于1百万个节点的2-3树，树的高度为12-20之间，对于10亿个节点的2-3树，树的高度为18-30之间。</li>
 </ul>
 <p>对于插入来说，只需要常数次操作即可完成，因为他只需要修改与该节点关联的节点即可，不需要检查其他节点，所以效率和查找类似。下面是2-3查找树的效率：</p>
-<p><img src="http://qn.mintools.net/mts/20180417/3852376548197376" alt="analysis of 2-3 tree"></p>
+<p><img src="http://qn.atecher.com/mts/20180417/3852376548197376" alt="analysis of 2-3 tree"></p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>直接实现2-3树比较复杂，因为：</p>
 <ol>
 <li>需要处理不同的节点类型，非常繁琐</li>
@@ -597,7 +597,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.mintools.net/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -724,7 +724,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

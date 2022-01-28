@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.mintools.net/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -81,12 +81,12 @@
 <meta property="og:site_name" content="Atecher&#39;s blog">
 <meta property="og:description" content="知道吗,你的Java web应用其实是使用线程池来处理请求的。这一实现细节被许多人忽略,但是你迟早都需要理解线程池如何使用,以及如何正确地根据应用调整线程池配置。这篇文章的目的是为了解释线程模型——什么是线程池、以及怎样正确地配置线程池。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://qn.mintools.net/Littles_Law.png">
-<meta property="og:updated_time" content="2020-06-24T12:54:49.967Z">
+<meta property="og:image" content="http://qn.atecher.com/Littles_Law.png">
+<meta property="og:updated_time" content="2022-01-28T02:59:18.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-Thread-线程池调整">
 <meta name="twitter:description" content="知道吗,你的Java web应用其实是使用线程池来处理请求的。这一实现细节被许多人忽略,但是你迟早都需要理解线程池如何使用,以及如何正确地根据应用调整线程池配置。这篇文章的目的是为了解释线程模型——什么是线程池、以及怎样正确地配置线程池。">
-<meta name="twitter:image" content="http://qn.mintools.net/Littles_Law.png">
+<meta name="twitter:image" content="http://qn.atecher.com/Littles_Law.png">
 
 
 
@@ -316,7 +316,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.mintools.net/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -442,7 +442,7 @@
 <p>一个好的默认策略应该是Discard或Abort,它们都会使线程池丢弃新到达的任务。这样服务器就能容易地向客户端响应一个错误,例如HTTP的503错误“Service unavailable”。有的人可能会认为,队列的长度应该是允许增长的,这样所有的任务最终都能被执行。但是用户是不愿意长时间等待的,而且若任务到达的速度超过任务处理的速度,队列将会无限地增长。队列是被用来缓冲突然爆发的请求,或者处理短期任务的,通常情况下,队列应该是空的。</p>
 <h2 id="多少线程合适呢？"><a href="#多少线程合适呢？" class="headerlink" title="多少线程合适呢？"></a>多少线程合适呢？</h2><p>现在,我们知道了如何创建一个线程池。但是有一个更困难的问题,线程池里应该创建多少个线程呢？我们已经知道了线程池中的最大线程数量应该被限制,才不会导致系统资源耗尽。这些系统资源包括了内存（堆栈)、打开的文件句柄、打开的TCP连接、打开的数据库连接以及其它有限的系统资源。相反的,如果线程执行的是CPU密集型任务而不是IO密集型任务,服务器的物理内核数就应该被视为是有限的资源,这样创建的线程数就不应该超过系统的内核数。</p>
 <p>系统应创建多少线程取决于这个应用执行的任务。开发人员应使用现实的请求来对系统进行负载测试,测试不同的线程池大小配置对系统的影响。每次测试都增加线程池的大小,直到系统达到崩溃的临界点。这个方法使你可以发现线程池线程数量的上限。超过这个上限,系统的资源将耗尽。在某些情况下,可以谨慎地增加系统的资源,例如分配更多的RAM空间给JVM,或者调整操作系统使其支持同时打开更多的文件句柄。然而,在某些情况下创建的线程数量会达到我们测试出的理论上限,这非常值得我们注意。稍后还会看到这方面的内容。</p>
-<h2 id="利特尔法则"><a href="#利特尔法则" class="headerlink" title="利特尔法则"></a>利特尔法则</h2><p><a href="http://qn.mintools.net/Littles_Law.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/Littles_Law.png" alt=""></a></p>
+<h2 id="利特尔法则"><a href="#利特尔法则" class="headerlink" title="利特尔法则"></a>利特尔法则</h2><p><a href="http://qn.atecher.com/Littles_Law.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/Littles_Law.png" alt=""></a></p>
 <p>排队论,特别的,Little’s Law,可以用来帮助我们理解线程池的一些特性。简单地说,利特尔法则解释了这三种变量的关系:L—系统里的请求数量、λ—请求到达的速率和W—每个请求的处理时间。例如,如果每秒10个请求到达,处理一个请求需要1秒,那么系统在每个时刻都有10个请求在处理。如果处理每个请求的时间翻倍,那么系统每时刻需要处理的请求数也翻倍为20,因此需要20个线程。</p>
 <p>任务的执行时间对于系统中正在处理的请求数量有着很大的影响,一些后端资源的迟延,例如数据库,通常会使得请求的处理时间被延长,从而导致线程池中的线程被迅速用尽。因此,理论上测出的线程数上限对于这种情况就不是很合适,这个上限值还应该考虑到线程的执行时间,并结合理论上的上限值。</p>
 <p>例如,假设JVM最多能同时处理的请求数为1000。如果我们预计每个请求需要耗费的时间不超过30秒,那么,在最坏的情况下我们每秒能同时处理的请求数不会超过33 ⅓个。但是,如果一切都很顺利,每个请求只需使用500ms就可以完成,那么通过1000个线程应用每秒就可以处理2000个请求。当系统突然出现短暂的任务执行迟延的问题时,通过使用一个队列来减缓这一问题是可行的。</p>
@@ -514,8 +514,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/13/Java-Thread-UncaughtExceptionHandler/" rel="prev" title="Java-Thread-UncaughtExceptionHandler-处理非正常的线程中止">
-                Java-Thread-UncaughtExceptionHandler-处理非正常的线程中止 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/13/Java-Thread-base/" rel="prev" title="Java-Thread-基础">
+                Java-Thread-基础 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -578,7 +578,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.mintools.net/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -705,7 +705,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

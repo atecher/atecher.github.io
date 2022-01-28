@@ -66,7 +66,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="http://qn.mintools.net/mts/20180418/3853306649789440?v=5.1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="http://qn.atecher.com/mts/20180418/3853306649789440?v=5.1.1">
 
 
 
@@ -81,15 +81,15 @@
 <meta property="og:site_name" content="Atecher&#39;s blog">
 <meta property="og:description" content="Java IO 是一套Java用来读写数据(输入和输出)的API。大部分程序都要处理一些输入,并由输入产生一些输出。Java为此提供了java.io包。 如果你浏览下java.io包,会对其中各样的类选择感到迷惑。这些类的作用都是什么？对于某个任务该选择哪个类？怎样创建你自己的类做插件？这个手册的目的就是给你介绍这些类是如何组织的,以及怎样使用他们,因此你就不会疑惑需要时怎样选取合适的类,或者是否">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://qn.mintools.net/无标题1.png">
-<meta property="og:image" content="http://qn.mintools.net/无标题2.png">
-<meta property="og:image" content="http://qn.mintools.net/QQ截图20141020174145.png">
-<meta property="og:image" content="http://qn.mintools.net/1.png">
-<meta property="og:updated_time" content="2020-06-24T12:54:49.967Z">
+<meta property="og:image" content="http://qn.atecher.com/无标题1.png">
+<meta property="og:image" content="http://qn.atecher.com/无标题2.png">
+<meta property="og:image" content="http://qn.atecher.com/QQ截图20141020174145.png">
+<meta property="og:image" content="http://qn.atecher.com/1.png">
+<meta property="og:updated_time" content="2022-01-28T02:59:18.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-IO">
 <meta name="twitter:description" content="Java IO 是一套Java用来读写数据(输入和输出)的API。大部分程序都要处理一些输入,并由输入产生一些输出。Java为此提供了java.io包。 如果你浏览下java.io包,会对其中各样的类选择感到迷惑。这些类的作用都是什么？对于某个任务该选择哪个类？怎样创建你自己的类做插件？这个手册的目的就是给你介绍这些类是如何组织的,以及怎样使用他们,因此你就不会疑惑需要时怎样选取合适的类,或者是否">
-<meta name="twitter:image" content="http://qn.mintools.net/无标题1.png">
+<meta name="twitter:image" content="http://qn.atecher.com/无标题1.png">
 
 
 
@@ -319,7 +319,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Atecher">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://qn.mintools.net/mts/20180418/3853594527466496">
+      <meta itemprop="image" content="http://qn.atecher.com/mts/20180418/3853594527466496">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -440,10 +440,10 @@
 <li>System.in, System.out, System.error(注:Java标准输入、输出、错误输出)</li>
 </ul>
 <p>下面这张图描绘了一个程序从数据源读取数据,然后将数据输出到其他媒介的原理:</p>
-<p><a href="http://qn.mintools.net/无标题1.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/无标题1.png" alt=""></a></p>
+<p><a href="http://qn.atecher.com/无标题1.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/无标题1.png" alt=""></a></p>
 <h3 id="流"><a href="#流" class="headerlink" title="流"></a>流</h3><p>在Java IO中,流是一个核心的概念。流从概念上来说是一个连续的数据流。你既可以从流中读取数据,也可以往流中写数据。流与数据源或者数据流向的媒介相关联。在Java IO中流既可以是字节流(以字节为单位进行读写),也可以是字符流(以字符为单位进行读写)。</p>
 <h3 id="类InputStream-OutputStream-Reader-和Writer"><a href="#类InputStream-OutputStream-Reader-和Writer" class="headerlink" title="类InputStream, OutputStream, Reader 和Writer"></a>类InputStream, OutputStream, Reader 和Writer</h3><p>一个程序需要InputStream或者Reader从数据源读取数据,需要OutputStream或者Writer将数据写入到目标媒介中。以下的图说明了这一点:</p>
-<p><a href="http://qn.mintools.net/无标题2.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/无标题2.png" alt=""></a></p>
+<p><a href="http://qn.atecher.com/无标题2.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/无标题2.png" alt=""></a></p>
 <p>InputStream和Reader与数据源相关联,OutputStream和writer与目标媒介相关联。</p>
 <p>Java IO中包含了许多InputStream、OutputStream、Reader、Writer的子类。这样设计的原因是让每一个类都负责不同的功能。这也就是为什么IO包中有这么多不同的类的缘故。各类用途汇总如下:</p>
 <ul>
@@ -460,7 +460,7 @@
 </ul>
 <p>当通读过Java IO类的源代码之后,我们很容易就能了解这些用途。这些用途或多或少让我们更加容易地理解,不同的类用于针对不同业务场景。</p>
 <h3 id="Java-IO类概述表"><a href="#Java-IO类概述表" class="headerlink" title="Java IO类概述表"></a>Java IO类概述表</h3><p>已经讨论了数据源、目标媒介、输入、输出和各类不同用途的Java IO类,接下来是一张通过输入、输出、基于字节或者字符、以及其他比如缓冲、解析之类的特定用途划分的大部分Java IO类的表格。</p>
-<p><a href="http://qn.mintools.net/QQ截图20141020174145.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/QQ截图20141020174145.png" alt=""></a></p>
+<p><a href="http://qn.atecher.com/QQ截图20141020174145.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/QQ截图20141020174145.png" alt=""></a></p>
 <h2 id="Java-IO-文件"><a href="#Java-IO-文件" class="headerlink" title="Java IO: 文件"></a>Java IO: 文件</h2><p>在Java应用程序中,文件是一种常用的数据源或者存储数据的媒介。所以这一小节将会对Java中文件的使用做一个简短的概述。这篇文章不会对每一个技术细节都做出解释,而是会针对文件存取的方法提供给你一些必要的知识点。在之后的文章中,将会更加详细地描述这些方法或者类,包括方法示例等等。</p>
 <h3 id="通过Java-IO读文件"><a href="#通过Java-IO读文件" class="headerlink" title="通过Java IO读文件"></a>通过Java IO读文件</h3><p>如果你需要在不同端之间读取文件,你可以根据该文件是二进制文件还是文本文件来选择使用FileInputStream或者FileReader。这两个类允许你从文件开始到文件末尾一次读取一个字节或者字符,或者将读取到的字节写入到字节数组或者字符数组。你不必一次性读取整个文件,相反你可以按顺序地读取文件中的字节和字符。</p>
 <p>如果你需要跳跃式地读取文件其中的某些部分,可以使用RandomAccessFile。</p>
@@ -472,7 +472,7 @@
 <p>你不能利用管道与不同的JVM中的线程通信(不同的进程)。在概念上,Java的管道不同于Unix/Linux系统中的管道。在Unix/Linux中,运行在不同地址空间的两个进程可以通过管道通信。在Java中,通信的双方应该是运行在同一进程中的不同线程。</p>
 <h3 id="通过Java-IO创建管道"><a href="#通过Java-IO创建管道" class="headerlink" title="通过Java IO创建管道"></a>通过Java IO创建管道</h3><p>可以通过Java IO中的PipedOutputStream和PipedInputStream创建管道。一个PipedInputStream流应该和一个PipedOutputStream流相关联。一个线程通过PipedOutputStream写入的数据可以被另一个线程通过相关联的PipedInputStream读取出来。</p>
 <h3 id="Java-IO管道示例"><a href="#Java-IO管道示例" class="headerlink" title="Java IO管道示例"></a>Java IO管道示例</h3><p>这是一个如何将PipedInputStream和PipedOutputStream关联起来的简单例子:</p>
-<p><a href="http://qn.mintools.net/1.png" target="_blank" rel="noopener"><img src="http://qn.mintools.net/1.png" alt=""></a></p>
+<p><a href="http://qn.atecher.com/1.png" target="_blank" rel="noopener"><img src="http://qn.atecher.com/1.png" alt=""></a></p>
 <p>注:本例忽略了流的关闭。请在处理流的过程中,务必保证关闭流,或者使用jdk7引入的try-resources代替显示地调用close方法的方式。</p>
 <p>你也可以使用两个管道共有的connect()方法使之相关联。PipedInputStream和PipedOutputStream都拥有一个可以互相关联的connect()方法。</p>
 <h3 id="管道和线程"><a href="#管道和线程" class="headerlink" title="管道和线程"></a>管道和线程</h3><p>请记得,当使用两个相关联的管道流时,务必将它们分配给不同的线程。read()方法和write()方法调用时会导致流阻塞,这意味着如果你尝试在一个线程中同时进行读和写,可能会导致线程死锁。</p>
@@ -870,7 +870,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="http://qn.mintools.net/mts/20180418/3853594527466496" alt="Atecher">
+          <img class="site-author-image" itemprop="image" src="http://qn.atecher.com/mts/20180418/3853594527466496" alt="Atecher">
           <p class="site-author-name" itemprop="name">Atecher</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -997,7 +997,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
