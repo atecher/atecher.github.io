@@ -49,6 +49,15 @@ jobs:
           branch: master
           folder: public
 
+
+      - name: sync
+        uses: wearerequired/git-mirror-action@master
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.HEXO_DEPLOY_KEY}}
+        with:
+          source-repo: "git@github.com:atecher/atecher.github.io.git"
+          destination-repo: "git@gitee.com:atecher/atecher.git"
+
 #      - name: 'Mirror to gitee'
 #        uses: pixta-dev/repository-mirroring-action@v1
 #        with:
