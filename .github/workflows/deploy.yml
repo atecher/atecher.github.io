@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2.5.1
+        uses: actions/checkout@v2
         with:
           ref: blog-source
           persist-credentials: false
