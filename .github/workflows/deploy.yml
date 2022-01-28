@@ -49,8 +49,9 @@ jobs:
           ACTION_DEPLOY_KEY: ${{secrets.HEXO_DEPLOY_KEY}}
         with:
           ACCESS_TOKEN: $ACTION_DEPLOY_KEY
-          BRANCH: master
-          FOLDER: public
+          ssh-key: ${{secrets.HEXO_DEPLOY_KEY}}
+          branch: master
+          folder: public
 
 #      - name: Deploy hexo blog
 #        env:
