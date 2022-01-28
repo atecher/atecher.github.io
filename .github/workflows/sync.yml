@@ -24,22 +24,3 @@ jobs:
           gitee-password: ${{secrets.GITEE_PASSWORD}}
           # 注意替换为你的 Gitee 仓库
           gitee-repo: atecher/atecher
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-          path: master
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14.x
-      - uses: Hanlin-Dong/hexo-to-qiniu-action@v1-full
-        with:
-          bucket: your-bucket
-          access-key: ${{ secrets.QINIU_ACCESS_KEY }}
-          secret-key: ${{ secrets.QINIU_SECRET_KEY }}
-          base-folder: myblog
-          domain: "http://abc.io"
-          sub-domain: ""
