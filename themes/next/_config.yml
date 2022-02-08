@@ -550,19 +550,24 @@ vendors:
   _internal: lib
 
   # Internal version: 2.1.3
-  jquery: //cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js
+#  jquery: //cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js
+  jquery: //cdn.bootcdn.net/ajax/libs/jquery/2.1.3/jquery.min.js
 
   # Internal version: 2.1.5
   # See: http://fancyapps.com/fancybox/
-  fancybox: //cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.js
-  fancybox_css: //cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css
+#  fancybox: //cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.js
+  fancybox: //cdn.bootcdn.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.js
+#  fancybox_css: //cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css
+  fancybox_css: //cdn.bootcdn.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css
 
   # Internal version: 1.0.6
   # See: https://github.com/ftlabs/fastclick
-  fastclick: //cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js
+#  fastclick: //cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js
+  fastclick: //cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js
 
   # Internal version: 1.9.7
   # See: https://github.com/tuupola/jquery_lazyload
+#  lazyload: //cdn.bootcdn.net/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js
   lazyload: //cdn.bootcdn.net/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js
 
   # Internal version: 1.2.1
@@ -575,16 +580,20 @@ vendors:
 
   # Internal version: 0.7.9
   # See: https://faisalman.github.io/ua-parser-js/
-  ua_parser: //cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.10/ua-parser.min.js
+#  ua_parser: //cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.10/ua-parser.min.js
+  ua_parser: //cdn.bootcdn.net/ajax/libs/UAParser.js/0.7.10/ua-parser.min.js
 
   # Internal version: 4.6.2
   # See: http://fontawesome.io/
-  fontawesome: //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css
+#  fontawesome: //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css
+  fontawesome: //cdn.bootcdn.net/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css
 
   # Internal version: 1
   # https://www.algolia.com
-  algolia_instant_js: //cdnjs.cloudflare.com/ajax/libs/instantsearch.js/1.5.0/instantsearch.min.js
-  algolia_instant_css: //cdnjs.cloudflare.com/ajax/libs/instantsearch.js/1.5.0/instantsearch.min.css
+#  algolia_instant_js: //cdnjs.cloudflare.com/ajax/libs/instantsearch.js/1.5.0/instantsearch.min.js
+  algolia_instant_js: //cdn.bootcdn.net/ajax/libs/instantsearch.js/1.5.0/instantsearch.min.js
+#  algolia_instant_css: //cdnjs.cloudflare.com/ajax/libs/instantsearch.js/1.5.0/instantsearch.min.css
+  algolia_instant_css: //cdn.bootcdn.net/ajax/libs/instantsearch.js/1.5.0/instantsearch.min.css
 
   # Internal version: 1.0.2
   # See: https://github.com/HubSpot/pace
@@ -596,7 +605,7 @@ vendors:
 
   # Internal version: 1.0.0
   # https://github.com/hustcc/canvas-nest.js
-  canvas_nest:
+  canvas_nest: //cdn.bootcdn.net/ajax/libs/canvas-nest.js/1.0.0/canvas-nest.min.js
 
   # three
   three:
