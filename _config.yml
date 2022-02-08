@@ -106,7 +106,34 @@ deploy:
 algolia:
   applicationID: 'PITP4EHINM'
   indexName: 'atecher_hexo'
-  chunkSize: 5000 
+  chunkSize: 5000
+
+
+# 文件压缩，设置一些需要跳过的文件
+# hexo-neat
+neat_enable: true
+# 压缩 html
+neat_html:
+  enable: true
+  # 一些百度、Google 的验证文件需要排除掉
+  exclude:
+    - '**/baidu*.html'
+    - '**/google*.html'
+# 压缩 css
+neat_css:
+  enable: true
+  exclude:
+    - '**/*.min.css'
+# 压缩 js
+neat_js:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '**/*.min.js'
+    - '**/jquery.fancybox.pack.js'
+    - '**/index.js'
   
   
   

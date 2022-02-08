@@ -35,6 +35,7 @@ jobs:
           git config --global user.email "hongwei.han@qq.com"
           git config --global user.name "atecher"
           npm install hexo-cli -g
+          npm install hexo-neat --save
           npm install
 
       - name: Generate files
