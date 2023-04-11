@@ -309,21 +309,21 @@ private static void swap(int[] array, int i, int min) {
 [1]: https://en.wikipedia.org/wiki/Donald_Knuth
 [2]: http://faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Weiss/L12-ShellSort.htm#increments
 [3]: http://www.cnblogs.com/yangecnu/p/Introduction-Insertion-and-Selection-and-Shell-Sort.html
-[image 1]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-1.png
-[image 2]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-2.png
-[image 3]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-3.gif
-[image 4]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-4.png
-[image 5]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-5.png
-[image 6]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-6.gif
-[image 7]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-7.gif
-[image 8]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-8.gif
-[image 9]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-9.png
-[image 10]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-10.gif
-[image 11]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-11.png
-[image 12]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-12.png
-[image 13]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-13.png
-[image 14]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-14.png
-[image 15]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-15.png
-[image 16]: //qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-16.gif
+[image 1]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-1.png
+[image 2]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-2.png
+[image 3]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-3.gif
+[image 4]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-4.png
+[image 5]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-5.png
+[image 6]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-6.gif
+[image 7]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-7.gif
+[image 8]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-8.gif
+[image 9]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-9.png
+[image 10]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-10.gif
+[image 11]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-11.png
+[image 12]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-12.png
+[image 13]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-13.png
+[image 14]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-14.png
+[image 15]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-15.png
+[image 16]: http:///qn.atecher.com/Introduction-Insertion-and-Selection-and-Shell-Sort-16.gif
 
 

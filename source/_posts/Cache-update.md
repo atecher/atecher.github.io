@@ -78,6 +78,6 @@ Write Back套路,一句说就是,在更新数据的时候,只更新缓存,不更
 ref:
 [https://coolshell.cn/articles/17416.html](https://coolshell.cn/articles/17416.html)
 
-[image 1]: //qn.atecher.com/Cache-Aside-Design-Pattern-Flow-Diagram-e1470471723210.png
-[image 2]: //qn.atecher.com/460px-Write-through_with_no-write-allocation.svg_.png
-[image 3]: //qn.atecher.com/Write-back_with_write-allocation.png
+[image 1]: http:///qn.atecher.com/Cache-Aside-Design-Pattern-Flow-Diagram-e1470471723210.png
+[image 2]: http:///qn.atecher.com/460px-Write-through_with_no-write-allocation.svg_.png
+[image 3]: http:///qn.atecher.com/Write-back_with_write-allocation.png

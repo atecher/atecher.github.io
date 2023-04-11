@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------
 
 # Put your favicon.ico into `hexo-site/source/` directory.
-favicon: //qn.atecher.com/mts/20180418/3853306649789440
+favicon: http:///qn.atecher.com/mts/20180418/3853306649789440
 
 # Set default keywords (Use a comma to separate)
 keywords: "Hexo, NexT"
@@ -118,7 +118,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: //qn.atecher.com/mts/20180418/3853594527466496
+avatar: http:///qn.atecher.com/mts/20180418/3853594527466496
 
 # Table Of Contents in the Sidebar
 toc:

@@ -206,4 +206,4 @@ ref:
 [https://blog.bramp.net/post/2015/12/17/the-importance-of-tuning-your-thread-pools/](https://blog.bramp.net/post/2015/12/17/the-importance-of-tuning-your-thread-pools/)
 [http://www.importnew.com/18619.html](http://www.importnew.com/18619.html)
 
-[image 1]: //qn.atecher.com/Littles_Law.png
+[image 1]: http:///qn.atecher.com/Littles_Law.png
