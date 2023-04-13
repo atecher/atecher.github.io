@@ -11,7 +11,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{secrets.CODING_PRIVATE_KEY}}
         with:
           source-repo: "git@github.com:atecher/atecher.github.io.git"
-          destination-repo: "https://e.coding.net/Atecher/atecher/atecher-blog.git"
+          destination-repo: "git@e.coding.net:Atecher/atecher/atecher-blog.git"
 #
 #
 #      - name: Build Gitee Pages
