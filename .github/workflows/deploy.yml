@@ -50,26 +50,12 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
           branch: master
           folder: public
-#
-#      - name: Qiniu
-#        uses: Hanlin-Dong/hexo-to-qiniu-action@v1-full
-#        with:
-#          bucket: atecher-blog
-#          access-key: ${{secrets.QINIU_ACCESS_KEY}}
-#          secret-key: ${{secrets.QINIU_SECRET_KEY}}
-#          base-folder: ./public
-#          domain: "http://www.atecher.com"
-#          sub-domain: ""
 
-
-#      - name: sync
-#        uses: wearerequired/git-mirror-action@master
-#        env:
-#          SSH_PRIVATE_KEY: ${{secrets.HEXO_DEPLOY_KEY}}
-#        with:
-#          source-repo: "git@github.com:atecher/atecher.github.io.git"
-#          destination-repo: "git@gitee.com:atecher/atecher.git"
-
+  mirror_to_coding:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3.0.2
       - name: 'Mirror to coding'
         uses: pixta-dev/repository-mirroring-action@v1
         with:
