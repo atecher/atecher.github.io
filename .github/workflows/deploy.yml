@@ -51,13 +51,13 @@ jobs:
           branch: master
           folder: public
 
-  mirror_to_coding:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v3.0.2
-      - name: 'Mirror to coding'
-        uses: pixta-dev/repository-mirroring-action@v1
-        with:
-          target_repo_url: git@e.coding.net:Atecher/atecher/atecher-blog.git
-          ssh_private_key: ${{secrets.CODING_PRIVATE_KEY}}
+#  mirror_to_coding:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: 'Checkout'
+#        uses: actions/checkout@v3.0.2
+#      - name: 'Mirror to coding'
+#        uses: pixta-dev/repository-mirroring-action@v1
+#        with:
+#          target_repo_url: git@e.coding.net:Atecher/atecher/atecher-blog.git
+#          ssh_private_key: ${{secrets.CODING_PRIVATE_KEY}}
