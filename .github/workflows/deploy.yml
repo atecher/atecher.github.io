@@ -45,19 +45,8 @@ jobs:
           echo "pwd: "`pwd`
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@v4.4.0
         with:
-          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+          ssh-key: ${{secrets.HEXO_DEPLOY_KEY}}
           branch: master
           folder: public
-
-#  mirror_to_coding:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: 'Checkout'
-#        uses: actions/checkout@v3.0.2
-#      - name: 'Mirror to coding'
-#        uses: pixta-dev/repository-mirroring-action@v1
-#        with:
-#          target_repo_url: git@e.coding.net:Atecher/atecher/atecher-blog.git
-#          ssh_private_key: ${{secrets.CODING_PRIVATE_KEY}}
