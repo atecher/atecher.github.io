@@ -11,15 +11,15 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v2
         with:
           ref: blog-source
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v1
         with:
-          node-version: '14'
+          node-version: '12'
 
       - name: Setup Hexo
         env:
@@ -44,9 +44,8 @@ jobs:
           echo "pwd: "`pwd`
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
-          persist-credentials: false
           ssh-key: ${{secrets.HEXO_DEPLOY_KEY}}
           branch: master
           folder: public
