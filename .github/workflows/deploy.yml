@@ -46,6 +46,7 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
+          persist-credentials: false
           ssh-key: ${{secrets.HEXO_DEPLOY_KEY}}
           branch: master
           folder: public
