@@ -1222,7 +1222,7 @@ getBuffer()方法能够获取StringWriter内部构造字符串时所使用的Str
 ref:
 [http://tutorials.jenkov.com/java-io/index.html](http://tutorials.jenkov.com/java-io/index.html)
 
-[image 1]: http:///qn.atecher.com/无标题1.png
-[image 2]: http:///qn.atecher.com/无标题2.png
-[image 3]: http:///qn.atecher.com/QQ截图20141020174145.png
-[image 4]: http:///qn.atecher.com/1.png
+[image 1]: //qn.atecher.com/无标题1.png
+[image 2]: //qn.atecher.com/无标题2.png
+[image 3]: //qn.atecher.com/QQ截图20141020174145.png
+[image 4]: //qn.atecher.com/1.png

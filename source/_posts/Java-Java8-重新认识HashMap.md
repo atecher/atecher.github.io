@@ -514,17 +514,17 @@ Java Code Geeks,[HashMap performance improvements in Java 8](http://www.javacode
 Importnew,[危险!在HashMap中将可变对象用作Key](http://www.importnew.com/13384.html),2014。
 CSDN博客频道,[为什么一般hashtable的桶数会取一个素数](http://blog.csdn.net/liuqiyao_01/article/details/14475159),2013。
 
-[image 1]: http:///qn.atecher.com/java.util.map类图.png
-[image 2]: http:///qn.atecher.com/hashMap内存结构图.png
-[image 3]: http:///qn.atecher.com/hashMap哈希算法例图.png
-[image 4]: http:///qn.atecher.com/hashMap_put方法执行流程图.png
-[image 5]: http:///qn.atecher.com/jdk1.7扩容例图.png
-[image 6]: http:///qn.atecher.com/hashMap_1.8_哈希算法例图1.png
-[image 7]: http:///qn.atecher.com/hashMap_1.8_哈希算法例图2.png
-[image 8]: http:///qn.atecher.com/jdk1.8 hashMap扩容例图.png
-[image 9]: http:///qn.atecher.com/jdk1.7_hashMap死循环例图1.png
-[image 10]: http:///qn.atecher.com/jdk1.7_hashMap死循环例图2.png
-[image 11]: http:///qn.atecher.com/jdk1.7_hashMap死循环例图3.png
-[image 12]: http:///qn.atecher.com/jdk1.7_hashMap死循环例图4.png
-[image 13]: http:///qn.atecher.com/性能比较表1.png
-[image 14]: http:///qn.atecher.com/性能比较表2.png
+[image 1]: //qn.atecher.com/java.util.map类图.png
+[image 2]: //qn.atecher.com/hashMap内存结构图.png
+[image 3]: //qn.atecher.com/hashMap哈希算法例图.png
+[image 4]: //qn.atecher.com/hashMap_put方法执行流程图.png
+[image 5]: //qn.atecher.com/jdk1.7扩容例图.png
+[image 6]: //qn.atecher.com/hashMap_1.8_哈希算法例图1.png
+[image 7]: //qn.atecher.com/hashMap_1.8_哈希算法例图2.png
+[image 8]: //qn.atecher.com/jdk1.8 hashMap扩容例图.png
+[image 9]: //qn.atecher.com/jdk1.7_hashMap死循环例图1.png
+[image 10]: //qn.atecher.com/jdk1.7_hashMap死循环例图2.png
+[image 11]: //qn.atecher.com/jdk1.7_hashMap死循环例图3.png
+[image 12]: //qn.atecher.com/jdk1.7_hashMap死循环例图4.png
+[image 13]: //qn.atecher.com/性能比较表1.png
+[image 14]: //qn.atecher.com/性能比较表2.png

@@ -669,18 +669,18 @@ Student s = new Student();在内存中做了哪些事情?
 
 
 
-[Java-VM-Explanation-1-1]: http:///qn.atecher.com/mts/20180418/3853291052336128
-[Java-VM-Explanation-1-2]: http:///qn.atecher.com/mts/20180418/3853291055121408
-[Java-VM-Explanation-1-3]: http:///qn.atecher.com/mts/20180418/3853291055662080
-[Java-VM-Explanation-1-4]: http:///qn.atecher.com/mts/20180418/3853291040113664
-[Java-VM-Explanation-1-5]: http:///qn.atecher.com/mts/20180418/3853291042571264
-[Java-VM-Explanation-1-6]: http:///qn.atecher.com/mts/20180418/3853291042374656
-[Java-VM-Explanation-1-7]: http:///qn.atecher.com/mts/20180418/3853291045504000
-[Java-VM-Explanation-1-8]: http:///qn.atecher.com/mts/20180418/3853291046257664
-[Java-VM-Explanation-1-9]: http:///qn.atecher.com/mts/20180418/3853291046355968
-[Java-VM-Explanation-1-10]: http:///qn.atecher.com/mts/20180418/3853291047191552
-[Java-VM-Explanation-1-11]: http:///qn.atecher.com/mts/20180418/3853291048797184
-[Java-VM-Explanation-1-12]: http:///qn.atecher.com/mts/20180418/3853291048715264
-[Java-VM-Explanation-1-13]: http:///qn.atecher.com/mts/20180418/3853291049092096
-[Java-VM-Explanation-1-14]: http:///qn.atecher.com/mts/20180418/3853291050943488
-[Java-VM-Explanation-1-15]: http:///qn.atecher.com/mts/20180418/3853291050828800
+[Java-VM-Explanation-1-1]: //qn.atecher.com/mts/20180418/3853291052336128
+[Java-VM-Explanation-1-2]: //qn.atecher.com/mts/20180418/3853291055121408
+[Java-VM-Explanation-1-3]: //qn.atecher.com/mts/20180418/3853291055662080
+[Java-VM-Explanation-1-4]: //qn.atecher.com/mts/20180418/3853291040113664
+[Java-VM-Explanation-1-5]: //qn.atecher.com/mts/20180418/3853291042571264
+[Java-VM-Explanation-1-6]: //qn.atecher.com/mts/20180418/3853291042374656
+[Java-VM-Explanation-1-7]: //qn.atecher.com/mts/20180418/3853291045504000
+[Java-VM-Explanation-1-8]: //qn.atecher.com/mts/20180418/3853291046257664
+[Java-VM-Explanation-1-9]: //qn.atecher.com/mts/20180418/3853291046355968
+[Java-VM-Explanation-1-10]: //qn.atecher.com/mts/20180418/3853291047191552
+[Java-VM-Explanation-1-11]: //qn.atecher.com/mts/20180418/3853291048797184
+[Java-VM-Explanation-1-12]: //qn.atecher.com/mts/20180418/3853291048715264
+[Java-VM-Explanation-1-13]: //qn.atecher.com/mts/20180418/3853291049092096
+[Java-VM-Explanation-1-14]: //qn.atecher.com/mts/20180418/3853291050943488
+[Java-VM-Explanation-1-15]: //qn.atecher.com/mts/20180418/3853291050828800

@@ -397,8 +397,8 @@ ref:
 《MySQL技术内幕:SQL编程》
 [http://www.cnblogs.com/annsshadow/p/5037667.html](http://www.cnblogs.com/annsshadow/p/5037667.html)
 
-[image 1]: http:///qn.atecher.com/701942-20151210224128402-1287669438.png
-[image 2]: http:///qn.atecher.com/701942-20151210224221011-1559007674.png
-[image 3]: http:///qn.atecher.com/701942-20151210224510246-264811072.png
-[image 4]: http:///qn.atecher.com/701942-20151210224616246-320415795.png
+[image 1]: //qn.atecher.com/701942-20151210224128402-1287669438.png
+[image 2]: //qn.atecher.com/701942-20151210224221011-1559007674.png
+[image 3]: //qn.atecher.com/701942-20151210224510246-264811072.png
+[image 4]: //qn.atecher.com/701942-20151210224616246-320415795.png
 

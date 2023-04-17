@@ -107,16 +107,16 @@ tags:
 
 
 
-  [1]: http:///qn.atecher.com/mts/20180417/3852376548230144
-  [2]: http:///qn.atecher.com/mts/20180417/3852376536810496
-  [3]: http:///qn.atecher.com/mts/20180417/3852376537089024
-  [4]: http:///qn.atecher.com/mts/20180417/3852376537416704
-  [5]: http:///qn.atecher.com/mts/20180417/3852376542184448
-  [6]: http:///qn.atecher.com/mts/20180417/3852376542299136
-  [7]: http:///qn.atecher.com/mts/20180417/3852376543986688
-  [8]: http:///qn.atecher.com/mts/20180417/3852376545215488
-  [9]: http:///qn.atecher.com/mts/20180417/3852376546264064
-  [10]: http:///qn.atecher.com/mts/20180417/3852376548197376
+  [1]: //qn.atecher.com/mts/20180417/3852376548230144
+  [2]: //qn.atecher.com/mts/20180417/3852376536810496
+  [3]: //qn.atecher.com/mts/20180417/3852376537089024
+  [4]: //qn.atecher.com/mts/20180417/3852376537416704
+  [5]: //qn.atecher.com/mts/20180417/3852376542184448
+  [6]: //qn.atecher.com/mts/20180417/3852376542299136
+  [7]: //qn.atecher.com/mts/20180417/3852376543986688
+  [8]: //qn.atecher.com/mts/20180417/3852376545215488
+  [9]: //qn.atecher.com/mts/20180417/3852376546264064
+  [10]: //qn.atecher.com/mts/20180417/3852376548197376
   [11]: http://www.cnblogs.com/yangecnu/p/Introduce-2-3-Search-Tree.html
 
 

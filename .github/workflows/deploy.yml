@@ -11,15 +11,15 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.0.2
         with:
           ref: blog-source
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '12'
+          node-version: '14'
 
       - name: Setup Hexo
         env:
@@ -44,7 +44,7 @@ jobs:
           echo "pwd: "`pwd`
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        uses: JamesIves/github-pages-deploy-action@v4.4.0
         with:
           github_token: ${{secrets.GH_TOKEN}}
           branch: master

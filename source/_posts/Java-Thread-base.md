@@ -800,14 +800,14 @@ ref:
 
 
 
-[image 1]: http:///qn.atecher.com/mts/20180403/3832334064026624
-[image 2]: http:///qn.atecher.com/Thread_State.png
-[image 3]: http:///qn.atecher.com/thread_status_from_new_2_dead.jpg
-[image 4]: http:///qn.atecher.com/mts/20180403/3832334095647744
-[image 5]: http:///qn.atecher.com/thread_status_from_new_2_dead_with_methods.jpg
-[image 6]: http:///qn.atecher.com/a_java_monitor.png
-[image 7]: http:///qn.atecher.com/main_memory.png
-[image 8]: http:///qn.atecher.com/thread_exception_catch.png 
-[image 9]: http:///qn.atecher.com/synchronize_Lock_performance.png
-[image 10]: http:///qn.atecher.com/BlockingQueue.png 
-[image 11]: http:///qn.atecher.com/ThreadPoolExecutor.png 
+[image 1]: //qn.atecher.com/mts/20180403/3832334064026624
+[image 2]: //qn.atecher.com/Thread_State.png
+[image 3]: //qn.atecher.com/thread_status_from_new_2_dead.jpg
+[image 4]: //qn.atecher.com/mts/20180403/3832334095647744
+[image 5]: //qn.atecher.com/thread_status_from_new_2_dead_with_methods.jpg
+[image 6]: //qn.atecher.com/a_java_monitor.png
+[image 7]: //qn.atecher.com/main_memory.png
+[image 8]: //qn.atecher.com/thread_exception_catch.png 
+[image 9]: //qn.atecher.com/synchronize_Lock_performance.png
+[image 10]: //qn.atecher.com/BlockingQueue.png 
+[image 11]: //qn.atecher.com/ThreadPoolExecutor.png 

@@ -227,5 +227,5 @@ tags:
 
 本文为转载文章，最初发表在[oschina](http://www.oschina.net/translate/101-tips-to-mysql-tuning-and-optimization)。
 
-[Image-1]: http:///qn.atecher.com/mts/20180418/3853306656752640
-[Image-2]: http:///qn.atecher.com/mts/20180418/3853306657358848
+[Image-1]: //qn.atecher.com/mts/20180418/3853306656752640
+[Image-2]: //qn.atecher.com/mts/20180418/3853306657358848
