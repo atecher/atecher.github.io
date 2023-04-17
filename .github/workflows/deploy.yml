@@ -44,7 +44,7 @@ jobs:
           echo "pwd: "`pwd`
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.4.0
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ssh-key: ${{secrets.HEXO_DEPLOY_KEY}}
           branch: master
