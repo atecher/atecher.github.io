@@ -1,0 +1,46 @@
+.site-meta {
+  flex-grow: 1;
+  text-align: center;
+
+  +mobile() {
+    text-align: center;
+  }
+}
+
+.custom-logo-image {
+  margin-top: 20px;
+
+  +tablet-mobile() {
+    display: none;
+  }
+}
+
+.brand {
+  background: transparent;
+  color: #555;
+  &:hover {
+    color: #fc9b00;
+  }
+}
+
+.site-title {
+  font-family: $font-family-logo;
+  font-size: $font-size-title;
+  font-weight: normal;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.site-subtitle {
+  color: $subtitle-color;
+  font-size: $font-size-subtitle;
+  margin: 10px 0;
+}
+
+.use-motion {
+  .site-title, .site-subtitle, .custom-logo-image {
+    opacity: 0;
+    position: relative;
+    top: -10px;
+  }
+}
