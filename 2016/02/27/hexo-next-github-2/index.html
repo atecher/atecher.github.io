@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://qn.atecher.com/mts/20180418/3853306649789440">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://qn.atecher.com/mts/20180418/3853306649789440">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://qn.atecher.com/mts/20180418/3853306649789440">
+  <link rel="mask-icon" href="https://qn.atecher.com/mts/20180418/3853306649789440" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.atecher.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="上一篇文章我们说了怎么在我们的电脑上安装和使用Hexo，这次我想介绍下怎么将hexo部署到github上，这篇文章中我将介绍两种方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo+next+GitHub搭建静态博客(二)-部署到github">
+<meta property="og:url" content="https://blog.atecher.com/2016/02/27/hexo-next-github-2/index.html">
+<meta property="og:site_name" content="Atecher&#39;s blog">
+<meta property="og:description" content="上一篇文章我们说了怎么在我们的电脑上安装和使用Hexo，这次我想介绍下怎么将hexo部署到github上，这篇文章中我将介绍两种方法。">
+<meta property="og:locale">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306650002432">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306656179200">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306661143552">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306661618688">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306665387008">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306665468928">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306667451392">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306667877377">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306667877376">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306664092672">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306634912768">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306634945536">
+<meta property="og:image" content="https://qn.atecher.com/mts/20180418/3853306635273216">
+<meta property="article:published_time" content="2016-02-27T12:33:10.000Z">
+<meta property="article:modified_time" content="2024-03-16T06:08:59.362Z">
+<meta property="article:author" content="Atecher">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Next">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qn.atecher.com/mts/20180418/3853306650002432">
+
+
+<link rel="canonical" href="https://blog.atecher.com/2016/02/27/hexo-next-github-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://blog.atecher.com/2016/02/27/hexo-next-github-2/","path":"2016/02/27/hexo-next-github-2/","title":"hexo+next+GitHub搭建静态博客(二)-部署到github"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hexo+next+GitHub搭建静态博客(二)-部署到github | Atecher's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/atecher" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Atecher's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">胸有丘壑,目有山川</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#github%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">github准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E8%B4%A6%E5%8F%B7"><span class="nav-number">1.1.</span> <span class="nav-text">注册账号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">第一种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%BD%91%E7%AB%99"><span class="nav-number">2.1.</span> <span class="nav-text">生成网站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">本地服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E7%BD%91%E7%AB%99"><span class="nav-number">2.3.</span> <span class="nav-text">部署网站</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">第二种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTravis-CI"><span class="nav-number">3.1.</span> <span class="nav-text">什么是Travis CI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#github%E4%BB%A3%E7%A0%81%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">github代码位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E7%94%A8%E8%A6%81%E6%9E%84%E5%BB%BA%E7%9A%84%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.3.</span> <span class="nav-text">启用要构建的项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8Travis-CI%E9%85%8D%E7%BD%AEGithub%E7%9A%84Access-Token"><span class="nav-number">3.4.</span> <span class="nav-text">在Travis CI配置Github的Access Token</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8github%E4%B8%8A%E7%94%9F%E6%88%90Access-Token"><span class="nav-number">3.4.1.</span> <span class="nav-text">在github上生成Access Token</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9C%A8Travis-CI%E9%85%8D%E7%BD%AE"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">在Travis CI配置</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Atecher"
+      src="//qn.atecher.com/mts/20180418/3853594527466496">
+  <p class="site-author-name" itemprop="name">Atecher</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/atecher" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;atecher" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/atecher" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;atecher" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.jianshu.com/u/649bbf6c8e00" title="Jianshu → http:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;649bbf6c8e00" rel="noopener" target="_blank"><i class="far fa-keyboard fa-fw"></i>Jianshu</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://blog.atecher.com/2016/02/27/hexo-next-github-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="//qn.atecher.com/mts/20180418/3853594527466496">
+      <meta itemprop="name" content="Atecher">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Atecher's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hexo+next+GitHub搭建静态博客(二)-部署到github | Atecher's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hexo+next+GitHub搭建静态博客(二)-部署到github
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-02-27 12:33:10" itemprop="dateCreated datePublished" datetime="2016-02-27T12:33:10+00:00">2016-02-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-16 06:08:59" itemprop="dateModified" datetime="2024-03-16T06:08:59+00:00">2024-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hexo%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">Hexo教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>上一篇文章我们说了怎么在我们的电脑上安装和使用Hexo，这次我想介绍下怎么将hexo部署到github上，这篇文章中我将介绍两种方法。</p>
+<span id="more"></span>
+<p>介绍这两种方法之前，我们先将准备工作做一下。</p>
+<h3 id="github准备工作"><a href="#github准备工作" class="headerlink" title="github准备工作"></a>github准备工作</h3><h4 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h4><p>如果你已经有了github账号，这一步可以忽略，注册的细节我就不多说了。</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>新建Repository</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306650002432"><img src="//qn.atecher.com/mts/20180418/3853306650002432" alt="Image-1"></a></p>
+<p>创建yourname.github.io，打勾表示名称可用</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306656179200"><img src="//qn.atecher.com/mts/20180418/3853306656179200" alt="Image-2"></a></p>
+<h3 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h3><h4 id="生成网站"><a href="#生成网站" class="headerlink" title="生成网站"></a>生成网站</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>此时会将&#x2F;source的.md文件生成到&#x2F;public中，形成网站的静态文件。</p>
+<h4 id="本地服务器"><a href="#本地服务器" class="headerlink" title="本地服务器"></a>本地服务器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输入<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 即可查看网站。</p>
+<p>可修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server -p 3000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>此时，输入<a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000</a> 查看网站。</p>
+<h4 id="部署网站"><a href="#部署网站" class="headerlink" title="部署网站"></a>部署网站</h4><p>第一步需要在_config.yml中配置你所要部署的站点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/mamadown/mamadown.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<p>部署命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>部署网站之前需要生成静态文件，也可以用$ hexo generate -d直接生成并部署。</p>
+<p>到此为止完成网站的雏形。输入yourname.github.io可访问博客主页。例如：<a target="_blank" rel="noopener" href="http://atecher.github.io/">http://atecher.github.io/</a> 。</p>
+<p>部署的时候有可能会出错，别急，加这一步操作就ok了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>PS:这种方式，如果需要多台电脑之间操作blog，会很麻烦。个人建议使用第二种方式。</p>
+<h3 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h3><p>第一种方法，我们需要每次写完文章后自己进行编译静态文件并部署到github上。那么能不能借助免费的开源持续集成构建项目来完成自动编译部署呢？</p>
+<p>能，那就是Travis CI。</p>
+<h4 id="什么是Travis-CI"><a href="#什么是Travis-CI" class="headerlink" title="什么是Travis CI"></a>什么是Travis CI</h4><p>Travis CI 是目前新兴的开源持续集成构建项目，它与jenkins，Go的很明显的特别在于采用yaml格式，同时他是在在线的服务，不像jenkins需要你本地打架服务器，简洁清新独树一帜。目前大多数的github项目都已经移入到Travis CI的构建队列中，据说Travis CI每天运行超过4000次完整构建。对于做开源项目或者github的使用者，如果你的项目还没有加入Travis CI构建队列，那么我真的想对你说out了。</p>
+<h4 id="github代码位置"><a href="#github代码位置" class="headerlink" title="github代码位置"></a>github代码位置</h4><p>使用Travis CI需要在github上创建两个分支，一个是默认的master，还有一个是blog-source分支。</p>
+<p>master：博客的静态文件，也就是hexo生成后的HTML文件，因为要使用Github Pages服务，所以他规定的网页文件必须是在master分支。</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306661143552"><img src="//qn.atecher.com/mts/20180418/3853306661143552" alt="Image-6"></a></p>
+<p>blog-source：是博客的源代码，我们需要将hexo的代码上传到这个分支。</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306661618688"><img src="//qn.atecher.com/mts/20180418/3853306661618688" alt="Image-7"></a></p>
+<p>我们只需要将你的blog clone到本地，在blog-source分支写blog，写完之后it push到github，然后Travis自动构建，构建完成后自动推送到Github上的master分支下。</p>
+<h4 id="启用要构建的项目"><a href="#启用要构建的项目" class="headerlink" title="启用要构建的项目"></a>启用要构建的项目</h4><p>首先如果你要使用Travis CI，你必须要GIthub账号（好像Travis CI只支持构建github的项目）和一个项目。</p>
+<p>使用Github账号登录<a target="_blank" rel="noopener" href="https://travis-ci.org/">Travis CI</a>官网，如下图:</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306665387008"><img src="//qn.atecher.com/mts/20180418/3853306665387008" alt="Image-9"></a></p>
+<p>登录完后会进入如下界面 </p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306665468928"><img src="//qn.atecher.com/mts/20180418/3853306665468928" alt="Image-10"></a></p>
+<p>当然如果你以前没用使用过，所以你登录完是没有上图红框内的内容的，这里是因为我在写这篇博客前已经使用了，所以会有这些内容。</p>
+<p>接下来我们点击My Repositories旁边的+，意思是添加一个要自动构建的仓库，点击后就会来到如下界面：</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306667451392"><img src="//qn.atecher.com/mts/20180418/3853306667451392" alt="Image-11"></a></p>
+<p>可以看到这个界面会显示当前github账号的所以项目，如果没有显示，点击右上角的“Sync account”按钮，就可以同步过来了。</p>
+<p>下一步肯定是要开启你需要构建的仓库，大家可以看到红框圈起来的部分，就是我开启了我的博客。</p>
+<p>开启后我们还需要进行一些配置，操作如下：</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306667877377"><img src="//qn.atecher.com/mts/20180418/3853306667877377" alt="Image-12"></a></p>
+<p>点击红框的那个菜单按钮，就会出现这样的下拉菜单，我们选择设置，来到这个界面，我们按照如下勾选：</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306667877376"><img src="//qn.atecher.com/mts/20180418/3853306667877376" alt="Image-13"></a></p>
+<p>Build only if .travis.yml is present：是只有在.travis.yml文件中配置的分支改变了才构建；<br>Build branch updates：当推送完这个分支后开始构建；</p>
+<p>到这一步， 我们已经开启了要构建的仓库，但是还有个问题就是，构建完后，我们怎么将生成的文件推送到github上呢，如果不能推送那我们就不需要倒腾一番来使用Travis CI服务了，我们要的结果就是，我们只要想github一push，他就自动构建并push静态文件到github pages呢，那么下面要解决的就是Travis CI怎么访问github了。</p>
+<h4 id="在Travis-CI配置Github的Access-Token"><a href="#在Travis-CI配置Github的Access-Token" class="headerlink" title="在Travis CI配置Github的Access Token"></a>在Travis CI配置Github的Access Token</h4><p>标题已经说得很明白了吧，我们需要在Travis上配置Access Token，这样我们就可以在他构建完后自动push到github pages了。</p>
+<h5 id="在github上生成Access-Token"><a href="#在github上生成Access-Token" class="headerlink" title="在github上生成Access Token"></a>在github上生成Access Token</h5><p>首先我们来到github的设置界面，点击到Personal access tokens页面，点击右上角的Generate new token按钮会重新生成一个，点击后他会叫你输入密码，然后来到如下界面，给他去一个名字，下面是勾选一些权限。</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306664092672"><img src="//qn.atecher.com/mts/20180418/3853306664092672" alt="Image-14"></a></p>
+<p>生成完后，你需要拷贝下来，只有这时候他才显示，下载进来为了安全他就不会显示了，如果忘了只能重新生成一个了，拷贝完以后我们需要到Travis CI网站配置下</p>
+<h6 id="在Travis-CI配置"><a href="#在Travis-CI配置" class="headerlink" title="在Travis CI配置"></a>在Travis CI配置</h6><p>配置界面还是在项目的setting里面，如下图：</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306634912768"><img src="//qn.atecher.com/mts/20180418/3853306634912768" alt="Image-15"></a></p>
+<p>至于为什么我们要在这里配置，我想大家肯定应该明白了，写在程序里不安全，配置到这里相当于一个环境变量，我们在构建的时候就可以引用他。<br>到这里我已经配置了要构建的仓库和要访问的Token，但是问题来了，他知道怎么构建，怎么生成静态文件吗，怎么push的github pages，又push到那个仓库吗，所以这里我们还需要在源代码的仓库里创建一个.travis.yml配置文件，放到源代码的根目录，如下图：</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306634945536"><img src="//qn.atecher.com/mts/20180418/3853306634945536" alt="Image-16"></a></p>
+<p>文件内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">language: node_js</span><br><span class="line">node_js: stable</span><br><span class="line"></span><br><span class="line"># S: Build Lifecycle</span><br><span class="line">install:</span><br><span class="line">  - npm install</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#before_script:</span><br><span class="line"> # - npm install -g gulp</span><br><span class="line"></span><br><span class="line">script:</span><br><span class="line">  - hexo g</span><br><span class="line"></span><br><span class="line">after_script:</span><br><span class="line">  - cd ./public</span><br><span class="line">  - git init</span><br><span class="line">  - git config user.name &quot;your nickname&quot;</span><br><span class="line">  - git config user.email &quot;your email&quot;</span><br><span class="line">  - git add .</span><br><span class="line">  - git commit -m &quot;Update docs&quot;</span><br><span class="line">  - git push --force --quiet &quot;https://$&#123;GH_TOKEN&#125;@$&#123;GH_REF&#125;&quot; master:master</span><br><span class="line"># E: Build LifeCycle</span><br><span class="line"></span><br><span class="line">branches:</span><br><span class="line">  only:</span><br><span class="line">    - blog-source</span><br><span class="line">env:</span><br><span class="line"> global:</span><br><span class="line">   - GH_REF: github.com/atecher/atecher.github.io.git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>记得配置一下你的昵称、邮箱和你的git地址(GH_REF)。</p>
+<p>到这一步，我们可以写一篇文章，添加到你的博客的_posts目录下，然后commit并push到你的Github上。</p>
+<p>如果不出意外，我们可以就可以在Travis CI网站看到他已经在构建了，如下图：</p>
+<p><a target="_blank" rel="noopener" href="//qn.atecher.com/mts/20180418/3853306635273216"><img src="//qn.atecher.com/mts/20180418/3853306635273216" alt="Image-17"></a></p>
+<p>构建完成后，我们去blog上就能看到这篇文章了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Next/" rel="tag"># Next</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/02/22/hexo-next-github-1/" rel="prev" title="hexo+next+GitHub搭建静态博客(一)-本地服务搭建">
+                  <i class="fa fa-chevron-left"></i> hexo+next+GitHub搭建静态博客(一)-本地服务搭建
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/04/02/use-debian-to-build-your-ngrok-server/" rel="next" title="搭建自己的ngrok服务器-debian版">
+                  搭建自己的ngrok服务器-debian版 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Atecher</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

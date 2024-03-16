@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://qn.atecher.com/mts/20180418/3853306649789440">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://qn.atecher.com/mts/20180418/3853306649789440">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://qn.atecher.com/mts/20180418/3853306649789440">
+  <link rel="mask-icon" href="https://qn.atecher.com/mts/20180418/3853306649789440" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.atecher.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="volatile两大作用  保证内存可见性 防止指令重排  此外需注意volatile并不保证操作的原子性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-Thread-volatile">
+<meta property="og:url" content="https://blog.atecher.com/2017/09/22/Java-Thread-volatile/index.html">
+<meta property="og:site_name" content="Atecher&#39;s blog">
+<meta property="og:description" content="volatile两大作用  保证内存可见性 防止指令重排  此外需注意volatile并不保证操作的原子性。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-09-22T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-16T06:08:59.358Z">
+<meta property="article:author" content="Atecher">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="volatile">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.atecher.com/2017/09/22/Java-Thread-volatile/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://blog.atecher.com/2017/09/22/Java-Thread-volatile/","path":"2017/09/22/Java-Thread-volatile/","title":"Java-Thread-volatile"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java-Thread-volatile | Atecher's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+	<a target="_blank" rel="noopener" href="https://github.com/atecher" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Atecher's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">胸有丘壑,目有山川</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">内存可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">内存可见性带来的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E5%86%85%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">提供内存可见性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92"><span class="nav-number">2.</span> <span class="nav-text">指令重排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.2.</span> <span class="nav-text">指令重排带来的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92"><span class="nav-number">3.</span> <span class="nav-text">防止指令重排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE"><span class="nav-number">4.1.</span> <span class="nav-text">volatile使用建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile%E5%92%8Csynchronized%E5%8C%BA%E5%88%AB"><span class="nav-number">4.2.</span> <span class="nav-text">volatile和synchronized区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%93%E4%B8%94%E4%BB%85%E5%BD%93%E6%BB%A1%E8%B6%B3%E4%BB%A5%E4%B8%8B%E6%89%80%E6%9C%89%E6%9D%A1%E4%BB%B6%E6%97%B6-%E6%89%8D%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8volatile%E5%8F%98%E9%87%8F"><span class="nav-number">4.3.</span> <span class="nav-text">当且仅当满足以下所有条件时,才应该使用volatile变量:</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Atecher"
+      src="//qn.atecher.com/mts/20180418/3853594527466496">
+  <p class="site-author-name" itemprop="name">Atecher</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/atecher" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;atecher" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/atecher" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;atecher" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.jianshu.com/u/649bbf6c8e00" title="Jianshu → http:&#x2F;&#x2F;www.jianshu.com&#x2F;u&#x2F;649bbf6c8e00" rel="noopener" target="_blank"><i class="far fa-keyboard fa-fw"></i>Jianshu</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://blog.atecher.com/2017/09/22/Java-Thread-volatile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="//qn.atecher.com/mts/20180418/3853594527466496">
+      <meta itemprop="name" content="Atecher">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Atecher's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java-Thread-volatile | Atecher's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java-Thread-volatile
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-09-22 00:00:00" itemprop="dateCreated datePublished" datetime="2017-09-22T00:00:00+00:00">2017-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-16 06:08:59" itemprop="dateModified" datetime="2024-03-16T06:08:59+00:00">2024-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>volatile两大作用</p>
+<ul>
+<li>保证内存可见性</li>
+<li>防止指令重排</li>
+</ul>
+<p>此外需注意volatile并不保证操作的原子性。</p>
+<span id="more"></span>
+
+<h2 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><strong>JVM内存模型:主内存和线程独立的工作内存</strong></p>
+<p>Java内存模型规定,对于多个线程共享的变量,存储在主内存当中,每个线程都有自己独立的工作内存(比如CPU的寄存器),线程只能访问自己的工作内存,不可以访问其它线程的工作内存。</p>
+<p>工作内存中保存了主内存共享变量的副本,线程要操作这些共享变量,只能通过操作工作内存中的副本来实现,操作完毕之后再同步回到主内存当中。</p>
+<p>如何保证多个线程操作主内存的数据完整性是一个难题,Java内存模型也规定了工作内存与主内存之间交互的协议,定义了8种原子操作:</p>
+<ol>
+<li>lock:将主内存中的变量锁定,为一个线程所独占</li>
+<li>unclock:将lock加的锁定解除,此时其它的线程可以有机会访问此变量</li>
+<li>read:将主内存中的变量值读到工作内存当中</li>
+<li>load:将read读取的值保存到工作内存中的变量副本中。</li>
+<li>use:将值传递给线程的代码执行引擎</li>
+<li>assign:将执行引擎处理返回的值重新赋值给变量副本</li>
+<li>store:将变量副本的值存储到主内存中。</li>
+<li>write:将store存储的值写入到主内存的共享变量当中。</li>
+</ol>
+<p><strong>通过上面Java内存模型的概述,我们会注意到这么一个问题,每个线程在获取锁之后会在自己的工作内存来操作共享变量,操作完成之后将工作内存中的副本回写到主内存,并且在其它线程从主内存将变量同步回自己的工作内存之前,共享变量的改变对其是不可见的</strong>。其他线程的本地内存中的变量已经是过时的,并不是更新后的值。</p>
+<h3 id="内存可见性带来的问题"><a href="#内存可见性带来的问题" class="headerlink" title="内存可见性带来的问题"></a>内存可见性带来的问题</h3><p>很多时候我们需要一个线程对共享变量的改动,其它线程也需要立即得知这个改动该怎么办呢？下面举两个例子说明内存可见性的重要性:</p>
+<p>例子1<br>有一个全局的状态变量open:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> open=<span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<p>这个变量用来描述对一个资源的打开关闭状态,true表示打开,false表示关闭,假设有一个线程A,在执行一些操作后将open修改为false:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程A</span></span><br><span class="line">resource.close();</span><br><span class="line">open = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+<p>线程B随时关注open的状态,当open为true的时候通过访问资源来进行一些操作:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程B</span></span><br><span class="line"><span class="keyword">while</span>(open) &#123;</span><br><span class="line">    doSomethingWithResource(resource);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当A把资源关闭的时候,open变量对线程B是不可见的,如果此时open变量的改动尚未同步到线程B的工作内存中,那么线程B就会用一个已经关闭了的资源去做一些操作,因此产生错误。</p>
+<p>例子2<br>下面是一个通过布尔标志判断线程是否结束的例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CancelThreadTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">PrimeGenerator</span> <span class="variable">gen</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PrimeGenerator</span>();</span><br><span class="line">        newThread(gen).start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">           Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">           gen.cancel();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PrimeGenerator</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> cancelled;     </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span>(!cancelled) &#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;Running...&quot;</span>);</span><br><span class="line">           <span class="comment">//doingsomething here...</span></span><br><span class="line">        &#125;         </span><br><span class="line">    &#125;      </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">cancel</span><span class="params">()</span>&#123;cancelled = <span class="literal">true</span>;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主线程中设置PrimeGenerator线程的是否取消标识,PrimeGenerator线程检测到这个标识后就会结束线程,由于主线程修改cancelled变量的内存可见性,主线程修改cancelled标识后并不马上同步回主内存,所以PrimeGenerator线程结束的时间难以把控(最终是一定会同步回主内存,让PrimeGenerator线程结束)。</p>
+<p>如果PrimeGenerator线程执行一些比较关键的操作,主线程希望能够及时终止它,这时将cenceled用volatile关键字修饰就是必要的。</p>
+<p><strong>特别注意:上面演示这个并不是正确的取消线程的方法,因为一旦PrimeGenerator线程中包含BolckingQueue.put()等阻塞方法,那么将可能永远不会去检查cancelled标识,导致线程永远不会退出。正确的方法参见另外一篇关于如何正确终止线程的方法。</strong></p>
+<h3 id="提供内存可见性"><a href="#提供内存可见性" class="headerlink" title="提供内存可见性"></a>提供内存可见性</h3><p>volatile保证可见性的原理是在每次访问变量时都会进行一次刷新,因此每次访问都是主内存中最新的版本。所以volatile关键字的作用之一就是保证变量修改的实时可见性。</p>
+<p>针对上面的例子1:<br>要求一个线程对open的改变,其他的线程能够立即可见,Java为此提供了volatile关键字,在声明open变量的时候加入volatile关键字就可以保证open的内存可见性,即open的改变对所有的线程都是立即可见的。<br>备注:也可以通过提供synchronized同步的open变量的Get&#x2F;Set方法解决此内存可见性问题,因为要Get变量open,必须等Set方完全释放锁之后。后面将介绍到两者的区别。</p>
+<p>针对上面的例子2:<br>将cancelled标志设置的volatile保证主线程针对cancelled标识的修改能够让PrimeGenerator线程立马看到。</p>
+<h2 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>指令重排序是JVM为了优化指令,提高程序运行效率,在不影响单线程程序执行结果的前提下,尽可能地提高并行度。编译器、处理器也遵循这样一个目标。注意是单线程。多线程的情况下指令重排序就会给程序员带来问题。</p>
+<p>不同的指令间可能存在数据依赖。比如下面计算圆的面积的语句:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">r</span> <span class="operator">=</span> <span class="number">2.3d</span>;<span class="comment">//(1)</span></span><br><span class="line"><span class="type">double</span> <span class="variable">pi</span> <span class="operator">=</span><span class="number">3.1415926</span>; <span class="comment">//(2)</span></span><br><span class="line"><span class="type">double</span> <span class="variable">area</span> <span class="operator">=</span> pi* r * r; <span class="comment">//(3)</span></span><br></pre></td></tr></table></figure>
+<p>area的计算依赖于r与pi两个变量的赋值指令。而r与pi无依赖关系。</p>
+<p>as-if-serial语义是指:不管如何重排序(编译器与处理器为了提高并行度),(单线程)程序的结果不能被改变。这是编译器、Runtime、处理器必须遵守的语义。</p>
+<p>虽然,(1) – happensbefore -&gt; (2),(2) – happens before -&gt; (3),但是计算顺序(1)(2)(3)与(2)(1)(3) 对于r、pi、area变量的结果并无区别。编译器、Runtime在优化时可以根据情况重排序(1)与(2),而丝毫不影响程序的结果。</p>
+<p>指令重排序包括编译器重排序和运行时重排序。</p>
+<h3 id="指令重排带来的问题"><a href="#指令重排带来的问题" class="headerlink" title="指令重排带来的问题"></a>指令重排带来的问题</h3><p>如果一个操作不是原子的,就会给JVM留下重排的机会。下面看几个例子:</p>
+<p>例子1:A线程指令重排导致B线程出错<br>对于在同一个线程内,这样的改变是不会对逻辑产生影响的,但是在多线程的情况下指令重排序会带来问题。看下面这个情景:</p>
+<p>在线程A中:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">context = loadContext();</span><br><span class="line">inited = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在线程B中:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(!inited )&#123; <span class="comment">//根据线程A中对inited变量的修改决定是否使用context变量</span></span><br><span class="line">   sleep(<span class="number">100</span>);</span><br><span class="line">&#125;</span><br><span class="line">doSomethingwithconfig(context);</span><br></pre></td></tr></table></figure>
+
+<p>假设线程A中发生了指令重排序:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inited = <span class="literal">true</span>;</span><br><span class="line">context = loadContext();</span><br></pre></td></tr></table></figure>
+<p>那么B中很可能就会拿到一个尚未初始化或尚未初始化完成的context,从而引发程序错误。</p>
+<p>例子2:指令重排导致单例模式失效<br>我们都知道一个经典的懒加载方式的双重判断单例模式:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123; &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="keyword">if</span>(instance == <span class="literal">null</span>) &#123;</span><br><span class="line">        synchronzied(Singleton.class) &#123;</span><br><span class="line">           <span class="keyword">if</span>(instance == <span class="literal">null</span>) &#123;</span><br><span class="line">               instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();  <span class="comment">//非原子操作</span></span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> instance;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看似简单的一段赋值语句:instance&#x3D; new Singleton(),但是很不幸它并不是一个原子操作,其实际上可以抽象为下面几条JVM指令:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">memory =allocate();    //1:分配对象的内存空间 </span><br><span class="line">ctorInstance(memory);  //2:初始化对象 </span><br><span class="line">instance =memory;     //3:设置instance指向刚分配的内存地址</span><br></pre></td></tr></table></figure>
+<p>上面操作2依赖于操作1,但是操作3并不依赖于操作2,所以JVM是可以针对它们进行指令的优化重排序的,经过重排序后如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">memory =allocate();    //1:分配对象的内存空间 </span><br><span class="line">instance =memory;     //3:instance指向刚分配的内存地址,此时对象还未初始化</span><br><span class="line">ctorInstance(memory);  //2:初始化对象</span><br></pre></td></tr></table></figure>
+<p>可以看到指令重排之后,instance指向分配好的内存放在了前面,而这段内存的初始化被排在了后面。<br>在线程A执行这段赋值语句,在初始化分配对象之前就已经将其赋值给instance引用,恰好另一个线程进入方法判断instance引用不为null,然后就将其返回使用,导致出错。</p>
+<h2 id="防止指令重排"><a href="#防止指令重排" class="headerlink" title="防止指令重排"></a>防止指令重排</h2><p>除了前面内存可见性中讲到的volatile关键字可以保证变量修改的可见性之外,还有另一个重要的作用:<strong>在JDK1.5之后,可以使用volatile变量禁止指令重排序.</strong></p>
+<p>解决方案:例子1中的inited和例子2中的instance以关键字volatile修饰之后,就会阻止JVM对其相关代码进行指令重排,这样就能够按照既定的顺序指执行。</p>
+<p>volatile关键字通过提供“<strong>内存屏障</strong>”的方式来防止指令被重排序,为了实现volatile的内存语义,编译器在生成字节码时,会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。</p>
+<p>大多数的处理器都支持内存屏障的指令。</p>
+<p>对于编译器来说,发现一个最优布置来最小化插入屏障的总数几乎不可能,为此,Java内存模型采取保守策略。下面是基于保守策略的JMM内存屏障插入策略:</p>
+<ul>
+<li>在每个volatile写操作的前面插入一个StoreStore屏障。</li>
+<li>在每个volatile写操作的后面插入一个StoreLoad屏障。</li>
+<li>在每个volatile读操作的后面插入一个LoadLoad屏障。</li>
+<li>在每个volatile读操作的后面插入一个LoadStore屏障。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>volatile是轻量级同步机制</p>
+<p>相对于synchronized块的代码锁,volatile应该是提供了一个轻量级的针对共享变量的锁,当我们在多个线程间使用共享变量进行通信的时候需要考虑将共享变量用volatile来修饰。</p>
+<p>volatile是一种稍弱的同步机制,在访问volatile变量时不会执行加锁操作,也就不会执行线程阻塞,因此volatilei变量是一种比synchronized关键字更轻量级的同步机制。</p>
+<h3 id="volatile使用建议"><a href="#volatile使用建议" class="headerlink" title="volatile使用建议"></a>volatile使用建议</h3><p>使用建议:在两个或者更多的线程需要访问的成员变量上使用volatile。当要访问的变量已在synchronized代码块中,或者为常量时,没必要使用volatile。</p>
+<p>由于使用volatile屏蔽掉了JVM中必要的代码优化,所以在效率上比较低,因此一定在必要时才使用此关键字。</p>
+<h3 id="volatile和synchronized区别"><a href="#volatile和synchronized区别" class="headerlink" title="volatile和synchronized区别"></a>volatile和synchronized区别</h3><ol>
+<li>volatile不会进行加锁操作:<br>volatile变量是一种稍弱的同步机制在访问volatile变量时不会执行加锁操作,因此也就不会使执行线程阻塞,因此volatile变量是一种比synchronized关键字更轻量级的同步机制。</li>
+<li>volatile变量作用类似于同步变量读写操作:<br>从内存可见性的角度看,写入volatile变量相当于退出同步代码块,而读取volatile变量相当于进入同步代码块。</li>
+<li>volatile不如synchronized安全:<br>在代码中如果过度依赖volatile变量来控制状态的可见性,通常会比使用锁的代码更脆弱,也更难以理解。仅当volatile变量能简化代码的实现以及对同步策略的验证时,才应该使用它。一般来说,用同步机制会更安全些。</li>
+<li>volatile无法同时保证内存可见性和原子性:<br>加锁机制(即同步机制)既可以确保可见性又可以确保原子性,而volatile变量只能确保可见性,原因是声明为volatile的简单变量如果当前值与该变量以前的值相关,那么volatile关键字不起作用,也就是说如下的表达式都不是原子操作:“count++”、“count &#x3D; count+1”。</li>
+</ol>
+<h3 id="当且仅当满足以下所有条件时-才应该使用volatile变量"><a href="#当且仅当满足以下所有条件时-才应该使用volatile变量" class="headerlink" title="当且仅当满足以下所有条件时,才应该使用volatile变量:"></a>当且仅当满足以下所有条件时,才应该使用volatile变量:</h3><ol>
+<li>对变量的写入操作不依赖变量的当前值,或者你能确保只有单个线程更新变量的值。</li>
+<li>该变量没有包含在具有其他变量的不变式中。</li>
+</ol>
+<p>总结:在需要同步的时候,第一选择应该是synchronized关键字,这是最安全的方式,尝试其他任何方式都是有风险的。尤其在、jdK1.5之后,对synchronized同步机制做了很多优化,如:自适应的自旋锁、锁粗化、锁消除、轻量级锁等,使得它的性能明显有了很大的提升。</p>
+<p>ref:<br><a target="_blank" rel="noopener" href="http://www.importnew.com/23535.html">http://www.importnew.com/23535.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/volatile/" rel="tag"># volatile</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/09/22/Mysql-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E6%9C%80%E4%BD%B320+%E6%9D%A1%E7%BB%8F%E9%AA%8C/" rel="prev" title="Mysql-性能优化的最佳20+条经验">
+                  <i class="fa fa-chevron-left"></i> Mysql-性能优化的最佳20+条经验
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/09/22/Java-Proxy/" rel="next" title="Java-Proxy">
+                  Java-Proxy <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Atecher</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
