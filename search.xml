@@ -6595,34 +6595,6 @@ this is the second sub!
       </tags>
   </entry>
   <entry>
-    <title>hexo+next+GitHub搭建静态博客(三)-添加tags和categories</title>
-    <url>/2016/04/23/hexo-next-github-3/</url>
-    <content><![CDATA[<p>之前我们已经写了怎么安装设置Hexo和怎么部署到gitHub上，下面我们说一下怎么完善我们的blog，今天先介绍下怎么添加分类和标签页面</p>
-<span id="more"></span>
-
-<h3 id="创建Tag页面"><a href="#创建Tag页面" class="headerlink" title="创建Tag页面"></a>创建Tag页面</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new page &quot;tags&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>编辑刚新建的页面，将页面的类型设置为tags，主题将自动为这个页面显示标签云。页面内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Tagcloud</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<p>注意：如果有启用多说 或者Disqus评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Tagcloud</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<h3 id="创建Categories页面"><a href="#创建Categories页面" class="headerlink" title="创建Categories页面"></a>创建Categories页面</h3><p>创建分类页和Tag页是差不多的步骤。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new page &quot;categories&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加菜单"><a href="#添加菜单" class="headerlink" title="添加菜单"></a>添加菜单</h3><p>在菜单中添加链接。编辑 主题配置文件 ，添加 tags 到 menu 中，如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: /</span><br><span class="line">  categories: /categories/</span><br><span class="line">  #about: /about/</span><br><span class="line">  archives: /archives/</span><br><span class="line">  tags: /tags/</span><br><span class="line">  #sitemap: /sitemap.xml</span><br><span class="line">  #commonweal: /404.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Hexo教程</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo+next+GitHub搭建静态博客(二)-部署到github</title>
     <url>/2016/02/27/hexo-next-github-2/</url>
     <content><![CDATA[<p>上一篇文章我们说了怎么在我们的电脑上安装和使用Hexo，这次我想介绍下怎么将hexo部署到github上，这篇文章中我将介绍两种方法。</p>
@@ -6703,6 +6675,34 @@ this is the second sub!
       <tags>
         <tag>Hexo</tag>
         <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo+next+GitHub搭建静态博客(三)-添加tags和categories</title>
+    <url>/2016/04/23/hexo-next-github-3/</url>
+    <content><![CDATA[<p>之前我们已经写了怎么安装设置Hexo和怎么部署到gitHub上，下面我们说一下怎么完善我们的blog，今天先介绍下怎么添加分类和标签页面</p>
+<span id="more"></span>
+
+<h3 id="创建Tag页面"><a href="#创建Tag页面" class="headerlink" title="创建Tag页面"></a>创建Tag页面</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new page &quot;tags&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编辑刚新建的页面，将页面的类型设置为tags，主题将自动为这个页面显示标签云。页面内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Tagcloud</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果有启用多说 或者Disqus评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Tagcloud</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<h3 id="创建Categories页面"><a href="#创建Categories页面" class="headerlink" title="创建Categories页面"></a>创建Categories页面</h3><p>创建分类页和Tag页是差不多的步骤。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new page &quot;categories&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加菜单"><a href="#添加菜单" class="headerlink" title="添加菜单"></a>添加菜单</h3><p>在菜单中添加链接。编辑 主题配置文件 ，添加 tags 到 menu 中，如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: /</span><br><span class="line">  categories: /categories/</span><br><span class="line">  #about: /about/</span><br><span class="line">  archives: /archives/</span><br><span class="line">  tags: /tags/</span><br><span class="line">  #sitemap: /sitemap.xml</span><br><span class="line">  #commonweal: /404.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Hexo教程</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
