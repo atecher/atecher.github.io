@@ -4,13 +4,12 @@ on:
   push:
     branches:
       - blog-source
-
 jobs:
-  build-to-deploy:
+  build:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - name: Checkout source
+      - name: Use Node.js 16.x
         uses: actions/checkout@v3.0.2
         with:
           ref: blog-source
@@ -19,7 +18,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16.x'
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Build
+        run: npm run build
 
       - name: Setup Hexo
         env:
@@ -47,5 +50,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.0
         with:
           github_token: ${{secrets.GH_TOKEN}}
+          token: ${{secrets.GH_TOKEN}}
           branch: master
           folder: public
