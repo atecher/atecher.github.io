@@ -153,18 +153,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -213,6 +213,483 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.atecher.com/2023/03/21/storedb-select/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="//qn.atecher.com/mts/20180418/3853594527466496">
+      <meta itemprop="name" content="Atecher">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Atecher's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Atecher's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/21/storedb-select/" class="post-title-link" itemprop="url">互联网存储选型推荐</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-21 12:33:10" itemprop="dateCreated datePublished" datetime="2023-03-21T12:33:10+00:00">2023-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="推荐分析"><a href="#推荐分析" class="headerlink" title="推荐分析"></a>推荐分析</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>业界常用场景</th>
+<th>推荐场景</th>
+<th>推荐分析</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>redis</td>
+<td>内存数据库、缓存、秒杀等高并发场景</td>
+<td>1、需要支持高并发读写场景</td>
+<td></td>
+<td>主要特征依然是缓存数据，宕机存在短时间内的数据丢失，重要数据要先保证落库（mysql）</td>
+</tr>
+<tr>
+<td>tair</td>
+<td>一种基于ssd降本考虑的替代redis的方案</td>
+<td>1、同样支持高并发读写场景</td>
+<td>理论上性能是略低于redis的 1、实测除非对于rt要求近乎变态的场景，否则可选tair 2、暂时数据结构支持的有限（k&#x2F;v结构）</td>
+<td></td>
+</tr>
+<tr>
+<td>Elasticsearch</td>
+<td>1、日志查询 2、增强MySQL结构化查询 3、检索 4、比较小的聚合统计</td>
+<td>1、全文检索 2、增强结构化查询的场景</td>
+<td>1、近实时，写入后1s可见（默认） 2、统计聚合支持一般，数据量不能超过百万，聚合QPS支持不高 3、不支持事务 4、不支持联表，通过嵌套结构实现</td>
+<td></td>
+</tr>
+<tr>
+<td>Clickhouse</td>
+<td>1、时序数据库 2、OLAP，海量数据统计聚合分析</td>
+<td>1、监控 2、聚合分析</td>
+<td></td>
+<td>支持QPS不高</td>
+</tr>
+<tr>
+<td>hbase</td>
+<td>订单&#x2F;账单存储、用户画像、时空&#x2F;时序数据、对象存储、Cube分析、Feeds流等</td>
+<td>1、大表及高并发场景 单表数据量超过千万或者十亿百亿的时候，并且伴有较高并发，可以考虑使用HBase 2、单条记录查询 Hbase对Rowkey做了索引优化，数据量庞大的情况下，根据行键的查询效率依然很高，非常适合根据行键做单条记录的查询</td>
+<td>数据分析是HBase的弱项，如果主要的业务需求就是为了做数据分析，比如做报表，那么不建议直接使用HBase。</td>
+<td></td>
+</tr>
+<tr>
+<td>tidb</td>
+<td>1 对数据一致性及高可靠、系统高可用、可扩展性、容灾要求较高的金融行业属性的场景 2 对存储容量、可扩展性、并发要求较高的海量数据及高并发的 OLTP 场景 3 Real-time HTAP 场景（HTAP指oltp+olap） 4 数据汇聚、二次加工处理的场景</td>
+<td>1、高并发海量数据的读写场景</td>
+<td>1、分布式数据库对海量数据多个kv同时计算 2、集群扩展性很强</td>
+<td>1、单条sql处理能力弱于mysql 2、tidb-server对大规模的聚合查询需求的内存比较高</td>
+</tr>
+</tbody></table>
+<h3 id="基础特性"><a href="#基础特性" class="headerlink" title="基础特性"></a>基础特性</h3><table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>并发（读&#x2F;写）参见<a target="_blank" rel="noopener" href="https://missfresh.feishu.cn/docs/doccnlrZoGhwZnNdgf0kFdwkY8L#5OVdFj">存储选型标准</a>测试报告</th>
+<th>实时可见性</th>
+<th>事务支持</th>
+<th>高可用</th>
+<th>并发一致性</th>
+<th>动态扩缩</th>
+<th>分片聚合查询</th>
+<th>全文检索</th>
+<th>存储结构</th>
+<th>type</th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mysql</td>
+<td>取决于：表结构大小，以及表关联的复杂度等</td>
+<td>实时： 需关注事务级别</td>
+<td>ACID</td>
+<td>主库和高可用备库是半同步，跟业务从库是异步</td>
+<td>mvcc</td>
+<td>&#x2F;</td>
+<td>&#x2F;</td>
+<td>差</td>
+<td>行</td>
+<td>关系型</td>
+<td>sql</td>
+</tr>
+<tr>
+<td>mysql sharding</td>
+<td>依赖分片数</td>
+<td>实时：需关注事务级别</td>
+<td>默认本地事务</td>
+<td>主库和高可用备库是半同步，跟业务从库是异步</td>
+<td>mvcc</td>
+<td>&#x2F;</td>
+<td>&#x2F;</td>
+<td>差</td>
+<td>行</td>
+<td>关系型</td>
+<td>对sql的特殊预发支持有限</td>
+</tr>
+<tr>
+<td>redis</td>
+<td>高读写： (如果特殊场景要用uc的集群版本需注意：集群版本支持的qps跟内存的大小有关系：1g 3000qps)</td>
+<td>实时</td>
+<td>支持有限：不建议使用</td>
+<td>高可用版本：1、异步同步 2、aof策略appendfsync&#x3D;everysec</td>
+<td>支持部分原子性操作</td>
+<td>支持：纵向扩容（最大64g）</td>
+<td>&#x2F;</td>
+<td>&#x2F;</td>
+<td>kv&#x2F;list&#x2F;hash..</td>
+<td>内存数据库</td>
+<td></td>
+</tr>
+<tr>
+<td>Tair</td>
+<td>高读写</td>
+<td>实时</td>
+<td>不支持</td>
+<td>异步同步</td>
+<td>支持：版本控制、原子性计数</td>
+<td>支持：水平扩缩</td>
+<td>&#x2F;</td>
+<td>&#x2F;</td>
+<td>k&#x2F;v</td>
+<td>基于ssdkv存储</td>
+<td></td>
+</tr>
+<tr>
+<td>Elasticsearch</td>
+<td>单台 QPS：千级 TPS：千级 依赖机器数和shard数</td>
+<td>近实时（1s可见）</td>
+<td>不支持</td>
+<td>同步写从：从必须写入成功</td>
+<td>乐观锁</td>
+<td>支持</td>
+<td>支持：性能一般 聚合百万数据基本达到瓶颈，支持QPS较低</td>
+<td>好</td>
+<td>倒排索引 + 行</td>
+<td>文档型</td>
+<td>dsl</td>
+</tr>
+<tr>
+<td>Clickhouse</td>
+<td>查询：100左右 写入：速度大约为50MB&#x2F;s（必须批量）</td>
+<td>实时</td>
+<td>不支持</td>
+<td>高可用</td>
+<td></td>
+<td>&#x2F;</td>
+<td>分析性数据库：非常好</td>
+<td>差</td>
+<td>列</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>hbase</td>
+<td>高读写</td>
+<td>实时</td>
+<td>支持</td>
+<td>分布式高可用</td>
+<td>使用行锁+MVCC机制实现一致性</td>
+<td>支持：水平扩缩</td>
+<td>支持</td>
+<td>&#x2F;</td>
+<td>列</td>
+<td>分布式数据库</td>
+<td>Native Java API &#x2F;Thrift Gateway&#x2F;Rest Gateway</td>
+</tr>
+<tr>
+<td>tidb</td>
+<td>取决于：分布式集群的大小，并发性总体好于mysql（相对）</td>
+<td>实时：但是简单sql的处理能力不好</td>
+<td>ACID</td>
+<td>分布式高可用</td>
+<td>mvcc</td>
+<td>支持</td>
+<td>支持</td>
+<td>&#x2F;</td>
+<td>行+列</td>
+<td>关系型</td>
+<td>sql</td>
+</tr>
+</tbody></table>
+<h3 id="测试报告"><a href="#测试报告" class="headerlink" title="测试报告"></a>测试报告</h3><table>
+<thead>
+<tr>
+<th>存储</th>
+<th>常规指标</th>
+<th>性能测试报告</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>redis</td>
+<td>get&#x2F;set：写：7w+&#x2F;s;读：9w+&#x2F;s</td>
+<td></td>
+</tr>
+<tr>
+<td>mysql</td>
+<td>20张表，200万数据：tps：3000+；qps：50000+</td>
+<td></td>
+</tr>
+<tr>
+<td>tair</td>
+<td>get&#x2F;put：写：1w+&#x2F;s；读：3w+&#x2F;s</td>
+<td></td>
+</tr>
+<tr>
+<td>Clickhouse</td>
+<td>参见测试报告</td>
+<td><a target="_blank" rel="noopener" href="https://clickhouse.tech/benchmark/dbms/">https://clickhouse.tech/benchmark/dbms/</a></td>
+</tr>
+<tr>
+<td>tidb</td>
+<td>参见测试报告</td>
+<td><a target="_blank" rel="noopener" href="https://docs.pingcap.com/zh/tidb/dev/benchmark-tidb-using-sysbench">https://docs.pingcap.com/zh/tidb/dev/benchmark-tidb-using-sysbench</a></td>
+</tr>
+<tr>
+<td>Elasticsearch</td>
+<td>参见测试报告</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="选型对比"><a href="#选型对比" class="headerlink" title="选型对比"></a>选型对比</h3><h4 id="ElasticSearch-vs-MongoDB"><a href="#ElasticSearch-vs-MongoDB" class="headerlink" title="ElasticSearch vs MongoDB"></a>ElasticSearch vs MongoDB</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>MongoDB</th>
+<th>ElasticSearch</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定位</td>
+<td>(文档型)数据库</td>
+<td>(文档型)搜索引擎</td>
+<td>一个管理数据,一个检索数据 Elasticsearch更倾向于数据的查询, 一般情况下elasticsearch仅作为数据检索服务和数据分析平台, 不直接作为源数据管理者</td>
+</tr>
+<tr>
+<td>资源占用</td>
+<td>一般</td>
+<td>高</td>
+<td>mongo使用c++, es使用Java开发</td>
+</tr>
+<tr>
+<td>写入延迟</td>
+<td>低</td>
+<td>高</td>
+<td>es的写入延迟默认1s, 可配置, 但是要牺牲非常大的性能</td>
+</tr>
+<tr>
+<td>全文索引支持度</td>
+<td>一般</td>
+<td>非常好</td>
+<td>es本来就是搜索引擎, 这个没啥可比性</td>
+</tr>
+<tr>
+<td>有无Schema</td>
+<td>无</td>
+<td>无</td>
+<td>两者都是无Schema</td>
+</tr>
+<tr>
+<td>支持的数据量</td>
+<td>PB+</td>
+<td>TB+ ~ PB</td>
+<td>两者支持的量并不好说的太死, 都支持分片和横向扩展, 但是相对来说MongoDB的数据量支持要更大一点</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>非常好</td>
+<td>好</td>
+<td>MongoDB在大部分场景性能比es强的多得多</td>
+</tr>
+<tr>
+<td>索引结构</td>
+<td>B树</td>
+<td>LSM树</td>
+<td>es追求写入吞吐量, MongoDB读写比较均衡</td>
+</tr>
+<tr>
+<td>操作接口</td>
+<td>TCP</td>
+<td>Restful(Http)</td>
+<td></td>
+</tr>
+<tr>
+<td>是否支持分片</td>
+<td>是</td>
+<td>是</td>
+<td></td>
+</tr>
+<tr>
+<td>是否支持副本</td>
+<td>是</td>
+<td>是</td>
+<td></td>
+</tr>
+<tr>
+<td>选主算法</td>
+<td>Bully(霸凌)</td>
+<td>Bully(霸凌)</td>
+<td>相比于Paxos和Raft算法实现更简单并有一定可靠性上的妥协，但是选举速度比较快</td>
+</tr>
+<tr>
+<td>扩展难度</td>
+<td>容易</td>
+<td>非常容易</td>
+<td>es是扩展最方便的存储系统之一</td>
+</tr>
+<tr>
+<td>配置难度</td>
+<td>难</td>
+<td>非常容易</td>
+<td></td>
+</tr>
+<tr>
+<td>地理位置</td>
+<td>支持</td>
+<td>支持</td>
+<td></td>
+</tr>
+<tr>
+<td>运维工具</td>
+<td>丰富</td>
+<td>一般</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="Redis-vs-Tair"><a href="#Redis-vs-Tair" class="headerlink" title="Redis vs Tair"></a>Redis vs Tair</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>存储</th>
+<th>同步</th>
+<th>容量成本</th>
+<th>性能</th>
+<th>支持数据结构</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>redis</td>
+<td>主要内存，磁盘异步持久化数据</td>
+<td>异步</td>
+<td></td>
+<td>强</td>
+<td>kv&#x2F;hash&#x2F;list…</td>
+<td>缓存&#x2F;抗并发</td>
+</tr>
+<tr>
+<td>tair</td>
+<td>磁盘主要ssd，内存提供二级缓存(可选)</td>
+<td>异步</td>
+<td></td>
+<td>稍微弱于redis</td>
+<td>目前支持kv和前缀kv</td>
+<td>可用于存储，提供多副本节点保证数据安全</td>
+</tr>
+</tbody></table>
+<h4 id="MySQL-vs-TiDB"><a href="#MySQL-vs-TiDB" class="headerlink" title="MySQL vs TiDB"></a>MySQL vs TiDB</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>SQL语法</th>
+<th>隔离级别</th>
+<th>锁</th>
+<th>存储过程&#x2F;触发器&#x2F;事件</th>
+<th>外键约束</th>
+<th>CREATE TABLE tblName AS SELECT</th>
+<th>CREATE TEMPORARY TABLE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mysql</td>
+<td>全支持</td>
+<td>支持读未提交、读已提交、可重复读、串行化，默认为可重复读</td>
+<td>悲观锁</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>Tidb</td>
+<td>兼容绝大多数</td>
+<td>乐观事务支持快照隔离，悲观事务支持快照隔离和读已提交</td>
+<td>乐观锁、悲观锁</td>
+<td>不支持</td>
+<td>忽略外键约束</td>
+<td>不支持</td>
+<td>TiDB 忽略TEMPORARY 关键字，按照普通表创建</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://blog.atecher.com/2018/04/11/Java-Design-Patterns/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -249,7 +726,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -341,7 +818,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -438,7 +915,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -533,7 +1010,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -628,7 +1105,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -721,7 +1198,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -815,7 +1292,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -909,7 +1386,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1001,7 +1478,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
+      <time title="修改时间：2024-03-19 14:12:40" itemprop="dateModified" datetime="2024-03-19T14:12:40+00:00">2024-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1028,98 +1505,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/10/18/Introduce-B-Tree-and-B-Plus-Tree/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.atecher.com/2017/10/18/Introduce-Red-Black-Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="//qn.atecher.com/mts/20180418/3853594527466496">
-      <meta itemprop="name" content="Atecher">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Atecher's blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Atecher's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/10/18/Introduce-Red-Black-Tree/" class="post-title-link" itemprop="url">浅谈算法和数据结构之平衡查找树之红黑树</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-10-18 19:00:10" itemprop="dateCreated datePublished" datetime="2017-10-18T19:00:10+00:00">2017-10-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-16 06:39:05" itemprop="dateModified" datetime="2024-03-16T06:39:05+00:00">2024-03-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Data-Structures/" itemprop="url" rel="index"><span itemprop="name">Data Structures</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>前面一篇文章介绍了2-3查找树，可以看到，2-3查找树能保证在插入元素之后能保持树的平衡状态，最坏情况下即所有的子节点都是2-node，树的高度为lgN，从而保证了最坏情况下的时间复杂度。但是2-3树实现起来比较复杂，本文介绍一种简单实现2-3树的数据结构，即红黑树（Red-Black Tree）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/10/18/Introduce-Red-Black-Tree/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
