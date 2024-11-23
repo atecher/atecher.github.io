@@ -896,7 +896,7 @@ vendors:
   # For example:
   # custom_cdn_url: https://cdn.jsdelivr.net/npm/${npm_name}@${version}/${minified}
   # custom_cdn_url: https://cdnjs.cloudflare.com/ajax/libs/${cdnjs_name}/${version}/${cdnjs_file}
-  custom_cdn_url:
+  custom_cdn_url: https://jsd.onmicrosoft.cn
 
 # Assets
 # Accelerate delivery of static files using a CDN
