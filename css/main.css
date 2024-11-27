@@ -1181,7 +1181,7 @@ pre code {
 }
 @media (min-width: 1600px) {
   .header-inner {
-    width: 900px;
+    width: 1200px;
   }
 }
 .site-brand-container {
@@ -1619,7 +1619,7 @@ pre code {
 }
 @media (min-width: 1600px) {
   .footer-inner {
-    width: 900px;
+    width: 1200px;
   }
 }
 .use-motion .footer {
@@ -2592,7 +2592,7 @@ mark.search-keyword {
 }
 @media (min-width: 1600px) {
   .main-inner {
-    width: 900px;
+    width: 1200px;
   }
 }
 @media (max-width: 767px) {
@@ -2738,7 +2738,7 @@ mark.search-keyword {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #09ffad;
+  background: #e2fa39;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);

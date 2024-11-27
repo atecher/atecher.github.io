@@ -450,54 +450,6 @@
       </tags>
   </entry>
   <entry>
-    <title>搭建HAProxy+Keepalived 高可用负载均衡</title>
-    <url>/2016/01/11/HAProxy-Keepalived-Install/</url>
-    <content><![CDATA[<h2 id="HAProxy"><a href="#HAProxy" class="headerlink" title="HAProxy"></a>HAProxy</h2><p>HAProxy是一款提供高可用性、负载均衡以及基于TCP（第四层）和HTTP（第七层）应用的代理软件（PS:nginx最新版也可以基于第四层和第七层的负载均衡）。<br>HAProxy和Keepalived 都采用源码方式安装，如果没有gcc编译器，需要先安装gcc编译工具。</p>
-<span id="more"></span>
-<h3 id="下载解压安装"><a href="#下载解压安装" class="headerlink" title="下载解压安装"></a>下载解压安装</h3><p>下载haproxy：<a href="http://www.haproxy.org/download/1.4/src/">http://www.haproxy.org/download/1.4/src/</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar zxvf haproxy-1.4.24.tar.gz</span><br><span class="line"><span class="built_in">cd</span> haproxy-1.4.24</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">mkdir</span> -p /usr/local/haproxy/etc</span><br><span class="line"><span class="built_in">mkdir</span> -p /usr/local/haproxy/sbin</span><br><span class="line"><span class="built_in">cp</span> examples/haproxy.cfg /usr/local/haproxy/etc</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/sbin/haproxy /usr/local/haproxy/sbin/haproxy</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p><code>vim /usr/local/haproxy/etc/haproxy.cfg</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">global </span><br><span class="line">    maxconn 51200 <span class="comment">#最大连接数</span></span><br><span class="line">    <span class="built_in">chroot</span> /usr/local/haproxy <span class="comment">#改变当前工作目录</span></span><br><span class="line">    uid 99</span><br><span class="line">    gid 99</span><br><span class="line">    daemon <span class="comment">#后台方式运行</span></span><br><span class="line">    <span class="comment">#quiet</span></span><br><span class="line">    nbproc 1  <span class="comment">#并发进程数</span></span><br><span class="line">    pidfile /usr/local/haproxy/logs/haproxy.pid     <span class="comment">#定义haproxy的pid</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">defaults  <span class="comment">#默认部分的定义</span></span><br><span class="line">        mode http <span class="comment">#mode &#123;http|tcp|health&#125; 。</span></span><br><span class="line">			      <span class="comment">#http是七层模式，tcp是四层模式，health是健康检测返回OK</span></span><br><span class="line">        <span class="comment">#retries 2</span></span><br><span class="line">        option redispatch</span><br><span class="line">        option abortonclose</span><br><span class="line">        <span class="built_in">timeout</span> connect 5000ms   <span class="comment">#连接超时</span></span><br><span class="line">        <span class="built_in">timeout</span> client 30000ms   <span class="comment">#客户端超时</span></span><br><span class="line">        <span class="built_in">timeout</span> server 30000ms   <span class="comment">#服务器超时</span></span><br><span class="line">        <span class="comment">#timeout check 2000      #心跳检测超时</span></span><br><span class="line">        <span class="built_in">log</span> 127.0.0.1 local0 err <span class="comment">#[err warning info debug]</span></span><br><span class="line">			<span class="comment">#使用本机syslog服务的local3设备记录错误信息</span></span><br><span class="line">        balance roundrobin</span><br><span class="line"></span><br><span class="line">	<span class="comment"># option httplog</span></span><br><span class="line">	<span class="comment"># option httpclose</span></span><br><span class="line">	<span class="comment"># option dontlognull</span></span><br><span class="line">	<span class="comment"># option forwardfor</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">listen admin_stats</span><br><span class="line">		<span class="comment">#定义一个名为status的部分，可以在listen指令指定的区域中定义匹配规则和后端服务器ip，</span></span><br><span class="line">        <span class="built_in">bind</span> 0.0.0.0:8888   <span class="comment"># 定义监听的套接字</span></span><br><span class="line">        option httplog</span><br><span class="line">        stats refresh 30s   <span class="comment">#统计页面的刷新间隔为30s</span></span><br><span class="line">        stats uri /stats     <span class="comment">#登陆统计页面是的uri</span></span><br><span class="line">        stats realm Haproxy Manager</span><br><span class="line">        stats auth admin:admin <span class="comment">#登陆统计页面是的用户名和密码</span></span><br><span class="line">        <span class="comment">#stats hide-version  # 隐藏统计页面上的haproxy版本信息</span></span><br><span class="line"></span><br><span class="line">listen tcp_test</span><br><span class="line">        <span class="built_in">bind</span> :12345</span><br><span class="line">        mode tcp</span><br><span class="line">        server t1 127.0.0.1:9000</span><br><span class="line">        server t2 192.168.15.13:9000</span><br><span class="line">        </span><br><span class="line">listen zzs_dzfp_proxy:90</span><br><span class="line">		mode http</span><br><span class="line">		balance roundrobin   <span class="comment">#轮询</span></span><br><span class="line">        cookie LBN insert indirect nocache   </span><br><span class="line">        option httpclose   </span><br><span class="line">        server web01 192.168.15.12:9000 check inter 2000 fall 3 weight 20  </span><br><span class="line">        server web02 192.168.15.13:9000 check inter 2000 fall 3 weight 20</span><br></pre></td></tr></table></figure>
-
-<h3 id="启停haproxy"><a href="#启停haproxy" class="headerlink" title="启停haproxy"></a>启停haproxy</h3><p>启动Haproxy</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/etc/haproxy.cfg</span><br></pre></td></tr></table></figure>
-
-<p>停止Haproxy：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">killall haproxy </span><br></pre></td></tr></table></figure>
-
-<p>访问统计页面：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://10.10.3.163:1080/stats</span><br></pre></td></tr></table></figure>
-
-<h2 id="Keepalived"><a href="#Keepalived" class="headerlink" title="Keepalived"></a>Keepalived</h2><p>keepalived是集群管理中保证集群高可用的一个服务软件，其功能类似于heartbeat，用来防止单点故障。</p>
-<p>keepalived是以VRRP协议为实现基础的，VRRP全称Virtual Router Redundancy Protocol，即虚拟路由冗余协议。</p>
-<p>虚拟路由冗余协议，可以认为是实现路由器高可用的协议，即将N台提供相同功能的路由器组成一个路由器组，这个组里面有一个master和多个backup，master上面有一个对外提供服务的vip（该路由器所在局域网内其他机器的默认路由为该vip），master会发组播，当backup收不到vrrp包时就认为master宕掉了，这时就需要根据VRRP的优先级来选举一个backup当master。这样的话就可以保证路由器的高可用了。</p>
-<h3 id="下载解压编译安装"><a href="#下载解压编译安装" class="headerlink" title="下载解压编译安装"></a>下载解压编译安装</h3><p>下载地址：<a href="http://www.keepalived.org/download.html">http://www.keepalived.org/download.html</a><br> 或者 ：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://www.keepalived.org/software/keepalived-1.2.8.tar.gz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>安装：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar zxvf keepalived-1.2.8.tar.gz</span><br><span class="line"><span class="built_in">cd</span> keepalived-1.2.8</span><br><span class="line">./configure --prefix=/usr/local/keepalived</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装成功后做成服务模式"><a href="#安装成功后做成服务模式" class="headerlink" title="安装成功后做成服务模式"></a>安装成功后做成服务模式</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> /usr/local/keepalived/sbin/keepalived /usr/sbin/</span><br><span class="line"><span class="built_in">cp</span> /usr/local/keepalived/etc/sysconfig/keepalived /etc/sysconfig/</span><br><span class="line"><span class="built_in">cp</span> /usr/local/keepalived/etc/rc.d/init.d/keepalived /etc/init.d/</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /etc/keepalived/</span><br><span class="line"><span class="built_in">cp</span> /usr/local/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf</span><br><span class="line"><span class="built_in">chmod</span> +x /etc/init.d/keepalived</span><br><span class="line">vi /etc/keepalived/keepalived.conf</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改文件配置keepalived-conf"><a href="#修改文件配置keepalived-conf" class="headerlink" title="修改文件配置keepalived.conf"></a>修改文件配置<code>keepalived.conf</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">global_defs &#123;</span><br><span class="line">    router_id LVS_DEVEL</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#监测haproxy进程状态，健康检查，每2秒执行一次 </span></span><br><span class="line">vrrp_script chk_haproxy &#123;</span><br><span class="line">    script <span class="string">&quot;/etc/keepalived/chk_haproxy.sh&quot;</span> <span class="comment">#监控脚本</span></span><br><span class="line">    interval 2   <span class="comment">#每两秒进行一次</span></span><br><span class="line">    weight -10    <span class="comment">#如果script中的指令执行失败，vrrp_instance的优先级会减少10个点</span></span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER          <span class="comment">#主服务器MASTER，从服务器为BACKUP</span></span><br><span class="line">    interface eth0        <span class="comment">#服务器固有IP（非VIP）的网卡</span></span><br><span class="line">    virtual_router_id 51  <span class="comment">#取值在0-255之间，用来区分多个instance的VRRP组播，同一网段中virtual_router_id的值不能重复，否则会出错。</span></span><br><span class="line">    priority 100          <span class="comment">#用来选举master的，要成为master，那么这个选项的值最好高于其他机器50个点。此时，从服务器要低于100；</span></span><br><span class="line">    advert_int 1          <span class="comment">#健康查检时间间隔</span></span><br><span class="line">    mcast_src_ip 192.168.15.12    <span class="comment">#MASTER服务器IP,从服务器写从服务器的IP</span></span><br><span class="line">    authentication &#123; <span class="comment">#认证区域</span></span><br><span class="line">        auth_type PASS  <span class="comment">#推荐使用PASS（密码只识别前8位）</span></span><br><span class="line">        auth_pass 12345678</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_haproxy    <span class="comment">#监测haproxy进程状态</span></span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.15.235   <span class="comment">#虚拟IP，作IP漂移使用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="监控脚本配置"><a href="#监控脚本配置" class="headerlink" title="监控脚本配置"></a>监控脚本配置</h3><p><code>vi /etc/keepalived/chk_haproxy.sh</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tatus=$(ps aux|grep haproxy | grep -v grep | grep -v bash | <span class="built_in">wc</span> -l)</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;status&#125;</span>&quot;</span> = <span class="string">&quot;0&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/etc/haproxy.cfg</span><br><span class="line"></span><br><span class="line">    status2=$(ps aux|grep haproxy | grep -v grep | grep -v bash |<span class="built_in">wc</span> -l)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;status2&#125;</span>&quot;</span> = <span class="string">&quot;0&quot;</span>  ]; <span class="keyword">then</span></span><br><span class="line">            /etc/init.d/keepalived stop</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-
-<p>这个配置文件意思：检查haproxy是否挂掉，如果挂掉启动haproxy；若启动之后还是没有检测到启动状态，则关闭keepalived，让IP飘移到备机上。</p>
-<h3 id="启动停止keepalived命令"><a href="#启动停止keepalived命令" class="headerlink" title="启动停止keepalived命令"></a>启动停止keepalived命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service keepalived start <span class="comment">#启动</span></span><br><span class="line">service keepalived stop	<span class="comment">#关闭服务</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>高可用</category>
-      </categories>
-      <tags>
-        <tag>HAProxy</tag>
-        <tag>Keepalived</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Cache-缓存更新的套路</title>
     <url>/2017/09/21/Cache-update/</url>
     <content><![CDATA[<p>看到好些人在写更新缓存数据代码时,先删除缓存,然后再更新数据库,而后续的操作会把数据再装载的缓存中。然而,这个是逻辑是错误的。试想,两个并发操作,一个是更新操作,另一个是查询操作,更新操作删除缓存后,查询操作没有命中缓存,先把老数据读出来后放到缓存中,然后更新操作更新了数据库。于是,在缓存中的数据还是老的数据,导致缓存中的数据是脏的,而且还一直这样脏下去了。</p>
@@ -547,6 +499,54 @@
       </categories>
       <tags>
         <tag>Cache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建HAProxy+Keepalived 高可用负载均衡</title>
+    <url>/2016/01/11/HAProxy-Keepalived-Install/</url>
+    <content><![CDATA[<h2 id="HAProxy"><a href="#HAProxy" class="headerlink" title="HAProxy"></a>HAProxy</h2><p>HAProxy是一款提供高可用性、负载均衡以及基于TCP（第四层）和HTTP（第七层）应用的代理软件（PS:nginx最新版也可以基于第四层和第七层的负载均衡）。<br>HAProxy和Keepalived 都采用源码方式安装，如果没有gcc编译器，需要先安装gcc编译工具。</p>
+<span id="more"></span>
+<h3 id="下载解压安装"><a href="#下载解压安装" class="headerlink" title="下载解压安装"></a>下载解压安装</h3><p>下载haproxy：<a href="http://www.haproxy.org/download/1.4/src/">http://www.haproxy.org/download/1.4/src/</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar zxvf haproxy-1.4.24.tar.gz</span><br><span class="line"><span class="built_in">cd</span> haproxy-1.4.24</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">mkdir</span> -p /usr/local/haproxy/etc</span><br><span class="line"><span class="built_in">mkdir</span> -p /usr/local/haproxy/sbin</span><br><span class="line"><span class="built_in">cp</span> examples/haproxy.cfg /usr/local/haproxy/etc</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/sbin/haproxy /usr/local/haproxy/sbin/haproxy</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p><code>vim /usr/local/haproxy/etc/haproxy.cfg</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">global </span><br><span class="line">    maxconn 51200 <span class="comment">#最大连接数</span></span><br><span class="line">    <span class="built_in">chroot</span> /usr/local/haproxy <span class="comment">#改变当前工作目录</span></span><br><span class="line">    uid 99</span><br><span class="line">    gid 99</span><br><span class="line">    daemon <span class="comment">#后台方式运行</span></span><br><span class="line">    <span class="comment">#quiet</span></span><br><span class="line">    nbproc 1  <span class="comment">#并发进程数</span></span><br><span class="line">    pidfile /usr/local/haproxy/logs/haproxy.pid     <span class="comment">#定义haproxy的pid</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">defaults  <span class="comment">#默认部分的定义</span></span><br><span class="line">        mode http <span class="comment">#mode &#123;http|tcp|health&#125; 。</span></span><br><span class="line">			      <span class="comment">#http是七层模式，tcp是四层模式，health是健康检测返回OK</span></span><br><span class="line">        <span class="comment">#retries 2</span></span><br><span class="line">        option redispatch</span><br><span class="line">        option abortonclose</span><br><span class="line">        <span class="built_in">timeout</span> connect 5000ms   <span class="comment">#连接超时</span></span><br><span class="line">        <span class="built_in">timeout</span> client 30000ms   <span class="comment">#客户端超时</span></span><br><span class="line">        <span class="built_in">timeout</span> server 30000ms   <span class="comment">#服务器超时</span></span><br><span class="line">        <span class="comment">#timeout check 2000      #心跳检测超时</span></span><br><span class="line">        <span class="built_in">log</span> 127.0.0.1 local0 err <span class="comment">#[err warning info debug]</span></span><br><span class="line">			<span class="comment">#使用本机syslog服务的local3设备记录错误信息</span></span><br><span class="line">        balance roundrobin</span><br><span class="line"></span><br><span class="line">	<span class="comment"># option httplog</span></span><br><span class="line">	<span class="comment"># option httpclose</span></span><br><span class="line">	<span class="comment"># option dontlognull</span></span><br><span class="line">	<span class="comment"># option forwardfor</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">listen admin_stats</span><br><span class="line">		<span class="comment">#定义一个名为status的部分，可以在listen指令指定的区域中定义匹配规则和后端服务器ip，</span></span><br><span class="line">        <span class="built_in">bind</span> 0.0.0.0:8888   <span class="comment"># 定义监听的套接字</span></span><br><span class="line">        option httplog</span><br><span class="line">        stats refresh 30s   <span class="comment">#统计页面的刷新间隔为30s</span></span><br><span class="line">        stats uri /stats     <span class="comment">#登陆统计页面是的uri</span></span><br><span class="line">        stats realm Haproxy Manager</span><br><span class="line">        stats auth admin:admin <span class="comment">#登陆统计页面是的用户名和密码</span></span><br><span class="line">        <span class="comment">#stats hide-version  # 隐藏统计页面上的haproxy版本信息</span></span><br><span class="line"></span><br><span class="line">listen tcp_test</span><br><span class="line">        <span class="built_in">bind</span> :12345</span><br><span class="line">        mode tcp</span><br><span class="line">        server t1 127.0.0.1:9000</span><br><span class="line">        server t2 192.168.15.13:9000</span><br><span class="line">        </span><br><span class="line">listen zzs_dzfp_proxy:90</span><br><span class="line">		mode http</span><br><span class="line">		balance roundrobin   <span class="comment">#轮询</span></span><br><span class="line">        cookie LBN insert indirect nocache   </span><br><span class="line">        option httpclose   </span><br><span class="line">        server web01 192.168.15.12:9000 check inter 2000 fall 3 weight 20  </span><br><span class="line">        server web02 192.168.15.13:9000 check inter 2000 fall 3 weight 20</span><br></pre></td></tr></table></figure>
+
+<h3 id="启停haproxy"><a href="#启停haproxy" class="headerlink" title="启停haproxy"></a>启停haproxy</h3><p>启动Haproxy</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/etc/haproxy.cfg</span><br></pre></td></tr></table></figure>
+
+<p>停止Haproxy：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">killall haproxy </span><br></pre></td></tr></table></figure>
+
+<p>访问统计页面：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://10.10.3.163:1080/stats</span><br></pre></td></tr></table></figure>
+
+<h2 id="Keepalived"><a href="#Keepalived" class="headerlink" title="Keepalived"></a>Keepalived</h2><p>keepalived是集群管理中保证集群高可用的一个服务软件，其功能类似于heartbeat，用来防止单点故障。</p>
+<p>keepalived是以VRRP协议为实现基础的，VRRP全称Virtual Router Redundancy Protocol，即虚拟路由冗余协议。</p>
+<p>虚拟路由冗余协议，可以认为是实现路由器高可用的协议，即将N台提供相同功能的路由器组成一个路由器组，这个组里面有一个master和多个backup，master上面有一个对外提供服务的vip（该路由器所在局域网内其他机器的默认路由为该vip），master会发组播，当backup收不到vrrp包时就认为master宕掉了，这时就需要根据VRRP的优先级来选举一个backup当master。这样的话就可以保证路由器的高可用了。</p>
+<h3 id="下载解压编译安装"><a href="#下载解压编译安装" class="headerlink" title="下载解压编译安装"></a>下载解压编译安装</h3><p>下载地址：<a href="http://www.keepalived.org/download.html">http://www.keepalived.org/download.html</a><br> 或者 ：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://www.keepalived.org/software/keepalived-1.2.8.tar.gz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar zxvf keepalived-1.2.8.tar.gz</span><br><span class="line"><span class="built_in">cd</span> keepalived-1.2.8</span><br><span class="line">./configure --prefix=/usr/local/keepalived</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装成功后做成服务模式"><a href="#安装成功后做成服务模式" class="headerlink" title="安装成功后做成服务模式"></a>安装成功后做成服务模式</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> /usr/local/keepalived/sbin/keepalived /usr/sbin/</span><br><span class="line"><span class="built_in">cp</span> /usr/local/keepalived/etc/sysconfig/keepalived /etc/sysconfig/</span><br><span class="line"><span class="built_in">cp</span> /usr/local/keepalived/etc/rc.d/init.d/keepalived /etc/init.d/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /etc/keepalived/</span><br><span class="line"><span class="built_in">cp</span> /usr/local/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf</span><br><span class="line"><span class="built_in">chmod</span> +x /etc/init.d/keepalived</span><br><span class="line">vi /etc/keepalived/keepalived.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改文件配置keepalived-conf"><a href="#修改文件配置keepalived-conf" class="headerlink" title="修改文件配置keepalived.conf"></a>修改文件配置<code>keepalived.conf</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">global_defs &#123;</span><br><span class="line">    router_id LVS_DEVEL</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#监测haproxy进程状态，健康检查，每2秒执行一次 </span></span><br><span class="line">vrrp_script chk_haproxy &#123;</span><br><span class="line">    script <span class="string">&quot;/etc/keepalived/chk_haproxy.sh&quot;</span> <span class="comment">#监控脚本</span></span><br><span class="line">    interval 2   <span class="comment">#每两秒进行一次</span></span><br><span class="line">    weight -10    <span class="comment">#如果script中的指令执行失败，vrrp_instance的优先级会减少10个点</span></span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER          <span class="comment">#主服务器MASTER，从服务器为BACKUP</span></span><br><span class="line">    interface eth0        <span class="comment">#服务器固有IP（非VIP）的网卡</span></span><br><span class="line">    virtual_router_id 51  <span class="comment">#取值在0-255之间，用来区分多个instance的VRRP组播，同一网段中virtual_router_id的值不能重复，否则会出错。</span></span><br><span class="line">    priority 100          <span class="comment">#用来选举master的，要成为master，那么这个选项的值最好高于其他机器50个点。此时，从服务器要低于100；</span></span><br><span class="line">    advert_int 1          <span class="comment">#健康查检时间间隔</span></span><br><span class="line">    mcast_src_ip 192.168.15.12    <span class="comment">#MASTER服务器IP,从服务器写从服务器的IP</span></span><br><span class="line">    authentication &#123; <span class="comment">#认证区域</span></span><br><span class="line">        auth_type PASS  <span class="comment">#推荐使用PASS（密码只识别前8位）</span></span><br><span class="line">        auth_pass 12345678</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_haproxy    <span class="comment">#监测haproxy进程状态</span></span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.15.235   <span class="comment">#虚拟IP，作IP漂移使用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="监控脚本配置"><a href="#监控脚本配置" class="headerlink" title="监控脚本配置"></a>监控脚本配置</h3><p><code>vi /etc/keepalived/chk_haproxy.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tatus=$(ps aux|grep haproxy | grep -v grep | grep -v bash | <span class="built_in">wc</span> -l)</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;status&#125;</span>&quot;</span> = <span class="string">&quot;0&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/etc/haproxy.cfg</span><br><span class="line"></span><br><span class="line">    status2=$(ps aux|grep haproxy | grep -v grep | grep -v bash |<span class="built_in">wc</span> -l)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;status2&#125;</span>&quot;</span> = <span class="string">&quot;0&quot;</span>  ]; <span class="keyword">then</span></span><br><span class="line">            /etc/init.d/keepalived stop</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>这个配置文件意思：检查haproxy是否挂掉，如果挂掉启动haproxy；若启动之后还是没有检测到启动状态，则关闭keepalived，让IP飘移到备机上。</p>
+<h3 id="启动停止keepalived命令"><a href="#启动停止keepalived命令" class="headerlink" title="启动停止keepalived命令"></a>启动停止keepalived命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service keepalived start <span class="comment">#启动</span></span><br><span class="line">service keepalived stop	<span class="comment">#关闭服务</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>高可用</category>
+      </categories>
+      <tags>
+        <tag>HAProxy</tag>
+        <tag>Keepalived</tag>
       </tags>
   </entry>
   <entry>
@@ -3717,6 +3717,41 @@ this is the second sub!
       </tags>
   </entry>
   <entry>
+    <title>Java-Thead-如何使用ConcurrentHashMap</title>
+    <url>/2017/09/18/Java-Thead-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ConcurrentHashMap/</url>
+    <content><![CDATA[<p>ConcurrentHashMap(简称CHM)是在Java 1.5作为Hashtable的替代选择新引入的，是concurrent包的重要成员。在Java 1.5之前，如果想要实现一个可以在多线程和并发的程序中安全使用的Map,只能在HashTable和synchronized Map中选择，因为HashMap并不是线程安全的。但再引入了CHM之后，我们有了更好的选择。CHM不但是线程安全的，而且比HashTable和synchronizedMap的性能要好。相对于HashTable和synchronizedMap锁住了整个Map，CHM只锁住部分Map。CHM允许并发的读操作，同时通过同步锁在写操作时保持数据完整性。</p>
+<span id="more"></span>
+
+<h2 id="Java中ConcurrentHashMap的实现"><a href="#Java中ConcurrentHashMap的实现" class="headerlink" title="Java中ConcurrentHashMap的实现"></a>Java中ConcurrentHashMap的实现</h2><p>CHM引入了分割，并提供了HashTable支持的所有的功能。在CHM中，支持多线程对Map做读操作，并且不需要任何的blocking。这得益于CHM将Map分割成了不同的部分，在执行更新操作时只锁住一部分。根据默认的并发级别(concurrency level)，Map被分割成16个部分，并且由不同的锁控制。这意味着，同时最多可以有16个写线程操作Map。试想一下，由只能一个线程进入变成同时可由16个写线程同时进入(读线程几乎不受限制)，性能的提升是显而易见的。但由于一些更新操作，如put(),remove(),putAll(),clear()只锁住操作的部分，所以在检索操作不能保证返回的是最新的结果。</p>
+<p>另一个重要点是在迭代遍历CHM时，keySet返回的iterator是弱一致和fail-safe的，可能不会返回某些最近的改变，并且在遍历过程中，如果已经遍历的数组上的内容变化了，不会抛出ConcurrentModificationExceptoin的异常。</p>
+<p>CHM默认的并发级别是16，但可以在创建CHM时通过构造函数改变。毫无疑问，并发级别代表着并发执行更新操作的数目，所以如果只有很少的线程会更新Map，那么建议设置一个低的并发级别。另外，CHM还使用了ReentrantLock来对segments加锁。</p>
+<h2 id="Java中ConcurrentHashMap-putifAbsent方法的例子"><a href="#Java中ConcurrentHashMap-putifAbsent方法的例子" class="headerlink" title="Java中ConcurrentHashMap putifAbsent方法的例子"></a>Java中ConcurrentHashMap putifAbsent方法的例子</h2><p>很多时候我们希望在元素不存在时插入元素，我们一般会像下面那样写代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(map)&#123;</span><br><span class="line">  <span class="keyword">if</span> (map.get(key) == <span class="literal">null</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> map.put(key, value);</span><br><span class="line">  &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> map.get(key);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码在HashMap和HashTable中是好用的，但在CHM中是有出错的风险的。这是因为CHM在put操作时并没有对整个Map加锁，所以一个线程正在put(k,v)的时候，另一个线程调用get(k)会得到null，这就会造成一个线程put的值会被另一个线程put的值所覆盖。当然，你可以将代码封装到synchronized代码块中，这样虽然线程安全了，但会使你的代码变成了单线程。CHM提供的putIfAbsent(key,value)方法原子性的实现了同样的功能，同时避免了上面的线程竞争的风险。</p>
+<h2 id="什么时候使用ConcurrentHashMap"><a href="#什么时候使用ConcurrentHashMap" class="headerlink" title="什么时候使用ConcurrentHashMap"></a>什么时候使用ConcurrentHashMap</h2><p>CHM适用于读者数量超过写者时，当写者数量大于等于读者时，CHM的性能是低于Hashtable和synchronized Map的。这是因为当锁住了整个Map时，读操作要等待对同一部分执行写操作的线程结束。CHM适用于做cache,在程序启动时初始化，之后可以被多个请求线程访问。正如Javadoc说明的那样，CHM是HashTable一个很好的替代，但要记住，CHM的比HashTable的同步性稍弱。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>现在我们知道了什么是ConcurrentHashMap和什么时候该用ConcurrentHashMap，下面我们来复习一下CHM的一些关键点。</p>
+<ul>
+<li>CHM允许并发的读和线程安全的更新操作</li>
+<li>在执行写操作时，CHM只锁住部分的Map</li>
+<li>并发的更新是通过内部根据并发级别将Map分割成小部分实现的</li>
+<li>高的并发级别会造成时间和空间的浪费，低的并发级别在写线程多时会引起线程间的竞争</li>
+<li>CHM的所有操作都是线程安全</li>
+<li>CHM返回的迭代器是弱一致性，fail-safe并且不会抛出ConcurrentModificationException异常</li>
+<li>CHM不允许null的键值</li>
+<li>可以使用CHM代替HashTable，但要记住CHM不会锁住整个Map</li>
+</ul>
+<p>以上就是Java中CHM的实现和使用场景</p>
+<p>ref:<br><a href="https://yemengying.com/2015/11/06/%E3%80%90%E8%AF%91%E3%80%91%E5%A6%82%E4%BD%95%E5%9C%A8java%E4%B8%AD%E4%BD%BF%E7%94%A8ConcurrentHashMap/">https://yemengying.com/2015/11/06/%E3%80%90%E8%AF%91%E3%80%91%E5%A6%82%E4%BD%95%E5%9C%A8java%E4%B8%AD%E4%BD%BF%E7%94%A8ConcurrentHashMap/</a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>ConcurrentHashMap</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java-Thread-如何线程安全的使用HashMap</title>
     <url>/2017/09/18/Java-Thread-HashMap/</url>
     <content><![CDATA[<p>总说 HashMap 是线程不安全的,不安全的,不安全的,那么到底为什么它是线程不安全的呢？要回答这个问题就要先来简单了解一下 HashMap 源码中的使用的存储结构(这里引用的是 Java 8 的源码,与7是不一样的)和它的扩容机制。</p>
@@ -3769,41 +3804,6 @@ this is the second sub!
       <tags>
         <tag>Java</tag>
         <tag>Thread</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java-Thead-如何使用ConcurrentHashMap</title>
-    <url>/2017/09/18/Java-Thead-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ConcurrentHashMap/</url>
-    <content><![CDATA[<p>ConcurrentHashMap(简称CHM)是在Java 1.5作为Hashtable的替代选择新引入的，是concurrent包的重要成员。在Java 1.5之前，如果想要实现一个可以在多线程和并发的程序中安全使用的Map,只能在HashTable和synchronized Map中选择，因为HashMap并不是线程安全的。但再引入了CHM之后，我们有了更好的选择。CHM不但是线程安全的，而且比HashTable和synchronizedMap的性能要好。相对于HashTable和synchronizedMap锁住了整个Map，CHM只锁住部分Map。CHM允许并发的读操作，同时通过同步锁在写操作时保持数据完整性。</p>
-<span id="more"></span>
-
-<h2 id="Java中ConcurrentHashMap的实现"><a href="#Java中ConcurrentHashMap的实现" class="headerlink" title="Java中ConcurrentHashMap的实现"></a>Java中ConcurrentHashMap的实现</h2><p>CHM引入了分割，并提供了HashTable支持的所有的功能。在CHM中，支持多线程对Map做读操作，并且不需要任何的blocking。这得益于CHM将Map分割成了不同的部分，在执行更新操作时只锁住一部分。根据默认的并发级别(concurrency level)，Map被分割成16个部分，并且由不同的锁控制。这意味着，同时最多可以有16个写线程操作Map。试想一下，由只能一个线程进入变成同时可由16个写线程同时进入(读线程几乎不受限制)，性能的提升是显而易见的。但由于一些更新操作，如put(),remove(),putAll(),clear()只锁住操作的部分，所以在检索操作不能保证返回的是最新的结果。</p>
-<p>另一个重要点是在迭代遍历CHM时，keySet返回的iterator是弱一致和fail-safe的，可能不会返回某些最近的改变，并且在遍历过程中，如果已经遍历的数组上的内容变化了，不会抛出ConcurrentModificationExceptoin的异常。</p>
-<p>CHM默认的并发级别是16，但可以在创建CHM时通过构造函数改变。毫无疑问，并发级别代表着并发执行更新操作的数目，所以如果只有很少的线程会更新Map，那么建议设置一个低的并发级别。另外，CHM还使用了ReentrantLock来对segments加锁。</p>
-<h2 id="Java中ConcurrentHashMap-putifAbsent方法的例子"><a href="#Java中ConcurrentHashMap-putifAbsent方法的例子" class="headerlink" title="Java中ConcurrentHashMap putifAbsent方法的例子"></a>Java中ConcurrentHashMap putifAbsent方法的例子</h2><p>很多时候我们希望在元素不存在时插入元素，我们一般会像下面那样写代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(map)&#123;</span><br><span class="line">  <span class="keyword">if</span> (map.get(key) == <span class="literal">null</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> map.put(key, value);</span><br><span class="line">  &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> map.get(key);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面这段代码在HashMap和HashTable中是好用的，但在CHM中是有出错的风险的。这是因为CHM在put操作时并没有对整个Map加锁，所以一个线程正在put(k,v)的时候，另一个线程调用get(k)会得到null，这就会造成一个线程put的值会被另一个线程put的值所覆盖。当然，你可以将代码封装到synchronized代码块中，这样虽然线程安全了，但会使你的代码变成了单线程。CHM提供的putIfAbsent(key,value)方法原子性的实现了同样的功能，同时避免了上面的线程竞争的风险。</p>
-<h2 id="什么时候使用ConcurrentHashMap"><a href="#什么时候使用ConcurrentHashMap" class="headerlink" title="什么时候使用ConcurrentHashMap"></a>什么时候使用ConcurrentHashMap</h2><p>CHM适用于读者数量超过写者时，当写者数量大于等于读者时，CHM的性能是低于Hashtable和synchronized Map的。这是因为当锁住了整个Map时，读操作要等待对同一部分执行写操作的线程结束。CHM适用于做cache,在程序启动时初始化，之后可以被多个请求线程访问。正如Javadoc说明的那样，CHM是HashTable一个很好的替代，但要记住，CHM的比HashTable的同步性稍弱。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>现在我们知道了什么是ConcurrentHashMap和什么时候该用ConcurrentHashMap，下面我们来复习一下CHM的一些关键点。</p>
-<ul>
-<li>CHM允许并发的读和线程安全的更新操作</li>
-<li>在执行写操作时，CHM只锁住部分的Map</li>
-<li>并发的更新是通过内部根据并发级别将Map分割成小部分实现的</li>
-<li>高的并发级别会造成时间和空间的浪费，低的并发级别在写线程多时会引起线程间的竞争</li>
-<li>CHM的所有操作都是线程安全</li>
-<li>CHM返回的迭代器是弱一致性，fail-safe并且不会抛出ConcurrentModificationException异常</li>
-<li>CHM不允许null的键值</li>
-<li>可以使用CHM代替HashTable，但要记住CHM不会锁住整个Map</li>
-</ul>
-<p>以上就是Java中CHM的实现和使用场景</p>
-<p>ref:<br><a href="https://yemengying.com/2015/11/06/%E3%80%90%E8%AF%91%E3%80%91%E5%A6%82%E4%BD%95%E5%9C%A8java%E4%B8%AD%E4%BD%BF%E7%94%A8ConcurrentHashMap/">https://yemengying.com/2015/11/06/%E3%80%90%E8%AF%91%E3%80%91%E5%A6%82%E4%BD%95%E5%9C%A8java%E4%B8%AD%E4%BD%BF%E7%94%A8ConcurrentHashMap/</a></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>ConcurrentHashMap</tag>
       </tags>
   </entry>
   <entry>
@@ -5144,52 +5144,6 @@ this is the second sub!
       </tags>
   </entry>
   <entry>
-    <title>Java_改善_提倡异常封装</title>
-    <url>/2017/08/01/Java-%E6%94%B9%E5%96%84-%E6%8F%90%E5%80%A1%E5%BC%82%E5%B8%B8%E5%B0%81%E8%A3%85/</url>
-    <content><![CDATA[<p> JavaAPI提供的异常都是比较低级别的,低级别是指只有开发人员才能看懂的异常.而对于终端用户来说基本上就是天书,与业务无关,是纯计算机语言的描述.</p>
-<p>异常封装的三方面的好处:</p>
-<ol>
-<li>提高系统的友好性</li>
-<li>提高性能的可维护性</li>
-<li>解决java异常机制自身的缺陷</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="提高系统的友好性"><a href="#提高系统的友好性" class="headerlink" title="提高系统的友好性."></a>提高系统的友好性.</h2><p>打开一个文件,如果文件不存在,则会报FileNotFoundException异常,如果该方法的编写不做任何的处理,直接抛到上层,则会降低系统的友好性.</p>
-<p>代码如下:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">doStuff</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;无效文件.txt&quot;</span>);</span><br><span class="line">    <span class="comment">/*文件操作*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解决方法就是封装异常,可以把异常的读者分为两类:开发人员和用户.</p>
-<p>开发人员查找问题需要打印出堆栈信息,而用户则需要了解具体的业务原因,比如:文件太大,不能同时编写文件等…</p>
-<p>代码如下:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">doStuff2</span><span class="params">()</span> <span class="keyword">throws</span> MyBussinessException&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;无效文件.txt&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">        <span class="comment">//为方便开发和维护人员而设置的异常信息</span></span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="comment">//抛出业务异常</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">MyBussinessException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">/*文件操作*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="提高新能的可维护性"><a href="#提高新能的可维护性" class="headerlink" title="提高新能的可维护性"></a>提高新能的可维护性</h2><p>来看如下代码:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doStuff</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种是很多程序员容易犯下的错误,抛出异常是吧..分类处理异常多麻烦,就写一个catch块来处理所有的异常吧,而且还信誓旦旦的说JVM会打印出出堆栈信息中的错误信息.</p>
-<p>虽然没有错,但是堆栈信息只有开发人员能看懂,维护人员看到这段异常的时候基本上无法处理.因为需要深入到代码逻辑中去分析问题.</p>
-<p>正确的做法是对异常进行分类处理,并进行封装输出,代码如下:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doStuff2</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    &#125;<span class="keyword">catch</span>(FileNotFoundException e)&#123;</span><br><span class="line">        log.info(<span class="string">&quot;文件问找到，使用默认配置文件……&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(SecurityException e)&#123;</span><br><span class="line">        log.error(<span class="string">&quot;无权访问，可能原因是……&quot;</span>);</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="解决java异常机制自身的缺陷"><a href="#解决java异常机制自身的缺陷" class="headerlink" title="解决java异常机制自身的缺陷"></a>解决java异常机制自身的缺陷</h2><p>Java中的异常一次只能抛出一个,比如doStuff方法有两个逻辑代码片段,如果在第一个逻辑片段中抛出异常,第二个逻辑片段中就不再执行了.也就无法抛出第二个异常了,现在的问题的是如何一次抛出多个异常….</p>
-<p>其实,使用自行封装的异常就可以解决问题了,代码如下:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">Exception</span> &#123;</span><br><span class="line">    <span class="comment">// 容纳所有的异常</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Throwable&gt; causes = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Throwable&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数，传递一个异常列表</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyException</span><span class="params">(List&lt;? extends Throwable&gt; _causes)</span> &#123;</span><br><span class="line">        causes.addAll(_causes);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取所有的异常</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Throwable&gt; <span class="title function_">getExceptions</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> causes;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如上MyExcepiton异常只是一个异常容器,可以容纳多个异常,但它本身并不代表任何异常含义,它所解决的是一次抛出多个异常的问题,具体调用如下:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">doStuff</span><span class="params">()</span> <span class="keyword">throws</span> MyException &#123;</span><br><span class="line">    List&lt;Throwable&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Throwable&gt;();</span><br><span class="line">    <span class="comment">// 第一个逻辑片段</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// Do Something</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">        list.add(e);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 第二个逻辑片段</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// Do Something</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        list.add(e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (list.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">MyException</span>(list);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样doStuff方法的调用者就可以一次获得多个异常了…也能够为用户提供完整的异常情况说明.</p>
-<p>可能你会问,有这种情况的出现吗?怎么会要求一个方法抛出多个异常呢?</p>
-<p>绝对可能出现,例如Web界面注册的时候.依次把User对象传递到逻辑层,Register方法需要对各个Field进行校验并注册,如果用户 填写的字段不只有一个错误,最好把所有的错误都一次性的提示给用户,而不是要求用户每次条件都进行修改.</p>
-<p>一次性的对User对象进行校验,然后返回所有的异常.</p>
-<p>ref:<br><a href="http://www.cnblogs.com/DreamDrive/p/5446819.html">http://www.cnblogs.com/DreamDrive/p/5446819.html</a></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>改善</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java_改善_枚举和注解结合使用威力更大</title>
     <url>/2017/07/31/Java-%E6%94%B9%E5%96%84-%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8%E5%A8%81%E5%8A%9B%E6%9B%B4%E5%A4%A7/</url>
     <content><![CDATA[<p>注解的写法和接口很类似,都采用了关键字interface,而且都不能有实现代码,常量定义默认都是pulbic static final类型的.<br>他们的主要不同点是:注解在interface前加上@字符,而且不能继承,不能实现,这经常会给我们的开发带来一些障碍.</p>
@@ -5277,6 +5231,52 @@ this is the second sub!
       <tags>
         <tag>Java</tag>
         <tag>规避</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java_改善_提倡异常封装</title>
+    <url>/2017/08/01/Java-%E6%94%B9%E5%96%84-%E6%8F%90%E5%80%A1%E5%BC%82%E5%B8%B8%E5%B0%81%E8%A3%85/</url>
+    <content><![CDATA[<p> JavaAPI提供的异常都是比较低级别的,低级别是指只有开发人员才能看懂的异常.而对于终端用户来说基本上就是天书,与业务无关,是纯计算机语言的描述.</p>
+<p>异常封装的三方面的好处:</p>
+<ol>
+<li>提高系统的友好性</li>
+<li>提高性能的可维护性</li>
+<li>解决java异常机制自身的缺陷</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="提高系统的友好性"><a href="#提高系统的友好性" class="headerlink" title="提高系统的友好性."></a>提高系统的友好性.</h2><p>打开一个文件,如果文件不存在,则会报FileNotFoundException异常,如果该方法的编写不做任何的处理,直接抛到上层,则会降低系统的友好性.</p>
+<p>代码如下:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">doStuff</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;无效文件.txt&quot;</span>);</span><br><span class="line">    <span class="comment">/*文件操作*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决方法就是封装异常,可以把异常的读者分为两类:开发人员和用户.</p>
+<p>开发人员查找问题需要打印出堆栈信息,而用户则需要了解具体的业务原因,比如:文件太大,不能同时编写文件等…</p>
+<p>代码如下:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">doStuff2</span><span class="params">()</span> <span class="keyword">throws</span> MyBussinessException&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;无效文件.txt&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">        <span class="comment">//为方便开发和维护人员而设置的异常信息</span></span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="comment">//抛出业务异常</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">MyBussinessException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">/*文件操作*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="提高新能的可维护性"><a href="#提高新能的可维护性" class="headerlink" title="提高新能的可维护性"></a>提高新能的可维护性</h2><p>来看如下代码:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doStuff</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种是很多程序员容易犯下的错误,抛出异常是吧..分类处理异常多麻烦,就写一个catch块来处理所有的异常吧,而且还信誓旦旦的说JVM会打印出出堆栈信息中的错误信息.</p>
+<p>虽然没有错,但是堆栈信息只有开发人员能看懂,维护人员看到这段异常的时候基本上无法处理.因为需要深入到代码逻辑中去分析问题.</p>
+<p>正确的做法是对异常进行分类处理,并进行封装输出,代码如下:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doStuff2</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    &#125;<span class="keyword">catch</span>(FileNotFoundException e)&#123;</span><br><span class="line">        log.info(<span class="string">&quot;文件问找到，使用默认配置文件……&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(SecurityException e)&#123;</span><br><span class="line">        log.error(<span class="string">&quot;无权访问，可能原因是……&quot;</span>);</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决java异常机制自身的缺陷"><a href="#解决java异常机制自身的缺陷" class="headerlink" title="解决java异常机制自身的缺陷"></a>解决java异常机制自身的缺陷</h2><p>Java中的异常一次只能抛出一个,比如doStuff方法有两个逻辑代码片段,如果在第一个逻辑片段中抛出异常,第二个逻辑片段中就不再执行了.也就无法抛出第二个异常了,现在的问题的是如何一次抛出多个异常….</p>
+<p>其实,使用自行封装的异常就可以解决问题了,代码如下:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">Exception</span> &#123;</span><br><span class="line">    <span class="comment">// 容纳所有的异常</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Throwable&gt; causes = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Throwable&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数，传递一个异常列表</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyException</span><span class="params">(List&lt;? extends Throwable&gt; _causes)</span> &#123;</span><br><span class="line">        causes.addAll(_causes);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取所有的异常</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Throwable&gt; <span class="title function_">getExceptions</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> causes;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上MyExcepiton异常只是一个异常容器,可以容纳多个异常,但它本身并不代表任何异常含义,它所解决的是一次抛出多个异常的问题,具体调用如下:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">doStuff</span><span class="params">()</span> <span class="keyword">throws</span> MyException &#123;</span><br><span class="line">    List&lt;Throwable&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Throwable&gt;();</span><br><span class="line">    <span class="comment">// 第一个逻辑片段</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// Do Something</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">        list.add(e);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 第二个逻辑片段</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// Do Something</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        list.add(e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (list.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">MyException</span>(list);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样doStuff方法的调用者就可以一次获得多个异常了…也能够为用户提供完整的异常情况说明.</p>
+<p>可能你会问,有这种情况的出现吗?怎么会要求一个方法抛出多个异常呢?</p>
+<p>绝对可能出现,例如Web界面注册的时候.依次把User对象传递到逻辑层,Register方法需要对各个Field进行校验并注册,如果用户 填写的字段不只有一个错误,最好把所有的错误都一次性的提示给用户,而不是要求用户每次条件都进行修改.</p>
+<p>一次性的对User对象进行校验,然后返回所有的异常.</p>
+<p>ref:<br><a href="http://www.cnblogs.com/DreamDrive/p/5446819.html">http://www.cnblogs.com/DreamDrive/p/5446819.html</a></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>改善</tag>
       </tags>
   </entry>
   <entry>
@@ -6107,19 +6107,6 @@ this is the second sub!
       </tags>
   </entry>
   <entry>
-    <title>MySQL-5.5.25 centos一键安装脚本 autoInstallMysql</title>
-    <url>/2014/12/11/autoInstallMysql/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">if [ `uname -m` == &quot;x86_64&quot; ];then</span><br><span class="line">machine=x86_64</span><br><span class="line">else</span><br><span class="line">machine=i686</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">mysqlBasedir=/storage/server/mysql</span><br><span class="line">mysqlDatadir=$&#123;mysqlBasedir&#125;/data/</span><br><span class="line">mysqlLogdir=/storage/log/mysql</span><br><span class="line">mysqlUser=mysql</span><br><span class="line">mysqlGroup=mysql</span><br><span class="line"></span><br><span class="line">mkdir -p $mysqlBasedir</span><br><span class="line">mkdir -p $mysqlDatadir</span><br><span class="line">mkdir -p $mysqlLogdir</span><br><span class="line"></span><br><span class="line">#如果mysql已安装,删除原有mysql</span><br><span class="line">if [ $machine == &quot;x86_64&quot; ];then</span><br><span class="line">  rm -rf mysql-5.6.30-linux-glibc2.5-x86_64</span><br><span class="line">  if [ ! -f mysql-5.6.30-linux-glibc2.5-x86_64.tar.gz ];then</span><br><span class="line">     wget http://mirrors.sohu.com/mysql/MySQL-5.6/mysql-5.6.30-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line">  fi</span><br><span class="line">  tar -xzvf mysql-5.6.30-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line">  mv mysql-5.6.30-linux-glibc2.5-x86_64/* $mysqlBasedir</span><br><span class="line">else</span><br><span class="line">  rm -rf mysql-5.6.30-linux-glibc2.5-i686</span><br><span class="line">  if [ ! -f mysql-5.6.30-linux-glibc2.5-i686.tar.gz ];then</span><br><span class="line">  wget http://mirrors.sohu.com/mysql/MySQL-5.6/mysql-5.6.30-linux-glibc2.5-i686.tar.gz</span><br><span class="line">  fi</span><br><span class="line">  tar -xzvf mysql-5.6.30-linux-glibc2.5-i686.tar.gz</span><br><span class="line">  mv mysql-5.6.30-linux-glibc2.5-i686/* $mysqlBasedir</span><br><span class="line"></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">#添加mysql用户组</span><br><span class="line">groupadd $mysqlGroup</span><br><span class="line">#添加mysql用户 ,并制定组为mysql /sbin/nologin意思是用户不允许登录</span><br><span class="line">useradd -g $mysqlGroup -s /sbin/nologin $mysqlUser</span><br><span class="line">#安装服务</span><br><span class="line">$&#123;mysqlBasedir&#125;/scripts/mysql_install_db --datadir=$mysqlDatadir --basedir=$mysqlBasedir --user=$mysqlUser </span><br><span class="line"></span><br><span class="line">#设置权限</span><br><span class="line">chown -R $&#123;mysqlUser&#125;:$&#123;mysqlGroup&#125; $mysqlBasedir</span><br><span class="line">chown -R $&#123;mysqlUser&#125;:$&#123;mysqlGroup&#125; $mysqlDatadir</span><br><span class="line">chown -R $&#123;mysqlUser&#125;:$&#123;mysqlGroup&#125; $mysqlLogdir</span><br><span class="line"></span><br><span class="line">#把mysql.server放到/etc/init.d 目录下方便使用</span><br><span class="line">\cp -f $&#123;mysqlBasedir&#125;/support-files/mysql.server /etc/init.d/mysqld</span><br><span class="line">#脚本里面的这两行在mysql启动文件指定mysql数据库的安装目录和数据目录存放目录</span><br><span class="line">sed -i &#x27;s#^basedir=$#basedir=&#x27;$&#123;mysqlBasedir&#125;&#x27;#&#x27; /etc/init.d/mysqld</span><br><span class="line">sed -i &#x27;s#^datadir=$#datadir=&#x27;$&#123;mysqlDatadir&#125;&#x27;#&#x27; /etc/init.d/mysqld</span><br><span class="line"></span><br><span class="line">#配置文件</span><br><span class="line">cat &gt; /etc/my.cnf &lt;&lt;END</span><br><span class="line">[client]</span><br><span class="line">port            = 3306</span><br><span class="line">socket          = /tmp/mysql.sock</span><br><span class="line">[mysqld]</span><br><span class="line">port            = 3306</span><br><span class="line">socket          = /tmp/mysql.sock</span><br><span class="line">skip-external-locking</span><br><span class="line">key_buffer_size = 16M</span><br><span class="line">max_allowed_packet = 1M</span><br><span class="line">table_open_cache = 64</span><br><span class="line">sort_buffer_size = 512K</span><br><span class="line">net_buffer_length = 8K</span><br><span class="line">read_buffer_size = 256K</span><br><span class="line">read_rnd_buffer_size = 512K</span><br><span class="line">myisam_sort_buffer_size = 8M</span><br><span class="line"></span><br><span class="line">log-bin=mysql-bin</span><br><span class="line">binlog_format=mixed</span><br><span class="line">server-id       = 1</span><br><span class="line"></span><br><span class="line">sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span><br><span class="line"></span><br><span class="line">[mysqldump]</span><br><span class="line">quick</span><br><span class="line">max_allowed_packet = 16M</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">no-auto-rehash</span><br><span class="line"></span><br><span class="line">[myisamchk]</span><br><span class="line">key_buffer_size = 20M</span><br><span class="line">sort_buffer_size = 20M</span><br><span class="line">read_buffer = 2M</span><br><span class="line">write_buffer = 2M</span><br><span class="line"></span><br><span class="line">[mysqlhotcopy]</span><br><span class="line">interactive-timeout</span><br><span class="line">END</span><br><span class="line"></span><br><span class="line">chmod 755 /etc/init.d/mysqld</span><br><span class="line">/etc/init.d/mysqld start</span><br><span class="line">#没测试过</span><br><span class="line">$mysqlBasedir/bin/mysqladmin -uroot password &#x27;hhw840129&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Mysql</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java编程中“为了性能”尽量要做到的一些地方</title>
     <url>/2014/08/12/as-far-as-possible-to-do-some-thing-for-Java-performance/</url>
     <content><![CDATA[<p>最近的机器内存又爆满了，除了新增机器内存外，还应该好好review一下我们的代码，有很多代码编写过于随意化，这些不好的习惯或对程序语言的不了解是应该好好打压打压了。</p>
@@ -6190,6 +6177,19 @@ this is the second sub!
       <tags>
         <tag>性能优化</tag>
         <tag>开发技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL-5.5.25 centos一键安装脚本 autoInstallMysql</title>
+    <url>/2014/12/11/autoInstallMysql/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">if [ `uname -m` == &quot;x86_64&quot; ];then</span><br><span class="line">machine=x86_64</span><br><span class="line">else</span><br><span class="line">machine=i686</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">mysqlBasedir=/storage/server/mysql</span><br><span class="line">mysqlDatadir=$&#123;mysqlBasedir&#125;/data/</span><br><span class="line">mysqlLogdir=/storage/log/mysql</span><br><span class="line">mysqlUser=mysql</span><br><span class="line">mysqlGroup=mysql</span><br><span class="line"></span><br><span class="line">mkdir -p $mysqlBasedir</span><br><span class="line">mkdir -p $mysqlDatadir</span><br><span class="line">mkdir -p $mysqlLogdir</span><br><span class="line"></span><br><span class="line">#如果mysql已安装,删除原有mysql</span><br><span class="line">if [ $machine == &quot;x86_64&quot; ];then</span><br><span class="line">  rm -rf mysql-5.6.30-linux-glibc2.5-x86_64</span><br><span class="line">  if [ ! -f mysql-5.6.30-linux-glibc2.5-x86_64.tar.gz ];then</span><br><span class="line">     wget http://mirrors.sohu.com/mysql/MySQL-5.6/mysql-5.6.30-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line">  fi</span><br><span class="line">  tar -xzvf mysql-5.6.30-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line">  mv mysql-5.6.30-linux-glibc2.5-x86_64/* $mysqlBasedir</span><br><span class="line">else</span><br><span class="line">  rm -rf mysql-5.6.30-linux-glibc2.5-i686</span><br><span class="line">  if [ ! -f mysql-5.6.30-linux-glibc2.5-i686.tar.gz ];then</span><br><span class="line">  wget http://mirrors.sohu.com/mysql/MySQL-5.6/mysql-5.6.30-linux-glibc2.5-i686.tar.gz</span><br><span class="line">  fi</span><br><span class="line">  tar -xzvf mysql-5.6.30-linux-glibc2.5-i686.tar.gz</span><br><span class="line">  mv mysql-5.6.30-linux-glibc2.5-i686/* $mysqlBasedir</span><br><span class="line"></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">#添加mysql用户组</span><br><span class="line">groupadd $mysqlGroup</span><br><span class="line">#添加mysql用户 ,并制定组为mysql /sbin/nologin意思是用户不允许登录</span><br><span class="line">useradd -g $mysqlGroup -s /sbin/nologin $mysqlUser</span><br><span class="line">#安装服务</span><br><span class="line">$&#123;mysqlBasedir&#125;/scripts/mysql_install_db --datadir=$mysqlDatadir --basedir=$mysqlBasedir --user=$mysqlUser </span><br><span class="line"></span><br><span class="line">#设置权限</span><br><span class="line">chown -R $&#123;mysqlUser&#125;:$&#123;mysqlGroup&#125; $mysqlBasedir</span><br><span class="line">chown -R $&#123;mysqlUser&#125;:$&#123;mysqlGroup&#125; $mysqlDatadir</span><br><span class="line">chown -R $&#123;mysqlUser&#125;:$&#123;mysqlGroup&#125; $mysqlLogdir</span><br><span class="line"></span><br><span class="line">#把mysql.server放到/etc/init.d 目录下方便使用</span><br><span class="line">\cp -f $&#123;mysqlBasedir&#125;/support-files/mysql.server /etc/init.d/mysqld</span><br><span class="line">#脚本里面的这两行在mysql启动文件指定mysql数据库的安装目录和数据目录存放目录</span><br><span class="line">sed -i &#x27;s#^basedir=$#basedir=&#x27;$&#123;mysqlBasedir&#125;&#x27;#&#x27; /etc/init.d/mysqld</span><br><span class="line">sed -i &#x27;s#^datadir=$#datadir=&#x27;$&#123;mysqlDatadir&#125;&#x27;#&#x27; /etc/init.d/mysqld</span><br><span class="line"></span><br><span class="line">#配置文件</span><br><span class="line">cat &gt; /etc/my.cnf &lt;&lt;END</span><br><span class="line">[client]</span><br><span class="line">port            = 3306</span><br><span class="line">socket          = /tmp/mysql.sock</span><br><span class="line">[mysqld]</span><br><span class="line">port            = 3306</span><br><span class="line">socket          = /tmp/mysql.sock</span><br><span class="line">skip-external-locking</span><br><span class="line">key_buffer_size = 16M</span><br><span class="line">max_allowed_packet = 1M</span><br><span class="line">table_open_cache = 64</span><br><span class="line">sort_buffer_size = 512K</span><br><span class="line">net_buffer_length = 8K</span><br><span class="line">read_buffer_size = 256K</span><br><span class="line">read_rnd_buffer_size = 512K</span><br><span class="line">myisam_sort_buffer_size = 8M</span><br><span class="line"></span><br><span class="line">log-bin=mysql-bin</span><br><span class="line">binlog_format=mixed</span><br><span class="line">server-id       = 1</span><br><span class="line"></span><br><span class="line">sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span><br><span class="line"></span><br><span class="line">[mysqldump]</span><br><span class="line">quick</span><br><span class="line">max_allowed_packet = 16M</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">no-auto-rehash</span><br><span class="line"></span><br><span class="line">[myisamchk]</span><br><span class="line">key_buffer_size = 20M</span><br><span class="line">sort_buffer_size = 20M</span><br><span class="line">read_buffer = 2M</span><br><span class="line">write_buffer = 2M</span><br><span class="line"></span><br><span class="line">[mysqlhotcopy]</span><br><span class="line">interactive-timeout</span><br><span class="line">END</span><br><span class="line"></span><br><span class="line">chmod 755 /etc/init.d/mysqld</span><br><span class="line">/etc/init.d/mysqld start</span><br><span class="line">#没测试过</span><br><span class="line">$mysqlBasedir/bin/mysqladmin -uroot password &#x27;hhw840129&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -6381,37 +6381,6 @@ this is the second sub!
       </tags>
   </entry>
   <entry>
-    <title>debian安装配置笔记</title>
-    <url>/2015/03/21/debian-Install/</url>
-    <content><![CDATA[<h4 id="将新建的用户增加到sudoers中"><a href="#将新建的用户增加到sudoers中" class="headerlink" title="将新建的用户增加到sudoers中"></a>将新建的用户增加到sudoers中</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/sudoers</span><br><span class="line"><span class="comment">#修改如下</span></span><br><span class="line"><span class="comment"># User privilege specification</span></span><br><span class="line">root    ALL=(ALL:ALL) ALL</span><br><span class="line">mark    ALL=(ALL:ALL) ALL</span><br><span class="line"><span class="comment"># Allow members of group sudo to execute any command</span></span><br><span class="line">%sudo   ALL=(ALL:ALL) ALL</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h4 id="Debian安装vim并设置代码高亮"><a href="#Debian安装vim并设置代码高亮" class="headerlink" title="Debian安装vim并设置代码高亮"></a>Debian安装vim并设置代码高亮</h4><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install vim</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/vim/vimrc</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>去掉syntax on的注释</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot; Vim5 and later versions support syntax highlighting. Uncommenting the next</span></span><br><span class="line"><span class="string">&quot;</span> line enables syntax highlighting by default.</span><br><span class="line">syntax on</span><br><span class="line"></span><br><span class="line"><span class="string">&quot; If using a dark background within the editing area and syntax highlighting</span></span><br><span class="line"><span class="string">&quot;</span> turn on this option as well</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="切换登录管理器"><a href="#切换登录管理器" class="headerlink" title="切换登录管理器"></a>切换登录管理器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dpkg-reconfigure</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="VirtualBox下Debian安装增强功能"><a href="#VirtualBox下Debian安装增强功能" class="headerlink" title="VirtualBox下Debian安装增强功能"></a>VirtualBox下Debian安装增强功能</h4><p>打开一个root终端：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt-get install build-essential</span><br></pre></td></tr></table></figure>
-<p>然后 设备 安装增强功能 提示不能自动运行 不必担心 执行下一步：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sh /media/cdrom0/VBoxLinuxAdditions.run</span><br></pre></td></tr></table></figure>
-<p>按提示操作即可。<br>终于可以想拖久拖，想黏贴就黏贴了~~</p>
-<h4 id="为debian8-安装Arc-theme主题"><a href="#为debian8-安装Arc-theme主题" class="headerlink" title="为debian8 安装Arc-theme主题"></a>为debian8 安装Arc-theme主题</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">url：http://software.opensuse.org/download.html?project=home%3AHorst3180&amp;package=arc-theme</span><br><span class="line">echo &#x27;deb http://download.opensuse.org/repositories/home:/Horst3180/Debian_8.0/ /&#x27; &gt;&gt; /etc/apt/sources.list.d/arc-theme.list</span><br><span class="line">wget http://download.opensuse.org/repositories/home:Horst3180/Debian_8.0/Release.key</span><br><span class="line">apt-key add - &lt; Release.key  </span><br><span class="line">apt-get update</span><br><span class="line">apt-get install arc-theme</span><br></pre></td></tr></table></figure>
-<h4 id="安装图标"><a href="#安装图标" class="headerlink" title="安装图标"></a>安装图标</h4><p>下载url:<a href="https://github.com/captiva-project/captiva-icon-theme">https://github.com/captiva-project/captiva-icon-theme</a></p>
-<p>解压后放到&#x2F;usr&#x2F;share&#x2F;icons&#x2F;中</p>
-<h4 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br><span class="line"><span class="comment">###安装完成后</span></span><br><span class="line">vim /etc/mysql/my.cnf</span><br><span class="line"><span class="comment">##注释掉</span></span><br><span class="line"><span class="comment">#bind-address           = 127.0.0.1</span></span><br><span class="line"></span><br><span class="line">sudo systemctl restart mysql.service</span><br><span class="line"></span><br><span class="line">更新mysql中root用户可以被远程访问</span><br><span class="line"></span><br><span class="line">update user <span class="built_in">set</span> host=<span class="string">&#x27;%&#x27;</span> <span class="built_in">where</span> host=<span class="string">&#x27;atecher&#x27;</span> and user=<span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Debian</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>东半球最先进的debug技巧</title>
     <url>/2015/07/20/cutting-edge-debugging/</url>
     <content><![CDATA[<p>不论是什么行业里，能让人最兴奋的事情通常都是解决新奇的、高难度问题带来的刺激。在我的工作中，经常会遇到很多bug，乍一看，它们都是不可能的。不是不可能解决，而是完全不可能出现。就好像最前沿的科技揭示了一个新的奇怪的逻辑现象，以至于人的大脑完全无法理解。 </p>
@@ -6462,6 +6431,37 @@ this is the second sub!
       <tags>
         <tag>开发技巧</tag>
         <tag>DEBUG</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>debian安装配置笔记</title>
+    <url>/2015/03/21/debian-Install/</url>
+    <content><![CDATA[<h4 id="将新建的用户增加到sudoers中"><a href="#将新建的用户增加到sudoers中" class="headerlink" title="将新建的用户增加到sudoers中"></a>将新建的用户增加到sudoers中</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/sudoers</span><br><span class="line"><span class="comment">#修改如下</span></span><br><span class="line"><span class="comment"># User privilege specification</span></span><br><span class="line">root    ALL=(ALL:ALL) ALL</span><br><span class="line">mark    ALL=(ALL:ALL) ALL</span><br><span class="line"><span class="comment"># Allow members of group sudo to execute any command</span></span><br><span class="line">%sudo   ALL=(ALL:ALL) ALL</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h4 id="Debian安装vim并设置代码高亮"><a href="#Debian安装vim并设置代码高亮" class="headerlink" title="Debian安装vim并设置代码高亮"></a>Debian安装vim并设置代码高亮</h4><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install vim</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/vim/vimrc</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>去掉syntax on的注释</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot; Vim5 and later versions support syntax highlighting. Uncommenting the next</span></span><br><span class="line"><span class="string">&quot;</span> line enables syntax highlighting by default.</span><br><span class="line">syntax on</span><br><span class="line"></span><br><span class="line"><span class="string">&quot; If using a dark background within the editing area and syntax highlighting</span></span><br><span class="line"><span class="string">&quot;</span> turn on this option as well</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="切换登录管理器"><a href="#切换登录管理器" class="headerlink" title="切换登录管理器"></a>切换登录管理器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dpkg-reconfigure</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="VirtualBox下Debian安装增强功能"><a href="#VirtualBox下Debian安装增强功能" class="headerlink" title="VirtualBox下Debian安装增强功能"></a>VirtualBox下Debian安装增强功能</h4><p>打开一个root终端：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt-get install build-essential</span><br></pre></td></tr></table></figure>
+<p>然后 设备 安装增强功能 提示不能自动运行 不必担心 执行下一步：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sh /media/cdrom0/VBoxLinuxAdditions.run</span><br></pre></td></tr></table></figure>
+<p>按提示操作即可。<br>终于可以想拖久拖，想黏贴就黏贴了~~</p>
+<h4 id="为debian8-安装Arc-theme主题"><a href="#为debian8-安装Arc-theme主题" class="headerlink" title="为debian8 安装Arc-theme主题"></a>为debian8 安装Arc-theme主题</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">url：http://software.opensuse.org/download.html?project=home%3AHorst3180&amp;package=arc-theme</span><br><span class="line">echo &#x27;deb http://download.opensuse.org/repositories/home:/Horst3180/Debian_8.0/ /&#x27; &gt;&gt; /etc/apt/sources.list.d/arc-theme.list</span><br><span class="line">wget http://download.opensuse.org/repositories/home:Horst3180/Debian_8.0/Release.key</span><br><span class="line">apt-key add - &lt; Release.key  </span><br><span class="line">apt-get update</span><br><span class="line">apt-get install arc-theme</span><br></pre></td></tr></table></figure>
+<h4 id="安装图标"><a href="#安装图标" class="headerlink" title="安装图标"></a>安装图标</h4><p>下载url:<a href="https://github.com/captiva-project/captiva-icon-theme">https://github.com/captiva-project/captiva-icon-theme</a></p>
+<p>解压后放到&#x2F;usr&#x2F;share&#x2F;icons&#x2F;中</p>
+<h4 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br><span class="line"><span class="comment">###安装完成后</span></span><br><span class="line">vim /etc/mysql/my.cnf</span><br><span class="line"><span class="comment">##注释掉</span></span><br><span class="line"><span class="comment">#bind-address           = 127.0.0.1</span></span><br><span class="line"></span><br><span class="line">sudo systemctl restart mysql.service</span><br><span class="line"></span><br><span class="line">更新mysql中root用户可以被远程访问</span><br><span class="line"></span><br><span class="line">update user <span class="built_in">set</span> host=<span class="string">&#x27;%&#x27;</span> <span class="built_in">where</span> host=<span class="string">&#x27;atecher&#x27;</span> and user=<span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Debian</tag>
       </tags>
   </entry>
   <entry>
@@ -6595,34 +6595,6 @@ this is the second sub!
       </tags>
   </entry>
   <entry>
-    <title>hexo+next+GitHub搭建静态博客(三)-添加tags和categories</title>
-    <url>/2016/04/23/hexo-next-github-3/</url>
-    <content><![CDATA[<p>之前我们已经写了怎么安装设置Hexo和怎么部署到gitHub上，下面我们说一下怎么完善我们的blog，今天先介绍下怎么添加分类和标签页面</p>
-<span id="more"></span>
-
-<h3 id="创建Tag页面"><a href="#创建Tag页面" class="headerlink" title="创建Tag页面"></a>创建Tag页面</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new page &quot;tags&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>编辑刚新建的页面，将页面的类型设置为tags，主题将自动为这个页面显示标签云。页面内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Tagcloud</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<p>注意：如果有启用多说 或者Disqus评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Tagcloud</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<h3 id="创建Categories页面"><a href="#创建Categories页面" class="headerlink" title="创建Categories页面"></a>创建Categories页面</h3><p>创建分类页和Tag页是差不多的步骤。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new page &quot;categories&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加菜单"><a href="#添加菜单" class="headerlink" title="添加菜单"></a>添加菜单</h3><p>在菜单中添加链接。编辑 主题配置文件 ，添加 tags 到 menu 中，如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: /</span><br><span class="line">  categories: /categories/</span><br><span class="line">  #about: /about/</span><br><span class="line">  archives: /archives/</span><br><span class="line">  tags: /tags/</span><br><span class="line">  #sitemap: /sitemap.xml</span><br><span class="line">  #commonweal: /404.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Hexo教程</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo+next+GitHub搭建静态博客(二)-部署到github</title>
     <url>/2016/02/27/hexo-next-github-2/</url>
     <content><![CDATA[<p>上一篇文章我们说了怎么在我们的电脑上安装和使用Hexo，这次我想介绍下怎么将hexo部署到github上，这篇文章中我将介绍两种方法。</p>
@@ -6703,6 +6675,34 @@ this is the second sub!
       <tags>
         <tag>Hexo</tag>
         <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo+next+GitHub搭建静态博客(三)-添加tags和categories</title>
+    <url>/2016/04/23/hexo-next-github-3/</url>
+    <content><![CDATA[<p>之前我们已经写了怎么安装设置Hexo和怎么部署到gitHub上，下面我们说一下怎么完善我们的blog，今天先介绍下怎么添加分类和标签页面</p>
+<span id="more"></span>
+
+<h3 id="创建Tag页面"><a href="#创建Tag页面" class="headerlink" title="创建Tag页面"></a>创建Tag页面</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new page &quot;tags&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编辑刚新建的页面，将页面的类型设置为tags，主题将自动为这个页面显示标签云。页面内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Tagcloud</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果有启用多说 或者Disqus评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Tagcloud</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<h3 id="创建Categories页面"><a href="#创建Categories页面" class="headerlink" title="创建Categories页面"></a>创建Categories页面</h3><p>创建分类页和Tag页是差不多的步骤。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo new page &quot;categories&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2017-06-22 12:39:04</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加菜单"><a href="#添加菜单" class="headerlink" title="添加菜单"></a>添加菜单</h3><p>在菜单中添加链接。编辑 主题配置文件 ，添加 tags 到 menu 中，如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: /</span><br><span class="line">  categories: /categories/</span><br><span class="line">  #about: /about/</span><br><span class="line">  archives: /archives/</span><br><span class="line">  tags: /tags/</span><br><span class="line">  #sitemap: /sitemap.xml</span><br><span class="line">  #commonweal: /404.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Hexo教程</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
